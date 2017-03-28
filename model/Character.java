@@ -14,8 +14,20 @@ public abstract class Character extends GameObject{
 		super(x,y,sprite);
 		
 	}
-	public int getHealth{
+	public int getHealth(){
 		return this.Health;
 	}
-
+//	public Weapon getWeapon(){
+//		return this.weapon;
+//	}
+	public void move(){
+		
+	}
+	public void attack(){
+		
+	}
+	public void die(){
+		
+	}
+	
 }
