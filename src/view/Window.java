@@ -11,7 +11,7 @@ public class Window {
 	private Map map = new Map();
 	
 	public Window(){	    
-	    JFrame window = new JFrame("Game");
+	    JFrame window = new JFrame("HaelterMINE");
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setBounds(0, 0, 1000, 1020);
 	    window.getContentPane().setBackground(Color.gray);
