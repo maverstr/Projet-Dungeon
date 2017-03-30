@@ -17,7 +17,7 @@ public class Keyboard implements KeyListener{
 	//@Override
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
-		
+		/*
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
 				game.movePlayer(1, 0, player1);
@@ -37,6 +37,7 @@ public class Keyboard implements KeyListener{
 			case KeyEvent.VK_B:
 				game.dropBomb("bomb", player1);
 		}
+		*/
 	}
 
 	//@Override
