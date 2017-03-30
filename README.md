@@ -2,4 +2,6 @@
 INFO-H-200
 Projet dungeon : La Mine
 
-Rapport préliminaire : 30 mars
+Rapport final 14 mai
+
+DEADLINE : 3avril : MAP building + Sprite + KEYBOARD
