@@ -46,4 +46,7 @@ public class Keyboard implements KeyListener{
 	//@Override
 	public void keyReleased(KeyEvent e) {
 	}
+	public void test(){
+		
+	}
 }
