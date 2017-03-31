@@ -39,7 +39,7 @@ public class Map extends JPanel {
 			int y = object.getPosY();
 			//Sprite sprite = object.getSprite();			
 			
-			g.drawImage (object.getsprite(), x, y, 50, 50, null); //Affiche le sprite de l'objet au bon endroit
+			g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); //Affiche le sprite de l'objet au bon endroit
 			//System.out.println(g.drawImage (object.getsprite(), x, y, null)); //Return true si 
 																			//l'image est bien loadée
 			

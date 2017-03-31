@@ -12,7 +12,7 @@ public class BlockNotBreakable extends Block {
 
 	
 	public BlockNotBreakable(int x, int y) throws IOException {
-		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/map/Haelti_Head.jpg").getFile())));
+		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
 		
 	}
 

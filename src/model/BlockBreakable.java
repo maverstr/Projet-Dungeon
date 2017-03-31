@@ -12,7 +12,7 @@ import view.Map;
 public class BlockBreakable extends Block implements Breakable {
 
 	public BlockBreakable(int x, int y) throws IOException{
-		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/map/blockBreakable_sprite.png").getFile())));
+		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/blockBreakable_sprite.png").getFile())));
 		
 	}
 	

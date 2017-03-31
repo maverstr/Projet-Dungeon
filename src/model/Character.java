@@ -1,6 +1,7 @@
 package model;
 
-import view.Sprite;
+import java.awt.image.BufferedImage;
+
 
 public abstract class Character extends GameObject{
 	int posX;
@@ -8,9 +9,9 @@ public abstract class Character extends GameObject{
 	int Direction = 1;
 	int Health = 5;
 	//Weapon weapon = new Weapon();
-	Sprite sprite;
+	BufferedImage sprite;
 	
-	public Character(int x, int y , Sprite sprite){
+	public Character(int x, int y , BufferedImage sprite){
 		super(x,y,sprite);
 		
 	}

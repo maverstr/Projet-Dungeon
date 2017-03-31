@@ -1,13 +1,13 @@
 package model;
 
-import view.Sprite;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
 	protected int posX;
 	protected int posY;
-	protected Sprite sprite;
+	protected BufferedImage sprite;
 	
-	public GameObject(int x, int y, Sprite sprite){
+	public GameObject(int x, int y, BufferedImage sprite){
 		this.posX = x;
 		this.posY = y;
 		this.sprite = sprite;
@@ -21,7 +21,7 @@ public abstract class GameObject {
 		return this.posY;
 	}
 	
-	public Sprite getSprite(){
+	public BufferedImage getSprite(){
 		return this.sprite;
 	}
 	
