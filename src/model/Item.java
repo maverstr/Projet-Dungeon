@@ -1,10 +1,11 @@
 package model;
 
-import view.Sprite;
+import java.awt.image.BufferedImage;
+
 
 public abstract class Item extends GameObject {
 
-	public Item(int x, int y, Sprite sprite) {
+	public Item(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
 		// TODO Auto-generated constructor stub
 	}

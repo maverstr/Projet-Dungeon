@@ -1,5 +1,10 @@
 package view;
+import model.BlockBreakable;
+import model.BlockNotBreakable;
 import model.GameObject;
+import model.Game;
+import model.Player;
+import CONSTANTS.CONSTANTS;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,7 +15,7 @@ import java.lang.Object;
 import javax.swing.JPanel;
 
 public class Map extends JPanel {
-	private ArrayList<GameObject> objects;
+	private ArrayList<GameObject> objects = new ArrayList<GameObject> ();
 	
 	public Map(){
 		this.setFocusable(true);
@@ -29,29 +34,16 @@ public class Map extends JPanel {
 			}
 		}
 		
-//		for(GameObject object : this.objects){
-//			int x = object.getPosX();
-//			int y = object.getPosY();
-//			Sprite sprite = object.getSprite();			
-//			
-//			if(color == 0){
-//				g.setColor(Color.DARK_GRAY);
-//			}else if(color == 1){
-//				g.setColor(Color.GRAY);
-//			}else if(color == 2){
-//				g.setColor(Color.BLUE);
-//			}else if(color == 3){
-//				g.setColor(Color.GREEN);
-//			}else if(color == 4){
-//				g.setColor(Color.RED);
-//			}else if(color == 5){
-//				g.setColor(Color.ORANGE);
-//			}
-
-//			g.fillRect(x*50, y*50, 48, 48);
-//			g.setColor(Color.BLACK);
-//			g.drawRect(x*50, y*50, 48, 48); 
-//		}
+		for(GameObject object : this.objects){
+			int x = object.getPosX();
+			int y = object.getPosY();
+			//Sprite sprite = object.getSprite();			
+			
+			g.drawImage (object.getsprite(), x, y, 50, 50, null); //Affiche le sprite de l'objet au bon endroit
+			//System.out.println(g.drawImage (object.getsprite(), x, y, null)); //Return true si 
+																			//l'image est bien loadÃ©e
+			
+		}
 	}
 	
 	public void setObjects(ArrayList<GameObject> objects){
@@ -64,7 +56,7 @@ public class Map extends JPanel {
 	
 	public void loadMap(String fileName){		//Lit la map et remplit la liste des objets
 		try{
-			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel répertoire le compilateur 
+			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel rï¿½pertoire le compilateur 
 	        System.out.println("Current dir:"+current);						//se trouve actuellement
 			File file = new File(Map.class.getResource("/resources/map/"+fileName).getFile());
 			String line = null;
@@ -72,23 +64,24 @@ public class Map extends JPanel {
 			
             BufferedReader bufferedReader = 
                     new BufferedReader(fileReader);
-
+            		int currentLine = 0;
                 while((line = bufferedReader.readLine()) != null) {
                     System.out.println(line);
                     for (int column = 0; column < line.length(); column++){
                     	char c = line.charAt(column);
                         switch (c) {
-                        case '*' : this.objects.add(new BlockUnbreakable(column, line));
+                        case '*' : this.objects.add(new BlockNotBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
                                 break;
-                        case '$' : this.objects.add(new BlockBreakable(column, line));
+                        case '$' : this.objects.add(new BlockBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
                                 break;
-                        case 'P' : this.player.setPosition(column, line);
+                        		// Creating one Player at position (1,1)		
+                        case 'P' : objects.add(new Player(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
                                 break;
                         default:
                                 break;
                               
                         }
-                    }
+                    } currentLine++;
                 }
                bufferedReader.close(); 
 			}
@@ -102,7 +95,7 @@ public class Map extends JPanel {
                 "Error reading file '" 
                 + fileName + "'");                  
               
-        	}
+        	} System.out.println(objects);
 	}
 }
 
