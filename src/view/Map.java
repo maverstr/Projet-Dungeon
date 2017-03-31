@@ -15,6 +15,10 @@ import java.lang.Object;
 import javax.swing.JPanel;
 
 public class Map extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6724459904147376476L; //POUR LA SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject> ();
 	
 	public Map(){
@@ -74,7 +78,7 @@ public class Map extends JPanel {
                                 break;
                         case '$' : this.objects.add(new BlockBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
                                 break;
-                        		// Creating one Player at position (1,1)		
+                        		// Creating one Player at position P		
                         case 'P' : objects.add(new Player(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
                                 break;
                         default:
