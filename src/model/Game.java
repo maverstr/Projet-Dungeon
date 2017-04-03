@@ -50,8 +50,8 @@ public class Game {
 		//window.update();
 	}
 	
-	public void playerAttack(int xAttack,int yAttack) {
-		player.attack(xAttack, yAttack, objects);
+	public void playerHit(int xHit,int yHit) {
+		player.hit(xHit, yHit, objects);
 		window.setGameObjects(objects);
 		//window.update();
 	}

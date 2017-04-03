@@ -8,6 +8,7 @@ public abstract class Character extends GameObject{
 
 	int Direction = 1;
 	int Health = 5;
+	int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	BufferedImage sprite;
 	
@@ -26,9 +27,7 @@ public abstract class Character extends GameObject{
 		this.posY += CONSTANTS.CONSTANTS.BLOCK_SIZE*yMove;
 	}
 	
-	public void attack(int xAttack,int yAttack,ArrayList<GameObject> objects) {
-		
-	}
+	public abstract void attack(int xAttack,int yAttack);
 	
 	public void die(){
 		
