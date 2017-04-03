@@ -8,10 +8,12 @@ import CONSTANTS.CONSTANTS;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.lang.Object;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Map extends JPanel {
@@ -20,10 +22,12 @@ public class Map extends JPanel {
 	 */
 	private static final long serialVersionUID = 6724459904147376476L; //POUR LA SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	private BufferedImage back_sprite;
 	
-	public Map(){
+	public Map() throws IOException{
 		this.setFocusable(true);
 		this.requestFocusInWindow();
+		back_sprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/back_sprite.png").getFile()));
 	}
 	
 	public void paint(Graphics g) { 
@@ -31,11 +35,8 @@ public class Map extends JPanel {
 			for(int j = 0; j<CONSTANTS.MAP_HEIGTH; j++){
 				int x = i;
 				int y = j;
-				g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE -2, CONSTANTS.BLOCK_SIZE -2); 
-				g.setColor(Color.BLACK);
-				g.drawRect(x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE -2 ,CONSTANTS.BLOCK_SIZE -2); 
-			}
+				g.drawImage (back_sprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+			}// Paint a background sprite on the map
 		}
 		
 		for(GameObject object : this.objects){
