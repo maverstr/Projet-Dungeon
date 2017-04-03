@@ -27,14 +27,14 @@ public class Map extends JPanel {
 	}
 	
 	public void paint(Graphics g) { 
-		for(int i = 0; i<20; i++){						
-			for(int j = 0; j<20; j++){
+		for(int i = 0; i< CONSTANTS.MAP_WIDTH; i++){						
+			for(int j = 0; j<CONSTANTS.MAP_HEIGTH; j++){
 				int x = i;
 				int y = j;
 				g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(x*50, y*50, 48, 48); 
+				g.fillRect(x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE -2, CONSTANTS.BLOCK_SIZE -2); 
 				g.setColor(Color.BLACK);
-				g.drawRect(x*50, y*50, 48, 48); 
+				g.drawRect(x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE -2 ,CONSTANTS.BLOCK_SIZE -2); 
 			}
 		}
 		

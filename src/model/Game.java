@@ -50,8 +50,8 @@ public class Game {
 		try{
 			int playerLine = 0;
 			int playerColumn = 0;
-			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel r�pertoire le compilateur 
-	        System.out.println("Current dir:"+current);						//se trouve actuellement
+//			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel r�pertoire le compilateur 
+//	        System.out.println("Current dir:"+current);						//se trouve actuellement
 			File file = new File(Map.class.getResource("/resources/map/"+fileName).getFile());
 			String line = null;
 			FileReader fileReader = new FileReader(file);
