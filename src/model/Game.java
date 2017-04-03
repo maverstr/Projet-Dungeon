@@ -18,26 +18,21 @@ import view.Window;
 public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
+	private Player player= new Player(0, 0);
+
 	
 	
-	public Game(Window window){
+	public Game(Window window) throws IOException{
 		this.window = window;
-		
+		objects.add(player);
 		loadMap("map_1.txt");
+
 
 		window.setGameObjects(objects);
 	}
 	
 	public void movePlayer(int xMove,int yMove) {
-		Player player = ((Player) objects.get(0));
-		
-		System.out.println(player == objects.get(0));
-		System.out.println(player == ((Player) objects.get(0)));
-		System.out.println(player.posX);
-		System.out.println(objects.get(0).posX);
 		player.move(xMove, yMove);
-		objects.get(0).setPos(player.posX, player.posY);
-		System.out.println(objects.get(0).posX);
 		window.setGameObjects(objects);
 		//window.update();
 	}
@@ -48,6 +43,7 @@ public class Game {
 	
 	public void loadMap(String fileName){		//Lit la map et remplit la liste des objets
 		try{
+
 			int playerLine = 0;
 			int playerColumn = 0;
 //			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel r�pertoire le compilateur 
@@ -58,7 +54,6 @@ public class Game {
 			
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int currentLine = 0;
-            objects.add(new Player(0, 0));
                 while((line = bufferedReader.readLine()) != null) {
                     System.out.println(line);
                     for (int column = 0; column < line.length(); column++){
@@ -78,10 +73,13 @@ public class Game {
                               
                         }
                     }
-                    objects.get(0).setPos(playerColumn*CONSTANTS.BLOCK_SIZE, playerLine*CONSTANTS.BLOCK_SIZE); //set position of the player
+                    player.setPos(playerColumn*CONSTANTS.BLOCK_SIZE, playerLine*CONSTANTS.BLOCK_SIZE); //set position of the player
                     currentLine++;
+
                 }
-               bufferedReader.close(); 
+               bufferedReader.close();
+//               System.out.println(player.getPosX());
+//               System.out.println(objects.get(0).getPosX());
 			}
 		catch(FileNotFoundException e){
             System.out.println(
