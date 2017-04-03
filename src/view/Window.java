@@ -19,9 +19,9 @@ public class Window {
 	    window.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_HEIGHT, CONSTANTS.CONSTANTS.WINDOW_WIDTH);
 	    window.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
 	    window.getContentPane().setBackground(Color.gray);
-	    window.getContentPane().add(this.map);
+	    window.getContentPane().add(this.map); //window.add(this.map) same
 	    window.setVisible(true);
-	}	
+	}
 	
 	
 	public void setGameObjects(ArrayList<GameObject> objects){

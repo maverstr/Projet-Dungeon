@@ -19,19 +19,18 @@ public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
 	private Player player= new Player(0, 0);
-
-	
 	
 	public Game(Window window) throws IOException{
 		this.window = window;
 		objects.add(player);
 		loadMap("map_1.txt");
 
-
 		window.setGameObjects(objects);
 	}
 	
 	public void movePlayer(int xMove,int yMove) {
+		
+		
 		player.move(xMove, yMove);
 		window.setGameObjects(objects);
 		//window.update();

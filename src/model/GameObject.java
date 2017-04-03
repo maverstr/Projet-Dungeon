@@ -9,6 +9,7 @@ public abstract class GameObject {
 	protected BufferedImage sprite;
 	
 	
+	
 	public GameObject(int x, int y, BufferedImage sprite){
 		this.posX = x;
 		this.posY = y;
