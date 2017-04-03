@@ -31,7 +31,27 @@ public class Game {
 	public void movePlayer(int xMove,int yMove) {
 		
 		
-		player.move(xMove, yMove);
+		boolean obstacle = false;
+		int newPosX = player.posX+CONSTANTS.BLOCK_SIZE*xMove;
+		int newPosY = player.posY+CONSTANTS.BLOCK_SIZE*yMove;
+		
+		for (GameObject object:objects) {
+			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
+				if (object.isObstacle()) {
+					obstacle = true;
+				}
+			}
+		}
+		if (!obstacle) {
+			player.move(xMove, yMove);
+		}
+		
+		window.setGameObjects(objects);
+		//window.update();
+	}
+	
+	public void playerAttack(int xAttack,int yAttack) {
+		player.attack(xAttack, yAttack, objects);
 		window.setGameObjects(objects);
 		//window.update();
 	}
