@@ -12,9 +12,9 @@ public class Main {
 		Window window = new Window();
 		window.update();
 
-		// Game game = new Game(window);
-		// Keyboard keyboard = new Keyboard(game);
-		// window.setKeyListener(keyboard);
+		Game game = new Game(window);
+		Keyboard keyboard = new Keyboard(game);
+		window.setKeyListener(keyboard);
 
 		//System.out.println(Map.loadMap("map_1.txt"));
 

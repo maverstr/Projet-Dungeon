@@ -21,8 +21,8 @@ public class Window {
 	    window.getContentPane().setBackground(Color.gray);
 	    window.getContentPane().add(this.map);
 	    window.setVisible(true);
-	    map.loadMap("map_1.txt");
 	}	
+	
 	
 	public void setGameObjects(ArrayList<GameObject> objects){
 		this.map.setObjects(objects);

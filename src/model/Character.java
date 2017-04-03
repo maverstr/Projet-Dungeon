@@ -21,9 +21,11 @@ public abstract class Character extends GameObject{
 //	public Weapon getWeapon(){
 //		return this.weapon;
 //	}
-	public void move(){
-		
+	public void move(int xMove,int yMove){
+		this.posX += 50*xMove;
+		this.posY += 50*yMove;
 	}
+	
 	public void attack(){
 		
 	}
