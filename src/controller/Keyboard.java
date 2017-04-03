@@ -23,17 +23,26 @@ public class Keyboard implements KeyListener{
 				game.movePlayer(1, 0);
 				break;
 			case KeyEvent.VK_LEFT:
-				System.out.println("move left");
 				game.movePlayer(-1, 0);
 				break;
 			case KeyEvent.VK_DOWN:
-				System.out.println("down");
 				game.movePlayer(0, 1);
 				break;
 			case KeyEvent.VK_UP:
-				System.out.println("up");
 				game.movePlayer(0, -1);
-				break;	
+				break;
+			case KeyEvent.VK_Z:
+				System.out.println("attack up");
+				break;
+			case KeyEvent.VK_Q:
+				System.out.println("attack left");
+				break;
+			case KeyEvent.VK_S:
+				System.out.println("attack down");
+				break;
+			case KeyEvent.VK_D:
+				System.out.println("attack right");
+				break;
 				/*
 			case KeyEvent.VK_SPACE:
 				game.dropBomb("nuke", player1);
