@@ -18,5 +18,6 @@ public abstract class Block extends GameObject{
 		//Les blocs ne peuvent pas être déplacés de base
 		return false;
 	}
+	
 
 }
