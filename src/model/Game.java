@@ -32,13 +32,28 @@ public class Game {
 		
 		
 		boolean obstacle = false;
+		
 		int newPosX = player.posX+CONSTANTS.BLOCK_SIZE*xMove;
 		int newPosY = player.posY+CONSTANTS.BLOCK_SIZE*yMove;
+		
+		int blockMoveableNewPosX = player.posX+2*CONSTANTS.BLOCK_SIZE*xMove;
+		int blockMoveableNewPosY = player.posY+2*CONSTANTS.BLOCK_SIZE*yMove;
 		
 		for (GameObject object:objects) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
+					System.out.println("obstacle");
 					obstacle = true;
+					Block block = (Block) object;
+					if (block.isMoveable()) {
+						System.out.println("moveable");
+						if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
+							System.out.println("freespace");
+							BlockMoveable blockMoveable = (BlockMoveable) block;
+							player.move(xMove, yMove);
+							blockMoveable.move(xMove, yMove);
+						}
+					}
 				}
 			}
 		}
@@ -48,6 +63,19 @@ public class Game {
 		
 		window.setGameObjects(objects);
 		//window.update();
+	}
+	
+	private boolean freeSpace(int x, int y) {
+		boolean res = true;
+		for (GameObject object:objects) {
+			if (object.getPosX() == x && object.getPosY() == y) {
+				if (object.isObstacle()) {
+					res = false;
+					break;
+				}
+			}
+		}
+		return res;
 	}
 	
 	public void playerHit(int xHit,int yHit) {
@@ -86,6 +114,8 @@ public class Game {
                         case 'P' : playerLine = currentLine;
                         		playerColumn = column;
                                 break;
+                        case 'M' : this.objects.add(new BlockMoveable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
+                        		break;
                         case '/' : break;
                         default:
                                 break;
