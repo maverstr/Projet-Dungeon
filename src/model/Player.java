@@ -14,11 +14,11 @@ public class Player extends Character {
 
 	@Override
 	public boolean isObstacle() {
-		return false;
+		return true;
 	}
 	
 	public void hit(int xHit,int yHit) {
-		this.itemType = 2;
+		this.itemType = 1;
 		
 		switch (this.itemType) {
 			case 1: this.attack(xHit, yHit);

@@ -36,6 +36,10 @@ public class Game {
 		objects.remove(object);
 	}
 	
+	public Player getPlayer() {
+		return this.player;
+	}
+	
 	public void movePlayer(int xMove,int yMove) {
 		boolean obstacle = false;
 		
@@ -69,8 +73,11 @@ public class Game {
 			player.move(xMove, yMove);
 		}
 		
+		updateWindow();
+	}
+	
+	public void updateWindow() {
 		window.setGameObjects(objects);
-		//window.update();
 	}
 	
 	private boolean freeSpace(int x, int y) {
