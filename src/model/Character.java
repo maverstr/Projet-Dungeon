@@ -1,8 +1,6 @@
 package model;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 
 public abstract class Character extends GameObject{
 
