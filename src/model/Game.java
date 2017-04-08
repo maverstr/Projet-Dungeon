@@ -45,43 +45,41 @@ public class Game {
 	}
 	
 	public void movePlayer(int xMove,int yMove) {
-		boolean obstacle = false;
-		
-		int newPosX = player.posX+CONSTANTS.BLOCK_SIZE*xMove;
-		int newPosY = player.posY+CONSTANTS.BLOCK_SIZE*yMove;
-		
-		int blockMoveableNewPosX = player.posX+2*CONSTANTS.BLOCK_SIZE*xMove;
-		int blockMoveableNewPosY = player.posY+2*CONSTANTS.BLOCK_SIZE*yMove;
-		
-		for (GameObject object:objects) {
-			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object.isObstacle()) {
-					System.out.println("obstacle");
-					obstacle = true;
-					if (object instanceof Block) {
-						Block block = (Block) object;
-						if (block.isMoveable()) {
-							System.out.println("moveable");
-							if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
-								System.out.println("freespace");
-								BlockMoveable blockMoveable = (BlockMoveable) block;
-								player.move(xMove, yMove);
-								blockMoveable.move(xMove, yMove);
+		if (player.isAlive()) {
+			boolean obstacle = false;
+			
+			int newPosX = player.posX+CONSTANTS.BLOCK_SIZE*xMove;
+			int newPosY = player.posY+CONSTANTS.BLOCK_SIZE*yMove;
+			
+			int blockMoveableNewPosX = player.posX+2*CONSTANTS.BLOCK_SIZE*xMove;
+			int blockMoveableNewPosY = player.posY+2*CONSTANTS.BLOCK_SIZE*yMove;
+			
+			for (GameObject object:objects) {
+				if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
+					if (object.isObstacle()) {
+						System.out.println("obstacle");
+						obstacle = true;
+						if (object instanceof Block) {
+							Block block = (Block) object;
+							if (block.isMoveable()) {
+								System.out.println("moveable");
+								if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
+									System.out.println("freespace");
+									BlockMoveable blockMoveable = (BlockMoveable) block;
+									player.move(xMove, yMove);
+									blockMoveable.move(xMove, yMove);
+								}
 							}
 						}
 					}
 				}
 			}
+			if (!obstacle) {
+				player.move(xMove, yMove);
+			}
+			
+			updateWindow();
 		}
-		if (!obstacle) {
-			player.move(xMove, yMove);
-		}
-		
-		updateWindow();
-	}
-	
-	public void updateWindow() {
-		window.setGameObjects(objects);
 	}
 	
 	private boolean freeSpace(int x, int y) {
@@ -98,13 +96,18 @@ public class Game {
 	}
 	
 	public void playerHit(int xHit,int yHit) {
-		player.hit(xHit, yHit);
-		window.setGameObjects(objects);
-		//window.update();
+		if (player.isAlive()) {
+			player.hit(xHit, yHit);
+			updateWindow();
+		}
 	}
 	
 	public ArrayList<GameObject> getGameObjects() {
 		return this.objects;
+	}
+	
+	public void updateWindow() {
+		window.setGameObjects(objects);
 	}
 	
 	private void loadMap(String fileName) {		//Lit la map et remplit la liste des objets
@@ -146,7 +149,7 @@ public class Game {
                 currentLine++;
             }
             bufferedReader.close();
-            loadMobs(emptyCasesX,emptyCasesY,3);
+            loadMobs(emptyCasesX,emptyCasesY,4);
 //          System.out.println(player.getPosX());
 //          System.out.println(objects.get(0).getPosX());
 		}
@@ -186,11 +189,8 @@ public class Game {
 			int posX = mobXArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			int posY = mobYArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			try {
-				this.objects.add(new Skeleton(posX,posY,this));
-			} catch(IOException ex) {
-				
-			}
-			
+				this.objects.add(new Skeleton(posX,posY,0,this));
+			} catch(IOException ex) {}
 		}
 	}
 	

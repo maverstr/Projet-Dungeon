@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class Character extends GameObject{
 
-	int Direction = 1;
-	int Health = 5;
+	int direction = 1;
+	int health = 5;
 	int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	BufferedImage sprite;
@@ -15,7 +15,7 @@ public abstract class Character extends GameObject{
 		
 	}
 	public int getHealth(){
-		return this.Health;
+		return this.health;
 	}
 //	public Weapon getWeapon(){
 //		return this.weapon;

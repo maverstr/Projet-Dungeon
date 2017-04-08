@@ -12,5 +12,9 @@ public class Zombie extends Mob {
 		
 	}
 	
+	@Override
+	public void run() {
+		
+	}
 
 }

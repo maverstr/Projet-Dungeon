@@ -8,6 +8,9 @@ import javax.imageio.ImageIO;
 import CONSTANTS.CONSTANTS;
 
 public class Player extends Character {
+	
+	private boolean alive = true;
+	
 	public Player(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Hugues_Head.jpg").getFile())));
 		this.itemType = 1;
@@ -55,11 +58,22 @@ public class Player extends Character {
 	}
 	
 	public void wasHit() {
-		die();
+		this.health--;
+		System.out.println("HEALTH : " + this.health + "\n");
+		if (this.health<=0) {
+			die();
+		}
+	}
+	
+	public boolean isAlive() {
+		return this.alive;
 	}
 	
 	public void die() {
+		this.alive = false;
 		this.getGame().getGameObjects().remove(this);
+		this.getGame().updateWindow();
+		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
 	}
 	
 	

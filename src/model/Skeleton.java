@@ -13,19 +13,21 @@ public class Skeleton extends Mob implements Runnable {
 	
 	static int waitTime = 1000;
 	int time = 0;
+	long offset;
 
-	public Skeleton(int x, int y, Game game) throws IOException {
+	public Skeleton(int x, int y, long threadOffset, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Skeleton.jpg").getFile())));
-		Thread t1 = new Thread(this);
-		t1.start();
+		this.offset = threadOffset;
+		
 	}
 	
 	@Override
 	public void run(){
-		try{ 
+		try{
+			Thread.sleep(offset);
 			Random random = new Random();
 			Player player = this.getGame().getPlayer();
-			while(true){
+			while(player.isAlive()){
 				int mobX = this.getPosX();
 				int mobY = this.getPosY();
 				int playerX = player.getPosX();
@@ -50,10 +52,20 @@ public class Skeleton extends Mob implements Runnable {
 				} else {
 					move(moveCloserX,moveCloserY);
 				}
+				
+				
+				
 				this.getGame().updateWindow();
+				Thread.sleep(waitTime/2);
+				
+				//area attack
+				this.attack(0, 1);
+				this.attack(0, -1);
+				this.attack(1, 0);
+				this.attack(-1, 0);
 				
 				//System.out.print("time : "+time+"\n");
-				Thread.sleep(waitTime);
+				Thread.sleep(waitTime/2);
 				time+=waitTime;
 			}
 		}catch(Exception e){}; 
@@ -85,7 +97,6 @@ public class Skeleton extends Mob implements Runnable {
 		
 		return res;
 	}
-	
 	
 
 }
