@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -8,8 +7,8 @@ import javax.imageio.ImageIO;
 
 public class BlockMoveable extends Block {
 
-	public BlockMoveable(int x, int y) throws IOException {
-		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Moveable.png").getFile())));
+	public BlockMoveable(int x, int y, Game game) throws IOException {
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Moveable.png").getFile())));
 		
 	}
 	

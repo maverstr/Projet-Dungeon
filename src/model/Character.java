@@ -10,8 +10,8 @@ public abstract class Character extends GameObject{
 	//Weapon weapon = new Weapon();
 	BufferedImage sprite;
 	
-	public Character(int x, int y , BufferedImage sprite){
-		super(x,y,sprite);
+	public Character(int x, int y, Game game, BufferedImage sprite){
+		super(x,y,game,sprite);
 		
 	}
 	public int getHealth(){
@@ -27,8 +27,8 @@ public abstract class Character extends GameObject{
 	
 	public abstract void attack(int xAttack,int yAttack);
 	
-	public void die(){
-		
-	}
+	public abstract void wasHit();
+	
+	public abstract void die();
 	
 }

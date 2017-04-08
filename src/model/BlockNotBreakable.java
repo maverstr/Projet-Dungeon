@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,8 +10,8 @@ public class BlockNotBreakable extends Block {
 	//private static final Sprite BlockNotBreakableSprite = null;
 
 	
-	public BlockNotBreakable(int x, int y) throws IOException {
-		super(x, y, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
+	public BlockNotBreakable(int x, int y, Game game) throws IOException {
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
 		
 	}
 

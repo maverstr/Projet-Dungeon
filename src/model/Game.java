@@ -21,7 +21,7 @@ import java.util.Random;
 public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
-	private Player player= new Player(0, 0);
+	private Player player= new Player(0, 0,this);
 	
 	public Game(Window window) throws IOException{
 		this.window = window;
@@ -30,6 +30,10 @@ public class Game {
 		
 
 		window.setGameObjects(objects);
+	}
+	
+	public void removeGameObject(GameObject object) {
+		objects.remove(object);
 	}
 	
 	public void movePlayer(int xMove,int yMove) {
@@ -83,7 +87,7 @@ public class Game {
 	}
 	
 	public void playerHit(int xHit,int yHit) {
-		player.hit(xHit, yHit, objects);
+		player.hit(xHit, yHit);
 		window.setGameObjects(objects);
 		//window.update();
 	}
@@ -111,15 +115,15 @@ public class Game {
                 for (int column = 0; column < line.length(); column++){
                 	char c = line.charAt(column);
                     switch (c) {
-                    	case '*' : this.objects.add(new BlockNotBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
+                    	case '*' : this.objects.add(new BlockNotBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE,this));
                                 break;
-                    	case '$' : this.objects.add(new BlockBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
+                    	case '$' : this.objects.add(new BlockBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE,this));
                                 break;
                         		// Creating one Player at position P		
                     	case 'P' : playerLine = currentLine;
                         		playerColumn = column;
                                 break;
-                    	case 'M' : this.objects.add(new BlockMoveable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE));
+                    	case 'M' : this.objects.add(new BlockMoveable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE,this));
                         		break;
                     	case '/' : emptyCasesX.add(column);
                     				emptyCasesY.add(currentLine);
@@ -171,7 +175,7 @@ public class Game {
 			int posX = mobXArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			int posY = mobYArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			try {
-				this.objects.add(new Skeleton(posX,posY));
+				this.objects.add(new Skeleton(posX,posY,this));
 			} catch(IOException ex) {
 				
 			}

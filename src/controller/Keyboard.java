@@ -8,8 +8,6 @@ import model.Game;
 public class Keyboard implements KeyListener{
 	private Game game;
 	
-	private static final int player1 = 0;
-	
 	public Keyboard(Game game){
 		this.game = game;
 	}
@@ -32,19 +30,19 @@ public class Keyboard implements KeyListener{
 				game.movePlayer(0, -1);
 				break;
 			case KeyEvent.VK_Z:
-				System.out.println("attack up");
+				System.out.println("hit up");
 				game.playerHit(0, -1);
 				break;
 			case KeyEvent.VK_Q:
-				System.out.println("attack left");
+				System.out.println("hit left");
 				game.playerHit(-1, 0);
 				break;
 			case KeyEvent.VK_S:
-				System.out.println("attack down");
+				System.out.println("hit down");
 				game.playerHit(0, 1);
 				break;
 			case KeyEvent.VK_D:
-				System.out.println("attack right");
+				System.out.println("hit right");
 				game.playerHit(1, 0);
 				break;
 				/*

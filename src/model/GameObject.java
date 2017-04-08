@@ -6,14 +6,13 @@ public abstract class GameObject {
 	protected int posX;
 	protected int posY;
 	protected BufferedImage sprite;
+	private Game game;
 	
-	
-	
-	public GameObject(int x, int y, BufferedImage sprite){
+	public GameObject(int x, int y, Game game, BufferedImage sprite){
 		this.posX = x;
 		this.posY = y;
 		this.sprite = sprite;
-		
+		this.game = game;
 	}
 	
 	public void setPos(int posX,int posY) {
@@ -35,6 +34,10 @@ public abstract class GameObject {
 	
 	public boolean isAtPosition(int x, int y){
 		return this.posX == x && this.posY == y;
+	}
+	
+	public Game getGame() {
+		return this.game;
 	}
 	
 	public abstract boolean isObstacle();
