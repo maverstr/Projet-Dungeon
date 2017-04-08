@@ -52,7 +52,7 @@ public class Skeleton extends Mob implements Runnable {
 				}
 				this.getGame().updateWindow();
 				
-				System.out.print("time : "+time+"\n");
+				//System.out.print("time : "+time+"\n");
 				Thread.sleep(waitTime);
 				time+=waitTime;
 			}
@@ -77,7 +77,7 @@ public class Skeleton extends Mob implements Runnable {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
-					System.out.println("obstacle for skeleton");
+					//System.out.println("obstacle for skeleton");
 					res = true;
 				}
 			}

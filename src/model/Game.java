@@ -40,6 +40,10 @@ public class Game {
 		return this.player;
 	}
 	
+	public void playerChangeTool() {
+		player.changeTool();
+	}
+	
 	public void movePlayer(int xMove,int yMove) {
 		boolean obstacle = false;
 		

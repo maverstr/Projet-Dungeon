@@ -45,6 +45,8 @@ public class Keyboard implements KeyListener{
 				System.out.println("hit right");
 				game.playerHit(1, 0);
 				break;
+			case KeyEvent.VK_A:
+				game.playerChangeTool();
 				/*
 			case KeyEvent.VK_SPACE:
 				game.dropBomb("nuke", player1);

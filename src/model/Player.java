@@ -10,6 +10,7 @@ import CONSTANTS.CONSTANTS;
 public class Player extends Character {
 	public Player(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Hugues_Head.jpg").getFile())));
+		this.itemType = 1;
 	}
 
 	@Override
@@ -17,8 +18,17 @@ public class Player extends Character {
 		return true;
 	}
 	
+	public void changeTool() {
+		if (this.itemType == 1) {
+			this.itemType = 2;
+			System.out.println("pickaxe");
+		} else {
+			this.itemType = 1;
+			System.out.println("weapon");
+		}
+	}
+	
 	public void hit(int xHit,int yHit) {
-		this.itemType = 1;
 		
 		switch (this.itemType) {
 			case 1: this.attack(xHit, yHit);
