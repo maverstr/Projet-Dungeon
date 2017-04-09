@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class BlockBreakable extends Block implements Breakable {
 
 	public BlockBreakable(int x, int y, Game game) throws IOException{
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/blockBreakable_sprite.png").getFile())));
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Breakable.png").getFile())));
 		
 	}
 	

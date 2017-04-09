@@ -17,7 +17,7 @@ public class Window {
 	    JFrame window = new JFrame("HaelterMINE");
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_HEIGHT, CONSTANTS.CONSTANTS.WINDOW_WIDTH);
-	    window.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
+	    window.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Unbreakable.png").getFile())));
 	    window.getContentPane().setBackground(Color.gray);
 	    window.getContentPane().add(this.map); //window.add(this.map) same
 	    window.setVisible(true);

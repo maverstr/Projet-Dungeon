@@ -16,6 +16,10 @@ public abstract class GameObject {
 		this.game = game;
 	}
 	
+	public void updateSprite(BufferedImage sprite) {
+		this.sprite = sprite;
+	}
+	
 	public void setPos(int posX,int posY) {
 		this.posX = posX;
 		this.posY = posY;
@@ -43,6 +47,10 @@ public abstract class GameObject {
 	
 	public Game getGame() {
 		return this.game;
+	}
+	
+	public boolean isZombie() {
+		return false;
 	}
 	
 	public abstract boolean isObstacle();

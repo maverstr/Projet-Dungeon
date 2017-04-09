@@ -30,19 +30,19 @@ public class Keyboard implements KeyListener{
 				game.movePlayer(0, -1);
 				break;
 			case KeyEvent.VK_Z:
-				System.out.println("hit up");
+				System.out.println("key hit up");
 				game.playerHit(0, -1);
 				break;
 			case KeyEvent.VK_Q:
-				System.out.println("hit left");
+				System.out.println("key hit left");
 				game.playerHit(-1, 0);
 				break;
 			case KeyEvent.VK_S:
-				System.out.println("hit down");
+				System.out.println("key hit down");
 				game.playerHit(0, 1);
 				break;
 			case KeyEvent.VK_D:
-				System.out.println("hit right");
+				System.out.println("key hit right");
 				game.playerHit(1, 0);
 				break;
 			case KeyEvent.VK_A:

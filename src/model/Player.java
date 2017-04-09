@@ -11,14 +11,70 @@ public class Player extends Character {
 	
 	private boolean alive = true;
 	
+	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile());
+	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Player_R.png").getFile());
+	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Player_D.png").getFile());
+	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Player_L.png").getFile());
+	
 	public Player(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Hugues_Head.jpg").getFile())));
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile())));
 		this.itemType = 1;
 	}
 
 	@Override
 	public boolean isObstacle() {
 		return true;
+	}
+	
+	public void tryToMove(int xMove, int yMove) {
+		boolean obstacle = false;
+		
+		int newPosX = posX+CONSTANTS.BLOCK_SIZE*xMove;
+		int newPosY = posY+CONSTANTS.BLOCK_SIZE*yMove;
+		
+		int blockMoveableNewPosX = posX+2*CONSTANTS.BLOCK_SIZE*xMove;
+		int blockMoveableNewPosY = posY+2*CONSTANTS.BLOCK_SIZE*yMove;
+		
+		for (GameObject object:this.getGame().getGameObjects()) {
+			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
+				if (object.isObstacle()) {
+					System.out.println("obstacle");
+					obstacle = true;
+					if (object instanceof Block) {
+						Block block = (Block) object;
+						if (block.isMoveable()) {
+							System.out.println("moveable");
+							if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
+								System.out.println("freespace");
+								BlockMoveable blockMoveable = (BlockMoveable) block;
+								move(xMove, yMove);
+								blockMoveable.move(xMove, yMove);
+								updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+							}
+						}
+					}
+				}
+			}
+		}
+		if (!obstacle) {
+			move(xMove, yMove);
+			updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+		}
+		
+		this.getGame().updateWindow();
+	}
+	
+	private boolean freeSpace(int x, int y) {
+		boolean res = true;
+		for (GameObject object:this.getGame().getGameObjects()) {
+			if (object.getPosX() == x && object.getPosY() == y) {
+				if (object.isObstacle()) {
+					res = false;
+					break;
+				}
+			}
+		}
+		return res;
 	}
 	
 	public void changeTool() {
@@ -32,7 +88,8 @@ public class Player extends Character {
 	}
 	
 	public void hit(int xHit,int yHit) {
-		
+		this.setMoveDirection(xHit, yHit);
+		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		switch (this.itemType) {
 			case 1: this.attack(xHit, yHit);
 				break;

@@ -14,9 +14,14 @@ public class Skeleton extends Mob implements Runnable {
 	static final int waitTime = 1000;
 	int time = 0;
 	long offset;
+	
+	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Skeleton_U.png").getFile());
+	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Skeleton_R.png").getFile());
+	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Skeleton_D.png").getFile());
+	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
 
 	public Skeleton(int x, int y, long threadOffset, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Skeleton.jpg").getFile())));
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Skeleton_U.png").getFile())));
 		this.offset = threadOffset;
 		
 	}
@@ -52,8 +57,7 @@ public class Skeleton extends Mob implements Runnable {
 				} else {
 					move(moveCloserX,moveCloserY);
 				}
-				
-				
+				updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 				
 				this.getGame().updateWindow();
 				Thread.sleep(waitTime/2);

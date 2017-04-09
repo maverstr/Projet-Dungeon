@@ -46,54 +46,11 @@ public class Game {
 	
 	public void movePlayer(int xMove,int yMove) {
 		if (player.isAlive()) {
-			boolean obstacle = false;
-			
-			int newPosX = player.posX+CONSTANTS.BLOCK_SIZE*xMove;
-			int newPosY = player.posY+CONSTANTS.BLOCK_SIZE*yMove;
-			
-			int blockMoveableNewPosX = player.posX+2*CONSTANTS.BLOCK_SIZE*xMove;
-			int blockMoveableNewPosY = player.posY+2*CONSTANTS.BLOCK_SIZE*yMove;
-			
-			for (GameObject object:objects) {
-				if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-					if (object.isObstacle()) {
-						System.out.println("obstacle");
-						obstacle = true;
-						if (object instanceof Block) {
-							Block block = (Block) object;
-							if (block.isMoveable()) {
-								System.out.println("moveable");
-								if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
-									System.out.println("freespace");
-									BlockMoveable blockMoveable = (BlockMoveable) block;
-									player.move(xMove, yMove);
-									blockMoveable.move(xMove, yMove);
-								}
-							}
-						}
-					}
-				}
-			}
-			if (!obstacle) {
-				player.move(xMove, yMove);
-			}
-			
-			updateWindow();
+			player.tryToMove(xMove,yMove);
 		}
 	}
 	
-	private boolean freeSpace(int x, int y) {
-		boolean res = true;
-		for (GameObject object:objects) {
-			if (object.getPosX() == x && object.getPosY() == y) {
-				if (object.isObstacle()) {
-					res = false;
-					break;
-				}
-			}
-		}
-		return res;
-	}
+	
 	
 	public void playerHit(int xHit,int yHit) {
 		if (player.isAlive()) {
@@ -191,9 +148,9 @@ public class Game {
 			int randomInt = random.nextInt(2);
 			try {
 				if (randomInt == 0) {
-					this.objects.add(new Zombie(posX,posY,1000/mobXArray.size(),this));
+					this.objects.add(new Zombie(posX,posY,i*1000/mobXArray.size(),this));
 				} else {
-					this.objects.add(new Skeleton(posX,posY,1000/mobXArray.size(),this));
+					this.objects.add(new Skeleton(posX,posY,i*1000/mobXArray.size(),this));
 				}
 			} catch(IOException ex) {}
 		}

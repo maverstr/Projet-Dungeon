@@ -1,8 +1,8 @@
 package model;
 
 import java.io.File;
+
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -10,12 +10,18 @@ public class Zombie extends Mob {
 	
 	static final int waitTime = 1000;
 	long offset;
+	
+	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Zombie_U.png").getFile());
+	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Zombie_R.png").getFile());
+	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Zombie_D.png").getFile());
+	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Zombie_L.png").getFile());
 
 	public Zombie(int x, int y, long threadOffset, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Zombie.png").getFile())));
+		super(x, y, game, ImageIO.read(spriteFileU));
 		this.offset = threadOffset;
 		
 	}
+	
 	
 	@Override
 	public void run() {
@@ -31,6 +37,8 @@ public class Zombie extends Mob {
 				int newDirection = setDirection(mobX,mobY,playerX,playerY);
 				if (newDirection != -1) {
 					this.direction = newDirection;
+					System.out.println(newDirection);
+					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 				}
 				this.getGame().updateWindow();
 				Thread.sleep(waitTime/2);
@@ -59,6 +67,8 @@ public class Zombie extends Mob {
 				break;
 		}
 	}
+	
+	
 	
 	private int setDirection(int mobX,int mobY,int playerX,int playerY) {
 		int res = -1;

@@ -11,7 +11,7 @@ public class BlockNotBreakable extends Block {
 
 	
 	public BlockNotBreakable(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Haelti_Head.jpg").getFile())));
+		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Unbreakable.png").getFile())));
 		
 	}
 
