@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JProgressBar;
 
 import CONSTANTS.CONSTANTS;
+import view.PlayerState;
 
 public class Player extends Character {
+	
+	JProgressBar healthBar = PlayerState.healthBar;
 	
 	private boolean alive = true;
 	
@@ -21,6 +25,11 @@ public class Player extends Character {
 	public Player(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.itemType = 1;
+	}
+
+	@Override
+	public boolean isObstacle() {
+		return true;
 	}
 	
 	public void tryToMove(int xMove, int yMove) {
@@ -114,6 +123,7 @@ public class Player extends Character {
 	public void wasHit() {
 		this.health--;
 		System.out.println("HEALTH : " + this.health + "\n");
+		PlayerState.barUpdate(this.health);
 		if (this.health<=0) {
 			die();
 		}

@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 public class Window {
 	private Map map = new Map();
@@ -30,6 +31,8 @@ public class Window {
 	    frame.getContentPane().setBackground(Color.gray);
 	    
 //	    
+
+	    
 	    //left side of top level container
 	    JPanel leftContainer = new JPanel();
 	    leftContainer.setLayout(new BoxLayout(leftContainer, BoxLayout.Y_AXIS));
