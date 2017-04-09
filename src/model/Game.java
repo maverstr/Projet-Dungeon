@@ -193,9 +193,8 @@ public class Game {
 				if (randomInt == 0) {
 					this.objects.add(new Zombie(posX,posY,1000/mobXArray.size(),this));
 				} else {
-					this.objects.add(new Zombie(posX,posY,1000/mobXArray.size(),this));
+					this.objects.add(new Skeleton(posX,posY,1000/mobXArray.size(),this));
 				}
-				
 			} catch(IOException ex) {}
 		}
 	}
