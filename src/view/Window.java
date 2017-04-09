@@ -9,20 +9,26 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Window {
 	private Map map = new Map();
 	
-	public Window() throws IOException{	    
-	    JFrame window = new JFrame("HaelterMINE");
-	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_HEIGHT, CONSTANTS.CONSTANTS.WINDOW_WIDTH);
-	    window.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Unbreakable.png").getFile())));
-	    window.getContentPane().setBackground(Color.gray);
-	    window.getContentPane().add(this.map); //window.add(this.map) same
-	    window.setVisible(true);
-	}
 	
+	
+	public Window() throws IOException{	  
+		
+	    JFrame frame = new JFrame("HaelterMINE");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_HEIGHT, CONSTANTS.CONSTANTS.WINDOW_WIDTH);
+	    frame.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile())));
+	    frame.getContentPane().setBackground(Color.gray);
+	    frame.getContentPane().add(this.map); //window.add(this.map) same
+	    frame.setVisible(true);
+	    
+	    
+	}
 	
 	public void setGameObjects(ArrayList<GameObject> objects){
 		this.map.setObjects(objects);

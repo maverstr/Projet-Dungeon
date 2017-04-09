@@ -7,13 +7,14 @@ import javax.imageio.ImageIO;
 
 public abstract class Character extends GameObject{
 	
-	int health = 5;
+	protected int health;
+	
 	int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	
-	public Character(int x, int y, Game game, BufferedImage sprite){
+	public Character(int x, int y, Game game, BufferedImage sprite, int health){
 		super(x,y,game,sprite);
-		
+		this.health = health;
 	}
 	public int getHealth(){
 		return this.health;

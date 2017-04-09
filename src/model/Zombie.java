@@ -8,8 +8,10 @@ import javax.imageio.ImageIO;
 
 public class Zombie extends Mob {
 	
-	static final int waitTime = 1000;
+	private static final int waitTime = 1000;
 	long offset;
+	
+	private static final int maxHealth = 3;
 	
 	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Zombie_U.png").getFile());
 	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Zombie_R.png").getFile());
@@ -17,7 +19,7 @@ public class Zombie extends Mob {
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Zombie_L.png").getFile());
 
 	public Zombie(int x, int y, long threadOffset, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(spriteFileU));
+		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.offset = threadOffset;
 		
 	}

@@ -6,9 +6,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class BlockMoveable extends Block {
+	
+	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Block_Moveable.png").getFile());
 
 	public BlockMoveable(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Block_Moveable.png").getFile())));
+		super(x, y, game, ImageIO.read(spriteFile));
 		
 	}
 	

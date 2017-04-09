@@ -15,13 +15,15 @@ public class Skeleton extends Mob implements Runnable {
 	int time = 0;
 	long offset;
 	
+	private static final int maxHealth = 2;
+	
 	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Skeleton_U.png").getFile());
 	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Skeleton_R.png").getFile());
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Skeleton_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
 
 	public Skeleton(int x, int y, long threadOffset, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Skeleton_U.png").getFile())));
+		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.offset = threadOffset;
 		
 	}
