@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,7 +17,9 @@ public class PlayerState extends JPanel {
 	
 
 	public PlayerState() {
+		this.setPreferredSize(new Dimension(200, 600));
 		this.setFocusable(true);
+		
 	}
 	
 	public void paint(Graphics g)  {

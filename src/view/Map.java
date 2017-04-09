@@ -2,6 +2,7 @@ package view;
 import model.GameObject;
 import CONSTANTS.CONSTANTS;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -19,6 +20,7 @@ public class Map extends JPanel {
 	private BufferedImage backSprite;
 	
 	public Map() throws IOException{
+		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
