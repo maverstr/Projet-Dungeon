@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Skeleton extends Mob implements Runnable {
 	
-	static int waitTime = 1000;
+	static final int waitTime = 1000;
 	int time = 0;
 	long offset;
 
@@ -58,11 +58,7 @@ public class Skeleton extends Mob implements Runnable {
 				this.getGame().updateWindow();
 				Thread.sleep(waitTime/2);
 				
-				//area attack
-				this.attack(0, 1);
-				this.attack(0, -1);
-				this.attack(1, 0);
-				this.attack(-1, 0);
+				attackPattern();
 				
 				//System.out.print("time : "+time+"\n");
 				Thread.sleep(waitTime/2);
@@ -96,6 +92,15 @@ public class Skeleton extends Mob implements Runnable {
 		}
 		
 		return res;
+	}
+	
+	@Override
+	public void attackPattern() {
+		//area attack
+		this.attack(0, 1);
+		this.attack(0, -1);
+		this.attack(1, 0);
+		this.attack(-1, 0);
 	}
 	
 

@@ -3,8 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 
 public abstract class Character extends GameObject{
-
-	int direction = 1;
+	
 	int health = 5;
 	int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();

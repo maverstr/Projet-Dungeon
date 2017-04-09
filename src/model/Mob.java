@@ -15,7 +15,6 @@ public abstract class Mob extends Character implements Runnable {
 		t.start();
 	}
 	
-	@Override
 	public void attack(int xAttack, int yAttack) {
 		// TODO Auto-generated method stub
 		int newPosX = this.posX+CONSTANTS.BLOCK_SIZE*xAttack;
@@ -32,6 +31,8 @@ public abstract class Mob extends Character implements Runnable {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public abstract void attackPattern();
 	
 	public void wasHit() {
 		die();

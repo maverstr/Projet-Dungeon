@@ -6,9 +6,10 @@ public abstract class GameObject {
 	protected int posX;
 	protected int posY;
 	protected BufferedImage sprite;
+	protected int direction = 0; //0=up,1=right,2=down,3=left
 	private Game game;
 	
-	public GameObject(int x, int y, Game game, BufferedImage sprite){
+	public GameObject(int x, int y, Game game, BufferedImage sprite) {
 		this.posX = x;
 		this.posY = y;
 		this.sprite = sprite;
@@ -20,15 +21,19 @@ public abstract class GameObject {
 		this.posY = posY;
 	}
 	
-	public int getPosX(){
+	public int getPosX() {
 		return this.posX;
 	}
 	
-	public int getPosY(){
+	public int getPosY() {
 		return this.posY;
 	}
 	
-	public BufferedImage getSprite(){
+	public int getDirection() {
+		return this.direction;
+	}
+	
+	public BufferedImage getSprite() {
 		return this.sprite;
 	}
 	

@@ -188,8 +188,14 @@ public class Game {
 		for (int i=0;i<mobXArray.size();i++) {
 			int posX = mobXArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			int posY = mobYArray.get(i)*CONSTANTS.BLOCK_SIZE;
+			int randomInt = random.nextInt(2);
 			try {
-				this.objects.add(new Skeleton(posX,posY,0,this));
+				if (randomInt == 0) {
+					this.objects.add(new Zombie(posX,posY,1000/mobXArray.size(),this));
+				} else {
+					this.objects.add(new Zombie(posX,posY,1000/mobXArray.size(),this));
+				}
+				
 			} catch(IOException ex) {}
 		}
 	}
