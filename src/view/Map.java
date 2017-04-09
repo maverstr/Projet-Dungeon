@@ -2,6 +2,7 @@ package view;
 import model.GameObject;
 import CONSTANTS.CONSTANTS;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -19,14 +20,15 @@ public class Map extends JPanel {
 	private BufferedImage backSprite;
 	
 	public Map() throws IOException{
+		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
 	public void paint(Graphics g) { 
-		for(int i = 0; i< CONSTANTS.MAP_WIDTH; i++){						
-			for(int j = 0; j<CONSTANTS.MAP_HEIGTH; j++){
+		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
+			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGTH; j++){
 				int x = i;
 				int y = j;
 				g.drawImage (backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
