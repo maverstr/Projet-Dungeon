@@ -29,16 +29,16 @@ public abstract class Character extends GameObject{
 	
 	public void setMoveDirection(int xMove, int yMove) {
 		if (yMove<0) {
-			this.direction = 0;
+			this.direction = Direction.North;
 		}
 		if (xMove>0) {
-			this.direction = 1;
+			this.direction = Direction.East;
 		}
 		if (yMove>0) {
-			this.direction = 2;
+			this.direction = Direction.South;
 		}
 		if (xMove<0) {
-			this.direction = 3;
+			this.direction = Direction.West;
 		}
 	}
 	
@@ -51,13 +51,15 @@ public abstract class Character extends GameObject{
 	public void updateSpriteDirection(File up,File right,File down,File left) {
 		try {
 			switch (this.direction) {
-			case 0:this.sprite = ImageIO.read(up);
+			case North:this.sprite = ImageIO.read(up);  
 				break;
-			case 1:this.sprite = ImageIO.read(right);
+			case East:this.sprite = ImageIO.read(right);
 				break;
-			case 2:this.sprite = ImageIO.read(down);
+			case South:this.sprite = ImageIO.read(down);
 				break;
-			case 3:this.sprite = ImageIO.read(left);
+			case West:this.sprite = ImageIO.read(left);
+				break;
+			default:
 				break;
 			}
 		} catch (Exception e) {}

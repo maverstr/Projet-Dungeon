@@ -34,8 +34,8 @@ public class Zombie extends Mob {
 				int playerX = player.getPosX();
 				int playerY = player.getPosY();
 				
-				int newDirection = setDirection(mobX,mobY,playerX,playerY);
-				if (newDirection != -1) {
+				Direction newDirection = setDirection(mobX,mobY,playerX,playerY);
+				if (newDirection != Direction.None) {
 					this.direction = newDirection;
 					System.out.println(newDirection);
 					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
@@ -53,16 +53,16 @@ public class Zombie extends Mob {
 	public void attackPattern() {
 		//vomi : 2 cases
 		switch (direction) {
-			case 0:this.attack(0, -1);
+			case North:this.attack(0, -1);//0=up,1=right,2=down,3=left
 				this.attack(0, -2);
 				break;
-			case 1:this.attack(1, 0);
+			case East:this.attack(1, 0);
 				this.attack(2, 0);
 				break;
-			case 2:this.attack(0, 1);
+			case South:this.attack(0, 1);
 				this.attack(0, 2);
 				break;
-			case 3:this.attack(-1, 0);
+			case West:this.attack(-1, 0);
 				this.attack(-2, 0);
 				break;
 		}
@@ -70,23 +70,23 @@ public class Zombie extends Mob {
 	
 	
 	
-	private int setDirection(int mobX,int mobY,int playerX,int playerY) {
-		int res = -1;
+	private Direction setDirection(int mobX,int mobY,int playerX,int playerY) {
+		Direction direction = Direction.None;
 		if ((mobX == playerX) && (mobY != playerY)) {
 			if (mobY<playerY) {
-				res = 2;
+				direction = Direction.South;
 			}else{
-				res = 0;
+				direction = Direction.North;
 			}
 		}
 		if ((mobY == playerY) && (mobX != playerX)) {
 			if (mobX<playerX) {
-				res = 1;
+				direction = Direction.East;
 			}else{
-				res = 3;
+				direction = direction.West;
 			}
 		}
-		return res;
+		return direction;
 	}
 
 }

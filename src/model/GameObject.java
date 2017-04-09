@@ -6,7 +6,7 @@ public abstract class GameObject {
 	protected int posX;
 	protected int posY;
 	protected BufferedImage sprite;
-	protected int direction = 0; //0=up,1=right,2=down,3=left
+	protected Direction direction = Direction.North; //0=up,1=right,2=down,3=left
 	private Game game;
 	
 	public GameObject(int x, int y, Game game, BufferedImage sprite) {
@@ -33,7 +33,7 @@ public abstract class GameObject {
 		return this.posY;
 	}
 	
-	public int getDirection() {
+	public Direction getDirection() {
 		return this.direction;
 	}
 	
