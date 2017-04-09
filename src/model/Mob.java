@@ -8,8 +8,8 @@ public abstract class Mob extends Character implements Runnable {
 	
 	Thread t;
 
-	public Mob(int x, int y, Game game, BufferedImage sprite) {
-		super(x, y, game, sprite);
+	public Mob(int x, int y, Game game, BufferedImage sprite, int health) {
+		super(x, y, game, sprite,health);
 		// TODO Auto-generated constructor stub
 		t = new Thread(this);
 		t.start();
@@ -35,7 +35,10 @@ public abstract class Mob extends Character implements Runnable {
 	public abstract void attackPattern();
 	
 	public void wasHit() {
-		die();
+		this.health--;
+		if (this.health<=0) {
+			die();
+		}
 	}
 	
 	public void die() {

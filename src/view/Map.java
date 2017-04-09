@@ -16,12 +16,12 @@ public class Map extends JPanel {
 	 */
 	private static final long serialVersionUID = 6724459904147376476L; //POUR LA SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
-	private BufferedImage back_sprite;
+	private BufferedImage backSprite;
 	
 	public Map() throws IOException{
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-		back_sprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
+		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
 	public void paint(Graphics g) { 
@@ -29,7 +29,7 @@ public class Map extends JPanel {
 			for(int j = 0; j<CONSTANTS.MAP_HEIGTH; j++){
 				int x = i;
 				int y = j;
-				g.drawImage (back_sprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+				g.drawImage (backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
 			}// Paint a background sprite on the map
 		}
 		

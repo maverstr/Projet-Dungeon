@@ -11,13 +11,15 @@ public class Player extends Character {
 	
 	private boolean alive = true;
 	
+	private static final int maxHealth = 5;
+	
 	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile());
 	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Player_R.png").getFile());
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Player_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Player_L.png").getFile());
 	
 	public Player(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile())));
+		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.itemType = 1;
 	}
 
