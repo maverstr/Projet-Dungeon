@@ -67,6 +67,8 @@ public class Zombie extends Mob {
 			case West:this.attack(-1, 0);
 				this.attack(-2, 0);
 				break;
+			default:
+				break;
 		}
 	}
 	
