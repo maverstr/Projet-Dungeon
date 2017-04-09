@@ -22,13 +22,17 @@ public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
 	private Player player= new Player(0, 0,this);
+	private static final boolean bossBool = true;
 	
 	public Game(Window window) throws IOException{
 		this.window = window;
 		objects.add(player);
-		loadMap("map_1.txt");
+		if (bossBool) {
+			loadMap("map_2.txt");
+		} else {
+			loadMap("map_1.txt");
+		}
 		
-
 		window.setGameObjects(objects);
 	}
 	
@@ -106,7 +110,12 @@ public class Game {
                 currentLine++;
             }
             bufferedReader.close();
-            loadMobs(emptyCasesX,emptyCasesY,4);
+            if (bossBool) {
+            	loadMobs(emptyCasesX,emptyCasesY,1);
+            } else {
+            	loadMobs(emptyCasesX,emptyCasesY,4);
+            }
+            
 //          System.out.println(player.getPosX());
 //          System.out.println(objects.get(0).getPosX());
 		}
@@ -147,10 +156,14 @@ public class Game {
 			int posY = mobYArray.get(i)*CONSTANTS.BLOCK_SIZE;
 			int randomInt = random.nextInt(2);
 			try {
-				if (randomInt == 0) {
-					this.objects.add(new Zombie(posX,posY,i*1000/mobXArray.size(),this));
+				if (bossBool) {
+					this.objects.add(new Boss(posX,posY,this));
 				} else {
-					this.objects.add(new Skeleton(posX,posY,i*1000/mobXArray.size(),this));
+					if (randomInt == 0) {
+						this.objects.add(new Zombie(posX,posY,i*1000/mobXArray.size(),this));
+					} else {
+						this.objects.add(new Skeleton(posX,posY,i*1000/mobXArray.size(),this));
+					}
 				}
 			} catch(IOException ex) {}
 		}

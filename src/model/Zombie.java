@@ -55,7 +55,7 @@ public class Zombie extends Mob {
 	public void attackPattern() {
 		//vomi : 2 cases
 		switch (direction) {
-			case North:this.attack(0, -1);//0=up,1=right,2=down,3=left
+			case North:this.attack(0, -1);
 				this.attack(0, -2);
 				break;
 			case East:this.attack(1, 0);
@@ -87,7 +87,7 @@ public class Zombie extends Mob {
 			if (mobX<playerX) {
 				direction = Direction.East;
 			}else{
-				direction = direction.West;
+				direction = Direction.West;
 			}
 		}
 		return direction;

@@ -16,6 +16,12 @@ public abstract class Character extends GameObject{
 		super(x,y,game,sprite);
 		this.health = health;
 	}
+	
+	@Override
+	public boolean isObstacle() {
+		return true;
+	}
+	
 	public int getHealth(){
 		return this.health;
 	}

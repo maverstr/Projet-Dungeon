@@ -22,11 +22,6 @@ public class Player extends Character {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.itemType = 1;
 	}
-
-	@Override
-	public boolean isObstacle() {
-		return true;
-	}
 	
 	public void tryToMove(int xMove, int yMove) {
 		boolean obstacle = false;

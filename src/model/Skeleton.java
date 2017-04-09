@@ -12,7 +12,6 @@ import java.util.Random;
 public class Skeleton extends Mob implements Runnable {
 	
 	static final int waitTime = 1000;
-	int time = 0;
 	long offset;
 	
 	private static final int maxHealth = 2;
@@ -66,9 +65,7 @@ public class Skeleton extends Mob implements Runnable {
 				
 				attackPattern();
 				
-				//System.out.print("time : "+time+"\n");
 				Thread.sleep(waitTime/2);
-				time+=waitTime;
 			}
 		}catch(Exception e){}; 
 	}
@@ -96,7 +93,6 @@ public class Skeleton extends Mob implements Runnable {
 				}
 			}
 		}
-		
 		return res;
 	}
 	

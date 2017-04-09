@@ -26,12 +26,6 @@ public abstract class Mob extends Character implements Runnable {
 		}
 	}
 	
-	@Override
-	public boolean isObstacle() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	
 	public abstract void attackPattern();
 	
 	public void wasHit() {
