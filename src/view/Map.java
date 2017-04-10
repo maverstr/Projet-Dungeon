@@ -26,7 +26,10 @@ public class Map extends JPanel {
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
-	public void paint(Graphics g) { 
+//	public void paint(Graphics g) { 
+	public void paintComponent(Graphics g) { 
+		super.paintComponent(g);
+		System.out.println("painting map");
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGTH; j++){
 				int x = i;

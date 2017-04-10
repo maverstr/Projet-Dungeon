@@ -13,19 +13,25 @@ import javax.swing.JProgressBar;
 
 import CONSTANTS.CONSTANTS;
 import model.GameObject;
+import model.Player;
 
 public class PlayerState extends JPanel {
-		public static JProgressBar healthBar = new JProgressBar(0,5);
+		public JProgressBar healthBar;
 
 
 	public PlayerState() {
 		this.setPreferredSize(new Dimension(200, 600));
 		this.setFocusable(true);
 
-		
+		healthBar = new JProgressBar(0,5);
+    	healthBar.setString("Health");
+    	healthBar.setStringPainted(true);
+		this.add(this.healthBar);
 	}
 	
-	public void paint(Graphics g)  {
+	//public void paint(Graphics g)  {
+	public void paintComponent(Graphics g)  {
+		super.paintComponent(g);
 		System.out.println("painting player state");
 //		try {
 //			BufferedImage backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
@@ -45,19 +51,21 @@ public class PlayerState extends JPanel {
 //		g.fillRect(0, 0, 200, 600);
 //		g.setColor(Color.RED);
 //		g.fillRect(50, 50, 100, 500);
-		
-    	healthBar.setValue(4);
-    	healthBar.setString("Health");
-    	healthBar.setStringPainted(true);
-    	healthBar.setValue(5);
-    	this.add(PlayerState.healthBar);
+
+	
 	}
-	public void redraw(){
+	public void redraw(Player p){
+
+		try {
+			this.healthBar.setValue(p.getHealth());
 		this.repaint();
+		} catch (NullPointerException e) {
+			System.out.println("player not created yet"+e);
+		}
 	}
 	
 	public static void barUpdate(int i){
-		PlayerState.healthBar.setValue(i);
+		//PlayerState.healthBar.setValue(i);
 	}
 
 }

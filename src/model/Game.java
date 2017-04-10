@@ -34,6 +34,7 @@ public class Game {
 		}
 		
 		window.setGameObjects(objects);
+		window.setPlayer(this.player);
 	}
 	
 	public void removeGameObject(GameObject object) {
@@ -69,6 +70,7 @@ public class Game {
 	
 	public void updateWindow() {
 		window.setGameObjects(objects);
+		window.setPlayer(this.player);
 	}
 	
 	private void loadMap(String fileName) {		//Lit la map et remplit la liste des objets

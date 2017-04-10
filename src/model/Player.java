@@ -11,7 +11,6 @@ import view.PlayerState;
 
 public class Player extends Character {
 	
-	JProgressBar healthBar = PlayerState.healthBar;
 	
 	private boolean alive = true;
 	
@@ -123,7 +122,6 @@ public class Player extends Character {
 	public void wasHit() {
 		this.health--;
 		System.out.println("HEALTH : " + this.health + "\n");
-		PlayerState.barUpdate(this.health);
 		if (this.health<=0) {
 			die();
 		}
