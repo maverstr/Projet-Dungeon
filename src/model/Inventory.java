@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Inventory {
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
-	private Item currentWeaponIndex;
+	private int currentWeaponIndex=0;
 
 	public Inventory()  {
 		
@@ -14,11 +14,13 @@ public class Inventory {
 	public void addConsumable(Consumable item) {
 		boolean found=false;
 		for(Consumable i : this.consumables){
-			if (i.getClass() == item.getClass()) {
-				i.setDurability(i.getDurability()+1);
-				found = true;
-				break;
-			} 
+			//if (i.getClass() == item.getClass()) {
+				if (i.getType().equals(item.getType())) {
+					i.setDurability(i.getDurability()+1);
+					found = true;
+					break;
+				}
+			//} 
 		}
 		
 		if (! found) {
@@ -32,7 +34,7 @@ public class Inventory {
 		boolean found=false;
 		for(Weapon i : this.weapons){
 			if (i.getClass() == item.getClass()) {
-				System.out.println("weapon already is weapon list");
+				System.out.println("weapon already in weapon list");
 				found = true;
 				break;
 			} 
@@ -43,6 +45,19 @@ public class Inventory {
 		}
 		
 	}
+	
+	public Weapon getWeapon() {
+		return this.weapons.get(currentWeaponIndex);
+	}
+	
+	public void setWeaponIndex(int index) {
+		this.currentWeaponIndex=index;
+	}
+	
+	public int getWeaponIndex() {
+		return this.currentWeaponIndex;
+	}
+
 
 	
 //	public Item takeConsumable(int itemIndex) {

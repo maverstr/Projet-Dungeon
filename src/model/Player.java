@@ -25,9 +25,17 @@ public class Player extends Character {
 	
 	public Player(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
-		this.itemType = 1;
+		
 		this. inventory = new Inventory();
 		this.inventory.addWeapon(new Sword());
+		this.inventory.addWeapon(new Pickaxe());
+		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
+		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
+		this.inventory.addConsumable(new Potion(Potion.potionType.mana));
+		
+		//this.itemType = 1;
+		this.inventory.setWeaponIndex(0);
+
 //		this.inventory.add(new Swor());
 	}
 	
@@ -93,11 +101,11 @@ public class Player extends Character {
 	}
 	
 	public void changeTool() {
-		if (this.itemType == 1) {
-			this.itemType = 2;
+		if (this.inventory.getWeapon() instanceof Sword) {
+			this.inventory.setWeaponIndex(1);
 			System.out.println("pickaxe");
-		} else {
-			this.itemType = 1;
+		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
+			this.inventory.setWeaponIndex(0);
 			System.out.println("weapon");
 		}
 	}
@@ -105,12 +113,19 @@ public class Player extends Character {
 	public void hit(int xHit,int yHit) {
 		this.setMoveDirection(xHit, yHit);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-		switch (this.itemType) {
-			case 1: this.attack(xHit, yHit);
-				break;
-			case 2: this.mine(xHit,yHit);
-				break;
+		
+		if (this.inventory.getWeapon() instanceof Sword) {
+			this.attack(xHit, yHit);
+		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
+			this.mine(xHit,yHit);
 		}
+		
+//		switch (this.itemType) {
+//			case 1: this.attack(xHit, yHit);
+//				break;
+//			case 2: this.mine(xHit,yHit);
+//				break;
+//		}
 	}
 	
 	public void attack(int xAttack,int yAttack) {

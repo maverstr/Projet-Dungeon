@@ -9,7 +9,7 @@ public abstract class Character extends GameObject{
 	
 	protected int health;
 	
-	int itemType = 0; //1->weapon, 2->pickaxe
+	//int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	
 	public Character(int x, int y, Game game, BufferedImage sprite, int health){
