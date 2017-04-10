@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Inventory {
-	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	public ArrayList<Weapon> weapons = new ArrayList<Weapon>(); 
 	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
 	private int currentWeaponIndex=0;
 
@@ -11,10 +11,9 @@ public class Inventory {
 		
 	}
 	
-	public void addConsumable(Consumable item) {
+	public void addConsumable(Consumable item) { //Add a consumable object with durability or quantity count if duplicates
 		boolean found=false;
 		for(Consumable i : this.consumables){
-			//if (i.getClass() == item.getClass()) {
 				if (i.getType().equals(item.getType())) {
 					i.setDurability(i.getDurability()+1);
 					found = true;
@@ -30,7 +29,7 @@ public class Inventory {
 	}
 
 	
-	public void addWeapon(Weapon item) {
+	public void addWeapon(Weapon item) { //Add a weapon object. No more than one weapon of the same type. No durability
 		boolean found=false;
 		for(Weapon i : this.weapons){
 			if (i.getClass() == item.getClass()) {
@@ -46,15 +45,15 @@ public class Inventory {
 		
 	}
 	
-	public Weapon getWeapon() {
+	public Weapon getWeapon() { // return the Weapon to check the instanceof (cf Player hit)
 		return this.weapons.get(currentWeaponIndex);
 	}
 	
-	public void setWeaponIndex(int index) {
+	public void setWeaponIndex(int index) {//Set the weapon index (cf Player changeTool)
 		this.currentWeaponIndex=index;
 	}
 	
-	public int getWeaponIndex() {
+	public int getWeaponIndex() { //Returns weapon index for checking CURRENT Weapon (cf PlayerState paintComponent)
 		return this.currentWeaponIndex;
 	}
 

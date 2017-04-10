@@ -10,13 +10,11 @@ public abstract class Mob extends Character implements Runnable {
 
 	public Mob(int x, int y, Game game, BufferedImage sprite, int health) {
 		super(x, y, game, sprite,health);
-		// TODO Auto-generated constructor stub
 		t = new Thread(this);
 		t.start();
 	}
 	
 	public void attack(int xAttack, int yAttack) {
-		// TODO Auto-generated method stub
 		int newPosX = this.posX+CONSTANTS.BLOCK_SIZE*xAttack;
 		int newPosY = this.posY+CONSTANTS.BLOCK_SIZE*yAttack;
 		
@@ -36,7 +34,7 @@ public abstract class Mob extends Character implements Runnable {
 	}
 	
 	public void die() {
-		System.out.println("mob die");
+		//System.out.println("mob die");
 		this.getGame().getGameObjects().remove(this);
 		t.interrupt();
 	}

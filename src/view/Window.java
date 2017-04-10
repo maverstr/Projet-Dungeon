@@ -29,57 +29,50 @@ public class Window {
 		
 	    JFrame frame = new JFrame("HaelterMINE");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_PIXEL_WIDTH+200, CONSTANTS.CONSTANTS.WINDOW_PIXEL_HEIGHT);
+	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_PIXEL_WIDTH, CONSTANTS.CONSTANTS.WINDOW_PIXEL_HEIGHT);
 	    frame.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile())));
 	    frame.getContentPane().setBackground(Color.gray);
-	    
-//	    
-
+	     
+///////
 	    
 	    //left side of top level container
 	    JPanel leftContainer = new JPanel();
 	    leftContainer.setLayout(new BoxLayout(leftContainer, BoxLayout.Y_AXIS));
-	    //leftContainer.setSize(CONSTANTS.CONSTANTS.MAP_WIDTH, CONSTANTS.CONSTANTS.MAP_HEIGHT);
-	    //leftContainer.setPreferredSize(new Dimension(CONSTANTS.CONSTANTS.MAP_WIDTH, CONSTANTS.CONSTANTS.MAP_HEIGHT));
-	    //leftContainer.setBounds(0, 0, CONSTANTS.CONSTANTS.MAP_WIDTH, CONSTANTS.CONSTANTS.MAP_HEIGHT);
 	    leftContainer.add(this.map);
-////	    
+	    
+	    
+	    
 //	    //right side of top level container
 	    JPanel rightContainer = new JPanel();
 	    rightContainer.setLayout(new BoxLayout(rightContainer, BoxLayout.Y_AXIS));
-	    //rightContainer.setPreferredSize(new Dimension(200,600));
-	    //rightContainer.setBounds(0, 0,200,600);
 	    rightContainer.add(this.playerState);
-//
-////	    
+	    
+	    
+    
 //	    //Top level container 
 	    JPanel container = new JPanel();
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 	    container.add(leftContainer);
-////	    container.add(Box.createHorizontalGlue());
-////	    container.add(Box.createHorizontalGlue());
 	    container.add(Box.createHorizontalStrut(10));
 	    container.add(rightContainer, BorderLayout.CENTER);
 	    
-	    
+	    //Add the top level container to the frame
 	    frame.getContentPane().add(container);
 	    frame.setVisible(true);
 	    
 	    
 	}
 	
-	public void setGameObjects(ArrayList<GameObject> objects){
+	public void setGameObjects(ArrayList<GameObject> objects){ //Update the GameObjects list and notify VIEW with update()
 		this.map.setObjects(objects);
 		this.update();
-//		this.map.redraw();
-//		this.playerState.redraw();
 	}
 	
 	public void setPlayer(Player p) {
 		this.player=p;
 	}
 	
-	public void update(){
+	public void update(){ //Redraw the graphics
 		this.map.redraw();
 		this.playerState.redraw(this.player);
 	}

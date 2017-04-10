@@ -73,14 +73,13 @@ public class Game {
 		window.setPlayer(this.player);
 	}
 	
-	private void loadMap(String fileName) {		//Lit la map et remplit la liste des objets
+	private void loadMap(String fileName) {		//Read the MAP.TXT and load every object in the GameObjects list
 		try {
 			int playerLine = 0;
 			int playerColumn = 0;
 			ArrayList<Integer> emptyCasesX = new ArrayList<>();
 			ArrayList<Integer> emptyCasesY = new ArrayList<>();
-//			String current = new java.io.File( "." ).getCanonicalPath(); //permet de savoir dans quel r�pertoire le compilateur 
-//	        System.out.println("Current dir:"+current);						//se trouve actuellement
+
 			File file = new File(Map.class.getResource("/resources/map/"+fileName).getFile());
 			String line = null;
 			FileReader fileReader = new FileReader(file);
@@ -96,7 +95,7 @@ public class Game {
                                 break;
                     	case '$' : this.objects.add(new BlockBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE,this));
                                 break;
-                        		// Creating one Player at position P		
+                        		//Read position of the Player		
                     	case 'P' : playerLine = currentLine;
                         		playerColumn = column;
                                 break;
@@ -118,8 +117,7 @@ public class Game {
             	loadMobs(emptyCasesX,emptyCasesY,4);
             }
             
-//          System.out.println(player.getPosX());
-//          System.out.println(objects.get(0).getPosX());
+            
 		}
 		catch(FileNotFoundException e) {
             System.out.println("Unable to open file '" + fileName + "'"+e);      
@@ -129,6 +127,9 @@ public class Game {
         }
 		System.out.println(objects);
 	}
+	
+	
+	
 	
 	private void loadMobs(ArrayList<Integer> a,ArrayList<Integer> b,int maxMobs) {
 		System.out.println(a);

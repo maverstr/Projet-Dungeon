@@ -23,9 +23,8 @@ public class Main {
 		Keyboard keyboard = new Keyboard(game);
 		window.setKeyListener(keyboard);
 		
-		window.update();
+		window.update(); //Paints for the first time before anything moves and notifies view to repaint
 
-		//System.out.println(Map.loadMap("map_1.txt"));
 
 	}
 	

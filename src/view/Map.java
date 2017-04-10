@@ -15,7 +15,7 @@ public class Map extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6724459904147376476L; //POUR LA SERIALIZATION
+	private static final long serialVersionUID = 6724459904147376476L; // SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private BufferedImage backSprite;
 	
@@ -27,9 +27,8 @@ public class Map extends JPanel {
 	}
 	
 //	public void paint(Graphics g) { 
-	public void paintComponent(Graphics g) { 
+	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
-		System.out.println("painting map");
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGTH; j++){
 				int x = i;
@@ -38,13 +37,11 @@ public class Map extends JPanel {
 			}// Paint a background sprite on the map
 		}
 		
-		for(GameObject object : this.objects){
+		for(GameObject object : this.objects){ //Paint the sprite of the object at the right place
 			int x = object.getPosX();
 			int y = object.getPosY();
-			
-			g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); //Affiche le sprite de l'objet au bon endroit
-			//System.out.println(g.drawImage (object.getsprite(), x, y, null)); //Return true si 
-																			//l'image est bien loadée
+			g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
+
 			
 		}
 	}

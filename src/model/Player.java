@@ -27,16 +27,17 @@ public class Player extends Character {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		
 		this. inventory = new Inventory();
+	//Add weapons and items to the Player at the beginning of the Game.
 		this.inventory.addWeapon(new Sword());
+		this.inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
 		this.inventory.addWeapon(new Pickaxe());
-		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
+		this.inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
 		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
 		this.inventory.addConsumable(new Potion(Potion.potionType.mana));
 		
 		//this.itemType = 1;
-		this.inventory.setWeaponIndex(0);
+		this.inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 
-//		this.inventory.add(new Swor());
 	}
 	
 	public Inventory getInventory() 
@@ -100,13 +101,18 @@ public class Player extends Character {
 		return res;
 	}
 	
-	public void changeTool() {
+	
+	
+	public void changeTool() { //When "A" is pressed, CYCLE trough the weapons Sword OR pickaxe 
+		
+		// TODO Not Cycle but Selection with KEYS
+		
 		if (this.inventory.getWeapon() instanceof Sword) {
 			this.inventory.setWeaponIndex(1);
-			System.out.println("pickaxe");
+			//System.out.println("pickaxe");
 		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
 			this.inventory.setWeaponIndex(0);
-			System.out.println("weapon");
+			//System.out.println("weapon");
 		}
 	}
 	
