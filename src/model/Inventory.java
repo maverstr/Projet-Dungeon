@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Inventory {
-	private ArrayList<Item> items = new ArrayList<Item>();
+	public ArrayList<Item> items = new ArrayList<Item>();
 	private Item current;
 
 	public Inventory()  {

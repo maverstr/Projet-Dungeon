@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JProgressBar;
@@ -15,6 +16,7 @@ public class Player extends Character {
 	private boolean alive = true;
 	
 	private static final int maxHealth = 5;
+	private Inventory inventory;
 	
 	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile());
 	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Player_R.png").getFile());
@@ -24,6 +26,13 @@ public class Player extends Character {
 	public Player(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.itemType = 1;
+		this. inventory = new Inventory();
+		this.inventory.add(new Weapon());
+	}
+	
+	public Inventory getInventory() 
+	{
+		return this.inventory;
 	}
 
 	@Override

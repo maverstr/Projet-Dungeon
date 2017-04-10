@@ -13,19 +13,25 @@ import javax.swing.JProgressBar;
 
 import CONSTANTS.CONSTANTS;
 import model.GameObject;
+import model.Inventory;
+import model.Item;
 import model.Player;
 
 public class PlayerState extends JPanel {
-		public JProgressBar healthBar;
+		private JProgressBar healthBar;
+		private Inventory inventory;
 
 
 	public PlayerState() {
 		this.setPreferredSize(new Dimension(200, 600));
 		this.setFocusable(true);
+		this.setLayout(null);
+		
 
 		healthBar = new JProgressBar(0,5);
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
+    	healthBar.setBounds(10, 10, 180, 20);
 		this.add(this.healthBar);
 	}
 	
@@ -48,16 +54,32 @@ public class PlayerState extends JPanel {
 //			System.out.println("error loading buffered image");
 //		}
 //		g.setColor(Color.BLUE);
-//		g.fillRect(0, 0, 200, 600);
-//		g.setColor(Color.RED);
-//		g.fillRect(50, 50, 100, 500);
+//		g.fillRect(0, 30, 200, 570);
+		int x = 0;
+		int y = 50;
+		for(Item item : this.inventory.items){
+			System.out.println(String.format("xxxxx Inventory : %s",item));
+			g.drawImage (item.getSprite(), x, y, 50,50, null);
+			g.setColor(Color.RED);
+			g.drawRect(x, y, 50, 50);
+			g.fillOval(x+40, y+40, 20,20);
+			g.setColor(Color.GREEN);
+			g.drawString("1", x+50, y+50);
+			
+			x+=50;
+			if (x>=200) {
+				x=0;
+				y+=50;
+			}
+			
+		}
 
 	
 	}
 	public void redraw(Player p){
-
 		try {
 			this.healthBar.setValue(p.getHealth());
+			this.inventory = p.getInventory(); 
 		this.repaint();
 		} catch (NullPointerException e) {
 			System.out.println("player not created yet"+e);

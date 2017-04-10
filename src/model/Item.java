@@ -14,6 +14,10 @@ public abstract class Item {
 	public Item(BufferedImage sprite) {
 		this.sprite=sprite;
 	}
+	
+	public BufferedImage getSprite() {
+		return this.sprite;
+	}
 
 //	@Override
 //	public boolean isObstacle() {
