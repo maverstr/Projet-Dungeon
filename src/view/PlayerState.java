@@ -45,6 +45,7 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 		//Paints INVENTORY
 		int x = 0;
 		int y = 50;
+		try{
 		for (int i = 0; i < this.inventory.weapons.size(); i ++) { //WEAPON inventory
 			Item item = this.inventory.weapons.get(i);
 		
@@ -60,10 +61,14 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 			}
 
 		}
+		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+			System.out.println("player not created yet"+e);
+		}
 			
 		 x = 0;
 		 y = 120;
 		
+		 try{
 		for (int i = 0; i < this.inventory.consumables.size(); i ++) { //CONSUMABLE Inventory
 			Item item = this.inventory.consumables.get(i);
 
@@ -81,6 +86,9 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 			}
 			
 		}
+			} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+				System.out.println("player not created yet"+e);
+			}
 		
 
 	

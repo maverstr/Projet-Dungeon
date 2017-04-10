@@ -87,7 +87,7 @@ public class Game {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int currentLine = 0;
             while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line); //PRINT THE MAP IN THE CONSOLE 
                 for (int column = 0; column < line.length(); column++){
                 	char c = line.charAt(column);
                     switch (c) {
@@ -125,15 +125,14 @@ public class Game {
         catch(IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");
         }
-		System.out.println(objects);
 	}
 	
 	
 	
 	
 	private void loadMobs(ArrayList<Integer> a,ArrayList<Integer> b,int maxMobs) {
-		System.out.println(a);
-		System.out.println(b);
+		//System.out.println(a);
+		//System.out.println(b);
 		
 		ArrayList<Integer> mobXArray = new ArrayList<>();
 		ArrayList<Integer> mobYArray = new ArrayList<>();
@@ -151,8 +150,8 @@ public class Game {
 				break;
 			}
 		}
-		System.out.println(mobXArray);
-		System.out.println(mobYArray);
+		//System.out.println(mobXArray);
+		//System.out.println(mobYArray);
 		
 		for (int i=0;i<mobXArray.size();i++) {
 			int posX = mobXArray.get(i)*CONSTANTS.BLOCK_SIZE;
