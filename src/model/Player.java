@@ -27,7 +27,8 @@ public class Player extends Character {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
 		this.itemType = 1;
 		this. inventory = new Inventory();
-		this.inventory.add(new Weapon());
+		this.inventory.addWeapon(new Sword());
+//		this.inventory.add(new Swor());
 	}
 	
 	public Inventory getInventory() 

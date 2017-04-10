@@ -53,18 +53,18 @@ public class PlayerState extends JPanel {
 //		} catch (IOException e) {
 //			System.out.println("error loading buffered image");
 //		}
-//		g.setColor(Color.BLUE);
-//		g.fillRect(0, 30, 200, 570);
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 30, 200, 570);
 		int x = 0;
 		int y = 50;
-		for(Item item : this.inventory.items){
-			System.out.println(String.format("xxxxx Inventory : %s",item));
+		for(Item item : this.inventory.weapons){
+			System.out.println(String.format("Weapon Inventory : %s",item));
 			g.drawImage (item.getSprite(), x, y, 50,50, null);
 			g.setColor(Color.RED);
 			g.drawRect(x, y, 50, 50);
 			g.fillOval(x+40, y+40, 20,20);
 			g.setColor(Color.GREEN);
-			g.drawString("1", x+50, y+50);
+			g.drawString(String.format("%d",item.getDurability()), x+50, y+50);
 			
 			x+=50;
 			if (x>=200) {
