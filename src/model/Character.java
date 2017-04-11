@@ -58,7 +58,7 @@ public abstract class Character extends GameObject{
 	public void updateSpriteDirection(File up,File right,File down,File left) {
 		try {
 			switch (this.direction) {
-			case North:this.sprite = ImageIO.read(up);  
+			case North:this.sprite = ImageIO.read(up);  /* TODO: Should use updateSprite (from GameObject) as this function exists, same for next lines */
 				break;
 			case East:this.sprite = ImageIO.read(right);
 				break;

@@ -36,18 +36,20 @@ public class Map extends JPanel {
 				g.drawImage (backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
 			}// Paint a background sprite on the map
 		}
+			/* TODO : need to work on a 'deepcopy' in order to prevent concurrent to objects from here and from Game,
+			 * otherwise we get a ConcurrentModificationException. */
+			ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone();
+			for(GameObject object : clone){ //Paint the sprite of the object at the right place
+				int x = object.getPosX();
+				int y = object.getPosY();
+				g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
+			}
 		
-		for(GameObject object : this.objects){ //Paint the sprite of the object at the right place
-			int x = object.getPosX();
-			int y = object.getPosY();
-			g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
-
-			
-		}
 	}
 	
 	public void setObjects(ArrayList<GameObject> objects){
 		this.objects = objects;
+		System.out.println(String.format("in map SetObjects, objects is : %s",objects));
 	}
 	
 	public void redraw(){

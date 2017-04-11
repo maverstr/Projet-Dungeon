@@ -26,19 +26,28 @@ public class Game {
 	
 	public Game(Window window) throws IOException{
 		this.window = window;
+		window.setGameObjects(this.objects);
 		objects.add(player);
 		if (bossBool) {
 			loadMap("map_2.txt");
 		} else {
 			loadMap("map_1.txt");
 		}
+		System.out.println(String.format("in game constructor, objects is : %s",objects));
+		/* pass to window the objects it will need for viewing things */
+		
 		window.setPlayer(this.player);
-		window.setGameObjects(objects);
+		
+		updateWindow();
 
 	}
 	
 	public void removeGameObject(GameObject object) {
 		objects.remove(object);
+	}
+	
+	public ArrayList<GameObject> getGameObjects() {
+		return this.objects;
 	}
 	
 	public Player getPlayer() {
@@ -56,7 +65,7 @@ public class Game {
 	}
 	
 	
-	
+	/* TODO: rename to playerDoAction() */
 	public void playerHit(int xHit,int yHit) {
 		if (player.isAlive()) {
 			player.hit(xHit, yHit);
@@ -64,13 +73,17 @@ public class Game {
 		}
 	}
 	
-	public ArrayList<GameObject> getGameObjects() {
-		return this.objects;
-	}
+	
 	
 	public void updateWindow() {
-		window.setGameObjects(objects);
-		window.setPlayer(this.player);
+		/* TODO: No need to resend the objects and player every time, we pass it already once in our constructor and 
+		 * it is passed by reference, so window will 'see' the modification in the objects / player
+		 */
+		//window.setGameObjects(objects); 
+		//window.setPlayer(this.player);
+		
+		/* We just tell window to redraw itself; window, in turn will ask map and playerState to redraw themself */
+		window.update();  /* TODO: could be replaced by an observer (window) / observable (this) */
 	}
 	
 	private void loadMap(String fileName) {		//Read the MAP.TXT and load every object in the GameObjects list

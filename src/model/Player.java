@@ -111,16 +111,16 @@ public class Player extends Character {
 		}
 	}
 	
-	public void hit(int xHit,int yHit) {
+	/*TODO: rename to doAction() */
+	public void hit(int xHit,int yHit) { /* TODO: replace all x,y direction indication with Direction Enum */
 		this.setMoveDirection(xHit, yHit);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		
 		if (this.inventory.getWeapon() instanceof Sword) {
-			this.attack(xHit, yHit);
+			this.attack(xHit, yHit); 
 		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
 			this.mine(xHit,yHit);
 		}
-		
 	}
 	
 	public void attack(int xAttack,int yAttack) {

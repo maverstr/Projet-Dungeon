@@ -62,7 +62,7 @@ public class Window {
 	
 	public void setGameObjects(ArrayList<GameObject> objects){ //Update the GameObjects list and notify VIEW with update()
 		this.map.setObjects(objects);
-		this.update();
+		//this.update();
 	}
 	
 	public void setPlayer(Player p) { //Game gives to window the reference to the player for udpdating healthbar...

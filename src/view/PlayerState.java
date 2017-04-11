@@ -27,10 +27,10 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 		this.setLayout(null);
 		
 
-		healthBar = new JProgressBar(0,5);
+		healthBar = new JProgressBar(0,5); /* TODO: Should get player *maxHealth* iso 5 */
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
-    	healthBar.setBounds(10, 10, 180, 20);
+    	healthBar.setBounds(10, 10, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
 		this.add(this.healthBar);
 	}
 	
@@ -54,7 +54,7 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 					g.setColor(Color.RED);
 					g.drawRect(x, y, 50, 50);
 				}
-				x+=60;
+				x+=60; /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
 				if (x>=200) {
 					x=0;
 					y+=60;
@@ -71,13 +71,14 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 				Item item = this.inventory.consumables.get(i);
 	
 				g.drawImage (item.getSprite(), x, y, 50,50, null);//Paints sprite of consumable
-				g.setColor(Color.RED);
-				g.fillOval(x+40, y+40, 20,20); //Red oval for durability
-				g.setColor(Color.GREEN);
-				g.setFont(new Font("default", Font.BOLD, 16)); 
-				g.drawString(String.format("%d",item.getDurability()), x+46, y+56);// #durability
-				
-				x+=60;
+				if (item.getDurability() > 1) {  /* display 'quantity' only if > 1 of this item in inventory */
+					g.setColor(Color.RED);
+					g.fillOval(x+40, y+40, 20,20); //Red oval for durability
+					g.setColor(Color.GREEN);
+					g.setFont(new Font("default", Font.BOLD, 16)); 
+					g.drawString(String.format("%d",item.getDurability()), x+46, y+56);// #durability
+				}
+				x+=60; /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
 				if (x>=200) {
 					x=0;
 					y+=60;

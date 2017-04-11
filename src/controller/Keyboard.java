@@ -18,7 +18,7 @@ public class Keyboard implements KeyListener{
 		//System.out.println(key);
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
-				game.movePlayer(1, 0);
+				game.movePlayer(1, 0); /* TODO: replace all with direction enum */
 				break;
 			case KeyEvent.VK_LEFT:
 				game.movePlayer(-1, 0);
