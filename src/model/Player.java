@@ -117,15 +117,14 @@ public class Player extends Character {
 		
 	}
 	
-	/*TODO: rename to doAction() */
-	public void hit(int xHit,int yHit) { /* TODO: replace all x,y direction indication with Direction Enum */
-		this.setMoveDirection(xHit, yHit);
+	public void useTool(int xUseTool,int yUseTool) { /* TODO: replace all x,y direction indication with Direction Enum */
+		this.setMoveDirection(xUseTool, yUseTool);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		
-		if (this.inventory.getWeapon() instanceof Sword) { //TODO: replace iso with a global use() redefined for each tool.
-			this.attack(xHit, yHit); 
+		if (this.inventory.getWeapon() instanceof Sword) {
+			this.attack(xUseTool, yUseTool); 
 		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
-			this.mine(xHit,yHit);
+			this.mine(xUseTool,yUseTool);
 		}
 	}
 	
