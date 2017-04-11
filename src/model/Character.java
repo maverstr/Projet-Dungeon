@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 public abstract class Character extends GameObject{
 	
 	protected int health;
+	protected int maxHealth;
 	
 	//int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
@@ -25,6 +26,11 @@ public abstract class Character extends GameObject{
 	public int getHealth(){
 		return this.health;
 	}
+	
+
+	
+
+	
 //	public Weapon getWeapon(){
 //		return this.weapon;
 //	}
@@ -58,7 +64,7 @@ public abstract class Character extends GameObject{
 	public void updateSpriteDirection(File up,File right,File down,File left) {
 		try {
 			switch (this.direction) {
-			case North:this.sprite = ImageIO.read(up);  /* TODO: Should use updateSprite (from GameObject) as this function exists, same for next lines */
+			case North:this.sprite = ImageIO.read(up); 
 				break;
 			case East:this.sprite = ImageIO.read(right);
 				break;

@@ -30,6 +30,8 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 		healthBar = new JProgressBar(0,5); /* TODO: Should get player *maxHealth* iso 5 */
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
+    	healthBar.setForeground(Color.GREEN);
+    	healthBar.setBackground(Color.RED);
     	healthBar.setBounds(10, 10, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
 		this.add(this.healthBar);
 	}
@@ -91,6 +93,7 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 	
 	public void redraw(Player p){
 		try {
+			this.healthBar.setMaximum(p.getMaxHealth());
 			this.healthBar.setValue(p.getHealth()); //update healthBar at each redraw (Window.update)
 			this.inventory = p.getInventory(); //update the inventory list to draw
 			this.repaint();

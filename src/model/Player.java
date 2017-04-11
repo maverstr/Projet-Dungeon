@@ -11,7 +11,7 @@ public class Player extends Character {
 	
 	private boolean alive = true;
 	
-	private static final int maxHealth = 5;
+	private static final int maxHealth = 50;
 	private Inventory inventory;
 	
 	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile());
@@ -39,6 +39,11 @@ public class Player extends Character {
 	{
 		return this.inventory;
 	}
+	
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+
 
 	@Override
 	public boolean isObstacle() {
@@ -102,13 +107,14 @@ public class Player extends Character {
 		
 		// TODO Not Cycle but Selection with KEYS
 		
-		if (this.inventory.getWeapon() instanceof Sword) {
+		if (this.inventory.getWeapon() instanceof Sword) { 
 			this.inventory.setWeaponIndex(1);
 			//System.out.println("pickaxe");
 		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
 			this.inventory.setWeaponIndex(0);
 			//System.out.println("weapon");
 		}
+		
 	}
 	
 	/*TODO: rename to doAction() */
@@ -116,7 +122,7 @@ public class Player extends Character {
 		this.setMoveDirection(xHit, yHit);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		
-		if (this.inventory.getWeapon() instanceof Sword) {
+		if (this.inventory.getWeapon() instanceof Sword) { //TODO: replace iso with a global use() redefined for each tool.
 			this.attack(xHit, yHit); 
 		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
 			this.mine(xHit,yHit);

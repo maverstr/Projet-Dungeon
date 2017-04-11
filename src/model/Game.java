@@ -56,6 +56,7 @@ public class Game {
 	
 	public void playerChangeTool() {
 		player.changeTool();
+		updateWindow();
 	}
 	
 	public void movePlayer(int xMove,int yMove) {
@@ -76,7 +77,7 @@ public class Game {
 	
 	
 	public void updateWindow() {
-		/* TODO: No need to resend the objects and player every time, we pass it already once in our constructor and 
+		/* No need to resend the objects and player every time, we pass it already once in our constructor and 
 		 * it is passed by reference, so window will 'see' the modification in the objects / player
 		 */
 		//window.setGameObjects(objects); 
