@@ -17,8 +17,8 @@ import model.Player;
 public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventory at the right of the screen
 
 	private static final long serialVersionUID = -1983468608760988132L;
-		private JProgressBar healthBar;
-		private Inventory inventory;
+	private JProgressBar healthBar;
+	private Inventory inventory;
 
 
 	public PlayerState() {
@@ -46,68 +46,56 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 		int x = 0;
 		int y = 50;
 		try{
-		for (int i = 0; i < this.inventory.weapons.size(); i ++) { //WEAPON inventory
-			Item item = this.inventory.weapons.get(i);
-		
-			g.drawImage (item.getSprite(), x, y, 50,50, null); //Paints sprite of weapon
-			if (i == this.inventory.getWeaponIndex()) { // If CURRENT Weapon, red Countouring
-				g.setColor(Color.RED);
-				g.drawRect(x, y, 50, 50);
-			}
-			x+=60;
-			if (x>=200) {
-				x=0;
-				y+=60;
+			for (int i = 0; i < this.inventory.weapons.size(); i ++) { //WEAPON inventory
+				Item item = this.inventory.weapons.get(i);
+			
+				g.drawImage (item.getSprite(), x, y, 50,50, null); //Paints sprite of weapon
+				if (i == this.inventory.getWeaponIndex()) { // If CURRENT Weapon, red Countouring
+					g.setColor(Color.RED);
+					g.drawRect(x, y, 50, 50);
 				}
-
-			}
-				} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-						System.out.println("player not created yet A"+e);
-					}
-		
-		
-		
-			
-		 x = 0;
-		 y = 120;
-		 try{
-		for (int i = 0; i < this.inventory.consumables.size(); i ++) { //CONSUMABLE Inventory
-			Item item = this.inventory.consumables.get(i);
-
-			g.drawImage (item.getSprite(), x, y, 50,50, null);//Paints sprite of consumable
-			g.setColor(Color.RED);
-			g.fillOval(x+40, y+40, 20,20); //Red oval for durability
-			g.setColor(Color.GREEN);
-			g.setFont(new Font("default", Font.BOLD, 16)); 
-			g.drawString(String.format("%d",item.getDurability()), x+46, y+56);// #durability
-			
-			x+=60;
-			if (x>=200) {
-				x=0;
-				y+=60;
+				x+=60;
+				if (x>=200) {
+					x=0;
+					y+=60;
 				}
-			
+			}
+		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+			System.out.println("player not created yet A"+e);
 		}
-				} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-						System.out.println("player not created yet B"+e);
-					}
-		 
-
+		
+		x = 0;
+		y = 120;
+		try{
+			for (int i = 0; i < this.inventory.consumables.size(); i ++) { //CONSUMABLE Inventory
+				Item item = this.inventory.consumables.get(i);
 	
+				g.drawImage (item.getSprite(), x, y, 50,50, null);//Paints sprite of consumable
+				g.setColor(Color.RED);
+				g.fillOval(x+40, y+40, 20,20); //Red oval for durability
+				g.setColor(Color.GREEN);
+				g.setFont(new Font("default", Font.BOLD, 16)); 
+				g.drawString(String.format("%d",item.getDurability()), x+46, y+56);// #durability
+				
+				x+=60;
+				if (x>=200) {
+					x=0;
+					y+=60;
+				}
+			}
+		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+			System.out.println("player not created yet B"+e);
+		}
 	}
-	
-	
-	
 	
 	public void redraw(Player p){
 		try {
 			this.healthBar.setValue(p.getHealth()); //update healthBar at each redraw (Window.update)
 			this.inventory = p.getInventory(); //update the inventory list to draw
-		this.repaint();
-			} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-				System.out.println("player not created yet C"+e);
-				}
+			this.repaint();
+		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+			System.out.println("player not created yet C"+e);
+		}
 	}
 	
-
 }
