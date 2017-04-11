@@ -4,7 +4,6 @@ import model.Player;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 
 public class Window {
 	private Map map = new Map();
@@ -68,7 +65,7 @@ public class Window {
 		this.update();
 	}
 	
-	public void setPlayer(Player p) {
+	public void setPlayer(Player p) { //Game gives to window the reference to the player for udpdating healthbar...
 		this.player=p;
 	}
 	

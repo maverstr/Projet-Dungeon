@@ -32,9 +32,9 @@ public class Game {
 		} else {
 			loadMap("map_1.txt");
 		}
-		
-		window.setGameObjects(objects);
 		window.setPlayer(this.player);
+		window.setGameObjects(objects);
+
 	}
 	
 	public void removeGameObject(GameObject object) {

@@ -2,13 +2,9 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-import javax.swing.JProgressBar;
 
 import CONSTANTS.CONSTANTS;
-import view.PlayerState;
 
 public class Player extends Character {
 	
@@ -35,7 +31,6 @@ public class Player extends Character {
 		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
 		this.inventory.addConsumable(new Potion(Potion.potionType.mana));
 		
-		//this.itemType = 1;
 		this.inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 
 	}
@@ -126,12 +121,6 @@ public class Player extends Character {
 			this.mine(xHit,yHit);
 		}
 		
-//		switch (this.itemType) {
-//			case 1: this.attack(xHit, yHit);
-//				break;
-//			case 2: this.mine(xHit,yHit);
-//				break;
-//		}
 	}
 	
 	public void attack(int xAttack,int yAttack) {

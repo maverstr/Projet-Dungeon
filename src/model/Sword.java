@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class Sword extends Weapon {
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/sword_sprite.png").getFile());
+	
 	public Sword() throws IOException {
 		super(ImageIO.read(spriteFile));
 	}

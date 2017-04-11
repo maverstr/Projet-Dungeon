@@ -58,16 +58,18 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 			if (x>=200) {
 				x=0;
 				y+=60;
-			}
+				}
 
-		}
-		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-			System.out.println("player not created yet"+e);
-		}
+			}
+				} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+						System.out.println("player not created yet A"+e);
+					}
+		
+		
+		
 			
 		 x = 0;
 		 y = 120;
-		
 		 try{
 		for (int i = 0; i < this.inventory.consumables.size(); i ++) { //CONSUMABLE Inventory
 			Item item = this.inventory.consumables.get(i);
@@ -83,24 +85,28 @@ public class PlayerState extends JPanel { //Jpanel for Player Stats and Inventor
 			if (x>=200) {
 				x=0;
 				y+=60;
-			}
+				}
 			
 		}
-			} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-				System.out.println("player not created yet"+e);
-			}
-		
+				} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+						System.out.println("player not created yet B"+e);
+					}
+		 
 
 	
 	}
+	
+	
+	
+	
 	public void redraw(Player p){
 		try {
 			this.healthBar.setValue(p.getHealth()); //update healthBar at each redraw (Window.update)
 			this.inventory = p.getInventory(); //update the inventory list to draw
 		this.repaint();
-		} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
-			System.out.println("player not created yet"+e);
-		}
+			} catch (NullPointerException e) { //At the beginning player may not be created -> nullpointer
+				System.out.println("player not created yet C"+e);
+				}
 	}
 	
 
