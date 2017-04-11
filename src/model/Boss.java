@@ -58,13 +58,11 @@ public class Boss extends Mob {
 
 	public Boss(int x, int y, Game game) throws IOException {
 		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
-		// TODO Auto-generated constructor stub
 		
 	}
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try{
 			Player player = this.getGame().getPlayer();
 			Random random = new Random();
