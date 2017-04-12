@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import CONSTANTS.CONSTANTS;
 import model.Player;
 
 import model.GameObject;
@@ -22,7 +21,7 @@ public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
 	private Player player = new Player(0, 0, this);
-	private static final boolean bossBool = true;
+	private static final boolean bossBool = false;
 
 	public Game(Window window) throws IOException {
 		this.window = window;
@@ -110,12 +109,12 @@ public class Game {
 					char c = line.charAt(column);
 					switch (c) {
 					case '*':
-						this.objects.add(new BlockNotBreakable(column * CONSTANTS.BLOCK_SIZE,
-								currentLine * CONSTANTS.BLOCK_SIZE, this));
+						this.objects.add(new BlockNotBreakable(column,
+								currentLine, this));
 						break;
 					case '$':
-						this.objects.add(new BlockBreakable(column * CONSTANTS.BLOCK_SIZE,
-								currentLine * CONSTANTS.BLOCK_SIZE, this));
+						this.objects.add(new BlockBreakable(column,
+								currentLine, this));
 						break;
 					// Read position of the Player
 					case 'P':
@@ -123,8 +122,8 @@ public class Game {
 						playerColumn = column;
 						break;
 					case 'M':
-						this.objects.add(new BlockMoveable(column * CONSTANTS.BLOCK_SIZE,
-								currentLine * CONSTANTS.BLOCK_SIZE, this));
+						this.objects.add(new BlockMoveable(column,
+								currentLine, this));
 						break;
 					case '/':
 						emptyCasesX.add(column);
@@ -134,7 +133,7 @@ public class Game {
 						break;
 					}
 				}
-				player.setPos(playerColumn * CONSTANTS.BLOCK_SIZE, playerLine * CONSTANTS.BLOCK_SIZE); // set
+				player.setPos(playerColumn, playerLine); // set
 																										// position
 																										// of
 																										// the
@@ -179,8 +178,8 @@ public class Game {
 		// System.out.println(mobYArray);
 
 		for (int i = 0; i < mobXArray.size(); i++) {
-			int posX = mobXArray.get(i) * CONSTANTS.BLOCK_SIZE;
-			int posY = mobYArray.get(i) * CONSTANTS.BLOCK_SIZE;
+			int posX = mobXArray.get(i);
+			int posY = mobYArray.get(i);
 			int randomInt = random.nextInt(2);
 			try {
 				if (bossBool) {

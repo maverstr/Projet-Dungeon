@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import CONSTANTS.CONSTANTS;
 
 public class Player extends Character {
 	
@@ -53,11 +52,11 @@ public class Player extends Character {
 	public void tryToMove(int xMove, int yMove) {
 		boolean obstacle = false;
 		
-		int newPosX = posX+CONSTANTS.BLOCK_SIZE*xMove;
-		int newPosY = posY+CONSTANTS.BLOCK_SIZE*yMove;
+		int newPosX = posX+xMove;
+		int newPosY = posY+yMove;
 		
-		int blockMoveableNewPosX = posX+2*CONSTANTS.BLOCK_SIZE*xMove;
-		int blockMoveableNewPosY = posY+2*CONSTANTS.BLOCK_SIZE*yMove;
+		int blockMoveableNewPosX = posX+2*xMove;
+		int blockMoveableNewPosY = posY+2*yMove;
 		
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
@@ -129,8 +128,8 @@ public class Player extends Character {
 	}
 	
 	public void attack(int xAttack,int yAttack) {
-		int newPosX = this.posX+CONSTANTS.BLOCK_SIZE*xAttack;
-		int newPosY = this.posY+CONSTANTS.BLOCK_SIZE*yAttack;
+		int newPosX = this.posX+xAttack;
+		int newPosY = this.posY+yAttack;
 		
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
@@ -165,8 +164,8 @@ public class Player extends Character {
 	
 	
 	public void mine(int xMine,int yMine) {
-		int newPosX = this.posX+CONSTANTS.BLOCK_SIZE*xMine;
-		int newPosY = this.posY+CONSTANTS.BLOCK_SIZE*yMine;
+		int newPosX = this.posX+xMine;
+		int newPosY = this.posY+yMine;
 		
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {

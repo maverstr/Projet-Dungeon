@@ -1,17 +1,10 @@
 package CONSTANTS;
 
-import model.BlockNotBreakable;
 
 // CETTE CLASSE EST RESERVEE A LA CREATION DE CONSTANTES.
 
 public class CONSTANTS {
-	/* TODO: Should use this only when drawing things. All other x,y reference should be based on 'cell' unit 
-	 * example : 
-	 * 		iso new BlockNotBreakable(column*CONSTANTS.BLOCK_SIZE, currentLine*CONSTANTS.BLOCK_SIZE,this)
-	 * 		do  new BlockNotBreakable(column, currentLine, this)
-	 * 
-	 * 	-> more compact, more readable (no useless information to filter out when reading)
-	 */
+	
 	public static final int BLOCK_SIZE = 50; //Taille en pixel d'une case
 	
 	

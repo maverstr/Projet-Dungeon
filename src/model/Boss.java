@@ -10,8 +10,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import CONSTANTS.CONSTANTS;
-
 import java.io.IOException;
 
 public class Boss extends Mob {
@@ -110,8 +108,8 @@ public class Boss extends Mob {
 	
 	private boolean obstacle(int mobPosX, int mobPosY, int xMove, int yMove) {
 		boolean res = false;
-		int newPosX = mobPosX+CONSTANTS.BLOCK_SIZE*xMove;
-		int newPosY = mobPosY+CONSTANTS.BLOCK_SIZE*yMove;
+		int newPosX = mobPosX+xMove;
+		int newPosY = mobPosY+yMove;
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
@@ -148,10 +146,10 @@ public class Boss extends Mob {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		for (int i = 1; i<phase+3; i++) {
 			try {
-				objects.add(new Laser(this.posX,this.posY+i*CONSTANTS.BLOCK_SIZE,this.getGame(),fileD(i,phase+2),phase));
-				objects.add(new Laser(this.posX,this.posY-i*CONSTANTS.BLOCK_SIZE,this.getGame(),fileU(i,phase+2),phase));
-				objects.add(new Laser(this.posX+i*CONSTANTS.BLOCK_SIZE,this.posY,this.getGame(),fileR(i,phase+2),phase));
-				objects.add(new Laser(this.posX-i*CONSTANTS.BLOCK_SIZE,this.posY,this.getGame(),fileL(i,phase+2),phase));
+				objects.add(new Laser(this.posX,this.posY+i,this.getGame(),fileD(i,phase+2),phase));
+				objects.add(new Laser(this.posX,this.posY-i,this.getGame(),fileU(i,phase+2),phase));
+				objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
+				objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
 			} catch(Exception e) {}
 		}
 	}

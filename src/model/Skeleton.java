@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import CONSTANTS.CONSTANTS;
-
 import java.util.Random;
 
 public class Skeleton extends Mob implements Runnable {
@@ -83,8 +81,8 @@ public class Skeleton extends Mob implements Runnable {
 	
 	private boolean obstacle(int mobPosX, int mobPosY, int xMove, int yMove) {
 		boolean res = false;
-		int newPosX = mobPosX+CONSTANTS.BLOCK_SIZE*xMove;
-		int newPosY = mobPosY+CONSTANTS.BLOCK_SIZE*yMove;
+		int newPosX = mobPosX+xMove;
+		int newPosY = mobPosY+yMove;
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {

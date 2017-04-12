@@ -42,7 +42,7 @@ public class Map extends JPanel {
 		for(GameObject object : clone){ //Paint the sprite of the object at the right place
 			int x = object.getPosX();
 			int y = object.getPosY();
-			g.drawImage (object.getSprite(), x, y, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
+			g.drawImage (object.getSprite(), x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
 		}
 
 	}

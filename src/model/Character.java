@@ -35,8 +35,8 @@ public abstract class Character extends GameObject{
 //		return this.weapon;
 //	}
 	public void move(int xMove,int yMove){
-		this.posX += CONSTANTS.CONSTANTS.BLOCK_SIZE*xMove;
-		this.posY += CONSTANTS.CONSTANTS.BLOCK_SIZE*yMove;
+		this.posX += xMove;
+		this.posY += yMove;
 		setMoveDirection(xMove,yMove);
 	}
 	

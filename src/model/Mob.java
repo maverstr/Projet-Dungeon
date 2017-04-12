@@ -2,8 +2,6 @@ package model;
 
 import java.awt.image.BufferedImage;
 
-import CONSTANTS.CONSTANTS;
-
 public abstract class Mob extends Character implements Runnable {
 	
 	Thread t;
@@ -15,8 +13,8 @@ public abstract class Mob extends Character implements Runnable {
 	}
 	
 	public void attack(int xAttack, int yAttack) {
-		int newPosX = this.posX+CONSTANTS.BLOCK_SIZE*xAttack;
-		int newPosY = this.posY+CONSTANTS.BLOCK_SIZE*yAttack;
+		int newPosX = this.posX+xAttack;
+		int newPosY = this.posY+yAttack;
 		
 		Player player = this.getGame().getPlayer();
 		if (player.getPosX() == newPosX && player.getPosY() == newPosY) {
