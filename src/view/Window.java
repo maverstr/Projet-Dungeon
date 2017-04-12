@@ -1,4 +1,5 @@
 package view;
+import model.Boss;
 import model.GameObject;
 import model.Player;
 
@@ -19,6 +20,8 @@ public class Window {
 	private Map map = new Map();
 	private PlayerState playerState = new PlayerState();
 	private Player player;
+	private boolean bossBool = false;
+	private Boss boss;
 	
 	
 	
@@ -69,9 +72,14 @@ public class Window {
 		this.player=p;
 	}
 	
+	public void setBoss(Boss b) { 
+		this.boss=b;
+		this.bossBool = true;
+	}
+	
 	public void update(){ //Redraw the graphics
 		this.map.redraw();
-		this.playerState.redraw(this.player);
+		this.playerState.redraw(this.player, this.boss, this.bossBool);
 	}
 	
 	public void setKeyListener(KeyListener keyboard){

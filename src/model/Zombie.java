@@ -39,7 +39,6 @@ public class Zombie extends Mob {
 				Direction newDirection = setDirection(mobX,mobY,playerX,playerY);
 				if (newDirection != Direction.None) {
 					this.direction = newDirection;
-					System.out.println(newDirection);
 					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 				}
 				this.getGame().updateWindow();

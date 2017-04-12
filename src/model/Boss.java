@@ -59,6 +59,10 @@ public class Boss extends Mob {
 		
 	}
 	
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+	
 	@Override
 	public void run() {
 		try{

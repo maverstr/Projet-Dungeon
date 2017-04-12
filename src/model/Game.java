@@ -21,7 +21,7 @@ public class Game {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Window window;
 	private Player player = new Player(0, 0, this);
-	private static final boolean bossBool = false;
+	private static final boolean bossBool = true;
 
 	public Game(Window window) throws IOException {
 		this.window = window;
@@ -183,7 +183,9 @@ public class Game {
 			int randomInt = random.nextInt(2);
 			try {
 				if (bossBool) {
-					this.objects.add(new Boss(posX, posY, this));
+					Boss boss = new Boss(posX, posY, this);
+					this.objects.add(boss);
+					window.setBoss(boss);
 				} else {
 					if (randomInt == 0) {
 						this.objects.add(new Zombie(posX, posY, i * 1000 / mobXArray.size(), this));

@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import model.Boss;
 import model.Inventory;
 import model.Item;
 import model.Player;
@@ -19,6 +20,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 
 	private static final long serialVersionUID = -1983468608760988132L;
 	private JProgressBar healthBar;
+	private JProgressBar bossHealthBar;
 	private Inventory inventory;
 
 	public PlayerState() {
@@ -27,13 +29,24 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		this.setFocusable(true);
 		this.setLayout(null);
 
-		healthBar = new JProgressBar(0,5); /* TODO: Should get player *maxHealth* iso 5 */
+		healthBar = new JProgressBar(0,1); /* TODO: Should get player *maxHealth* iso 5 */
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
     	healthBar.setForeground(Color.GREEN);
     	healthBar.setBackground(Color.RED);
     	healthBar.setBounds(10, 10, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
 		this.add(this.healthBar);
+		
+		
+		bossHealthBar = new JProgressBar(0,1); /* TODO: Should get player *maxHealth* iso 5 */
+		bossHealthBar.setVisible(false);
+		bossHealthBar.setString("HAELTI LIFE");
+		bossHealthBar.setStringPainted(true);
+		bossHealthBar.setForeground(Color.RED);
+		bossHealthBar.setBackground(Color.BLUE);
+		bossHealthBar.setBounds(10, 580, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
+		this.add(this.bossHealthBar);
+		
 	}
 
 	public void paintComponent(Graphics g) { // Note : DO NOT override paint(g).
@@ -113,11 +126,18 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		}
 	}
 
-	public void redraw(Player p) {
+	public void redraw(Player p, Boss b, boolean bossBool) {
 		try {
 			this.healthBar.setMaximum(p.getMaxHealth());
 			this.healthBar.setValue(p.getHealth()); //update healthBar at each redraw (Window.update)
 			this.inventory = p.getInventory(); //update the inventory list to draw
+			
+			
+			if(bossBool){
+				this.bossHealthBar.setVisible(true); //This Healthbar only appears when in the boss room
+				this.bossHealthBar.setValue(b.getHealth());
+				this.bossHealthBar.setMaximum(b.getMaxHealth());
+			}
 
 			this.repaint();
 		} catch (NullPointerException e) { // At the beginning player may not be
