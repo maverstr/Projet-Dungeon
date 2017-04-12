@@ -17,8 +17,9 @@ import view.Window;
 
 import java.util.Random;
 
-public class Game {
+public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	private Player player = new Player(0, 0, this);
 	private static final boolean bossBool = true;
@@ -83,10 +84,9 @@ public class Game {
 		 * We just tell window to redraw itself; window, in turn will ask map
 		 * and playerState to redraw themself
 		 */
-		window.update(); /*
-							 * TODO: could be replaced by an observer (window) /
-							 * observable (this)
-							 */
+		//window.update(); 
+		/* replaced by a redrawObservable notification */
+		notifyRedrawObserver();
 	}
 
 	private void loadMap(String fileName) { // Read the MAP.TXT and load every
@@ -196,6 +196,29 @@ public class Game {
 			} catch (IOException ex) {
 			}
 		}
+	}
+
+	@Override
+	public void addRedrawObserver(RedrawObserver obs) {
+		// TODO Auto-generated method stub
+		this.listRedrawObservers.add(obs);
+		
+	}
+
+	@Override
+	public void removeRedrawObserver(RedrawObserver obs) {
+		// TODO Auto-generated method stub
+		this.listRedrawObservers.remove(obs);
+		
+	}
+
+	@Override
+	public void notifyRedrawObserver() {
+		// TODO Auto-generated method stub
+		System.out.println("Notifying to the redrawObservers a request to redraw");
+		 for (RedrawObserver ob : listRedrawObservers) {
+		             ob.redraw(this);
+		      }
 	}
 
 }

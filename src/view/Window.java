@@ -2,6 +2,8 @@ package view;
 import model.Boss;
 import model.GameObject;
 import model.Player;
+import model.RedrawObservable;
+import model.RedrawObserver;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window {
+public class Window implements RedrawObserver {
 	private Map map = new Map();
 	private PlayerState playerState = new PlayerState();
 	private Player player;
@@ -76,13 +78,23 @@ public class Window {
 		this.boss=b;
 		this.bossBool = true;
 	}
-	
-	public void update(){ //Redraw the graphics
-		this.map.redraw();
-		this.playerState.redraw(this.player, this.boss, this.bossBool);
-	}
+
+	/* Replaced by a redrawObserver notification */
+//	public void update(){ //Redraw the graphics
+//		this.map.redraw();
+//		this.playerState.redraw(this.player, this.boss, this.bossBool);
+//	}
 	
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);
+	}
+
+	@Override
+	public void redraw(RedrawObservable obj) {
+		// TODO Auto-generated method stub
+		System.out.println("got a notify to redraw");
+		this.map.redraw();
+		this.playerState.redraw(this.player, this.boss, this.bossBool);
+		
 	}
 }
