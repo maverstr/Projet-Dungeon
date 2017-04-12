@@ -23,6 +23,8 @@ public class Main {
 		Keyboard keyboard = new Keyboard(game);
 		window.setKeyListener(keyboard);
 		
+		game.addRedrawObserver(window);
+		
 		//window.update(); //Paints for the first time before anything moves and notifies view to repaint
 
 
