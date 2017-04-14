@@ -58,6 +58,17 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 
 		g.setColor(Color.darkGray); // Background color for Panel
 		g.fillRect(0, 30, 200, 570);
+		g.setColor(Color.blue);
+		for (int e = 0; e <180; e+=60){
+				g.drawRect(e, 50,50, 50);
+			}
+		
+		g.setColor(Color.green);
+		for (int e = 0; e <180; e+=60){
+			for (int l =120; l <= 300; l+=60){
+				g.drawRect(e, l,50, 50);
+			}}
+
 
 		// Paints INVENTORY
 		int x = 0;
