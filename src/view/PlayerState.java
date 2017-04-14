@@ -48,6 +48,10 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		this.add(this.bossHealthBar);
 		
 	}
+	
+	
+	
+	
 
 	public void paintComponent(Graphics g) { // Note : DO NOT override paint(g).
 		super.paintComponent(g);
@@ -65,21 +69,11 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		
 		g.setColor(Color.green);
 		for (int e = 2; e <182; e+=60){
-			for (int l =120; l <= 320; l+=60){
+			for (int l =120; l < 240; l+=60){
 				g.drawRect(e, l,50, 50);
 			}}
-		
-//		for(int i = 0; i<3; i++){							// Vire la valeur 20 et parametrer ca
-//			for(int j = 0; j<20; j++){
-//				int x = i;
-//				int y = j;
-//				g.setColor(Color.LIGHT_GRAY);
-//				g.fillRect(x*50 +2, y*50, 48, 48); 
-//				g.setColor(Color.BLACK);
-//				g.drawRect(x*50 +2, y*50, 48, 48); 
-//			}
-//		}
-		
+		g.drawRect(62, 260, 50, 50); // Case dedicated PASSIVE ITEM
+		setPassiveText(27,240,g);
 
 
 		// Paints INVENTORY
@@ -156,13 +150,21 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		}
 	}
 	
-	public void setKeyNumber(int x, int y, int keyNumber, Graphics g) {
+	private void setKeyNumber(int x, int y, int keyNumber, Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(x + 42, y - 20, 20, 20); // Black oval for
 											// key number
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("default", Font.BOLD, 16));
 		g.drawString(String.format("%d", keyNumber+1), x + 48, y - 4);// #key number
+	}
+	
+	private void setPassiveText(int x, int y, Graphics g){
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 120, 18); // 
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("default", Font.BOLD, 16));
+		g.drawString(String.format("PASSIVE ITEM"), x+5, y+15);// #key number
 	}
 
 	public void redraw(Player p, Boss b, boolean bossBool) {
