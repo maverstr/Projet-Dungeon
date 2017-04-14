@@ -101,7 +101,7 @@ public class Player extends Character {
 	}
 	
 	
-	
+	/*
 	public void changeTool() { //When "A" is pressed, CYCLE trough the weapons Sword OR pickaxe 
 		
 		// TODO Not Cycle but Selection with KEYS
@@ -113,17 +113,28 @@ public class Player extends Character {
 			this.inventory.setWeaponIndex(0);
 			//System.out.println("weapon");
 		}
+	}*/
+	
+	public void useWeapon(int xUseWeapon,int yUseWeapon) { /* TODO: replace all x,y direction indication with Direction Enum */
+		this.setMoveDirection(xUseWeapon, yUseWeapon);
+		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+		this.attack(xUseWeapon, yUseWeapon);
 		
+		if (this.inventory.getWeapon().breakBlockAbility()) {
+			this.mine(xUseWeapon,yUseWeapon);
+		}
 	}
 	
-	public void useTool(int xUseTool,int yUseTool) { /* TODO: replace all x,y direction indication with Direction Enum */
-		this.setMoveDirection(xUseTool, yUseTool);
-		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-		
-		if (this.inventory.getWeapon() instanceof Sword) {
-			this.attack(xUseTool, yUseTool); 
-		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
-			this.mine(xUseTool,yUseTool);
+	public void checkItemAtIndex(int index) {
+		int ws = inventory.weapons.size();
+		if (index<ws) {
+			this.inventory.setWeaponIndex(index);
+		} else {
+			if (index<inventory.getItemCount()) {
+				Consumable consumable = inventory.consumables.get(index-ws);
+				System.out.println(consumable);
+				//TODO consumable.use()
+			}
 		}
 	}
 	
@@ -136,20 +147,13 @@ public class Player extends Character {
 				if (object instanceof Mob) {
 					System.out.println("mob attacked");
 					Mob mob = (Mob) object;
-					mob.wasHit();
+					mob.wasHit(inventory.getWeapon().getDamage());
 					break;
 				}
 			}
 		}
 	}
 	
-	public void wasHit() {
-		this.health--;
-		System.out.println("HEALTH : " + this.health + "\n");
-		if (this.health<=0) {
-			die();
-		}
-	}
 	
 	public boolean isAlive() {
 		return this.alive;

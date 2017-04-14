@@ -62,9 +62,13 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		// Paints INVENTORY
 		int x = 0;
 		int y = 50;
+		int keyNumber = 0;
 		try {
 			for (int i = 0; i < this.inventory.weapons.size(); i++) { // WEAPON
 																		// inventory
+				setKeyNumber(x,y,keyNumber,g);
+				keyNumber++;
+				
 				Item item = this.inventory.weapons.get(i);
 
 				g.drawImage(item.getSprite(), x, y, 50, 50, null); // Paints
@@ -95,6 +99,9 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		try {
 			for (int i = 0; i < this.inventory.consumables.size(); i++) { // CONSUMABLE
 																			// Inventory
+				setKeyNumber(x,y,keyNumber,g);
+				keyNumber++;
+				
 				Item item = this.inventory.consumables.get(i);
 
 				g.drawImage(item.getSprite(), x, y, 50, 50, null);// Paints
@@ -124,6 +131,15 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 											// created -> nullpointer
 			System.out.println("player not created yet B" + e);
 		}
+	}
+	
+	public void setKeyNumber(int x, int y, int keyNumber, Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(x + 40, y - 20, 20, 20); // Black oval for
+											// key number
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("default", Font.BOLD, 16));
+		g.drawString(String.format("%d", keyNumber), x + 46, y - 4);// #key number
 	}
 
 	public void redraw(Player p, Boss b, boolean bossBool) {

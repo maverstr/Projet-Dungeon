@@ -39,6 +39,7 @@ public class Map extends JPanel {
 
 		@SuppressWarnings("unchecked")
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
+		//System.out.println("size : " + clone.size());
 		for(GameObject object : clone){ //Paint the sprite of the object at the right place
 			int x = object.getPosX();
 			int y = object.getPosY();

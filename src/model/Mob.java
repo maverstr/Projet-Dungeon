@@ -18,18 +18,12 @@ public abstract class Mob extends Character implements Runnable {
 		
 		Player player = this.getGame().getPlayer();
 		if (player.getPosX() == newPosX && player.getPosY() == newPosY) {
-			player.wasHit();
+			player.wasHit(1);
 		}
 	}
 	
 	public abstract void attackPattern();
 	
-	public void wasHit() {
-		this.health--;
-		if (this.health<=0) {
-			die();
-		}
-	}
 	
 	public void die() {
 		//System.out.println("mob die");

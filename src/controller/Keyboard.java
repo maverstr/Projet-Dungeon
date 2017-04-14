@@ -31,22 +31,36 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_Z:
 				System.out.println("key hit up");
-				game.playerUseTool(0, -1);
+				game.playerUseWeapon(0, -1);
 				break;
 			case KeyEvent.VK_Q:
 				System.out.println("key hit left");
-				game.playerUseTool(-1, 0);
+				game.playerUseWeapon(-1, 0);
 				break;
 			case KeyEvent.VK_S:
 				System.out.println("key hit down");
-				game.playerUseTool(0, 1);
+				game.playerUseWeapon(0, 1);
 				break;
 			case KeyEvent.VK_D:
 				System.out.println("key hit right");
-				game.playerUseTool(1, 0);
+				game.playerUseWeapon(1, 0);
 				break;
-			case KeyEvent.VK_A:
+			/*case KeyEvent.VK_A:
 				game.playerChangeTool();
+				break;*/
+			case 48:
+			case 49:
+			case 50:
+			case 51:
+			case 52:
+			case 53:
+			case 54:
+			case 55:
+			case 56:
+			case 57:
+				game.itemAtIndex(key-48);
+				break;
+				
 				/*
 			case KeyEvent.VK_SPACE:
 				game.dropBomb("nuke", player1);

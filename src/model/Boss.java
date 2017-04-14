@@ -126,8 +126,8 @@ public class Boss extends Mob {
 	}
 	
 	@Override 
-	public void wasHit() {
-		super.wasHit();
+	public void wasHit(int damage) {
+		super.wasHit(damage);
 		System.out.println("HAELTI LIFE : "+this.health);
 		int newPhase = 0;
 		if (this.health < 3*maxHealth/4) {

@@ -57,7 +57,12 @@ public abstract class Character extends GameObject{
 	
 	public abstract void attack(int xAttack,int yAttack);
 	
-	public abstract void wasHit();
+	public void wasHit(int damage) {
+		this.health-=damage;
+		if (this.health<=0) {
+			die();
+		}
+	}
 	
 	public abstract void die();
 	

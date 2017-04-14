@@ -54,10 +54,11 @@ public class Game implements RedrawObservable {
 		return this.player;
 	}
 
+	/*
 	public void playerChangeTool() {
 		player.changeTool();
 		updateWindow();
-	}
+	}*/
 
 	public void movePlayer(int xMove, int yMove) {
 		if (player.isAlive()) {
@@ -65,11 +66,17 @@ public class Game implements RedrawObservable {
 		}
 	}
 
-	public void playerUseTool(int xUseTool, int yUseTool) {
+	public void playerUseWeapon(int xUseWeapon, int yUseWeapon) {
 		if (player.isAlive()) {
-			player.useTool(xUseTool, yUseTool);
+			player.useWeapon(xUseWeapon, yUseWeapon);
 			updateWindow();
 		}
+	}
+	
+	public void itemAtIndex(int index) {
+		//System.out.println(index);
+		player.checkItemAtIndex(index);
+		updateWindow();
 	}
 
 	public void updateWindow() {
