@@ -48,7 +48,7 @@ public class Keyboard implements KeyListener{
 			/*case KeyEvent.VK_A:
 				game.playerChangeTool();
 				break;*/
-			case 48:
+
 			case 49:
 			case 50:
 			case 51:
@@ -58,8 +58,9 @@ public class Keyboard implements KeyListener{
 			case 55:
 			case 56:
 			case 57:
-				game.itemAtIndex(key-48);
+				game.itemAtIndex(key-49); //numbers set items in inventory, begin with 1 to 9
 				break;
+			case 48: game.itemAtIndex(key-39); // 0 is equal to item #10
 				
 				/*
 			case KeyEvent.VK_SPACE:

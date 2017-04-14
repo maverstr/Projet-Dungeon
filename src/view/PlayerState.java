@@ -29,7 +29,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		this.setFocusable(true);
 		this.setLayout(null);
 
-		healthBar = new JProgressBar(0,1); /* TODO: Should get player *maxHealth* iso 5 */
+		healthBar = new JProgressBar(0,1); // Initialize the progress bar. Max health is set at paint in case of overheal or upgrade
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
     	healthBar.setForeground(Color.GREEN);
@@ -38,7 +38,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		this.add(this.healthBar);
 		
 		
-		bossHealthBar = new JProgressBar(0,1); /* TODO: Should get player *maxHealth* iso 5 */
+		bossHealthBar = new JProgressBar(0,1); 
 		bossHealthBar.setVisible(false);
 		bossHealthBar.setString("HAELTI LIFE");
 		bossHealthBar.setStringPainted(true);
@@ -139,7 +139,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 											// key number
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("default", Font.BOLD, 16));
-		g.drawString(String.format("%d", keyNumber), x + 46, y - 4);// #key number
+		g.drawString(String.format("%d", keyNumber+1), x + 46, y - 4);// #key number
 	}
 
 	public void redraw(Player p, Boss b, boolean bossBool) {
