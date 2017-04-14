@@ -59,19 +59,31 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		g.setColor(Color.darkGray); // Background color for Panel
 		g.fillRect(0, 30, 200, 570);
 		g.setColor(Color.blue);
-		for (int e = 0; e <180; e+=60){
+		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
 				g.drawRect(e, 50,50, 50);
 			}
 		
 		g.setColor(Color.green);
-		for (int e = 0; e <180; e+=60){
-			for (int l =120; l <= 300; l+=60){
+		for (int e = 2; e <182; e+=60){
+			for (int l =120; l <= 320; l+=60){
 				g.drawRect(e, l,50, 50);
 			}}
+		
+//		for(int i = 0; i<3; i++){							// Vire la valeur 20 et parametrer ca
+//			for(int j = 0; j<20; j++){
+//				int x = i;
+//				int y = j;
+//				g.setColor(Color.LIGHT_GRAY);
+//				g.fillRect(x*50 +2, y*50, 48, 48); 
+//				g.setColor(Color.BLACK);
+//				g.drawRect(x*50 +2, y*50, 48, 48); 
+//			}
+//		}
+		
 
 
 		// Paints INVENTORY
-		int x = 0;
+		int x = 2;
 		int y = 50;
 		int keyNumber = 0;
 		try {
@@ -105,7 +117,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			System.out.println("player not created yet A" + e);
 		}
 
-		x = 0;
+		x = 2;
 		y = 120;
 		try {
 			for (int i = 0; i < this.inventory.consumables.size(); i++) { // CONSUMABLE
@@ -146,11 +158,11 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	
 	public void setKeyNumber(int x, int y, int keyNumber, Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(x + 40, y - 20, 20, 20); // Black oval for
+		g.fillRect(x + 42, y - 20, 20, 20); // Black oval for
 											// key number
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("default", Font.BOLD, 16));
-		g.drawString(String.format("%d", keyNumber+1), x + 46, y - 4);// #key number
+		g.drawString(String.format("%d", keyNumber+1), x + 48, y - 4);// #key number
 	}
 
 	public void redraw(Player p, Boss b, boolean bossBool) {
