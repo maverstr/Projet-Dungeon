@@ -1,9 +1,8 @@
 package model;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 public abstract class Character extends GameObject{
 	
@@ -13,8 +12,8 @@ public abstract class Character extends GameObject{
 	//int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	
-	public Character(int x, int y, Game game, BufferedImage sprite, int health){
-		super(x,y,game,sprite);
+	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int health){
+		super(x,y,game,spriteList);
 		this.health = health;
 	}
 	
@@ -67,15 +66,16 @@ public abstract class Character extends GameObject{
 	public abstract void die();
 	
 	public void updateSpriteDirection(File up,File right,File down,File left) {
+		Sprite sprite = spriteList.get(0);
 		try {
 			switch (this.direction) {
-			case North:this.sprite = ImageIO.read(up); 
+			case North:sprite.setImageFromFile(up);
 				break;
-			case East:this.sprite = ImageIO.read(right);
+			case East:sprite.setImageFromFile(right);
 				break;
-			case South:this.sprite = ImageIO.read(down);
+			case South:sprite.setImageFromFile(down);
 				break;
-			case West:this.sprite = ImageIO.read(left);
+			case West:sprite.setImageFromFile(left);
 				break;
 			default:
 				break;

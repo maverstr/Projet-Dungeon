@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 import java.util.Random;
 
 public class Skeleton extends Mob implements Runnable {
@@ -20,7 +18,7 @@ public class Skeleton extends Mob implements Runnable {
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
 
 	public Skeleton(int x, int y, long threadOffset, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
 		this.offset = threadOffset;
 		
 	}

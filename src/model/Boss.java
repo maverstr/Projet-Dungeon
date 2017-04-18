@@ -8,14 +8,12 @@ import javafx.scene.media.MediaPlayer;
 
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
 import java.io.IOException;
 
 public class Boss extends Mob {
 	
 	private static final int initWaitTime = 2000;
-	private static final int soundWaitTime = 10000;
+	private static final int soundWaitTime = 15000;
 	private int soundTime = 0;
 	private boolean punchline1Bool = true;
 	private int waitTime = initWaitTime;
@@ -55,7 +53,7 @@ public class Boss extends Mob {
 	
 
 	public Boss(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
 		
 	}
 	
@@ -218,8 +216,10 @@ public class Boss extends Mob {
 		if (soundTime > soundWaitTime) {
 			if (punchline1Bool) {
 				punchline1Player.play();
+				punchline2Player.stop();
 			} else {
 				punchline2Player.play();
+				punchline1Player.stop();
 			}
 			punchline1Bool = !punchline1Bool;
 			soundTime = 0;

@@ -1,9 +1,9 @@
 package model;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import java.io.IOException;
 
 // Potion Consumable Class
 
@@ -31,7 +31,7 @@ public enum potionType { //ALL the Potions Types available with their index in r
 			new File(GameObject.class.getResource("/resources/sprites/potion_mana_sprite.png").getFile()),
 			
 	};
-	public Potion(potionType type) throws IOException {
+	public Potion(potionType type) throws IOException{
 		super(ImageIO.read(spriteFile[type.getIndex()]));
 		this.type = type;
 	}

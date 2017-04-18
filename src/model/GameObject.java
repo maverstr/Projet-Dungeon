@@ -1,18 +1,18 @@
 package model;
 
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class GameObject {
 	protected int posX;
 	protected int posY;
-	protected BufferedImage sprite;
+	protected ArrayList<Sprite> spriteList;
 	protected Direction direction = Direction.North; //0=up,1=right,2=down,3=left
 	private Game game;
 	
-	public GameObject(int x, int y, Game game, BufferedImage sprite) {
+	public GameObject(int x, int y, Game game, ArrayList<Sprite> spriteList) {
 		this.posX = x;
 		this.posY = y;
-		this.sprite = sprite;
+		this.spriteList = spriteList;
 		this.game = game;
 	}
 	
@@ -33,8 +33,8 @@ public abstract class GameObject {
 		return this.direction;
 	}
 	
-	public BufferedImage getSprite() {
-		return this.sprite;
+	public ArrayList<Sprite> getSpriteList() {
+		return this.spriteList;
 	}
 	
 	public boolean isAtPosition(int x, int y){

@@ -1,11 +1,11 @@
 package model;
 //test
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class Block extends GameObject{
 
-	public Block(int x, int y, Game game, BufferedImage sprite) {
-		super(x, y, game, sprite);
+	public Block(int x, int y, Game game, ArrayList<Sprite> spriteList) {
+		super(x, y, game, spriteList);
 	}
 
 	@Override

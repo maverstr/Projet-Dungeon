@@ -1,13 +1,13 @@
 package model;
 
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class Mob extends Character implements Runnable {
 	
 	Thread t;
 
-	public Mob(int x, int y, Game game, BufferedImage sprite, int health) {
-		super(x, y, game, sprite,health);
+	public Mob(int x, int y, Game game, ArrayList<Sprite> spriteList, int health) {
+		super(x, y, game, spriteList,health);
 		t = new Thread(this);
 		t.start();
 	}

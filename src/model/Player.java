@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
+
 
 
 public class Player extends Character {
@@ -18,28 +18,31 @@ public class Player extends Character {
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Player_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Player_L.png").getFile());
 	
-	public Player(int x, int y, Game game) throws IOException {
-		super(x, y, game, ImageIO.read(spriteFileU),maxHealth);
+	
+	public Player(int x, int y, Game game) {
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
 		
 		this. inventory = new Inventory();
 	//Add weapons and items to the Player at the beginning of the Game.
-		this.inventory.addWeapon(new Sword());
-		this.inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
-		this.inventory.addWeapon(new Pickaxe());
-		this.inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
-		this.inventory.addConsumable(new Potion(Potion.potionType.vie));
-		this.inventory.addConsumable(new Potion(Potion.potionType.mana));
+		try {
+			this.inventory.addWeapon(new Sword());
+			this.inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
+			this.inventory.addWeapon(new Pickaxe());
+			this.inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
+			this.inventory.addConsumable(new Potion(Potion.potionType.vie));
+			this.inventory.addConsumable(new Potion(Potion.potionType.mana));
+		}catch (IOException e){}
+		
 		
 		this.inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 
 	}
 	
-	public Inventory getInventory() 
-	{
+	public Inventory getInventory() {
 		return this.inventory;
 	}
 	
-	public int getMaxHealth(){
+	public int getMaxHealth() {
 		return maxHealth;
 	}
 

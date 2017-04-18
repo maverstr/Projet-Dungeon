@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 public class Laser extends Mob {
 	
 	private int waitTime;
@@ -12,7 +10,7 @@ public class Laser extends Mob {
 	private int time = 0;
 
 	public Laser(int x, int y, Game game, File file,int phase) throws IOException {
-		super(x, y, game, ImageIO.read(file),10000);
+		super(x, y, game, Sprite.makeSpriteList(file,0,0,2),10000);
 		this.liveTime = 500/phase;
 		this.waitTime = 300/phase;
 	}
