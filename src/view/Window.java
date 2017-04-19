@@ -25,6 +25,12 @@ public class Window implements RedrawObserver {
 	private boolean bossBool = false;
 	private Boss boss;
 	
+	private Menu menu = new Menu();
+	
+    JPanel leftContainer = new JPanel();
+	JPanel menuContainer = new JPanel();
+    JPanel rightContainer = new JPanel();
+	
 	
 	
 	public Window() throws IOException{	  
@@ -38,16 +44,24 @@ public class Window implements RedrawObserver {
 ///////
 	    
 	    //left side of top level container
-	    JPanel leftContainer = new JPanel();
 	    leftContainer.setLayout(new BoxLayout(leftContainer, BoxLayout.Y_AXIS));
 	    leftContainer.add(this.map);
+	    leftContainer.setVisible(false);
+	    
+///////
+	    
+	    //Menu/pause case
+		menuContainer.setLayout(new BoxLayout(menuContainer, BoxLayout.Y_AXIS));
+		menuContainer.add(this.menu);
+	    menuContainer.setVisible(false);
+	    
 	    
 	    
 	    
 //	    //right side of top level container
-	    JPanel rightContainer = new JPanel();
 	    rightContainer.setLayout(new BoxLayout(rightContainer, BoxLayout.Y_AXIS));
 	    rightContainer.add(this.playerState);
+	    rightContainer.setVisible(false);
 	    
 	    
     
@@ -55,6 +69,7 @@ public class Window implements RedrawObserver {
 	    JPanel container = new JPanel();
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 	    container.add(leftContainer);
+	    container.add(menuContainer);
 	    container.add(Box.createHorizontalStrut(10));
 	    container.add(rightContainer, BorderLayout.CENTER);
 	    
@@ -65,9 +80,8 @@ public class Window implements RedrawObserver {
 	    
 	}
 	
-	public void setGameObjects(ArrayList<GameObject> objects){ //Update the GameObjects list and notify VIEW with update()
+	public void setGameObjects(ArrayList<GameObject> objects){ //Update the GameObjects list
 		this.map.setObjects(objects);
-		//this.update();
 	}
 	
 	public void setPlayer(Player p) { //Game gives to window the reference to the player for udpdating healthbar...
@@ -79,11 +93,6 @@ public class Window implements RedrawObserver {
 		this.bossBool = true;
 	}
 
-	/* Replaced by a redrawObserver notification */
-//	public void update(){ //Redraw the graphics
-//		this.map.redraw();
-//		this.playerState.redraw(this.player, this.boss, this.bossBool);
-//	}
 	
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);
@@ -91,10 +100,20 @@ public class Window implements RedrawObserver {
 
 	@Override
 	public void redraw(RedrawObservable obj) {
-		// TODO Auto-generated method stub
 		System.out.println("got a notify to redraw");
+		rightContainer.setVisible(true);
+		leftContainer.setVisible(true);
+		menuContainer.setVisible(false);
 		this.map.redraw();
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		
+	}
+	
+	public void redrawMenu(){
+		System.out.println("Redraw menu");
+		rightContainer.setVisible(false);
+		leftContainer.setVisible(false);
+		menuContainer.setVisible(true);
+		this.menu.redraw();
 	}
 }

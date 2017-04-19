@@ -27,7 +27,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	public PlayerState() {
 		this.setPreferredSize(new Dimension(200, CONSTANTS.CONSTANTS.MAP_HEIGHT)); // Set Size of screen
 														// part for player STATS
-		this.setFocusable(true);
+		this.setFocusable(false);
 		this.setLayout(null);
 
 		healthBar = new JProgressBar(0,1); // Initialize the progress bar. Max health is always updated in paint in case of overheal or upgrade

@@ -28,9 +28,9 @@ public class Map extends JPanel {
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
-//	public void paint(Graphics g) { 
 	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
+		this.requestFocus();
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
 				int x = i;
@@ -39,7 +39,6 @@ public class Map extends JPanel {
 			}// Paint a background sprite on the map
 		}
 
-		@SuppressWarnings("unchecked")
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		//System.out.println("size : " + clone.size());
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();

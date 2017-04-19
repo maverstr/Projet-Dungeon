@@ -5,17 +5,22 @@ import java.awt.event.KeyListener;
 
 import model.Game;
 
+
 public class Keyboard implements KeyListener{
 	private Game game;
 	
 	public Keyboard(Game game){
 		this.game = game;
+		System.out.println(game.state);
+
 	}
 
 	//@Override
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
-		//System.out.println(key);
+		System.out.println(key);		
+		if (game.state == Game.STATE.GAME){ //Only when in the game and not in the menu
+			System.out.println("key GAME");
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
 				game.movePlayer(1, 0); /* TODO: replace all with direction enum */
@@ -70,6 +75,16 @@ public class Keyboard implements KeyListener{
 				game.dropBomb("bomb", player1);
 				*/
 		}
+		}
+		else if(game.state == Game.STATE.MENU){
+			System.out.println("key MENU");
+			switch(key){
+			case KeyEvent.VK_ENTER:
+				game.setState(Game.STATE.MENU);
+				System.out.println("key ENTER");
+				break;
+			}
+		}
 		
 	}
 
@@ -80,7 +95,5 @@ public class Keyboard implements KeyListener{
 	//@Override
 	public void keyReleased(KeyEvent e) {
 	}
-	public void test(){
-		
-	}
+
 }

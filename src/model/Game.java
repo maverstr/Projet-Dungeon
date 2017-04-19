@@ -10,11 +10,9 @@ import java.util.ArrayList;
 
 import model.Player;
 
-import model.GameObject;
-import view.Map;
-//import java.awt.Window;
-import view.Window;
+import view.*;
 
+import model.GameObject;
 import java.util.Random;
 
 public class Game implements RedrawObservable {
@@ -23,13 +21,24 @@ public class Game implements RedrawObservable {
 	private Window window;
 	private Player player = new Player(0, 0, this);
 	private static final boolean bossBool = true;
-
+	
+	public enum STATE{ //The 2 states for the game
+		MENU,
+		GAME
+	};
+	
+	public STATE state = STATE.GAME;
+	
+	
+	
+	
+	
 	public Game(Window window) throws IOException {
 		this.window = window;
 		window.setGameObjects(this.objects);
 		objects.add(player);
 		if (bossBool) {
-			loadMap("map_2.txt");
+			loadMap("map_boss.txt");
 		} else {
 			loadMap("map_1.txt");
 		}
@@ -41,6 +50,11 @@ public class Game implements RedrawObservable {
 		updateWindow();
 
 	}
+	
+	public void setState(STATE state){
+		this.state = state;
+	}
+	
 
 	public void removeGameObject(GameObject object) {
 		objects.remove(object);
@@ -53,12 +67,6 @@ public class Game implements RedrawObservable {
 	public Player getPlayer() {
 		return this.player;
 	}
-
-	/*
-	public void playerChangeTool() {
-		player.changeTool();
-		updateWindow();
-	}*/
 
 	public void movePlayer(int xMove, int yMove) {
 		if (player.isAlive()) {
@@ -74,26 +82,18 @@ public class Game implements RedrawObservable {
 	}
 	
 	public void itemAtIndex(int index) {
-		//System.out.println(index);
 		player.checkItemAtIndex(index);
 		updateWindow();
 	}
 
 	public void updateWindow() {
-		/* No need to resend the objects and player every time, we pass it already once in our constructor and 
-		 * it is passed by reference, so window will 'see' the modification in the objects / player
-
-		 */
-		// window.setGameObjects(objects);
-		// window.setPlayer(this.player);
-
-		/*
-		 * We just tell window to redraw itself; window, in turn will ask map
-		 * and playerState to redraw themself
-		 */
-		//window.update(); 
-		/* replaced by a redrawObservable notification */
-		notifyRedrawObserver();
+		if(state == STATE.GAME){
+			notifyRedrawObserver();
+		}
+		else if(state == STATE.MENU) {
+			System.out.println("update menu");
+			window.redrawMenu(); 
+			}
 	}
 
 	private void loadMap(String fileName) { // Read the MAP.TXT and load every
@@ -111,40 +111,36 @@ public class Game implements RedrawObservable {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			int currentLine = 0;
 			while ((line = bufferedReader.readLine()) != null) {
-				// System.out.println(line); //PRINT THE MAP IN THE CONSOLE
 				for (int column = 0; column < line.length(); column++) {
 					char c = line.charAt(column);
 					switch (c) {
 					case '*':
 						this.objects.add(new BlockNotBreakable(column,
-								currentLine, this));
+								currentLine-10, this)); //the -10 is due to parameters in the beginning of map files (10 lines) 
+														///which must NOT be taken into account for positioning
 						break;
 					case '$':
 						this.objects.add(new BlockBreakable(column,
-								currentLine, this));
+								currentLine-10, this));
 						break;
 					// Read position of the Player
 					case 'P':
-						playerLine = currentLine;
+						playerLine = currentLine-10;
 						playerColumn = column;
 						break;
 					case 'M':
 						this.objects.add(new BlockMoveable(column,
-								currentLine, this));
+								currentLine-10, this));
 						break;
 					case '/':
 						emptyCasesX.add(column);
-						emptyCasesY.add(currentLine);
+						emptyCasesY.add(currentLine-10);
 						break;
 					default:
 						break;
 					}
 				}
-				player.setPos(playerColumn, playerLine); // set
-																										// position
-																										// of
-																										// the
-																										// player
+				player.setPos(playerColumn, playerLine); // set position of the player
 				currentLine++;
 			}
 			bufferedReader.close();
@@ -207,21 +203,18 @@ public class Game implements RedrawObservable {
 
 	@Override
 	public void addRedrawObserver(RedrawObserver obs) {
-		// TODO Auto-generated method stub
 		this.listRedrawObservers.add(obs);
 		
 	}
 
 	@Override
 	public void removeRedrawObserver(RedrawObserver obs) {
-		// TODO Auto-generated method stub
 		this.listRedrawObservers.remove(obs);
 		
 	}
 
 	@Override
 	public void notifyRedrawObserver() {
-		// TODO Auto-generated method stub
 		System.out.println("Notifying to the redrawObservers a request to redraw");
 		 for (RedrawObserver ob : listRedrawObservers) {
 		             ob.redraw(this);

@@ -13,8 +13,8 @@ public class CONSTANTS {
 	public static final int WINDOW_PIXEL_HEIGHT = MAP_HEIGHT+36; // Prend en compte la taille de playerstate etc....
 	public static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+226;
 
-	public static int MAP_BLOCK_WIDTH = 12; // #blocs
-	public static int MAP_BLOCK_HEIGHT = 12;
+	public static int MAP_BLOCK_WIDTH = 10; // #blocs
+	public static int MAP_BLOCK_HEIGHT = 10;
 	
 	public static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT); //Taille en pixel d'une case
 	
