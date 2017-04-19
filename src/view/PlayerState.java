@@ -22,19 +22,20 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	private JProgressBar healthBar;
 	private JProgressBar bossHealthBar;
 	private Inventory inventory;
+	
 
 	public PlayerState() {
-		this.setPreferredSize(new Dimension(200, 600)); // Set Size of screen
+		this.setPreferredSize(new Dimension(200, CONSTANTS.CONSTANTS.MAP_HEIGHT)); // Set Size of screen
 														// part for player STATS
 		this.setFocusable(true);
 		this.setLayout(null);
 
-		healthBar = new JProgressBar(0,1); // Initialize the progress bar. Max health is set at paint in case of overheal or upgrade
+		healthBar = new JProgressBar(0,1); // Initialize the progress bar. Max health is always updated in paint in case of overheal or upgrade
     	healthBar.setString("Health");
     	healthBar.setStringPainted(true);
     	healthBar.setForeground(Color.GREEN);
     	healthBar.setBackground(Color.RED);
-    	healthBar.setBounds(10, 10, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
+    	healthBar.setBounds(10, 10, 180, 20);
 		this.add(this.healthBar);
 		
 		
@@ -44,7 +45,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		bossHealthBar.setStringPainted(true);
 		bossHealthBar.setForeground(Color.RED);
 		bossHealthBar.setBackground(Color.BLUE);
-		bossHealthBar.setBounds(10, 580, 180, 20); /* TODO: Do some Math here to place it correctly whatever PlayerState Dimensions are */
+		bossHealthBar.setBounds(10, CONSTANTS.CONSTANTS.MAP_HEIGHT-20, 180, 20); 
 		this.add(this.bossHealthBar);
 		
 	}
@@ -61,7 +62,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 													// Weapon
 
 		g.setColor(Color.darkGray); // Background color for Panel
-		g.fillRect(0, 30, 200, 570);
+		g.fillRect(0, 30, 200, CONSTANTS.CONSTANTS.MAP_HEIGHT-30);
 		g.setColor(Color.blue);
 		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
 				g.drawRect(e, 50,50, 50);
@@ -168,16 +169,22 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	}
 
 	public void redraw(Player p, Boss b, boolean bossBool) {
+		int pMaxHealth = p.getMaxHealth();
+		int pHealth = p.getHealth();
+		int bMaxHealth = b.getMaxHealth();
+		int bHealth = b.getHealth();
 		try {
-			this.healthBar.setMaximum(p.getMaxHealth());
-			this.healthBar.setValue(p.getHealth()); //update healthBar at each redraw (Window.update)
+	    	this.healthBar.setString(String.format("Health %d/%d", pHealth, pMaxHealth));
+			this.healthBar.setMaximum(pMaxHealth);
+			this.healthBar.setValue(pHealth); //update healthBar at each redraw (Window.update)
 			this.inventory = p.getInventory(); //update the inventory list to draw
 			
 			
 			if(bossBool){
+		    	this.bossHealthBar.setString(String.format("HAELTI LIFE %d/%d", bHealth, bMaxHealth));
 				this.bossHealthBar.setVisible(true); //This Healthbar only appears when in the boss room
-				this.bossHealthBar.setValue(b.getHealth());
-				this.bossHealthBar.setMaximum(b.getMaxHealth());
+				this.bossHealthBar.setValue(bHealth);
+				this.bossHealthBar.setMaximum(bMaxHealth);
 			}
 
 			this.repaint();
@@ -186,5 +193,6 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			System.out.println("player not created yet C" + e);
 		}
 	}
+	
 
 }
