@@ -32,7 +32,7 @@ public class Map extends JPanel {
 	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
-			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGTH; j++){
+			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
 				int x = i;
 				int y = j;
 				g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 

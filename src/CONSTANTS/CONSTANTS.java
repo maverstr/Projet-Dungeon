@@ -14,15 +14,23 @@ public class CONSTANTS {
 	public static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+226;
 
 	public static int MAP_BLOCK_WIDTH = 12; // #blocs
-	public static int MAP_BLOCK_HEIGTH = 12;
+	public static int MAP_BLOCK_HEIGHT = 12;
 	
-	public static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGTH); //Taille en pixel d'une case
+	public static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT); //Taille en pixel d'une case
 	
 	
 	
 	
 	public CONSTANTS() {
 	
+	}
+	
+	public void setMAP_BLOCK_WIDTH(int value){
+		MAP_BLOCK_WIDTH = value;
+	}
+	
+	public void setMAP_BLOCK_HEIGHT(int value){
+		MAP_BLOCK_HEIGHT = value;
 	}
 
 }
