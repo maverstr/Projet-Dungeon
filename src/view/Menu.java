@@ -52,7 +52,7 @@ public class Menu extends JPanel{
 		this.setBackground(Color.BLACK);
 		
 		
-		System.out.println("Menu painting");
+		//System.out.println("Menu painting");
 		
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);
@@ -65,16 +65,13 @@ public class Menu extends JPanel{
 		g.drawString("Options", optionsButton.x+60, optionsButton.y+60);
 		g.drawString("Quit Game", exitButton.x+25, exitButton.y+60);
 		g.drawImage(mainScreen, 100, 32, 780, 400, null);
-
-		
-		
 	}
 	
 	public void redraw(){
 		this.requestFocusInWindow();
 		this.repaint();
-		System.out.println("Menu redraw");
-		System.out.println(this.requestFocusInWindow());
+		//System.out.println("Menu redraw");
+		//System.out.println(this.requestFocusInWindow());
 		
 	}
 

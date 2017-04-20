@@ -27,8 +27,17 @@ public abstract class Mob extends Character implements Runnable {
 	
 	public void die() {
 		//System.out.println("mob die");
-		this.getGame().getGameObjects().remove(this);
+		if (!this.getGame().getGameObjects().remove(this)) {
+			System.out.println(this);
+			this.getSpriteList().get(0).setOffset(0.2, 0.2);
+			System.out.println(this.getGame().getGameObjects());
+		}
+		loot();
 		t.interrupt();
+	}
+	
+	public void loot() {
+		this.getGame().loot(this.posX, this.posY, 13);
 	}
 	
 	public abstract void run();

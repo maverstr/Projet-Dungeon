@@ -78,17 +78,14 @@ public abstract class Player extends Character {
 				if (object.isObstacle()) {
 					System.out.println("obstacle");
 					obstacle = true;
-					if (object instanceof Block) {
-						Block block = (Block) object;
-						if (block.isMoveable()) {
-							System.out.println("moveable");
-							if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
-								System.out.println("freespace");
-								BlockMoveable blockMoveable = (BlockMoveable) block;
-								move(xMove, yMove);
-								blockMoveable.move(xMove, yMove);
-								updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-							}
+					if (object.isMoveable()) {
+						System.out.println("moveable");
+						if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
+							System.out.println("freespace");
+							BlockMoveable blockMoveable = (BlockMoveable) object;
+							move(xMove, yMove);
+							blockMoveable.move(xMove, yMove);
+							updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 						}
 					}
 				}
@@ -115,20 +112,6 @@ public abstract class Player extends Character {
 		return res;
 	}
 	
-	
-	/*
-	public void changeTool() { //When "A" is pressed, CYCLE trough the weapons Sword OR pickaxe 
-		
-		// TODO Not Cycle but Selection with KEYS
-		
-		if (this.inventory.getWeapon() instanceof Sword) { 
-			this.inventory.setWeaponIndex(1);
-			//System.out.println("pickaxe");
-		} else if  (this.inventory.getWeapon() instanceof Pickaxe) {
-			this.inventory.setWeaponIndex(0);
-			//System.out.println("weapon");
-		}
-	}*/
 	
 	public void useWeapon(int xUseWeapon,int yUseWeapon) { /* TODO: replace all x,y direction indication with Direction Enum */
 		this.setMoveDirection(xUseWeapon, yUseWeapon);
@@ -177,6 +160,23 @@ public abstract class Player extends Character {
 			this.spriteList.add(Sprite.makeSpriteFromFile(spriteFilePU, 0, -0.45, 2));
 		}
 		updatePenneDirection();
+	}
+	
+	public void openChest() {
+		
+	}
+	
+	public void pickUpItem() {
+		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
+		for (GameObject object:clone) {
+			if (object.isPickable()) {
+				if (object.isAtPosition(posX, posY)) {
+					Item item = (Item) object;
+					item.pickUp(inventory);
+					this.getGame().updateWindow();
+				}
+			}
+		}
 	}
 	
 	public boolean isAlive() {

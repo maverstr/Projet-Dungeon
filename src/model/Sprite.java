@@ -25,6 +25,11 @@ public class Sprite {
 		this.drawZ = drawZ;
 	}
 	
+	public void setOffset(double x, double y) {
+		this.offsetX = x;
+		this.offsetY = y;
+	}
+	
 	public void setDrawPosition(int objectX,int objectY) {
 		this.drawX = objectX+offsetX;
 		this.drawY = objectY+offsetY;
@@ -51,13 +56,23 @@ public class Sprite {
 		return image;
 	}
 	
+	public static BufferedImage imageFromFile(File file) {
+		try {
+			BufferedImage image = ImageIO.read(file);
+			return image;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
 	public static Sprite makeSpriteFromFile(File file, double x, double y, int z) {
 		try {
 			BufferedImage image = ImageIO.read(file);
 			Sprite sprite = new Sprite(image,x,y,z);
 			return sprite;
-		} catch (IOException e) {}
-		return null;
+		} catch (IOException e) {
+			return null;
+		}
 	}
 	
 	public static ArrayList<Sprite> makeSpriteList(File file, double x, double y, int z) {

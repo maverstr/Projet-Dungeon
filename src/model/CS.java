@@ -41,8 +41,8 @@ public class CS extends Player {
 	public void setInventory(Inventory inventory) {
 		//Add weapons and items to the Player at the beginning of the Game.
 		try {
-			inventory.addWeapon(new Sword());
-			inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
+			inventory.addWeapon(new Sword(0,0,this.getGame()));
+			inventory.addConsumable(new Potion(Potion.potionType.vie, 0, 0, this.getGame())); //Note the type of potion
 		}catch (Exception e){}
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.

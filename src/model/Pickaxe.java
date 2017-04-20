@@ -8,12 +8,13 @@ import javax.imageio.ImageIO;
 public class Pickaxe extends Weapon {
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/pickaxe_sprite.png").getFile());
 
-	public Pickaxe() throws IOException {
-		super(ImageIO.read(spriteFile),1);
+	public Pickaxe(int x, int y, Game game) {
+		super(1, Sprite.imageFromFile(spriteFile), x, y, game, Sprite.makeSpriteList(spriteFile, 0, 0, 0));
 	}
 	
 	public boolean breakBlockAbility() {
 		return true;
 	}
+	
 
 }

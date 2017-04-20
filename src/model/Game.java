@@ -20,20 +20,16 @@ public class Game implements RedrawObservable {
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	private Player player = new CP(0, 0, this);
-	private static final boolean bossBool = true;
-	
-	public enum STATE{ //The 2 states for the game
-		MENU,
-		GAME
+	private static final boolean bossBool = false;
+	Random random = new Random();
+
+	public enum STATE { // The 2 states for the game
+		MENU, GAME
 	};
-	
-	public STATE state = STATE.GAME;
-	
-	
-	
-	
-	
-	public Game(Window window) throws IOException {
+
+	public STATE state = STATE.MENU;
+
+	public Game(Window window) {
 		this.window = window;
 		window.setGameObjects(this.objects);
 		objects.add(player);
@@ -50,11 +46,10 @@ public class Game implements RedrawObservable {
 		updateWindow();
 
 	}
-	
-	public void setState(STATE state){
+
+	public void setState(STATE state) {
 		this.state = state;
 	}
-	
 
 	public void removeGameObject(GameObject object) {
 		objects.remove(object);
@@ -80,20 +75,31 @@ public class Game implements RedrawObservable {
 			updateWindow();
 		}
 	}
-	
-	public void itemAtIndex(int index) {
+
+	public void itemAtIndex(int index) { //use item in inventory
 		player.checkItemAtIndex(index);
 		updateWindow();
 	}
+	
+	public void playerPickUpItem() { //pick up item on the ground
+		if (player.isAlive()) {
+			player.pickUpItem();
+		}
+	}
+	
+	public void playerOpenChest() {
+		if (player.isAlive()) {
+			//player.openChest();
+		}
+	}
 
 	public void updateWindow() {
-		if(state == STATE.GAME){
+		if (state == STATE.GAME) {
 			notifyRedrawObserver();
+		} else if (state == STATE.MENU) {
+			// System.out.println("update menu");
+			window.redrawMenu();
 		}
-		else if(state == STATE.MENU) {
-			System.out.println("update menu");
-			window.redrawMenu(); 
-			}
 	}
 
 	private void loadMap(String fileName) { // Read the MAP.TXT and load every
@@ -115,32 +121,54 @@ public class Game implements RedrawObservable {
 					char c = line.charAt(column);
 					switch (c) {
 					case '*':
-						this.objects.add(new BlockNotBreakable(column,
-								currentLine-10, this)); //the -10 is due to parameters in the beginning of map files (10 lines) 
-														///which must NOT be taken into account for positioning
+						this.objects.add(new BlockNotBreakable(column, currentLine - 10, this)); // the
+																									// -10
+																									// is
+																									// due
+																									// to
+																									// parameters
+																									// in
+																									// the
+																									// beginning
+																									// of
+																									// map
+																									// files
+																									// (10
+																									// lines)
+																									/// which
+																									// must
+																									// NOT
+																									// be
+																									// taken
+																									// into
+																									// account
+																									// for
+																									// positioning
 						break;
 					case '$':
-						this.objects.add(new BlockBreakable(column,
-								currentLine-10, this));
+						this.objects.add(new BlockBreakable(column, currentLine - 10, this));
 						break;
 					// Read position of the Player
 					case 'P':
-						playerLine = currentLine-10;
+						playerLine = currentLine - 10;
 						playerColumn = column;
 						break;
 					case 'M':
-						this.objects.add(new BlockMoveable(column,
-								currentLine-10, this));
+						this.objects.add(new BlockMoveable(column, currentLine - 10, this));
+						break;
+					case 'C':
+						this.objects.add(new Chest(column, currentLine - 10, this));
 						break;
 					case '/':
 						emptyCasesX.add(column);
-						emptyCasesY.add(currentLine-10);
+						emptyCasesY.add(currentLine - 10);
 						break;
 					default:
 						break;
 					}
 				}
-				player.setPos(playerColumn, playerLine); // set position of the player
+				player.setPos(playerColumn, playerLine); // set position of the
+															// player
 				currentLine++;
 			}
 			bufferedReader.close();
@@ -164,10 +192,10 @@ public class Game implements RedrawObservable {
 		ArrayList<Integer> mobXArray = new ArrayList<>();
 		ArrayList<Integer> mobYArray = new ArrayList<>();
 
-		Random random = new Random();
+		
 		for (int i = 0; i < maxMobs; i++) {
 			if (emptyCasesX.size() > 0) {
-				int randomInt = random.nextInt(emptyCasesX.size());
+				int randomInt = random.nextInt(emptyCasesX.size()); //int between 0 (inclusive) and size (exclusive)
 				int mobX = emptyCasesX.remove(randomInt);
 				int mobY = emptyCasesY.remove(randomInt);
 				mobXArray.add(mobX);
@@ -196,29 +224,53 @@ public class Game implements RedrawObservable {
 						this.objects.add(new Skeleton(posX, posY, i * 1000 / mobXArray.size(), this));
 					}
 				}
-			} catch (IOException ex) {
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
 			}
 		}
 	}
+	
+	public void loot(int x, int y, int lootLevel) {
+		int randomInt = random.nextInt(lootLevel)-10; //int between -10 (inclusive) and lootLevel-10 (exclusive)
+		System.out.println(randomInt);
+		int randomIntLimited = Math.min(randomInt, 2);
+		Item item = null;
+		switch (randomIntLimited) {
+		case 0:
+			item = new Potion(Potion.potionType.vie, x, y, this);
+			break;
+		case 1:
+			item = new Potion(Potion.potionType.mana, x, y, this);
+			break;
+		case 2:
+			item = new Sword(x, y, this);
+			break;
+		}
+		if (item!=null) {
+			this.getGameObjects().add(item);
+		}
+	}
+	
 
 	@Override
 	public void addRedrawObserver(RedrawObserver obs) {
 		this.listRedrawObservers.add(obs);
-		
+
 	}
 
 	@Override
 	public void removeRedrawObserver(RedrawObserver obs) {
 		this.listRedrawObservers.remove(obs);
-		
+
 	}
 
 	@Override
 	public void notifyRedrawObserver() {
-		System.out.println("Notifying to the redrawObservers a request to redraw");
-		 for (RedrawObserver ob : listRedrawObservers) {
-		             ob.redraw(this);
-		      }
+		// System.out.println("Notifying to the redrawObservers a request to
+		// redraw");
+		for (RedrawObserver ob : listRedrawObservers) {
+			ob.redraw(this);
+		}
 	}
 
 }

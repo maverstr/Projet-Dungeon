@@ -45,7 +45,11 @@ public abstract class GameObject {
 		return this.game;
 	}
 	
-	public boolean isZombie() {
+	public boolean isMoveable() {
+		return false;
+	}
+	
+	public boolean isPickable() {
 		return false;
 	}
 	

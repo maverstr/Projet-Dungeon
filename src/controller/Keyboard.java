@@ -18,9 +18,9 @@ public class Keyboard implements KeyListener{
 	//@Override
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
-		System.out.println(key);		
+		//System.out.println(key);		
 		if (game.state == Game.STATE.GAME){ //Only when in the game and not in the menu
-			System.out.println("key GAME");
+			//System.out.println("key GAME");
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
 				game.movePlayer(1, 0); /* TODO: replace all with direction enum */
@@ -50,9 +50,11 @@ public class Keyboard implements KeyListener{
 				System.out.println("key hit right");
 				game.playerUseWeapon(1, 0);
 				break;
-			/*case KeyEvent.VK_A:
-				game.playerChangeTool();
-				break;*/
+			case KeyEvent.VK_A:
+				game.playerOpenChest();
+				break;
+			case KeyEvent.VK_E:
+				game.playerPickUpItem();
 
 			case 49:
 			case 50:
@@ -77,11 +79,12 @@ public class Keyboard implements KeyListener{
 		}
 		}
 		else if(game.state == Game.STATE.MENU){
-			System.out.println("key MENU");
+			//System.out.println("key MENU");
 			switch(key){
 			case KeyEvent.VK_ENTER:
-				game.setState(Game.STATE.MENU);
+				game.setState(Game.STATE.GAME);
 				System.out.println("key ENTER");
+				System.out.println(game.state);
 				break;
 			}
 		}

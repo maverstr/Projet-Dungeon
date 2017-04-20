@@ -26,13 +26,17 @@ public enum potionType { //ALL the Potions Types available with their index in r
 // Attributes for Potion begin here:
 
 	potionType type;
-	private static final File[] spriteFile = { //List of sprites according to the potion Type and its index
+	private static final File[] spriteFileInventory = { //List of sprites (inventory) according to the potion Type and its index
 			new File(GameObject.class.getResource("/resources/sprites/potion_heal_sprite.png").getFile()),
 			new File(GameObject.class.getResource("/resources/sprites/potion_mana_sprite.png").getFile()),
-			
 	};
-	public Potion(potionType type) throws IOException{
-		super(ImageIO.read(spriteFile[type.getIndex()]));
+	private static final File[] spriteFile = { //List of sprites (map) according to the potion Type and its index
+			new File(GameObject.class.getResource("/resources/sprites/potion_heal_sprite.png").getFile()),
+			new File(GameObject.class.getResource("/resources/sprites/potion_mana_sprite.png").getFile()),
+	};
+	
+	public Potion(potionType type, int x, int y, Game game) {
+		super(Sprite.imageFromFile(spriteFileInventory[type.getIndex()]), x, y, game, Sprite.makeSpriteList(spriteFile[type.getIndex()], 0, 0, 0));
 		this.type = type;
 	}
 	

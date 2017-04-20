@@ -2,8 +2,6 @@ package model;
 
 import java.io.File;
 
-import java.io.IOException;
-
 public class Zombie extends Mob {
 	
 	private static final int waitTime = 1000;
@@ -16,7 +14,7 @@ public class Zombie extends Mob {
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Zombie_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Zombie_L.png").getFile());
 
-	public Zombie(int x, int y, long threadOffset, Game game) throws IOException {
+	public Zombie(int x, int y, long threadOffset, Game game) {
 		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
 		this.offset = threadOffset;
 		

@@ -101,7 +101,7 @@ public class Window implements RedrawObserver {
 
 	@Override
 	public void redraw(RedrawObservable obj) {
-		System.out.println("got a notify to redraw");
+		//System.out.println("got a notify to redraw");
 		rightContainer.setVisible(true);
 		leftContainer.setVisible(true);
 		menuContainer.setVisible(false);
@@ -112,13 +112,13 @@ public class Window implements RedrawObserver {
 	}
 	
 	public void redrawMenu(){
-		System.out.println("Redraw menu");
+		//System.out.println("Redraw menu");
 		rightContainer.setVisible(false);
 		leftContainer.setVisible(false);
 		menuContainer.setVisible(true);
 		this.menu.redraw();
 		this.menu.requestFocusInWindow();
-		System.out.println(this.map.requestFocusInWindow());
+		//System.out.println(this.map.requestFocusInWindow());
 
 
 	}

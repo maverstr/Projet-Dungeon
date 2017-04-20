@@ -1,7 +1,6 @@
 package model;
 
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Random;
 
@@ -17,7 +16,7 @@ public class Skeleton extends Mob implements Runnable {
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Skeleton_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
 
-	public Skeleton(int x, int y, long threadOffset, Game game) throws IOException {
+	public Skeleton(int x, int y, long threadOffset, Game game) {
 		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
 		this.offset = threadOffset;
 		

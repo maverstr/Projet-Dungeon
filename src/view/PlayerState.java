@@ -89,7 +89,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 				
 				Item item = this.inventory.weapons.get(i);
 
-				g.drawImage(item.getSprite(), x, y, 50, 50, null); // Paints
+				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null); // Paints
 																	// sprite of
 																	// weapon
 				if (i == this.inventory.getWeaponIndex()) { // If CURRENT
@@ -122,7 +122,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 				
 				Item item = this.inventory.consumables.get(i);
 
-				g.drawImage(item.getSprite(), x, y, 50, 50, null);// Paints
+				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null);// Paints
 																	// sprite of
 																	// consumable
 				if (item.getDurability() > 1) { /*
@@ -171,8 +171,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	public void redraw(Player p, Boss b, boolean bossBool) {
 		int pMaxHealth = p.getMaxHealth();
 		int pHealth = p.getHealth();
-		int bMaxHealth = b.getMaxHealth();
-		int bHealth = b.getHealth();
+		
 		try {
 	    	this.healthBar.setString(String.format("Health %d/%d", pHealth, pMaxHealth));
 			this.healthBar.setMaximum(pMaxHealth);
@@ -181,6 +180,8 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			
 			
 			if(bossBool){
+				int bMaxHealth = b.getMaxHealth();
+				int bHealth = b.getHealth();
 		    	this.bossHealthBar.setString(String.format("HAELTI LIFE %d/%d", bHealth, bMaxHealth));
 				this.bossHealthBar.setVisible(true); //This Healthbar only appears when in the boss room
 				this.bossHealthBar.setValue(bHealth);
