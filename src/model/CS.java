@@ -15,6 +15,11 @@ public class CS extends Player {
 	private static final File spriteFilePCSD = new File(GameObject.class.getResource("/resources/sprites/P_CS_D.png").getFile());
 	private static final File spriteFilePCSL = new File(GameObject.class.getResource("/resources/sprites/P_CS_L.png").getFile());
 	
+	private static final int maxHealthCS = 50;
+	private static final int maxManaCS = 10;
+	private static final int luckCS = 1;
+	//private static final int maxMana = 10;
+	
 	@SuppressWarnings("serial")
 	private static final ArrayList<File> fileList = new ArrayList<File>() {{
 	    add(spriteFileCSU);
@@ -28,8 +33,24 @@ public class CS extends Player {
 	}};
 
 	public CS(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileCSU,0,-0.25,1),fileList);
-		// TODO Auto-generated constructor stub
+		super(x, y, game, Sprite.makeSpriteList(spriteFileCSU,0,-0.25,1),fileList,maxHealthCS,maxManaCS,luckCS);
+		setLuck(3);
+	}
+	
+	@Override
+	public void setInventory(Inventory inventory) {
+		//Add weapons and items to the Player at the beginning of the Game.
+		try {
+			inventory.addWeapon(new Sword());
+			inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
+		}catch (Exception e){}
+		
+		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
+	}
+	
+	@Override
+	public void specialAbility() {
+		
 	}
 
 }

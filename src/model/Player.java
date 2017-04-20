@@ -1,7 +1,6 @@
 package model;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -11,8 +10,12 @@ public abstract class Player extends Character {
 	
 	private boolean alive = true;
 	
-	private static final int maxHealth = 50;
+	
+	
 	private Inventory inventory;
+	private int luck;
+	protected int mana;
+	protected int maxMana;
 	
 	private File spriteFileU;
 	private File spriteFileR;
@@ -24,8 +27,8 @@ public abstract class Player extends Character {
 	private File spriteFilePL;
 	
 	
-	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList) {
-		super(x, y, game, spriteList,maxHealth);
+	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList, int maxHealth, int maxMana, int luck) {
+		super(x, y, game, spriteList, maxHealth);
 		this.spriteFileU = fileList.get(0);
 		this.spriteFileR = fileList.get(1);
 		this.spriteFileD = fileList.get(2);
@@ -35,21 +38,17 @@ public abstract class Player extends Character {
 		this.spriteFilePD = fileList.get(6);
 		this.spriteFilePL = fileList.get(7);
 		
-		this. inventory = new Inventory();
-	//Add weapons and items to the Player at the beginning of the Game.
-		try {
-			this.inventory.addWeapon(new Sword());
-			this.inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
-			this.inventory.addWeapon(new Pickaxe());
-			this.inventory.addConsumable(new Potion(Potion.potionType.vie)); //Note the type of potion
-			this.inventory.addConsumable(new Potion(Potion.potionType.vie));
-			this.inventory.addConsumable(new Potion(Potion.potionType.mana));
-		}catch (IOException e){}
+		this.maxMana = maxMana;
+		this.mana = maxMana;
+		this.luck = luck;
 		
-		
-		this.inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
+		this.inventory = new Inventory();
+		setInventory(inventory);
+	
 
 	}
+	
+	public abstract void setInventory(Inventory inventory);
 	
 	public Inventory getInventory() {
 		return this.inventory;
@@ -231,6 +230,12 @@ public abstract class Player extends Character {
 			}
 		} catch (Exception e) {}
 	}
+	
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
+	
+	public abstract void specialAbility();
 	
 	
 }

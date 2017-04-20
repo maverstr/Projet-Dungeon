@@ -6,15 +6,17 @@ import java.util.ArrayList;
 
 public abstract class Character extends GameObject{
 	
-	protected int health;
 	protected int maxHealth;
+	protected int health;
+	
 	
 	//int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	
-	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int health){
+	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int maxHealth){
 		super(x,y,game,spriteList);
-		this.health = health;
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
 	}
 	
 	@Override

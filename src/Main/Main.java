@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import controller.Keyboard;
 import javafx.embed.swing.JFXPanel;
@@ -12,6 +13,10 @@ import view.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException{
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); //For cross-platform progress bar;
+		} catch (Exception e) {}
 		
 		initializeAudio();
 		

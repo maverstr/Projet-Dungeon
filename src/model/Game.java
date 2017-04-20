@@ -19,7 +19,7 @@ public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
-	private Player player = new CM(0, 0, this);
+	private Player player = new CP(0, 0, this);
 	private static final boolean bossBool = true;
 	
 	public enum STATE{ //The 2 states for the game
@@ -27,7 +27,7 @@ public class Game implements RedrawObservable {
 		GAME
 	};
 	
-	public STATE state = STATE.MENU;
+	public STATE state = STATE.GAME;
 	
 	
 	

@@ -96,6 +96,7 @@ public class Window implements RedrawObserver {
 	
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);
+	    this.menu.addKeyListener(keyboard);
 	}
 
 	@Override

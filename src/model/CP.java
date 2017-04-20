@@ -15,6 +15,10 @@ public class CP extends Player {
 	private static final File spriteFilePCPD = new File(GameObject.class.getResource("/resources/sprites/P_CP_D.png").getFile());
 	private static final File spriteFilePCPL = new File(GameObject.class.getResource("/resources/sprites/P_CP_L.png").getFile());
 	
+	private static final int maxHealthCP = 50;
+	private static final int maxManaCP = 10;
+	private static final int luckCP = 1;
+	
 	@SuppressWarnings("serial")
 	private static final ArrayList<File> fileList = new ArrayList<File>() {{
 	    add(spriteFileCPU);
@@ -28,7 +32,24 @@ public class CP extends Player {
 	}};
 
 	public CP(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileCPU,0,-0.25,1),fileList);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileCPU,0,-0.25,1),fileList,maxHealthCP,maxManaCP,luckCP);
+		
+	}
+
+	@Override
+	public void setInventory(Inventory inventory) {
+		//Add weapons and items to the Player at the beginning of the Game.
+		try {
+			inventory.addWeapon(new Sword());
+			inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
+			inventory.addWeapon(new Pickaxe());
+		}catch (Exception e){}
+		
+		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
+	}
+	
+	@Override
+	public void specialAbility() {
 		
 	}
 
