@@ -19,15 +19,16 @@ public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
+	private boolean gameRunning = false;
 	private Player player = new CP(0, 0, this);
 	private static final boolean bossBool = true;
 	
 	public enum STATE{ //The 2 states for the game
 		MENU,
-		GAME
+		RUN
 	};
 	
-	public STATE state = STATE.GAME;
+	public STATE state = STATE.MENU; //Set the initial state to titlescreen
 	
 	
 	
@@ -37,18 +38,21 @@ public class Game implements RedrawObservable {
 		this.window = window;
 		window.setGameObjects(this.objects);
 		objects.add(player);
-		if (bossBool) {
-			loadMap("map_boss.txt");
-		} else {
-			loadMap("map_1.txt");
-		}
-		System.out.println(String.format("in game constructor, objects is : %s", objects));
-		/* pass to window the objects it will need for viewing things */
-
-		window.setPlayer(this.player);
-
 		updateWindow();
 
+	}
+	
+	public void gameStart(){//Launch the game when NewGame from titleScreen is selected
+		if (!gameRunning){
+			if (bossBool) {
+				loadMap("map_boss.txt");
+			} else {
+				loadMap("map_1.txt");
+			}
+			this.gameRunning = true;
+			window.setPlayer(this.player);
+			updateWindow();
+		}
 	}
 	
 	public void setState(STATE state){
@@ -87,11 +91,10 @@ public class Game implements RedrawObservable {
 	}
 
 	public void updateWindow() {
-		if(state == STATE.GAME){
+		if(state == STATE.RUN){
 			notifyRedrawObserver();
 		}
 		else if(state == STATE.MENU) {
-			System.out.println("update menu");
 			window.redrawMenu(); 
 			}
 	}
@@ -215,7 +218,7 @@ public class Game implements RedrawObservable {
 
 	@Override
 	public void notifyRedrawObserver() {
-		System.out.println("Notifying to the redrawObservers a request to redraw");
+		//System.out.println("Notifying to the redrawObservers a request to redraw");
 		 for (RedrawObserver ob : listRedrawObservers) {
 		             ob.redraw(this);
 		      }

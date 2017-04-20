@@ -20,15 +20,17 @@ public class Laser extends Mob {
 		try{
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				
-				attackPattern();
-				
-				if (time>liveTime) {
-					this.die();
-					this.getGame().updateWindow();
+				if (game.state == Game.STATE.RUN) {
+					
+					attackPattern();
+					
+					if (time>liveTime) {
+						this.die();
+						this.getGame().updateWindow();
+					}
+					Thread.sleep(waitTime);
+					time+=waitTime;
 				}
-				Thread.sleep(waitTime);
-				time+=waitTime;
 			}
 		}catch(Exception e){}; 
 	}

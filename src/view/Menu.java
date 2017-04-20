@@ -51,9 +51,6 @@ public class Menu extends JPanel{
 		
 		this.setBackground(Color.BLACK);
 		
-		
-		System.out.println("Menu painting");
-		
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);
 		g.setColor(Color.WHITE);
@@ -73,8 +70,6 @@ public class Menu extends JPanel{
 	public void redraw(){
 		this.requestFocusInWindow();
 		this.repaint();
-		System.out.println("Menu redraw");
-		System.out.println(this.requestFocusInWindow());
 		
 	}
 

@@ -30,37 +30,40 @@ public class Skeleton extends Mob implements Runnable {
 			Random random = new Random();
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				int mobX = this.getPosX();
-				int mobY = this.getPosY();
-				int playerX = player.getPosX();
-				int playerY = player.getPosY();
-				
-				int moveCloserX = moveCloser(mobX,playerX);
-				if (obstacle(mobX,mobY,moveCloserX,0)) {
-					moveCloserX = 0;
-				}
-				int moveCloserY = moveCloser(mobY,playerY);
-				if (obstacle(mobX,mobY,0,moveCloserY)) {
-					moveCloserY = 0;
-				}
-				
-				if ((moveCloserX!=0) && (moveCloserY!=0)) {
-					int randomInt = random.nextInt(2); // 0 or 1
-					if (randomInt == 0) {
-						move(moveCloserX,0);
-					} else {
-						move(0,moveCloserY);
+				if (game.state == Game.STATE.RUN) {
+					int mobX = this.getPosX();
+					int mobY = this.getPosY();
+					int playerX = player.getPosX();
+					int playerY = player.getPosY();
+					
+					int moveCloserX = moveCloser(mobX,playerX);
+					if (obstacle(mobX,mobY,moveCloserX,0)) {
+						moveCloserX = 0;
 					}
-				} else {
-					move(moveCloserX,moveCloserY);
+					int moveCloserY = moveCloser(mobY,playerY);
+					if (obstacle(mobX,mobY,0,moveCloserY)) {
+						moveCloserY = 0;
+					}
+					
+					if ((moveCloserX!=0) && (moveCloserY!=0)) {
+						int randomInt = random.nextInt(2); // 0 or 1
+						if (randomInt == 0) {
+							move(moveCloserX,0);
+						} else {
+							move(0,moveCloserY);
+						}
+					} else {
+						move(moveCloserX,moveCloserY);
+					}
+					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					
+					this.getGame().updateWindow();
+					Thread.sleep(waitTime/2);
+					
+					attackPattern();
+					
+					
 				}
-				updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-				
-				this.getGame().updateWindow();
-				Thread.sleep(waitTime/2);
-				
-				attackPattern();
-				
 				Thread.sleep(waitTime/2);
 			}
 		}catch(Exception e){}; 

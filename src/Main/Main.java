@@ -29,9 +29,6 @@ public class Main {
 		window.setKeyListener(keyboard);
 		
 		game.addRedrawObserver(window);
-		
-		//window.update(); //Paints for the first time before anything moves and notifies view to repaint
-
 
 	}
 	

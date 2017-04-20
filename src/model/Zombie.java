@@ -29,20 +29,22 @@ public class Zombie extends Mob {
 			Thread.sleep(offset);
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				int mobX = this.getPosX();
-				int mobY = this.getPosY();
-				int playerX = player.getPosX();
-				int playerY = player.getPosY();
-				
-				Direction newDirection = setDirection(mobX,mobY,playerX,playerY);
-				if (newDirection != Direction.None) {
-					this.direction = newDirection;
-					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+				if (game.state == Game.STATE.RUN) {
+					int mobX = this.getPosX();
+					int mobY = this.getPosY();
+					int playerX = player.getPosX();
+					int playerY = player.getPosY();
+					
+					Direction newDirection = setDirection(mobX,mobY,playerX,playerY);
+					if (newDirection != Direction.None) {
+						this.direction = newDirection;
+						updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					}
+					this.getGame().updateWindow();
+					Thread.sleep(waitTime/2);
+					
+					attackPattern();
 				}
-				this.getGame().updateWindow();
-				Thread.sleep(waitTime/2);
-				
-				attackPattern();
 				Thread.sleep(waitTime/2);
 			}
 		}catch(Exception e){}; 
