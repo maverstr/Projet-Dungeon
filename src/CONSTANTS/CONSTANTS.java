@@ -5,22 +5,32 @@ package CONSTANTS;
 
 public class CONSTANTS {
 	
-	public static final int BLOCK_SIZE = 50; //Taille en pixel d'une case
-	
-	
-	public static final int MAP_HEIGHT = 600; //#pixels de la map ! /!\ suffisants pour les blocs
-	public static final int MAP_WIDTH = 600;
-	public static final int WINDOW_PIXEL_HEIGHT = 636; // Prend en compte la taille de playerstate etc....
-	public static final int WINDOW_PIXEL_WIDTH = 826;
 
-	public static final int MAP_BLOCK_WIDTH = 12; // #blocs
-	public static final int MAP_BLOCK_HEIGTH = 12;
+	
+	
+	public static final int MAP_HEIGHT = 800; //#pixels de la map ! 
+	public static final int MAP_WIDTH = 800;
+	public static final int WINDOW_PIXEL_HEIGHT = MAP_HEIGHT+36; // Prend en compte la taille de playerstate etc....
+	public static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+226;
+
+	public static int MAP_BLOCK_WIDTH = 10; // #blocs
+	public static int MAP_BLOCK_HEIGHT = 10;
+	
+	public static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT); //Taille en pixel d'une case
 	
 	
 	
 	
 	public CONSTANTS() {
 	
+	}
+	
+	public void setMAP_BLOCK_WIDTH(int value){
+		MAP_BLOCK_WIDTH = value;
+	}
+	
+	public void setMAP_BLOCK_HEIGHT(int value){
+		MAP_BLOCK_HEIGHT = value;
 	}
 
 }

@@ -24,22 +24,22 @@ public class Map extends JPanel {
 	public Map() throws IOException{
 		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
 		this.setFocusable(true);
-		this.requestFocusInWindow();
+		this.setEnabled(true);
+		this.setRequestFocusEnabled(true);
+		//this.requestFocusInWindow();
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
-//	public void paint(Graphics g) { 
 	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
-			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGTH; j++){
+			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
 				int x = i;
 				int y = j;
 				g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
 			}// Paint a background sprite on the map
 		}
 
-		@SuppressWarnings("unchecked")
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		//System.out.println("size : " + clone.size());
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
@@ -70,6 +70,7 @@ public class Map extends JPanel {
 	}
 	
 	public void redraw(){
+		this.requestFocusInWindow();
 		this.repaint();
 	}
 	
