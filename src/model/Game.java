@@ -245,7 +245,6 @@ public class Game implements RedrawObservable {
 	
 	public void loot(int x, int y, int lootLevel) {
 		int randomInt = random.nextInt(lootLevel)-10; //int between -10 (inclusive) and lootLevel-10 (exclusive)
-		System.out.println(randomInt);
 		int randomIntLimited = Math.min(randomInt, 2);
 		Item item = null;
 		switch (randomIntLimited) {

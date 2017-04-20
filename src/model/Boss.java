@@ -151,9 +151,9 @@ public class Boss extends Mob {
 		for (int i = 1; i<phase+3; i++) {
 			try {
 				objects.add(new Laser(this.posX,this.posY+i,this.getGame(),fileD(i,phase+2),phase));
-				//objects.add(new Laser(this.posX,this.posY-i,this.getGame(),fileU(i,phase+2),phase));
-				//objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
-				//objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
+				objects.add(new Laser(this.posX,this.posY-i,this.getGame(),fileU(i,phase+2),phase));
+				objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
+				objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
 			} catch(Exception e) {
 				System.out.println("qslmkfdjsqkjfdlksqddjfmlqskjfmlkqsjdfmlksdj");
 				System.out.println(e.getMessage());
