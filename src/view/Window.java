@@ -24,6 +24,7 @@ public class Window implements RedrawObserver {
 	private Player player;
 	private boolean bossBool = false;
 	private Boss boss;
+
 	
 	private Menu menu = new Menu();
 	
@@ -112,13 +113,12 @@ public class Window implements RedrawObserver {
 	}
 	
 	public void redrawMenu(){
-		//System.out.println("Redraw menu");
+
 		rightContainer.setVisible(false);
 		leftContainer.setVisible(false);
 		menuContainer.setVisible(true);
 		this.menu.redraw();
 		this.menu.requestFocusInWindow();
-		//System.out.println(this.map.requestFocusInWindow());
 
 
 	}

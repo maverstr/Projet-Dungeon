@@ -66,7 +66,6 @@ public class Map extends JPanel {
 	
 	public void setObjects(ArrayList<GameObject> objects){
 		this.objects = objects;
-		System.out.println(String.format("in map SetObjects, objects is : %s",objects));
 	}
 	
 	public void redraw(){

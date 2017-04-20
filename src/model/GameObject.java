@@ -7,7 +7,7 @@ public abstract class GameObject {
 	protected int posY;
 	protected ArrayList<Sprite> spriteList;
 	protected Direction direction = Direction.North; //0=up,1=right,2=down,3=left
-	private Game game;
+	protected Game game;
 	
 	public GameObject(int x, int y, Game game, ArrayList<Sprite> spriteList) {
 		this.posX = x;

@@ -65,12 +65,16 @@ public class Boss extends Mob {
 			Player player = this.getGame().getPlayer();
 			Random random = new Random();
 			while(player.isAlive()){
-				movePattern(player,random);
-				updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-				this.getGame().updateWindow();
-				Thread.sleep(waitTime/2);
-				attackPattern();
-				this.getGame().updateWindow();
+				System.out.println("player is alive");
+				if (game.state == Game.STATE.RUN) {
+					System.out.println("boss is running");
+					movePattern(player,random);
+					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					this.getGame().updateWindow();
+					Thread.sleep(waitTime/2);
+					attackPattern();
+					this.getGame().updateWindow();
+				}
 				Thread.sleep(waitTime/2);
 				setAudio();
 			}

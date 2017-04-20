@@ -19,7 +19,7 @@ public class Keyboard implements KeyListener{
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
 		//System.out.println(key);		
-		if (game.state == Game.STATE.GAME){ //Only when in the game and not in the menu
+		if (game.state == Game.STATE.RUN){ //Only when in the game and not in the menu
 			//System.out.println("key GAME");
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
@@ -82,8 +82,14 @@ public class Keyboard implements KeyListener{
 			//System.out.println("key MENU");
 			switch(key){
 			case KeyEvent.VK_ENTER:
-				game.setState(Game.STATE.GAME);
+				game.setState(Game.STATE.RUN);
 				System.out.println("key ENTER");
+				game.setState(Game.STATE.RUN);
+				game.gameStart();
+				break;
+			case KeyEvent.VK_P:
+				game.setState(Game.STATE.RUN);
+				System.out.println(game.state);
 				System.out.println(game.state);
 				break;
 			}

@@ -171,7 +171,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	public void redraw(Player p, Boss b, boolean bossBool) {
 		int pMaxHealth = p.getMaxHealth();
 		int pHealth = p.getHealth();
-		
+
 		try {
 	    	this.healthBar.setString(String.format("Health %d/%d", pHealth, pMaxHealth));
 			this.healthBar.setMaximum(pMaxHealth);
