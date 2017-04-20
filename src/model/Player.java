@@ -2,10 +2,11 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 
-public class Player extends Character {
+public abstract class Player extends Character {
 	
 	
 	private boolean alive = true;
@@ -13,14 +14,26 @@ public class Player extends Character {
 	private static final int maxHealth = 50;
 	private Inventory inventory;
 	
-	private static final File spriteFileU = new File(GameObject.class.getResource("/resources/sprites/Player_U.png").getFile());
-	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Player_R.png").getFile());
-	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Player_D.png").getFile());
-	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Player_L.png").getFile());
+	private File spriteFileU;
+	private File spriteFileR;
+	private File spriteFileD;
+	private File spriteFileL;
+	private File spriteFilePU;
+	private File spriteFilePR;
+	private File spriteFilePD;
+	private File spriteFilePL;
 	
 	
-	public Player(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
+	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList) {
+		super(x, y, game, spriteList,maxHealth);
+		this.spriteFileU = fileList.get(0);
+		this.spriteFileR = fileList.get(1);
+		this.spriteFileD = fileList.get(2);
+		this.spriteFileL = fileList.get(3);
+		this.spriteFilePU = fileList.get(4);
+		this.spriteFilePR = fileList.get(5);
+		this.spriteFilePD = fileList.get(6);
+		this.spriteFilePL = fileList.get(7);
 		
 		this. inventory = new Inventory();
 	//Add weapons and items to the Player at the beginning of the Game.
@@ -155,8 +168,17 @@ public class Player extends Character {
 				}
 			}
 		}
+		pickUpPenne();
 	}
 	
+	public void pickUpPenne() {
+		try {
+			this.spriteList.set(1, Sprite.makeSpriteFromFile(spriteFilePU, 0, -0.45, 2));
+		} catch (Exception e) {
+			this.spriteList.add(Sprite.makeSpriteFromFile(spriteFilePU, 0, -0.45, 2));
+		}
+		updatePenneDirection();
+	}
 	
 	public boolean isAlive() {
 		return this.alive;
@@ -184,6 +206,30 @@ public class Player extends Character {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void updateSpriteDirection(File up,File right,File down,File left) {
+		super.updateSpriteDirection(up, right, down, left);
+		updatePenneDirection();
+	}
+	
+	public void updatePenneDirection() {
+		try {
+			Sprite sprite = spriteList.get(1);
+			switch (this.direction) {
+			case North:sprite.setImageFromFile(spriteFilePU);
+				break;
+			case East:sprite.setImageFromFile(spriteFilePR);
+				break;
+			case South:sprite.setImageFromFile(spriteFilePD);
+				break;
+			case West:sprite.setImageFromFile(spriteFilePL);
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {}
 	}
 	
 	

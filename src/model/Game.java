@@ -21,7 +21,7 @@ public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
-	private Player player = new Player(0, 0, this);
+	private Player player = new CM(0, 0, this);
 	private static final boolean bossBool = true;
 
 	public Game(Window window) throws IOException {
