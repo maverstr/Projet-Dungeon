@@ -8,7 +8,16 @@ public class Chest extends Block {
 
 	public Chest(int x, int y, Game game) {
 		super(x, y, game, Sprite.makeSpriteList(spriteFile,0,0,0));
-		
+	}
+	
+	public void open() {
+		this.getGame().loot(this.posX, this.posY, 13, true);
+		this.getGame().getGameObjects().remove(this);
+	}
+	
+	@Override
+	public boolean isOpenable() {
+		return true;
 	}
 
 }

@@ -22,7 +22,7 @@ public class Game implements RedrawObservable {
 	private boolean gameRunning = false;
 	private Player player = new CP(0, 0, this);
 
-	private static final boolean bossBool = true;
+	private static final boolean bossBool = false;
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
@@ -98,7 +98,7 @@ public class Game implements RedrawObservable {
 	
 	public void playerOpenChest() {
 		if (player.isAlive()) {
-			//player.openChest();
+			player.openChest();
 		}
 	}
 
@@ -243,8 +243,11 @@ public class Game implements RedrawObservable {
 		}
 	}
 	
-	public void loot(int x, int y, int lootLevel) {
+	public void loot(int x, int y, int lootLevel, boolean alwaysLoot) {
 		int randomInt = random.nextInt(lootLevel)-10; //int between -10 (inclusive) and lootLevel-10 (exclusive)
+		if (alwaysLoot) {
+			randomInt+=10;
+		}
 		int randomIntLimited = Math.min(randomInt, 2);
 		Item item = null;
 		switch (randomIntLimited) {

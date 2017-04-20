@@ -37,7 +37,7 @@ public abstract class Mob extends Character implements Runnable {
 	}
 	
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, 13);
+		this.getGame().loot(this.posX, this.posY, 13,false);
 	}
 	
 	public abstract void run();

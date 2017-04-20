@@ -53,6 +53,10 @@ public abstract class GameObject {
 		return false;
 	}
 	
+	public boolean isOpenable() {
+		return false;
+	}
+	
 	public abstract boolean isObstacle();
 }
 

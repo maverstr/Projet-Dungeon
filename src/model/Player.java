@@ -163,7 +163,16 @@ public abstract class Player extends Character {
 	}
 	
 	public void openChest() {
-		
+		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
+		for (GameObject object:clone) {
+			if (object.isOpenable()) {
+				if (object.isAtPosition(posX, posY-1)) {
+					Chest chest = (Chest) object;
+					chest.open();
+					this.getGame().updateWindow();
+				}
+			}
+		}
 	}
 	
 	public void pickUpItem() {
