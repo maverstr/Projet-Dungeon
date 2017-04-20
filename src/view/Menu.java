@@ -6,11 +6,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
@@ -18,7 +20,10 @@ import CONSTANTS.CONSTANTS;
 import model.GameObject;
 
 public class Menu extends JPanel{
-
+	private static final long serialVersionUID = 1L;
+	
+	
+	
 	public Rectangle playButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 450,300,80);
 	public Rectangle optionsButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 550,300,80);
 	public Rectangle exitButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 650,300,80);
@@ -28,8 +33,10 @@ public class Menu extends JPanel{
 	
 	public Menu() throws IOException {	
 		this.setPreferredSize(new Dimension(CONSTANTS.WINDOW_PIXEL_WIDTH, CONSTANTS.WINDOW_PIXEL_HEIGHT));
-		this.setFocusable(false);
-		//this.requestFocusInWindow();
+		this.setFocusable(true);
+		this.setEnabled(true);
+		this.setRequestFocusEnabled(true);
+		this.requestFocusInWindow();
 		this.setLayout(null);
 		
 		mainScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/main_screen.png").getFile()));
@@ -64,8 +71,11 @@ public class Menu extends JPanel{
 	}
 	
 	public void redraw(){
+		this.requestFocusInWindow();
 		this.repaint();
 		System.out.println("Menu redraw");
+		System.out.println(this.requestFocusInWindow());
+		
 	}
 
 }

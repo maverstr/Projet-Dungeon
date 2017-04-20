@@ -27,7 +27,7 @@ public class Game implements RedrawObservable {
 		GAME
 	};
 	
-	public STATE state = STATE.GAME;
+	public STATE state = STATE.MENU;
 	
 	
 	

@@ -24,13 +24,14 @@ public class Map extends JPanel {
 	public Map() throws IOException{
 		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
 		this.setFocusable(true);
-		this.requestFocusInWindow();
+		this.setEnabled(true);
+		this.setRequestFocusEnabled(true);
+		//this.requestFocusInWindow();
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 	}
 	
 	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
-		this.requestFocus();
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
 				int x = i;
@@ -69,6 +70,7 @@ public class Map extends JPanel {
 	}
 	
 	public void redraw(){
+		this.requestFocusInWindow();
 		this.repaint();
 	}
 	

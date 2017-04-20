@@ -106,6 +106,7 @@ public class Window implements RedrawObserver {
 		menuContainer.setVisible(false);
 		this.map.redraw();
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
+		this.map.requestFocusInWindow();
 		
 	}
 	
@@ -115,5 +116,9 @@ public class Window implements RedrawObserver {
 		leftContainer.setVisible(false);
 		menuContainer.setVisible(true);
 		this.menu.redraw();
+		this.menu.requestFocusInWindow();
+		System.out.println(this.map.requestFocusInWindow());
+
+
 	}
 }
