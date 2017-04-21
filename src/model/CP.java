@@ -41,8 +41,10 @@ public class CP extends Player {
 		//Add weapons and items to the Player at the beginning of the Game.
 		try {
 			inventory.addWeapon(new Sword(0,0,this.getGame()));
-			//inventory.addWeapon(new Sword()); // adds a second sword -> prints an error message cause there cant be two same weapons
 			inventory.addWeapon(new Pickaxe(0,0,this.getGame()));
+			inventory.addSpell(new Fire(0,0,game,true));
+			inventory.addSpell(new Thunder(0,0,game,true));
+			inventory.addSpell(new Ice(0,0,game,true));
 		}catch (Exception e){}
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.

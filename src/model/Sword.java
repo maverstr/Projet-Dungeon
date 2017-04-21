@@ -2,9 +2,6 @@ package model;
 
 import java.io.File;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
 public class Sword extends Weapon {
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/sword_sprite.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/sword_sprite.png").getFile());

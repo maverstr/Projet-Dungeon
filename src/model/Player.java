@@ -142,7 +142,7 @@ public abstract class Player extends Character {
 		
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object instanceof Mob) {
+				if (object.isAttackable()) {
 					System.out.println("mob attacked");
 					Mob mob = (Mob) object;
 					mob.wasHit(inventory.getWeapon().getDamage());
@@ -151,6 +151,19 @@ public abstract class Player extends Character {
 			}
 		}
 		pickUpPenne();
+		//Thunder thunder = new Thunder(0,0,game,true);
+		//thunder.castSpell(posX,posY,game,this.direction);
+	}
+	
+	public void changeSpell() {
+		inventory.updateSpellIndex();
+		this.getGame().updateWindow();
+	}
+	
+	public void castSpell() {
+		Spell spell = inventory.getSpell();
+		spell.castSpell(posX, posY, game, this.direction);
+		this.getGame().updateWindow();
 	}
 	
 	public void pickUpPenne() {

@@ -55,7 +55,13 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_E:
 				game.playerPickUpItem();
-
+				break;
+			case KeyEvent.VK_SHIFT:
+				game.playerChangeSpell();
+				break;
+			case KeyEvent.VK_SPACE:
+				game.playerCastSpell();
+				break;
 			case 49:
 			case 50:
 			case 51:

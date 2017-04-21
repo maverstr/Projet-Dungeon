@@ -22,7 +22,7 @@ public class Game implements RedrawObservable {
 	private boolean gameRunning = false;
 	private Player player = new CP(0, 0, this);
 
-	private static final boolean bossBool = false;
+	private static final boolean bossBool = true;
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
@@ -37,7 +37,7 @@ public class Game implements RedrawObservable {
 	
 	public Game(Window window) throws IOException {
 		this.window = window;
-		window.setGameObjects(this.objects);
+		window.setGameObjects(objects);
 		objects.add(player);
 		updateWindow();
 
@@ -100,6 +100,14 @@ public class Game implements RedrawObservable {
 		if (player.isAlive()) {
 			player.openChest();
 		}
+	}
+	
+	public void playerCastSpell() {
+		player.castSpell();
+	}
+	
+	public void playerChangeSpell() {
+		player.changeSpell();
 	}
 
 	public void updateWindow() {
@@ -199,8 +207,6 @@ public class Game implements RedrawObservable {
 	}
 
 	private void loadMobs(ArrayList<Integer> emptyCasesX, ArrayList<Integer> emptyCasesY, int maxMobs) {
-		// System.out.println(a);
-		// System.out.println(b);
 
 		ArrayList<Integer> mobXArray = new ArrayList<>();
 		ArrayList<Integer> mobYArray = new ArrayList<>();

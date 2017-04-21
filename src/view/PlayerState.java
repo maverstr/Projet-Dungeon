@@ -65,16 +65,24 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		g.fillRect(0, 30, 200, CONSTANTS.CONSTANTS.MAP_HEIGHT-30);
 		g.setColor(Color.blue);
 		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
-				g.drawRect(e, 50,50, 50);
-			}
+				g.drawRect(e, 50, 50, 50);
+		}
 		
 		g.setColor(Color.green);
 		for (int e = 2; e <182; e+=60){
-			for (int l =120; l < 240; l+=60){
-				g.drawRect(e, l,50, 50);
-			}}
-		g.drawRect(62, 260, 50, 50); // Case dedicated PASSIVE ITEM
-		setPassiveText(27,240,g);
+			for (int l = 120; l < 240; l+=60){
+				g.drawRect(e, l, 50, 50);
+			}
+		}
+		
+		g.setColor(Color.yellow); //Cases for magic
+		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
+			g.drawRect(e, 260, 50, 50);
+		}
+		
+		g.setColor(Color.magenta);
+		g.drawRect(62, 360, 50, 50); // Case dedicated PASSIVE ITEM
+		setPassiveText(27, 340,g);
 
 
 		// Paints INVENTORY
@@ -148,6 +156,38 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		} catch (NullPointerException e) { // At the beginning player may not be
 											// created -> nullpointer
 			System.out.println("player not created yet B" + e);
+		}
+		
+		x = 2;
+		y = 260;
+		try {
+			for (int i = 0; i < this.inventory.spells.size(); i++) { // SPELL
+																		// inventory
+				if (i == this.inventory.getSpellIndex()) { // If CURRENT
+															// Spell, red
+															// Countouring
+					g.setColor(Color.RED);
+					g.drawRect(x, y, 50, 50);
+				}
+				
+				Item item = this.inventory.spells.get(i);
+
+				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null); // Paints
+																	// sprite of
+																	// spell
+				
+				x += 60; /*
+							 * TODO: Do some Math here to place it correctly
+							 * whatever PlayerState Dimensions are
+							 */
+				if (x >= 200) {
+					x = 0;
+					y += 60;
+				}
+			}
+		} catch (NullPointerException e) { // At the beginning player may not be
+											// created -> nullpointer
+			System.out.println("player not created yet A" + e);
 		}
 	}
 	

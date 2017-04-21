@@ -3,9 +3,11 @@ package model;
 import java.util.ArrayList;
 
 public class Inventory {
+	public ArrayList<Spell> spells = new ArrayList<Spell>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
 	private int currentWeaponIndex = 0;
+	private int currentSpellIndex = 0;
 
 	public Inventory() {
 
@@ -28,6 +30,10 @@ public class Inventory {
 			consumables.add(item);
 		}
 
+	}
+	
+	public void addSpell(Spell spell) {
+		spells.add(spell);
 	}
 
 	public void addWeapon(Weapon item) { // Add a weapon object. No more than
@@ -52,15 +58,30 @@ public class Inventory {
 								// Player hit)
 		return this.weapons.get(currentWeaponIndex);
 	}
+	
+	public Spell getSpell() {
+		return this.spells.get(currentSpellIndex);
+	}
 
 	public void setWeaponIndex(int index) {// Set the weapon index (cf Player
 											// changeTool)
 		this.currentWeaponIndex = index;
 	}
+	
+	public void updateSpellIndex() {
+		this.currentSpellIndex++;
+		if (this.currentSpellIndex>=spells.size()) {
+			this.currentSpellIndex = 0;
+		}
+	}
 
 	public int getWeaponIndex() { // Returns weapon index for checking CURRENT
 									// Weapon (cf PlayerState paintComponent)
 		return this.currentWeaponIndex;
+	}
+	
+	public int getSpellIndex() {
+		return this.currentSpellIndex;
 	}
 	
 	public int getItemCount() {

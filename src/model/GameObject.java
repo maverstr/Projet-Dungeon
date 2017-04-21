@@ -57,6 +57,10 @@ public abstract class GameObject {
 		return false;
 	}
 	
+	public boolean isAttackable() {
+		return false;
+	}
+	
 	public abstract boolean isObstacle();
 }
 

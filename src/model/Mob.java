@@ -42,5 +42,10 @@ public abstract class Mob extends Character implements Runnable {
 	
 	public abstract void run();
 	
+	@Override
+	public boolean isAttackable() {
+		return true;
+	}
+	
 
 }
