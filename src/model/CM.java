@@ -49,6 +49,7 @@ public class CM extends Player {
 			inventory.addSpell(new Fire(0,0,game,true));
 			inventory.addSpell(new Thunder(0,0,game,true));
 			inventory.addSpell(new Ice(0,0,game,true));
+			inventory.addSpell(new Heal(0,0,game,true));
 		}catch (Exception e){}
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.

@@ -20,7 +20,7 @@ public class Game implements RedrawObservable {
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	private boolean gameRunning = false;
-	private Player player = new CP(0, 0, this);
+	private Player player = new CM(0, 0, this);
 
 	private static final boolean bossBool = true;
 	Random random = new Random();

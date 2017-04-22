@@ -21,6 +21,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	private static final long serialVersionUID = -1983468608760988132L;
 	private JProgressBar healthBar;
 	private JProgressBar bossHealthBar;
+	private JProgressBar manaBar;
 	private Inventory inventory;
 	
 
@@ -37,6 +38,14 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
     	healthBar.setBackground(Color.RED);
     	healthBar.setBounds(10, 10, 180, 20);
 		this.add(this.healthBar);
+		
+		manaBar = new JProgressBar(0,1); // Initialize the progress bar. Max health is always updated in paint in case of overheal or upgrade
+		manaBar.setString("Mana");
+		manaBar.setStringPainted(true);
+		manaBar.setForeground(Color.BLUE);
+		manaBar.setBackground(Color.RED);
+		manaBar.setBounds(10, 500, 180, 20);
+		this.add(this.manaBar);
 		
 		
 		bossHealthBar = new JProgressBar(0,1); 
@@ -56,6 +65,9 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 
 	public void paintComponent(Graphics g) { // Note : DO NOT override paint(g).
 		super.paintComponent(g);
+		
+		float spellNumber = inventory.spells.size();
+		
 		Graphics2D g2 = (Graphics2D) g; // Allows thickness for Rect
 		g2.setStroke(new java.awt.BasicStroke(3)); // thickness of 3 for
 													// countouring CURRENT
@@ -76,8 +88,9 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		}
 		
 		g.setColor(Color.yellow); //Cases for magic
-		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
-			g.drawRect(e, 260, 50, 50);
+		for (int i = 0; i <spellNumber; i++) {
+			int e = (int) (2+i*60*3/spellNumber);
+			g.drawRect(e, 260, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)));
 		}
 		
 		g.setColor(Color.magenta);
@@ -167,23 +180,20 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 															// Spell, red
 															// Countouring
 					g.setColor(Color.RED);
-					g.drawRect(x, y, 50, 50);
+					g.drawRect(x, y, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)));
 				}
 				
 				Item item = this.inventory.spells.get(i);
 
-				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null); // Paints
+				g.drawImage(item.getInventoryImage(), x, y, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)), null); // Paints
 																	// sprite of
 																	// spell
 				
-				x += 60; /*
+				x += 60.0*(3.0/spellNumber); /*
 							 * TODO: Do some Math here to place it correctly
 							 * whatever PlayerState Dimensions are
 							 */
-				if (x >= 200) {
-					x = 0;
-					y += 60;
-				}
+				
 			}
 		} catch (NullPointerException e) { // At the beginning player may not be
 											// created -> nullpointer
@@ -210,12 +220,19 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 
 	public void redraw(Player p, Boss b, boolean bossBool) {
 		int pMaxHealth = p.getMaxHealth();
+		int pMaxMana = p.getMaxMana();
 		int pHealth = p.getHealth();
+		int pMana = p.getMana();
 
 		try {
 	    	this.healthBar.setString(String.format("Health %d/%d", pHealth, pMaxHealth));
 			this.healthBar.setMaximum(pMaxHealth);
 			this.healthBar.setValue(pHealth); //update healthBar at each redraw (Window.update)
+			
+			this.manaBar.setString(String.format("Mana %d/%d", pMana, pMaxMana));
+			this.manaBar.setMaximum(pMaxMana);
+			this.manaBar.setValue(pMana);
+			
 			this.inventory = p.getInventory(); //update the inventory list to draw
 			
 			

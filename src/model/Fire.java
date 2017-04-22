@@ -10,9 +10,10 @@ public class Fire extends Spell {
 	private static final int waitTime = 1000;
 	private static final int liveTime = 2000;
 	private static final int damage = 2;
+	private static final int manaCost = 1;
 
 	public Fire(int x, int y, Game game, boolean inventory) {
-		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,0), waitTime, liveTime, damage);
+		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,0), waitTime, liveTime, damage, manaCost);
 	}
 
 	@Override
@@ -55,7 +56,6 @@ public class Fire extends Spell {
 			}
 		}
 	}
-	
 	
 	
 }

@@ -11,9 +11,10 @@ public class Ice extends Spell {
 	private static final int waitTime = 1000;
 	private static final int liveTime = 3000;
 	private static final int damage = 1;
+	private static final int manaCost = 1;
 
 	public Ice(int x, int y, Game game, boolean inventory) {
-		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,0), waitTime, liveTime, damage);
+		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,0), waitTime, liveTime, damage, manaCost);
 		
 	}
 

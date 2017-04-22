@@ -57,6 +57,14 @@ public abstract class Player extends Character {
 	public int getMaxHealth() {
 		return maxHealth;
 	}
+	
+	public int getMaxMana() {
+		return maxMana;
+	}
+	
+	public int getMana() {
+		return mana;
+	}
 
 
 	@Override
@@ -162,9 +170,14 @@ public abstract class Player extends Character {
 	
 	public void castSpell() {
 		Spell spell = inventory.getSpell();
-		spell.castSpell(posX, posY, game, this.direction);
+		int manaCost = spell.getManaCost();
+		if (manaCost<=mana) {
+			spell.castSpell(posX, posY, game, this.direction);
+			mana-=manaCost;
+		}
 		this.getGame().updateWindow();
 	}
+	
 	
 	public void pickUpPenne() {
 		try {
@@ -255,6 +268,13 @@ public abstract class Player extends Character {
 	
 	public void setLuck(int luck) {
 		this.luck = luck;
+	}
+	
+	public void heal(int healPoints) {
+		health+=healPoints;
+		if (health>maxHealth) {
+			health = maxHealth;
+		}
 	}
 	
 	public abstract void specialAbility();

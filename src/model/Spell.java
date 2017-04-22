@@ -9,15 +9,17 @@ public abstract class Spell extends Item implements Runnable {
 	private int waitTime;
 	private int liveTime;
 	private int damage;
-	private boolean inventory;
-	private int time = 0;
+	private int manaCost;
+	protected boolean inventory;
+	protected int time = 0;
 	
-	public Spell(BufferedImage inventoryImage, int x, int y, Game game, boolean inventory, ArrayList<Sprite> spriteList, int waitTime, int liveTime, int damage) {
+	public Spell(BufferedImage inventoryImage, int x, int y, Game game, boolean inventory, ArrayList<Sprite> spriteList, int waitTime, int liveTime, int damage, int manaCost) {
 		super(inventoryImage, x, y, game, spriteList);
 		this.waitTime = waitTime;
 		this.liveTime = liveTime;
 		this.damage = damage;
 		this.inventory = inventory;
+		this.manaCost = manaCost;
 		t = new Thread(this);
 		t.start();
 	}
@@ -79,5 +81,9 @@ public abstract class Spell extends Item implements Runnable {
 	}
 	
 	public abstract void castSpell(int x, int y, Game game, Direction direction);
+	
+	public int getManaCost() {
+		return this.manaCost;
+	}
 
 }
