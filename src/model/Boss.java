@@ -78,6 +78,8 @@ public class Boss extends Mob {
 				Thread.sleep(waitTime/2);
 				setAudio();
 			}
+			punchline1Player.stop();
+			punchline2Player.stop();
 			punchline3Player.play();
 			
 		}catch(Exception e){}; 

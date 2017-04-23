@@ -3,15 +3,20 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 
 
 public abstract class Player extends Character {
 	
+	private static final File swordFile = new File(GameObject.class.getResource("/resources/audio/Sword_Sound.m4a").getFile());
+	private static final File pickaxeFile = new File(GameObject.class.getResource("/resources/audio/Pickaxe_Sound.wav").getFile());
+	
+	private static final Media swordMedia = new Media(swordFile.toURI().toString());
+	private static final Media pickaxeMedia = new Media(pickaxeFile.toURI().toString());
 	
 	private boolean alive = true;
-	
-	
-	
 	private Inventory inventory;
 	private int luck;
 	protected int mana;
@@ -154,6 +159,8 @@ public abstract class Player extends Character {
 					System.out.println("mob attacked");
 					Mob mob = (Mob) object;
 					mob.wasHit(inventory.getWeapon().getDamage());
+					MediaPlayer swordPlayer = new MediaPlayer(swordMedia);
+					swordPlayer.play();
 					break;
 				}
 			}
@@ -161,6 +168,24 @@ public abstract class Player extends Character {
 		pickUpPenne();
 		//Thunder thunder = new Thunder(0,0,game,true);
 		//thunder.castSpell(posX,posY,game,this.direction);
+	}
+	
+	public void mine(int xMine,int yMine) {
+		int newPosX = this.posX+xMine;
+		int newPosY = this.posY+yMine;
+		
+		for (GameObject object:this.getGame().getGameObjects()) {
+			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
+				if (object instanceof BlockBreakable) {
+					System.out.println("break");
+					BlockBreakable block = (BlockBreakable) object;
+					block.toBreak();
+					MediaPlayer pickaxePlayer = new MediaPlayer(pickaxeMedia);
+					pickaxePlayer.play();
+					break;
+				}
+			}
+		}
 	}
 	
 	public void changeSpell() {
@@ -223,23 +248,6 @@ public abstract class Player extends Character {
 		this.getGame().getGameObjects().remove(this);
 		this.getGame().updateWindow();
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
-	}
-	
-	
-	public void mine(int xMine,int yMine) {
-		int newPosX = this.posX+xMine;
-		int newPosY = this.posY+yMine;
-		
-		for (GameObject object:this.getGame().getGameObjects()) {
-			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object instanceof BlockBreakable) {
-					System.out.println("break");
-					BlockBreakable block = (BlockBreakable) object;
-					block.toBreak();
-					break;
-				}
-			}
-		}
 	}
 	
 	@Override

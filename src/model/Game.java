@@ -15,14 +15,21 @@ import view.*;
 import model.GameObject;
 import java.util.Random;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	private boolean gameRunning = false;
-	private Player player = new CM(0, 0, this);
+	private Player player = new CP(0, 0, this);
+	
+	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
+	private static final Media musicMedia = new Media(musicFile.toURI().toString());
+	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
 
-	private static final boolean bossBool = true;
+	private static final boolean bossBool = false;
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
@@ -52,6 +59,7 @@ public class Game implements RedrawObservable {
 			}
 			this.gameRunning = true;
 			window.setPlayer(this.player);
+			musicPlayer.play();
 			updateWindow();
 		}
 	}
