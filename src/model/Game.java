@@ -29,7 +29,7 @@ public class Game implements RedrawObservable {
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
 	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
 
-	private static final boolean bossBool = false;
+	private static final boolean bossBool = true;
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
