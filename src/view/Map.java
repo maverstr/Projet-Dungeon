@@ -1,5 +1,6 @@
 package view;
 import model.GameObject;
+import model.Player;
 import model.Sprite;
 import CONSTANTS.CONSTANTS;
 
@@ -20,6 +21,9 @@ public class Map extends JPanel {
 	private static final long serialVersionUID = 6724459904147376476L; // SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private BufferedImage backSprite;
+	private BufferedImage backSprite_transparent;
+
+	private Player player;
 	
 	public Map() throws IOException{
 		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
@@ -28,17 +32,33 @@ public class Map extends JPanel {
 		this.setRequestFocusEnabled(true);
 		//this.requestFocusInWindow();
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
+		backSprite_transparent = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back_transparent.png").getFile()));
+
 	}
+
 	
 	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
 				int x = i;
-				int y = j;
-				g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
-			}// Paint a background sprite on the map
-		}
+				int y = j;		
+									// Paint a background sprite on the map
+				if(CONSTANTS.DARKNESS_MODIFIER){//If DARKNESS mode is activated, blocks not in sight are half-transparent
+					if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
+						g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+					}
+					else{
+						g.drawImage(backSprite_transparent, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+					}
+
+				}
+				else{ 
+					g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+				}
+
+	}
+}
 
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
@@ -47,8 +67,16 @@ public class Map extends JPanel {
 			int y = object.getPosY();
 			ArrayList<Sprite> spriteList = object.getSpriteList();
 			for (Sprite sprite:spriteList) {
+				if(CONSTANTS.DARKNESS_MODIFIER){
+					if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
+						sprite.setDrawPosition(x, y);
+						totalSpriteList.add(sprite);
+					}
+				}
+				else{
 				sprite.setDrawPosition(x, y);
 				totalSpriteList.add(sprite);
+				}
 			}
 		}
 		
@@ -67,7 +95,8 @@ public class Map extends JPanel {
 		this.objects = objects;
 	}
 	
-	public void redraw(){
+	public void redraw(Player player){
+		this.player = player;
 		this.requestFocusInWindow();
 		this.repaint();
 	}

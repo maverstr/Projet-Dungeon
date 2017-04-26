@@ -15,8 +15,9 @@ public class CONSTANTS {
 
 	public static int MAP_BLOCK_WIDTH = 10; // #blocs
 	public static int MAP_BLOCK_HEIGHT = 10;
-	
 	public static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT); //Taille en pixel d'une case
+
+	public static boolean DARKNESS_MODIFIER = false; //Reduce line of sight if true
 	
 	
 	

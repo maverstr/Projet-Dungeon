@@ -53,13 +53,14 @@ public class Game implements RedrawObservable {
 	}
 	
 	public void gameStart(){//Launch the game when NewGame from titleScreen is selected
-		if (!gameRunning){
+		System.out.println(state);
+		if (state != STATE.RUN){
 			if (bossBool) {
 				loadMap("map_boss.txt");
 			} else {
 				loadMap("map_1.txt");
 			}
-			this.gameRunning = true;
+			this.setState(STATE.RUN);
 			window.setPlayer(this.player);
 			musicPlayer.play();
 			updateWindow();
@@ -69,6 +70,7 @@ public class Game implements RedrawObservable {
 	public void setState(STATE state) {
 		this.state = state;
 	}
+
 
 	public void removeGameObject(GameObject object) {
 		objects.remove(object);
@@ -148,7 +150,9 @@ public class Game implements RedrawObservable {
 			
 			
 			String map_block_width = ""; //To define the dimension of the map from arguments in the map file
-			String map_block_height = "";			
+			String map_block_height = "";	
+			
+			String darkness = "";
 			
 			FileReader fileReader = new FileReader(file);
 
@@ -162,6 +166,10 @@ public class Game implements RedrawObservable {
 					}
 					else if (currentLine == -9){
 						map_block_height = map_block_height +c;
+					}
+					
+					else if(currentLine == -2){
+						darkness = darkness + c;
 					}
 					switch (c) {
 					case '*':
@@ -199,6 +207,12 @@ public class Game implements RedrawObservable {
 			CONSTANTS.CONSTANTS.MAP_BLOCK_WIDTH = Integer.valueOf(map_block_width); //Defines the dimension of the map from arguments in the map file
 			CONSTANTS.CONSTANTS.MAP_BLOCK_HEIGHT = Integer.valueOf(map_block_height);
 			CONSTANTS.CONSTANTS.updateBLOCK_SIZE();
+			
+			if(darkness.equals("DARKNESS")){
+				CONSTANTS.CONSTANTS.DARKNESS_MODIFIER = true;
+				System.out.println(darkness+" true");
+			}
+			
 			bufferedReader.close();
 			if (bossBool) {
 				loadMobs(emptyCasesX, emptyCasesY, 1);

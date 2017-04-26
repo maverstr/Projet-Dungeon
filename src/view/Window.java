@@ -35,6 +35,7 @@ public class Window implements RedrawObserver {
 	
 	
 	public Window() throws IOException{	  
+
 		
 	    JFrame frame = new JFrame("HaelterMINE");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,7 +106,7 @@ public class Window implements RedrawObserver {
 		rightContainer.setVisible(true);
 		leftContainer.setVisible(true);
 		menuContainer.setVisible(false);
-		this.map.redraw();
+		this.map.redraw(this.player);
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		this.map.requestFocusInWindow();
 		

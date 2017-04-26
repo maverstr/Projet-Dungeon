@@ -90,14 +90,10 @@ public class Keyboard implements KeyListener{
 			//System.out.println("key MENU");
 			switch(key){
 			case KeyEvent.VK_ENTER:
-				game.setState(Game.STATE.RUN);
-				System.out.println("key ENTER");
-				game.setState(Game.STATE.RUN);
 				game.gameStart();
 				break;
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.RUN);
-				System.out.println(game.state);
 				System.out.println(game.state);
 				break;
 			}
