@@ -22,14 +22,16 @@ public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
-	private boolean gameRunning = false;
-	
-	
-	private Player player = new CM(0, 0, this);
+
+	private Player player = new CP(0, 0, this);
 	
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
 	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
+	private static final File uneMineFile = new File(GameObject.class.getResource("/resources/audio/Une_Mine.mp3").getFile());
+	private static final Media uneMineMedia = new Media(uneMineFile.toURI().toString());
+	MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
+
 
 	private static boolean bossBool = false;
 	Random random = new Random();
@@ -136,6 +138,7 @@ public class Game implements RedrawObservable {
 		this.objects.subList(1, this.objects.size()).clear();
 		bossBool = true;//Suppress the previous map (except the player in index 1).
 		loadMap("map_boss.txt");
+		uneMinePlayer.play();
 	}
 
 	private void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
