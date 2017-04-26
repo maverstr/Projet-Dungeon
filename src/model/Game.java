@@ -23,7 +23,7 @@ public class Game implements RedrawObservable {
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 
-	private Player player = new CP(0, 0, this);
+	private Player player = new CM(0, 0, this);
 	
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
