@@ -61,6 +61,10 @@ public abstract class GameObject {
 		return false;
 	}
 	
-	public abstract boolean isObstacle();
+	public abstract boolean isObstacle(); //abstract to not forget to define every block
+
+	public boolean isExit() {
+		return false;
+	}
 }
 

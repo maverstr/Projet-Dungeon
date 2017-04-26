@@ -84,6 +84,7 @@ public class Sprite {
 		return spriteList;
 	}
 	
+	// NOTE HERE : Overcharge of "makeSpriteList" depending of if a 3D model (with double sprite list and offset) is required or not
 	public static ArrayList<Sprite> makeSpriteList(File file1, double x1, double y1, int z1, File file2, double x2, double y2, int z2) {
 		ArrayList<Sprite> spriteList = new ArrayList<Sprite>();
 		try {

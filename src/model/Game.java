@@ -29,7 +29,7 @@ public class Game implements RedrawObservable {
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
 	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
 
-	private static final boolean bossBool = true;
+	private static boolean bossBool = false;
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
@@ -45,7 +45,7 @@ public class Game implements RedrawObservable {
 	public Game(Window window) throws IOException {
 		this.window = window;
 		window.setGameObjects(objects);
-		objects.add(player);
+		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
 		updateWindow();
 
 	}
@@ -130,9 +130,16 @@ public class Game implements RedrawObservable {
 			window.redrawMenu(); 
 			}
 	}
+	
+	public void changeMap(){
+		System.out.println(this.objects);
 
-	private void loadMap(String fileName) { // Read the MAP.TXT and load every
-											// object in the GameObjects list
+		this.objects.subList(1, this.objects.size()).clear();
+		bossBool = true;//Suppress the previous map (except the player in index 1).
+		loadMap("map_boss.txt");
+	}
+
+	private void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
 		try {
 			int playerLine = 0;
 			int playerColumn = 0;
@@ -141,56 +148,48 @@ public class Game implements RedrawObservable {
 
 			File file = new File(Map.class.getResource("/resources/map/" + fileName).getFile());
 			String line = null;
+			
+			
+			String map_block_width = ""; //To define the dimension of the map from arguments in the map file
+			String map_block_height = "";			
+			
 			FileReader fileReader = new FileReader(file);
 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			int currentLine = 0;
+			int currentLine = -10; // the -10 is due to parameters in the beginning of map files (10 lines) which must NOT be taken into account for positioning
 			while ((line = bufferedReader.readLine()) != null) {
 				for (int column = 0; column < line.length(); column++) {
 					char c = line.charAt(column);
+					if(currentLine == -10){ //Reads the 1st line of the map.txt file as the width of the map
+						map_block_width = map_block_width + c;
+					}
+					else if (currentLine == -9){
+						map_block_height = map_block_height +c;
+					}
 					switch (c) {
 					case '*':
-						this.objects.add(new BlockNotBreakable(column, currentLine - 10, this)); // the
-																									// -10
-																									// is
-																									// due
-																									// to
-																									// parameters
-																									// in
-																									// the
-																									// beginning
-																									// of
-																									// map
-																									// files
-																									// (10
-																									// lines)
-																									/// which
-																									// must
-																									// NOT
-																									// be
-																									// taken
-																									// into
-																									// account
-																									// for
-																									// positioning
+						this.objects.add(new BlockNotBreakable(column, currentLine, this));
 						break;
 					case '$':
-						this.objects.add(new BlockBreakable(column, currentLine - 10, this));
+						this.objects.add(new BlockBreakable(column, currentLine, this));
 						break;
 					// Read position of the Player
 					case 'P':
-						playerLine = currentLine - 10;
+						playerLine = currentLine;
 						playerColumn = column;
 						break;
 					case 'M':
-						this.objects.add(new BlockMoveable(column, currentLine - 10, this));
+						this.objects.add(new BlockMoveable(column, currentLine, this));
 						break;
 					case 'C':
-						this.objects.add(new Chest(column, currentLine - 10, this));
+						this.objects.add(new Chest(column, currentLine, this));
+						break;
+					case 'D':
+						this.objects.add(new Door(column, currentLine, this));
 						break;
 					case '/':
 						emptyCasesX.add(column);
-						emptyCasesY.add(currentLine - 10);
+						emptyCasesY.add(currentLine);
 						break;
 					default:
 						break;
@@ -200,6 +199,9 @@ public class Game implements RedrawObservable {
 															// player
 				currentLine++;
 			}
+			CONSTANTS.CONSTANTS.MAP_BLOCK_WIDTH = Integer.valueOf(map_block_width); //Defines the dimension of the map from arguments in the map file
+			CONSTANTS.CONSTANTS.MAP_BLOCK_HEIGHT = Integer.valueOf(map_block_height);
+			CONSTANTS.CONSTANTS.updateBLOCK_SIZE();
 			bufferedReader.close();
 			if (bossBool) {
 				loadMobs(emptyCasesX, emptyCasesY, 1);
@@ -232,8 +234,6 @@ public class Game implements RedrawObservable {
 				break;
 			}
 		}
-		// System.out.println(mobXArray);
-		// System.out.println(mobYArray);
 
 		for (int i = 0; i < mobXArray.size(); i++) {
 			int posX = mobXArray.get(i);

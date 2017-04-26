@@ -245,7 +245,7 @@ public abstract class Player extends Character {
 		}
 	}
 	
-	public void pickUpItem() {
+	public void pickUpItem() { //Note : this method may also be called to enter the level exit door
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isPickable()) {
@@ -253,6 +253,12 @@ public abstract class Player extends Character {
 					Item item = (Item) object;
 					item.pickUp(inventory);
 					this.getGame().updateWindow();
+				}
+			}
+			else if(object.isExit()){
+				if (object.isAtPosition(posX, posY)) {
+					System.out.println("is exit");
+					game.changeMap();
 				}
 			}
 		}

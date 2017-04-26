@@ -1,12 +1,12 @@
+10
+10
+
 North
 East
 South
 West
+
 DARKNESS
-10
-10
-
-
 
 **********
 *////////*

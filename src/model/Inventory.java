@@ -29,15 +29,6 @@ public class Inventory {
 		}
 
 	}
-	// public Item takeConsumable(int itemIndex) {
-
-	// Item item;
-	// item =items.remove(itemIndex); /*TODO: could work with same items grouped
-	// together, thus before removing, first check for item count */
-	// System.out.println(String.format("use item at index %d : %s", itemIndex,
-	// item));
-	// return item;
-	// }
 	public void useConsumable(Consumable item){
 		if(item.getDurability()>1){
 		item.used();	

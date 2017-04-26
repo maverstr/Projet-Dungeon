@@ -62,6 +62,8 @@ public class Keyboard implements KeyListener{
 			case KeyEvent.VK_SPACE:
 				game.playerCastSpell();
 				break;
+			case KeyEvent.VK_ENTER:
+				game.changeMap();
 			case 49:
 			case 50:
 			case 51:

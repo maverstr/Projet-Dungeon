@@ -19,5 +19,13 @@ public abstract class Block extends GameObject{
 		return false;
 	}
 	
+	public boolean isOpenable(){
+		return false;
+	}
+	
+	public boolean isExit(){
+		return false;
+	}
+	
 
 }
