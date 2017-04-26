@@ -212,6 +212,8 @@ public class Game implements RedrawObservable {
 				CONSTANTS.CONSTANTS.DARKNESS_MODIFIER = true;
 				System.out.println(darkness+" true");
 			}
+			else{CONSTANTS.CONSTANTS.DARKNESS_MODIFIER = false;}
+
 			
 			bufferedReader.close();
 			if (bossBool) {
