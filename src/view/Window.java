@@ -8,6 +8,8 @@ import model.RedrawObserver;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,6 +101,18 @@ public class Window implements RedrawObserver {
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);
 	    this.menu.addKeyListener(keyboard);
+
+	}
+	
+	public void setMouseListener(MouseListener mouse){
+		this.menu.addMouseListener(mouse);
+	    this.map.addMouseListener(mouse);
+	    this.menu.addMouseMotionListener((MouseMotionListener) mouse);
+
+	}
+	
+	public Menu getMenu(){
+		return this.menu;
 	}
 
 	@Override

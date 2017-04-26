@@ -72,6 +72,10 @@ public class Game implements RedrawObservable {
 	public void setState(STATE state) {
 		this.state = state;
 	}
+	
+	public Window getWindow(){
+		return this.window;
+	}
 
 
 	public void removeGameObject(GameObject object) {

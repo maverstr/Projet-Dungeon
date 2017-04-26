@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import controller.Keyboard;
+import controller.Mouse;
 import javafx.embed.swing.JFXPanel;
 import model.Game;
 import view.*;
@@ -26,7 +27,9 @@ public class Main {
 		
 		Game game = new Game(window);
 		Keyboard keyboard = new Keyboard(game);
+		Mouse mouse = new Mouse(game);
 		window.setKeyListener(keyboard);
+		window.setMouseListener(mouse);
 		
 		game.addRedrawObserver(window);
 

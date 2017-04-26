@@ -1,18 +1,19 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
@@ -41,8 +42,6 @@ public class Menu extends JPanel{
 		
 		mainScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/main_screen.png").getFile()));
 
-
-
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -69,6 +68,8 @@ public class Menu extends JPanel{
 		this.repaint();
 		
 	}
+
+
 
 }
 
