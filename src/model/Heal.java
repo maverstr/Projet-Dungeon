@@ -23,7 +23,7 @@ public class Heal extends Spell {
 			while (!inventory) {
 				if (game.state == Game.STATE.RUN) {
 					
-					this.getGame().getPlayer().heal(1000);
+					this.getGame().getPlayer().addHealth(1000);
 					
 					if (time>liveTime) {
 						this.disappear();

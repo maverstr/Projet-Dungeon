@@ -47,5 +47,19 @@ public enum potionType { //ALL the Potions Types available with their index in r
 		return String.format("%s",this.type.name()); //Need to format cause type.name is PotionType not String
 														//Is overriding super getType cause of the special enum for potion types
 	}
+	
+	public void use(Consumable c){
+		Potion p = (Potion) c; //Downcasting
+		if(p.type == potionType.vie){
+			System.out.println("Use Potion de VIE");
+			game.getPlayer().addHealth(10);
+		}
+		else if(p.type == potionType.mana){
+			System.out.println("Use Potion de MANA");
+			game.getPlayer().addMana(5);
+
+		}
+	}
+	
 
 }

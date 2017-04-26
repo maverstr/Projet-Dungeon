@@ -17,5 +17,7 @@ public abstract class Consumable extends Item {
 		this.getGame().getGameObjects().remove(this);
 		inventory.addConsumable(this);
 	}
+
+	public abstract void use(Consumable consumable);
 	
 }

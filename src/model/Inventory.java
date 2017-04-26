@@ -13,9 +13,7 @@ public class Inventory {
 
 	}
 
-	public void addConsumable(Consumable item) { // Add a consumable object with
-													// durability or quantity
-													// count if duplicates
+	public void addConsumable(Consumable item) { // Add a consumable object with durability or quantity count if duplicates
 		boolean found = false;
 		for (Consumable i : this.consumables) {
 			if (i.getType().equals(item.getType())) {
@@ -30,6 +28,23 @@ public class Inventory {
 			consumables.add(item);
 		}
 
+	}
+	// public Item takeConsumable(int itemIndex) {
+
+	// Item item;
+	// item =items.remove(itemIndex); /*TODO: could work with same items grouped
+	// together, thus before removing, first check for item count */
+	// System.out.println(String.format("use item at index %d : %s", itemIndex,
+	// item));
+	// return item;
+	// }
+	public void useConsumable(Consumable item){
+		if(item.getDurability()>1){
+		item.used();	
+		}
+		else{
+			this.consumables.remove(item);
+		}
 	}
 	
 	public void addSpell(Spell spell) {
@@ -88,13 +103,5 @@ public class Inventory {
 		return weapons.size()+consumables.size();
 	}
 
-	// public Item takeConsumable(int itemIndex) {
 
-	// Item item;
-	// item =items.remove(itemIndex); /*TODO: could work with same items grouped
-	// together, thus before removing, first check for item count */
-	// System.out.println(String.format("use item at index %d : %s", itemIndex,
-	// item));
-	// return item;
-	// }
 }

@@ -70,6 +70,25 @@ public abstract class Player extends Character {
 	public int getMana() {
 		return mana;
 	}
+	
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
+
+	public void addHealth(int healPoints) {
+		health+=healPoints;
+		if (health>maxHealth) {
+			health = maxHealth;
+		}
+	}
+
+	public void addMana(int manaPoints) {
+		mana+=manaPoints;
+		if (mana>maxMana) {
+			mana = maxMana;
+
+		}
+	}
 
 
 	@Override
@@ -143,8 +162,8 @@ public abstract class Player extends Character {
 		} else {
 			if (index<inventory.getItemCount()) {
 				Consumable consumable = inventory.consumables.get(index-ws);
-				System.out.println(consumable);
-				//TODO consumable.use()
+				consumable.use(consumable);
+				inventory.useConsumable(consumable);
 			}
 		}
 	}
@@ -274,16 +293,6 @@ public abstract class Player extends Character {
 		} catch (Exception e) {}
 	}
 	
-	public void setLuck(int luck) {
-		this.luck = luck;
-	}
-	
-	public void heal(int healPoints) {
-		health+=healPoints;
-		if (health>maxHealth) {
-			health = maxHealth;
-		}
-	}
 	
 	public abstract void specialAbility();
 	
