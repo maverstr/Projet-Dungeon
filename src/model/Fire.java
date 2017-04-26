@@ -51,8 +51,6 @@ public class Fire extends Spell {
 		for (int i = x1; i<=x2; i++) {
 			for (int j = y1; j<=y2; j++) {
 				objects.add(new Fire(x+i,y+j,game,false));
-				System.out.println(i);
-				System.out.println(j + "\n\n");
 			}
 		}
 	}

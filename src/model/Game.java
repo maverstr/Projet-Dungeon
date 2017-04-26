@@ -23,7 +23,9 @@ public class Game implements RedrawObservable {
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	private boolean gameRunning = false;
-	private Player player = new CP(0, 0, this);
+	
+	
+	private Player player = new CM(0, 0, this);
 	
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
@@ -122,9 +124,6 @@ public class Game implements RedrawObservable {
 
 		if(state == STATE.RUN){
 			notifyRedrawObserver();
-		} else if (state == STATE.MENU) {
-			// System.out.println("update menu");
-			window.redrawMenu();
 		}
 		else if(state == STATE.MENU) {
 			window.redrawMenu(); 
@@ -132,8 +131,6 @@ public class Game implements RedrawObservable {
 	}
 	
 	public void changeMap(){
-		System.out.println(this.objects);
-
 		this.objects.subList(1, this.objects.size()).clear();
 		bossBool = true;//Suppress the previous map (except the player in index 1).
 		loadMap("map_boss.txt");
@@ -295,8 +292,6 @@ public class Game implements RedrawObservable {
 
 	@Override
 	public void notifyRedrawObserver() {
-		// System.out.println("Notifying to the redrawObservers a request to
-		// redraw");
 		for (RedrawObserver ob : listRedrawObservers) {
 			ob.redraw(this);
 		}

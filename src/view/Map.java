@@ -41,7 +41,6 @@ public class Map extends JPanel {
 		}
 
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
-		//System.out.println("size : " + clone.size());
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
 		for(GameObject object : clone) { //Paint the sprite of the object at the right place
 			int x = object.getPosX();

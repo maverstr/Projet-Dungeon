@@ -65,9 +65,7 @@ public class Boss extends Mob {
 			Player player = this.getGame().getPlayer();
 			Random random = new Random();
 			while(player.isAlive()){
-				System.out.println("player is alive");
 				if (game.state == Game.STATE.RUN) {
-					System.out.println("boss is running");
 					movePattern(player,random);
 					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 					this.getGame().updateWindow();
@@ -119,7 +117,6 @@ public class Boss extends Mob {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
-					//System.out.println("obstacle for skeleton");
 					res = true;
 				}
 			}
@@ -130,7 +127,6 @@ public class Boss extends Mob {
 	@Override 
 	public void wasHit(int damage) {
 		super.wasHit(damage);
-		System.out.println("HAELTI LIFE : "+this.health);
 		int newPhase = 0;
 		if (this.health < 3*maxHealth/4) {
 			newPhase = 2;
@@ -157,7 +153,6 @@ public class Boss extends Mob {
 				objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
 				objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
 			} catch(Exception e) {
-				System.out.println("qslmkfdjsqkjfdlksqddjfmlqskjfmlkqsjdfmlksdj");
 				System.out.println(e.getMessage());
 			}
 		}

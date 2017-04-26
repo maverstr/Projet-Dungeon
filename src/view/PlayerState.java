@@ -44,7 +44,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		manaBar.setStringPainted(true);
 		manaBar.setForeground(Color.BLUE);
 		manaBar.setBackground(Color.RED);
-		manaBar.setBounds(10, 500, 180, 20);
+		manaBar.setBounds(10, 30, 180, 20);
 		this.add(this.manaBar);
 		
 		
@@ -54,7 +54,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		bossHealthBar.setStringPainted(true);
 		bossHealthBar.setForeground(Color.RED);
 		bossHealthBar.setBackground(Color.BLUE);
-		bossHealthBar.setBounds(10, CONSTANTS.CONSTANTS.MAP_HEIGHT-20, 180, 20); 
+		bossHealthBar.setBounds(10, 450, 180, 20); 
 		this.add(this.bossHealthBar);
 		
 	}
@@ -73,34 +73,34 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 													// countouring CURRENT
 													// Weapon
 
-		g.setColor(Color.darkGray); // Background color for Panel
-		g.fillRect(0, 30, 200, CONSTANTS.CONSTANTS.MAP_HEIGHT-30);
+		g.setColor(Color.darkGray);
+		g.fillRect(0, 0, 200, CONSTANTS.CONSTANTS.MAP_HEIGHT); // Background color for Panel
 		g.setColor(Color.blue);
 		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
-				g.drawRect(e, 50, 50, 50);
+				g.drawRect(e, 70, 50, 50); //Paints the rect for weapons inventory
 		}
 		
 		g.setColor(Color.green);
 		for (int e = 2; e <182; e+=60){
-			for (int l = 120; l < 240; l+=60){
-				g.drawRect(e, l, 50, 50);
+			for (int l = 140; l < 260; l+=60){
+				g.drawRect(e, l, 50, 50);  //Paints the rect fo consumable inventory
 			}
 		}
 		
 		g.setColor(Color.yellow); //Cases for magic
 		for (int i = 0; i <spellNumber; i++) {
 			int e = (int) (2+i*60*3/spellNumber);
-			g.drawRect(e, 260, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)));
+			g.drawRect(e, 280, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber))); // //Paints the rect for spells
 		}
 		
 		g.setColor(Color.magenta);
-		g.drawRect(62, 360, 50, 50); // Case dedicated PASSIVE ITEM
-		setPassiveText(27, 340,g);
+		g.drawRect(62, 380, 50, 50); //  //Paints the rect for PASSIVE item
+		setPassiveText(27, 360,g);
 
 
 		// Paints INVENTORY
 		int x = 2;
-		int y = 50;
+		int y = 70;
 		int keyNumber = 0;
 		try {
 			for (int i = 0; i < this.inventory.weapons.size(); i++) { // WEAPON
@@ -134,7 +134,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		}
 
 		x = 2;
-		y = 120;
+		y = 140;
 		try {
 			for (int i = 0; i < this.inventory.consumables.size(); i++) { // CONSUMABLE
 																			// Inventory
@@ -172,7 +172,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		}
 		
 		x = 2;
-		y = 260;
+		y = 280;
 		try {
 			for (int i = 0; i < this.inventory.spells.size(); i++) { // SPELL
 																		// inventory

@@ -86,7 +86,6 @@ public class Skeleton extends Mob implements Runnable {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
-					//System.out.println("obstacle for skeleton");
 					res = true;
 				}
 			}

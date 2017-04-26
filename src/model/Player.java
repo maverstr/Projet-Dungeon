@@ -108,12 +108,12 @@ public abstract class Player extends Character {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isObstacle()) {
-					System.out.println("obstacle");
+					//System.out.println("obstacle");
 					obstacle = true;
 					if (object.isMoveable()) {
-						System.out.println("moveable");
+						//System.out.println("moveable");
 						if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
-							System.out.println("freespace");
+							//System.out.println("freespace");
 							BlockMoveable blockMoveable = (BlockMoveable) object;
 							move(xMove, yMove);
 							blockMoveable.move(xMove, yMove);
@@ -175,7 +175,7 @@ public abstract class Player extends Character {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object.isAttackable()) {
-					System.out.println("mob attacked");
+					//System.out.println("mob attacked");
 					Mob mob = (Mob) object;
 					mob.wasHit(inventory.getWeapon().getDamage());
 					MediaPlayer swordPlayer = new MediaPlayer(swordMedia);
@@ -196,7 +196,6 @@ public abstract class Player extends Character {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 				if (object instanceof BlockBreakable) {
-					System.out.println("break");
 					BlockBreakable block = (BlockBreakable) object;
 					block.toBreak();
 					MediaPlayer pickaxePlayer = new MediaPlayer(pickaxeMedia);
@@ -257,7 +256,6 @@ public abstract class Player extends Character {
 			}
 			else if(object.isExit()){
 				if (object.isAtPosition(posX, posY)) {
-					System.out.println("is exit");
 					game.changeMap();
 				}
 			}

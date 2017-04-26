@@ -102,7 +102,6 @@ public class Window implements RedrawObserver {
 
 	@Override
 	public void redraw(RedrawObservable obj) {
-		//System.out.println("got a notify to redraw");
 		rightContainer.setVisible(true);
 		leftContainer.setVisible(true);
 		menuContainer.setVisible(false);
