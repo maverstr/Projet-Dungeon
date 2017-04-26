@@ -31,10 +31,10 @@ public class Inventory {
 	}
 	public void useConsumable(Consumable item){
 		if(item.getDurability()>1){
-		item.used();	
+		item.used();	//Diminish durability of item 
 		}
 		else{
-			this.consumables.remove(item);
+			this.consumables.remove(item); //Remove if last count of item
 		}
 	}
 	

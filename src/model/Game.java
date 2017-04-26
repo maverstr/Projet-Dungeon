@@ -60,7 +60,7 @@ public class Game implements RedrawObservable {
 			if (bossBool) {
 				loadMap("map_boss.txt");
 			} else {
-				loadMap("map_1.txt");
+				loadMap("map_sokoban.txt");
 			}
 			this.setState(STATE.RUN);
 			window.setPlayer(this.player);
@@ -100,7 +100,7 @@ public class Game implements RedrawObservable {
 	}
 
 	public void itemAtIndex(int index) { //use item in inventory
-		player.checkItemAtIndex(index);
+		player.selectItemAtIndex(index);
 		updateWindow();
 	}
 	
@@ -207,8 +207,13 @@ public class Game implements RedrawObservable {
 															// player
 				currentLine++;
 			}
+			try{
 			CONSTANTS.CONSTANTS.MAP_BLOCK_WIDTH = Integer.valueOf(map_block_width); //Defines the dimension of the map from arguments in the map file
 			CONSTANTS.CONSTANTS.MAP_BLOCK_HEIGHT = Integer.valueOf(map_block_height);
+			}catch(NumberFormatException e){
+				System.out.println("Les arguments de taille de map ne sont pas valides.");
+			    e.printStackTrace();
+			}
 			CONSTANTS.CONSTANTS.updateBLOCK_SIZE();
 			
 			if(darkness.equals("DARKNESS")){

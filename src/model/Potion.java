@@ -3,6 +3,10 @@ package model;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.io.IOException;
 
 // Potion Consumable Class
@@ -35,6 +39,10 @@ public enum potionType { //ALL the Potions Types available with their index in r
 			new File(GameObject.class.getResource("/resources/sprites/potion_mana_sprite.png").getFile()),
 	};
 	
+	private static final File beerSoundFile = new File(GameObject.class.getResource("/resources/audio/beer_Sound.mp3").getFile());
+	private static final Media beerSoundMedia = new Media(beerSoundFile.toURI().toString());
+	MediaPlayer beerSoundPlayer = new MediaPlayer(beerSoundMedia);
+	
 	public Potion(potionType type, int x, int y, Game game) {
 		super(Sprite.imageFromFile(spriteFileInventory[type.getIndex()]), x, y, game, Sprite.makeSpriteList(spriteFile[type.getIndex()], 0, 0, 0));
 		this.type = type;
@@ -50,6 +58,7 @@ public enum potionType { //ALL the Potions Types available with their index in r
 	
 	public void use(Consumable c){
 		Potion p = (Potion) c; //Downcasting
+		beerSoundPlayer.play();
 		if(p.type == potionType.vie){
 			System.out.println("Use Potion de VIE");
 			game.getPlayer().addHealth(10);

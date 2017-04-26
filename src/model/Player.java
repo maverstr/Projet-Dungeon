@@ -155,7 +155,7 @@ public abstract class Player extends Character {
 		}
 	}
 	
-	public void checkItemAtIndex(int index) {
+	public void selectItemAtIndex(int index) {
 		int ws = inventory.weapons.size();
 		if (index<ws) {
 			this.inventory.setWeaponIndex(index);
