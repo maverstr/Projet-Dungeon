@@ -62,6 +62,10 @@ public class Keyboard implements KeyListener{
 			case KeyEvent.VK_SPACE:
 				game.playerCastSpell();
 				break;
+			case KeyEvent.VK_P:
+				game.setState(Game.STATE.MENU);
+				System.out.println(game.state);
+				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
 			case 49:
@@ -96,6 +100,10 @@ public class Keyboard implements KeyListener{
 				game.setState(Game.STATE.RUN);
 				System.out.println(game.state);
 				break;
+			case 49:
+			case 50:
+			case 51:
+				game.ChooseClass(key-48);
 			}
 		}
 		

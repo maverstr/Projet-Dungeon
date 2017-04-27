@@ -24,7 +24,7 @@ public abstract class Mob extends Character implements Runnable {
 	
 	public abstract void attackPattern();
 	
-	
+	@Override
 	public void die() {
 		if (!this.getGame().getGameObjects().remove(this)) {
 			System.out.println(this); //TODO : ces putains de lasers

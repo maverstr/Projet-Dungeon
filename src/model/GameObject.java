@@ -66,5 +66,9 @@ public abstract class GameObject {
 	public boolean isExit() {
 		return false;
 	}
+	
+	public void die(){
+		
+	}
 }
 

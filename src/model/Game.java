@@ -23,7 +23,7 @@ public class Game implements RedrawObservable {
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 
-	private Player player = new CM(0, 0, this);
+	private Player player;
 	
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
@@ -49,18 +49,34 @@ public class Game implements RedrawObservable {
 	public Game(Window window) throws IOException {
 		this.window = window;
 		window.setGameObjects(objects);
-		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
 		updateWindow();
 
 	}
 	
+	public void ChooseClass(int c){
+		switch(c){
+		case 1:
+			player = new CP(0, 0, this);
+			break;
+		case 2 :
+			player = new CM(0, 0, this);
+			break;
+		case 3:
+			player = new CS(0, 0, this);
+			break;
+		}
+		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
+
+	}
+	
 	public void gameStart(){//Launch the game when NewGame from titleScreen is selected
+		System.out.println(player);
 		System.out.println(state);
 		if (state != STATE.RUN){
 			if (bossBool) {
 				loadMap("map_boss.txt");
 			} else {
-				loadMap("map_sokoban.txt");
+				loadMap("map_1.txt");
 			}
 			this.setState(STATE.RUN);
 			window.setPlayer(this.player);
@@ -138,12 +154,18 @@ public class Game implements RedrawObservable {
 			}
 	}
 	
-	public void changeMap(){
+	public synchronized void changeMap(){
+//		synchronized (objects) {
+//		for(GameObject mob: objects){
+//			mob.die();
+//		}
 		this.objects.subList(1, this.objects.size()).clear();
+		System.out.println(objects);
 		bossBool = true;//Suppress the previous map (except the player in index 1).
 		loadMap("map_boss.txt");
 		uneMinePlayer.play();
-	}
+		}
+//	}
 
 	private void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
 		try {

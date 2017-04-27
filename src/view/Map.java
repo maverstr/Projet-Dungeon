@@ -30,7 +30,6 @@ public class Map extends JPanel {
 		this.setFocusable(true);
 		this.setEnabled(true);
 		this.setRequestFocusEnabled(true);
-		//this.requestFocusInWindow();
 //		File curdir = new File(".");
 //		String path = curdir.getCanonicalPath();
 //		System.out.println(path);
@@ -40,7 +39,7 @@ public class Map extends JPanel {
 	}
 
 	
-	public void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
+	public synchronized void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
 			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
@@ -65,20 +64,22 @@ public class Map extends JPanel {
 
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
-		for(GameObject object : clone) { //Paint the sprite of the object at the right place
-			int x = object.getPosX();
-			int y = object.getPosY();
-			ArrayList<Sprite> spriteList = object.getSpriteList();
-			for (Sprite sprite:spriteList) {
-				if(CONSTANTS.DARKNESS_MODIFIER){
-					if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
-						sprite.setDrawPosition(x, y);
-						totalSpriteList.add(sprite);
+		synchronized (objects){
+			for(GameObject object : clone) { //Paint the sprite of the object at the right place
+				int x = object.getPosX();
+				int y = object.getPosY();
+				ArrayList<Sprite> spriteList = object.getSpriteList();
+				for (Sprite sprite:spriteList) {
+					if(CONSTANTS.DARKNESS_MODIFIER){
+						if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
+							sprite.setDrawPosition(x, y);
+							totalSpriteList.add(sprite);
+						}
 					}
-				}
-				else{
-				sprite.setDrawPosition(x, y);
-				totalSpriteList.add(sprite);
+					else{
+					sprite.setDrawPosition(x, y);
+					totalSpriteList.add(sprite);
+					}
 				}
 			}
 		}
