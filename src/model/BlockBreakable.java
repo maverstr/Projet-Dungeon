@@ -16,7 +16,7 @@ public class BlockBreakable extends Block implements Breakable {
 		return true;
 	}
 	
-	public void toBreak() {
+	public synchronized void toBreak() {
 		this.getGame().removeGameObject(this);
 	}
 

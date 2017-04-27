@@ -19,7 +19,7 @@ public abstract class Weapon extends Item {
 	public abstract boolean breakBlockAbility();
 	
 	@Override
-	public void pickUp(Inventory inventory) {
+	public synchronized void pickUp(Inventory inventory) {
 		this.getGame().getGameObjects().remove(this);
 		inventory.addWeapon(this);
 	}

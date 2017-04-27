@@ -29,12 +29,7 @@ public abstract class Character extends GameObject{
 	}
 	
 
-	
 
-	
-//	public Weapon getWeapon(){
-//		return this.weapon;
-//	}
 	public void move(int xMove,int yMove){
 		this.posX += xMove;
 		this.posY += yMove;
@@ -82,7 +77,7 @@ public abstract class Character extends GameObject{
 			default:
 				break;
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {e.printStackTrace();}
 		
 	}
 	

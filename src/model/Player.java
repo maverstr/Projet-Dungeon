@@ -96,7 +96,7 @@ public abstract class Player extends Character {
 		return true;
 	}
 	
-	public void tryToMove(int xMove, int yMove) {
+	public synchronized void tryToMove(int xMove, int yMove) {
 		boolean obstacle = false;
 		
 		int newPosX = posX+xMove;
@@ -131,7 +131,7 @@ public abstract class Player extends Character {
 		this.getGame().updateWindow();
 	}
 	
-	private boolean freeSpace(int x, int y) {
+	private synchronized boolean freeSpace(int x, int y) {
 		boolean res = true;
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == x && object.getPosY() == y) {
@@ -168,7 +168,7 @@ public abstract class Player extends Character {
 		}
 	}
 	
-	public void attack(int xAttack,int yAttack) {
+	public synchronized void attack(int xAttack,int yAttack) {
 		int newPosX = this.posX+xAttack;
 		int newPosY = this.posY+yAttack;
 		
@@ -185,11 +185,10 @@ public abstract class Player extends Character {
 			}
 		}
 		pickUpPenne();
-		//Thunder thunder = new Thunder(0,0,game,true);
-		//thunder.castSpell(posX,posY,game,this.direction);
+
 	}
 	
-	public void mine(int xMine,int yMine) {
+	public synchronized void mine(int xMine,int yMine) {
 		int newPosX = this.posX+xMine;
 		int newPosY = this.posY+yMine;
 		
@@ -231,7 +230,7 @@ public abstract class Player extends Character {
 		updatePenneDirection();
 	}
 	
-	public void openChest() {
+	public synchronized void openChest() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isOpenable()) {
@@ -244,7 +243,7 @@ public abstract class Player extends Character {
 		}
 	}
 	
-	public void pickUpItem() { //Note : this method may also be called to enter the level exit door
+	public synchronized void pickUpItem() { //Note : this method may also be called to enter the level exit door
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isPickable()) {

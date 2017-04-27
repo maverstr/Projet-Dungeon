@@ -48,7 +48,7 @@ public abstract class Spell extends Item implements Runnable {
 		}catch(Exception e){}; 
 	}
 	
-	public void attackMobs() {
+	public synchronized void attackMobs() {
 		
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
@@ -61,7 +61,7 @@ public abstract class Spell extends Item implements Runnable {
 		}
 	}
 	
-	public void disappear() {
+	public synchronized void disappear() {
 		if (!this.getGame().getGameObjects().remove(this)) {
 			System.out.println(this);
 			//this.getSpriteList().get(0).setOffset(0.2, 0.2);

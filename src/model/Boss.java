@@ -144,7 +144,7 @@ public class Boss extends Mob {
 	}
 	
 	@Override
-	public void attackPattern() {
+	public synchronized void attackPattern() {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		for (int i = 1; i<phase+3; i++) {
 			try {
@@ -153,6 +153,7 @@ public class Boss extends Mob {
 				objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
 				objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
 			} catch(Exception e) {
+				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
 		}

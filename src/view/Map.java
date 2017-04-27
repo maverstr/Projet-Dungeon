@@ -95,7 +95,7 @@ public class Map extends JPanel {
 
 	}
 	
-	public void setObjects(ArrayList<GameObject> objects){
+	public synchronized void setObjects(ArrayList<GameObject> objects){
 		this.objects = objects;
 	}
 	

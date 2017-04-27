@@ -17,7 +17,7 @@ public class Fire extends Spell {
 	}
 
 	@Override
-	public void castSpell(int x, int y, Game game, Direction playerDirection) {
+	public synchronized void castSpell(int x, int y, Game game, Direction playerDirection) {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 		switch (playerDirection) {

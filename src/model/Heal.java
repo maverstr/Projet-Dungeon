@@ -37,7 +37,7 @@ public class Heal extends Spell {
 	}
 	
 	@Override
-	public void castSpell(int x, int y, Game game, Direction playerDirection) {
+	public synchronized void castSpell(int x, int y, Game game, Direction playerDirection) {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		objects.add(new Heal(x,y,game,false));
 	}

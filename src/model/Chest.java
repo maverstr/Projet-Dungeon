@@ -10,7 +10,7 @@ public class Chest extends Block {
 		super(x, y, game, Sprite.makeSpriteList(spriteFile,0,0,0));
 	}
 	
-	public void open() {
+	public synchronized void open() {
 		this.getGame().loot(this.posX, this.posY, 13, true);
 		this.getGame().getGameObjects().remove(this);
 	}

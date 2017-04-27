@@ -53,7 +53,7 @@ public class Game implements RedrawObservable {
 
 	}
 	
-	public void ChooseClass(int c){
+	public synchronized void ChooseClass(int c){
 		switch(c){
 		case 1:
 			player = new CP(0, 0, this);
@@ -94,11 +94,11 @@ public class Game implements RedrawObservable {
 	}
 
 
-	public void removeGameObject(GameObject object) {
+	public synchronized void removeGameObject(GameObject object) {
 		objects.remove(object);
 	}
 
-	public ArrayList<GameObject> getGameObjects() {
+	public synchronized ArrayList<GameObject> getGameObjects() {
 		return this.objects;
 	}
 
@@ -155,19 +155,27 @@ public class Game implements RedrawObservable {
 	}
 	
 	public synchronized void changeMap(){
-//		synchronized (objects) {
-//		for(GameObject mob: objects){
-//			mob.die();
-//		}
-		this.objects.subList(1, this.objects.size()).clear();
-		System.out.println(objects);
-		bossBool = true;//Suppress the previous map (except the player in index 1).
-		loadMap("map_boss.txt");
-		uneMinePlayer.play();
+		synchronized (objects) {
+			ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
+			for(GameObject object: clone){
+				if (object.isAttackable()) {
+					Mob mob = (Mob) object;
+					mob.die();
+				}
+			}
+			System.out.println(objects);
+			this.objects.subList(1, this.objects.size()).clear();//Suppress the previous map (except the player in index 1).
+			System.out.println(objects);
+			bossBool = true;
+			loadMap("map_boss.txt");
+			player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
+			uneMinePlayer.play();
 		}
-//	}
+		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 
-	private void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
+	}
+
+	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
 		try {
 			int playerLine = 0;
 			int playerColumn = 0;
@@ -263,7 +271,7 @@ public class Game implements RedrawObservable {
 		}
 	}
 
-	private void loadMobs(ArrayList<Integer> emptyCasesX, ArrayList<Integer> emptyCasesY, int maxMobs) {
+	private synchronized void loadMobs(ArrayList<Integer> emptyCasesX, ArrayList<Integer> emptyCasesY, int maxMobs) {
 
 		ArrayList<Integer> mobXArray = new ArrayList<>();
 		ArrayList<Integer> mobYArray = new ArrayList<>();
@@ -304,7 +312,7 @@ public class Game implements RedrawObservable {
 		}
 	}
 	
-	public void loot(int x, int y, int lootLevel, boolean alwaysLoot) {
+	public synchronized void loot(int x, int y, int lootLevel, boolean alwaysLoot) {
 		int randomInt = random.nextInt(lootLevel)-10; //int between -10 (inclusive) and lootLevel-10 (exclusive)
 		if (alwaysLoot) {
 			randomInt+=10;

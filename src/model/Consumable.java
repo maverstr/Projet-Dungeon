@@ -13,7 +13,7 @@ public abstract class Consumable extends Item {
 	}
 	
 	@Override
-	public void pickUp(Inventory inventory) {
+	public synchronized void pickUp(Inventory inventory) {
 		this.getGame().getGameObjects().remove(this);
 		inventory.addConsumable(this);
 	}

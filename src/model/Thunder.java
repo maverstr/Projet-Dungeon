@@ -18,7 +18,7 @@ public class Thunder extends Spell {
 	}
 
 	@Override
-	public void castSpell(int x, int y, Game game, Direction playerDirection) {
+	public synchronized void castSpell(int x, int y, Game game, Direction playerDirection) {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		switch (playerDirection) {
 		case North:

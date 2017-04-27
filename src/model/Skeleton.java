@@ -79,7 +79,7 @@ public class Skeleton extends Mob implements Runnable {
 		return res;
 	}
 	
-	private boolean obstacle(int mobPosX, int mobPosY, int xMove, int yMove) {
+	private synchronized boolean obstacle(int mobPosX, int mobPosY, int xMove, int yMove) {
 		boolean res = false;
 		int newPosX = mobPosX+xMove;
 		int newPosY = mobPosY+yMove;
