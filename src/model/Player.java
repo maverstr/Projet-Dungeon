@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 
 
@@ -179,6 +180,7 @@ public abstract class Player extends Character {
 					Mob mob = (Mob) object;
 					mob.wasHit(inventory.getWeapon().getDamage());
 					MediaPlayer swordPlayer = new MediaPlayer(swordMedia);
+					swordPlayer.setVolume(0.1);
 					swordPlayer.play();
 					break;
 				}

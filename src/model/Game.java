@@ -17,6 +17,7 @@ import java.util.Random;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -28,7 +29,7 @@ public class Game implements RedrawObservable {
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
 	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
-	private static final File uneMineFile = new File(GameObject.class.getResource("/resources/audio/Une_Mine.mp3").getFile());
+	private static final File uneMineFile = new File(GameObject.class.getResource("/resources/audio/Une_Mine.wav").getFile());
 	private static final Media uneMineMedia = new Media(uneMineFile.toURI().toString());
 	MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
 
@@ -50,7 +51,7 @@ public class Game implements RedrawObservable {
 		this.window = window;
 		window.setGameObjects(objects);
 		updateWindow();
-
+		setMusicPlayer();
 	}
 	
 	public synchronized void ChooseClass(int c){
@@ -100,6 +101,15 @@ public class Game implements RedrawObservable {
 
 	public synchronized ArrayList<GameObject> getGameObjects() {
 		return this.objects;
+	}
+	
+	public void setMusicPlayer() {
+		musicPlayer.setVolume(0.7);
+		musicPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				musicPlayer.seek(Duration.ZERO);
+			}
+		});
 	}
 
 	public Player getPlayer() {
@@ -172,7 +182,7 @@ public class Game implements RedrawObservable {
 			uneMinePlayer.play();
 		}
 		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
-
+		
 	}
 
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list

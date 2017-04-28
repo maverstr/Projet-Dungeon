@@ -58,6 +58,7 @@ public enum potionType { //ALL the Potions Types available with their index in r
 	
 	public void use(Consumable c){
 		Potion p = (Potion) c; //Downcasting
+		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		if(p.type == potionType.vie){
 			game.getPlayer().addHealth(10);
