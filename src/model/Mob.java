@@ -6,8 +6,8 @@ public abstract class Mob extends Character implements Runnable {
 	
 	Thread t;
 
-	public Mob(int x, int y, Game game, ArrayList<Sprite> spriteList, int health) {
-		super(x, y, game, spriteList,health);
+	public Mob(int x, int y, Game game, ArrayList<Sprite> spriteList, int health, boolean isBaptized) {
+		super(x, y, game, spriteList,health,isBaptized);
 		t = new Thread(this);
 		t.start();
 	}

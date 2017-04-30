@@ -58,12 +58,15 @@ public class Game implements RedrawObservable {
 		switch(c){
 		case 1:
 			player = new CP(0, 0, this);
+			Penne.initSprites(0);
 			break;
 		case 2 :
 			player = new CM(0, 0, this);
+			Penne.initSprites(1);
 			break;
 		case 3:
 			player = new CS(0, 0, this);
+			Penne.initSprites(2);
 			break;
 		}
 		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
@@ -303,17 +306,18 @@ public class Game implements RedrawObservable {
 		for (int i = 0; i < mobXArray.size(); i++) {
 			int posX = mobXArray.get(i);
 			int posY = mobYArray.get(i);
-			int randomInt = random.nextInt(2);
+			boolean randomIsZombie = random.nextBoolean();
+			boolean randomBaptized = random.nextBoolean();
 			try {
 				if (bossBool) {
 					Boss boss = new Boss(posX, posY, this);
 					this.objects.add(boss);
 					window.setBoss(boss);
 				} else {
-					if (randomInt == 0) {
-						this.objects.add(new Zombie(posX, posY, i * 1000 / mobXArray.size(), this));
+					if (randomIsZombie) {
+						this.objects.add(new Zombie(posX, posY, i * 1000 / mobXArray.size(), this, randomBaptized));
 					} else {
-						this.objects.add(new Skeleton(posX, posY, i * 1000 / mobXArray.size(), this));
+						this.objects.add(new Skeleton(posX, posY, i * 1000 / mobXArray.size(), this, randomBaptized));
 					}
 				}
 			} catch (Exception ex) {
@@ -337,7 +341,10 @@ public class Game implements RedrawObservable {
 			item = new Potion(Potion.potionType.mana, x, y, this);
 			break;
 		case 2:
-			item = new Sword(x, y, this);
+			item = new Penne(x, y, this, Penne.getFileRight());
+			break;
+		case 3:
+			item = new Penne(x, y, this, Penne.getFileRight());
 			break;
 		}
 		if (item!=null) {

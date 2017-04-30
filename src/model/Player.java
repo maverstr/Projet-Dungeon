@@ -17,6 +17,9 @@ public abstract class Player extends Character {
 	private static final Media swordMedia = new Media(swordFile.toURI().toString());
 	private static final Media pickaxeMedia = new Media(pickaxeFile.toURI().toString());
 	
+	private ArrayList<MediaPlayer> swordPlayerArray = new ArrayList<MediaPlayer>(); //for looping 3 sword players (if only 1=>attack sound stops first
+	private int swordPlayerIndex = 0;																			 //if new each time : lag
+	
 	private boolean alive = true;
 	private Inventory inventory;
 	private int luck;
@@ -27,22 +30,14 @@ public abstract class Player extends Character {
 	private File spriteFileR;
 	private File spriteFileD;
 	private File spriteFileL;
-	private File spriteFilePU;
-	private File spriteFilePR;
-	private File spriteFilePD;
-	private File spriteFilePL;
 	
 	
 	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList, int maxHealth, int maxMana, int luck) {
-		super(x, y, game, spriteList, maxHealth);
+		super(x, y, game, spriteList, maxHealth,false);
 		this.spriteFileU = fileList.get(0);
 		this.spriteFileR = fileList.get(1);
 		this.spriteFileD = fileList.get(2);
 		this.spriteFileL = fileList.get(3);
-		this.spriteFilePU = fileList.get(4);
-		this.spriteFilePR = fileList.get(5);
-		this.spriteFilePD = fileList.get(6);
-		this.spriteFilePL = fileList.get(7);
 		
 		this.maxMana = maxMana;
 		this.mana = maxMana;
@@ -51,7 +46,7 @@ public abstract class Player extends Character {
 		this.inventory = new Inventory();
 		setInventory(inventory);
 	
-
+		setSwordMediaPlayer();
 	}
 	
 	public abstract void setInventory(Inventory inventory);
@@ -179,15 +174,21 @@ public abstract class Player extends Character {
 					//System.out.println("mob attacked");
 					Mob mob = (Mob) object;
 					mob.wasHit(inventory.getWeapon().getDamage());
-					MediaPlayer swordPlayer = new MediaPlayer(swordMedia);
-					swordPlayer.setVolume(0.1);
-					swordPlayer.play();
+					playSwordSound();
 					break;
 				}
 			}
 		}
-		pickUpPenne();
-
+	}
+	
+	private void playSwordSound() {
+		MediaPlayer swordPlayer = swordPlayerArray.get(swordPlayerIndex);
+		swordPlayer.stop();
+		swordPlayer.play();
+		swordPlayerIndex++;
+		if (swordPlayerIndex>2) {
+			swordPlayerIndex = 0;
+		}
 	}
 	
 	public synchronized void mine(int xMine,int yMine) {
@@ -223,14 +224,7 @@ public abstract class Player extends Character {
 	}
 	
 	
-	public void pickUpPenne() {
-		try {
-			this.spriteList.set(1, Sprite.makeSpriteFromFile(spriteFilePU, 0, -0.45, 2));
-		} catch (Exception e) {
-			this.spriteList.add(Sprite.makeSpriteFromFile(spriteFilePU, 0, -0.45, 2));
-		}
-		updatePenneDirection();
-	}
+	
 	
 	public synchronized void openChest() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
@@ -274,30 +268,13 @@ public abstract class Player extends Character {
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
 	}
 	
-	@Override
-	public void updateSpriteDirection(File up,File right,File down,File left) {
-		super.updateSpriteDirection(up, right, down, left);
-		updatePenneDirection();
+	private void setSwordMediaPlayer() {
+		for (int i=0;i<3;i++) {
+			MediaPlayer player = new MediaPlayer(swordMedia);
+			player.setVolume(0.1);
+			swordPlayerArray.add(player);
+		}
 	}
-	
-	public void updatePenneDirection() {
-		try {
-			Sprite sprite = spriteList.get(1);
-			switch (this.direction) {
-			case North:sprite.setImageFromFile(spriteFilePU);
-				break;
-			case East:sprite.setImageFromFile(spriteFilePR);
-				break;
-			case South:sprite.setImageFromFile(spriteFilePD);
-				break;
-			case West:sprite.setImageFromFile(spriteFilePL);
-				break;
-			default:
-				break;
-			}
-		} catch (Exception e) {}
-	}
-	
 	
 	public abstract void specialAbility();
 	

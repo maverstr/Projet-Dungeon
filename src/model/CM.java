@@ -10,11 +10,6 @@ public class CM extends Player {
 	private static final File spriteFileCMD = new File(GameObject.class.getResource("/resources/sprites/CM_D.png").getFile());
 	private static final File spriteFileCML = new File(GameObject.class.getResource("/resources/sprites/CM_L.png").getFile());
 	
-	private static final File spriteFilePCMU = new File(GameObject.class.getResource("/resources/sprites/P_CM_U.png").getFile());
-	private static final File spriteFilePCMR = new File(GameObject.class.getResource("/resources/sprites/P_CM_R.png").getFile());
-	private static final File spriteFilePCMD = new File(GameObject.class.getResource("/resources/sprites/P_CM_D.png").getFile());
-	private static final File spriteFilePCML = new File(GameObject.class.getResource("/resources/sprites/P_CM_L.png").getFile());
-	
 	private static final int maxHealthCM = 30;
 	private static final int maxManaCM = 20;
 	private static final int luckCM = 3;
@@ -26,10 +21,6 @@ public class CM extends Player {
 	    add(spriteFileCMR);
 	    add(spriteFileCMD);
 	    add(spriteFileCML);
-	    add(spriteFilePCMU);
-	    add(spriteFilePCMR);
-	    add(spriteFilePCMD);
-	    add(spriteFilePCML);
 	}};
 
 	public CM(int x, int y, Game game) {

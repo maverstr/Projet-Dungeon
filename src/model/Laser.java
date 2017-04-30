@@ -9,7 +9,7 @@ public class Laser extends Mob {
 	private int time = 0;
 
 	public Laser(int x, int y, Game game, File file,int phase) {
-		super(x, y, game, Sprite.makeSpriteList(file,0,0,2),10000);
+		super(x, y, game, Sprite.makeSpriteList(file,0,0,2),10000,false);
 		this.liveTime = 500/phase;
 		this.waitTime = 300/phase;
 	}

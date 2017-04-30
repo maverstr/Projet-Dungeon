@@ -16,8 +16,8 @@ public class Skeleton extends Mob implements Runnable {
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Skeleton_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
 
-	public Skeleton(int x, int y, long threadOffset, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
+	public Skeleton(int x, int y, long threadOffset, Game game, boolean isBaptized) {
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,isBaptized);
 		this.offset = threadOffset;
 		
 	}
@@ -59,11 +59,13 @@ public class Skeleton extends Mob implements Runnable {
 					this.getGame().updateWindow();
 					Thread.sleep(waitTime/2);
 					
-					attackPattern();
-					
+					if (!this.isBaptized || !this.getGame().getPlayer().isBaptized) {
+						attackPattern();
+						this.getGame().updateWindow();
+					}
+					Thread.sleep(waitTime/2);
 					
 				}
-				Thread.sleep(waitTime/2);
 			}
 		}catch(Exception e){}; 
 	}

@@ -10,11 +10,6 @@ public class CS extends Player {
 	private static final File spriteFileCSD = new File(GameObject.class.getResource("/resources/sprites/CS_D.png").getFile());
 	private static final File spriteFileCSL = new File(GameObject.class.getResource("/resources/sprites/CS_L.png").getFile());
 	
-	private static final File spriteFilePCSU = new File(GameObject.class.getResource("/resources/sprites/P_CS_U.png").getFile());
-	private static final File spriteFilePCSR = new File(GameObject.class.getResource("/resources/sprites/P_CS_R.png").getFile());
-	private static final File spriteFilePCSD = new File(GameObject.class.getResource("/resources/sprites/P_CS_D.png").getFile());
-	private static final File spriteFilePCSL = new File(GameObject.class.getResource("/resources/sprites/P_CS_L.png").getFile());
-	
 	private static final int maxHealthCS = 50;
 	private static final int maxManaCS = 10;
 	private static final int luckCS = 1;
@@ -26,10 +21,6 @@ public class CS extends Player {
 	    add(spriteFileCSR);
 	    add(spriteFileCSD);
 	    add(spriteFileCSL);
-	    add(spriteFilePCSU);
-	    add(spriteFilePCSR);
-	    add(spriteFilePCSD);
-	    add(spriteFilePCSL);
 	}};
 
 	public CS(int x, int y, Game game) {

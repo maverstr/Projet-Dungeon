@@ -27,8 +27,8 @@ public class Zombie extends Mob {
 	private Sprite attackSprite1;
 	private Sprite attackSprite2;
 
-	public Zombie(int x, int y, long threadOffset, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
+	public Zombie(int x, int y, long threadOffset, Game game, boolean isBaptized) {
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,isBaptized);
 		this.offset = threadOffset;
 	}
 	
@@ -53,8 +53,11 @@ public class Zombie extends Mob {
 					this.getGame().updateWindow();
 					Thread.sleep(waitTime/2);
 					
-					attackPattern();
-					this.getGame().updateWindow();
+					if (!this.isBaptized || !this.getGame().getPlayer().isBaptized) {
+						attackPattern();
+						this.getGame().updateWindow();
+					}
+					
 					Thread.sleep(waitTime/2);
 					this.spriteList.remove(attackSprite1); //remove the attack sprites
 					this.spriteList.remove(attackSprite2);

@@ -8,15 +8,19 @@ public abstract class Character extends GameObject{
 	
 	protected int maxHealth;
 	protected int health;
-	
+	protected boolean isBaptized;
+	protected int penneSpriteIndex;
 	
 	//int itemType = 0; //1->weapon, 2->pickaxe
 	//Weapon weapon = new Weapon();
 	
-	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int maxHealth){
+	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int maxHealth, boolean isBaptized){
 		super(x,y,game,spriteList);
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
+		if (isBaptized) {
+			putPenne();
+		}
 	}
 	
 	@Override
@@ -78,7 +82,37 @@ public abstract class Character extends GameObject{
 				break;
 			}
 		} catch (Exception e) {e.printStackTrace();}
-		
+		if (this.isBaptized) {
+			updatePenneDirection();
+		}
 	}
+	
+	public void updatePenneDirection() {
+		try {
+			Sprite sprite = spriteList.get(penneSpriteIndex);
+			switch (this.direction) {
+			case North:sprite.setImageFromFile(Penne.getFileUp());
+				break;
+			case East:sprite.setImageFromFile(Penne.getFileRight());
+				break;
+			case South:sprite.setImageFromFile(Penne.getFileDown());
+				break;
+			case West:sprite.setImageFromFile(Penne.getFileLeft());
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {}
+	}
+	
+	public void putPenne() {
+		if (!this.isBaptized) {
+			this.isBaptized = true;
+			this.spriteList.add(Sprite.makeSpriteFromFile(Penne.getFileRight(), 0, -0.45, 2));
+			this.penneSpriteIndex = spriteList.size()-1;
+			updatePenneDirection();
+		}
+	}
+	
 	
 }

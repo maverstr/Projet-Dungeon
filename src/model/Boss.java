@@ -51,7 +51,7 @@ public class Boss extends Mob {
 	
 
 	public Boss(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,false);
 		punchline1Player.setVolume(0.8);
 		punchline2Player.setVolume(0.8);
 		punchline3Player.setVolume(0.8);
