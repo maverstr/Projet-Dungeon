@@ -11,7 +11,7 @@ public class Heal extends Spell {
 	private static final int waitTime = 600;
 	private static final int liveTime = 500;
 	private static final int damage = 0;
-	private static final int manaCost = 20;
+	private static final int manaCost = 10;
 
 	public Heal(int x, int y, Game game, boolean inventory) {
 		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,-1,2), waitTime, liveTime, damage, manaCost);

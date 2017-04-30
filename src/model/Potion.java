@@ -2,12 +2,8 @@ package model;
 
 import java.io.File;
 
-import javax.imageio.ImageIO;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
-import java.io.IOException;
 
 // Potion Consumable Class
 
