@@ -46,5 +46,24 @@ public abstract class Mob extends Character implements Runnable {
 		return true;
 	}
 	
+	public Direction setDirection(int mobX,int mobY,int playerX,int playerY) {
+		Direction direction = Direction.None;
+		if ((mobX == playerX) && (mobY != playerY)) {
+			if (mobY<playerY) {
+				direction = Direction.South;
+			}else{
+				direction = Direction.North;
+			}
+		}
+		if ((mobY == playerY) && (mobX != playerX)) {
+			if (mobX<playerX) {
+				direction = Direction.East;
+			}else{
+				direction = Direction.West;
+			}
+		}
+		return direction;
+	}
+	
 
 }

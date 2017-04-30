@@ -15,6 +15,13 @@ public class Skeleton extends Mob implements Runnable {
 	private static final File spriteFileR = new File(GameObject.class.getResource("/resources/sprites/Skeleton_R.png").getFile());
 	private static final File spriteFileD = new File(GameObject.class.getResource("/resources/sprites/Skeleton_D.png").getFile());
 	private static final File spriteFileL = new File(GameObject.class.getResource("/resources/sprites/Skeleton_L.png").getFile());
+	
+	private static final File spriteFileBoneU = new File(GameObject.class.getResource("/resources/sprites/BoneU.png").getFile());
+	private static final File spriteFileBoneR = new File(GameObject.class.getResource("/resources/sprites/BoneR.png").getFile());
+	private static final File spriteFileBoneD = new File(GameObject.class.getResource("/resources/sprites/BoneD.png").getFile());
+	private static final File spriteFileBoneL = new File(GameObject.class.getResource("/resources/sprites/BoneL.png").getFile());
+	
+	private Sprite attackSprite;
 
 	public Skeleton(int x, int y, long threadOffset, Game game, boolean isBaptized) {
 		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,isBaptized);
@@ -54,7 +61,15 @@ public class Skeleton extends Mob implements Runnable {
 					} else {
 						move(moveCloserX,moveCloserY);
 					}
-					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					
+					int newMobX = this.getPosX();
+					int newMobY = this.getPosY();
+					
+					Direction newDirection = setDirection(newMobX,newMobY,playerX,playerY);
+					if (newDirection != Direction.None) {
+						this.direction = newDirection;
+						updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					}
 					
 					this.getGame().updateWindow();
 					Thread.sleep(waitTime/2);
@@ -64,7 +79,7 @@ public class Skeleton extends Mob implements Runnable {
 						this.getGame().updateWindow();
 					}
 					Thread.sleep(waitTime/2);
-					
+					this.spriteList.remove(attackSprite); //remove the attack sprites
 				}
 			}
 		}catch(Exception e){}; 
@@ -97,11 +112,30 @@ public class Skeleton extends Mob implements Runnable {
 	
 	@Override
 	public void attackPattern() {
-		//area attack
-		this.attack(0, 1);
-		this.attack(0, -1);
-		this.attack(1, 0);
-		this.attack(-1, 0);
+		switch (direction) {
+		case North:
+			this.attack(0, -1);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneU, 0, -0.75, 0);
+			this.spriteList.add(attackSprite);
+			break;
+		case East:
+			this.attack(1, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneR, 0.75, 0, 0);
+			this.spriteList.add(attackSprite);
+			break;
+		case South:
+			this.attack(0, 1);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneD, 0, 0.75, 0);
+			this.spriteList.add(attackSprite);
+			break;
+		case West:
+			this.attack(-1, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneL, -0.75, 0, 0);
+			this.spriteList.add(attackSprite);
+			break;
+		default:
+			break;
+		}
 	}
 	
 
