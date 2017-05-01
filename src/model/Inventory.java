@@ -18,11 +18,12 @@ public class Inventory {
 		boolean found = false;
 		for (Consumable i : this.consumables) {
 			if (i.getType().equals(item.getType())) {
-				i.setDurability(i.getDurability() + 1);
+				if (i.getDurability()<9) {
+					i.setDurability(i.getDurability() + 1);
+				}
 				found = true;
 				break;
 			}
-			// }
 		}
 
 		if (!found) {
