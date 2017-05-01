@@ -33,9 +33,9 @@ public class CM extends Player {
 		//Add weapons and items to the Player at the beginning of the Game.
 		try {
 			inventory.addWeapon(new Sword(0,0,this.getGame()));
-			inventory.addConsumable(new Potion(Potion.potionType.vie, 0, 0, this.getGame())); //Note the type of potion
-			inventory.addConsumable(new Potion(Potion.potionType.vie, 0, 0, this.getGame()));
-			inventory.addConsumable(new Potion(Potion.potionType.mana, 0, 0, this.getGame()));
+			inventory.addConsumable(new PotionVie(0, 0, this.getGame())); //Note the type of potion
+			inventory.addConsumable(new PotionVie(0, 0, this.getGame()));
+			inventory.addConsumable(new PotionMana(0, 0, this.getGame()));
 			inventory.addSpell(new Fire(0,0,game,true));
 			inventory.addSpell(new Thunder(0,0,game,true));
 			inventory.addSpell(new Ice(0,0,game,true));

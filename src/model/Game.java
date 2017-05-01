@@ -347,15 +347,15 @@ public class Game implements RedrawObservable {
 		if (alwaysLoot) {
 			randomInt+=10;
 		}
-		int randomIntLimited = Math.min(randomInt, 2);
+		int randomIntLimited = Math.min(randomInt, 4);
 		Item item = null;
 		switch (randomIntLimited) {
 		case 0:
-			//item = new Potion(Potion.potionType.vie, x, y, this);
+			//item = new PotionVie(x, y, this);
 			item = new Torch(x,y,this);
 			break;
 		case 1:
-			item = new Potion(Potion.potionType.mana, x, y, this);
+			item = new PotionMana(x, y, this);
 			break;
 		case 2:
 			item = new Penne(x, y, this, Penne.getFileRight());

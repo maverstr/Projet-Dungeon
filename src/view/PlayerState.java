@@ -202,7 +202,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			e.printStackTrace();
 		}
 		if(inventory.getPassive()!= null){
-			g.drawImage(inventory.passiveItem.getInventoryImage(), 65, 380, 50, 50, null);
+			g.drawImage(inventory.passiveItem.getInventoryImage(), 65, 380, 45, 45, null); //Draw passive item if there is one
 		}
 	}
 	
