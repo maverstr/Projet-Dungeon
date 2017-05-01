@@ -40,6 +40,8 @@ public class Mouse implements MouseListener, MouseMotionListener{
 			//optionsButton
 			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 550 && my <= 630){
+					game.setState(Game.STATE.STORY);
+					game.updateWindow();
 				}
 			}
 			//exitButton
@@ -61,11 +63,11 @@ public class Mouse implements MouseListener, MouseMotionListener{
 				game.ChooseClass(3);
 			}
 		}
-		
-//		public Rectangle playButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 450,300,80);
-//		public Rectangle optionsButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 550,300,80);
-//		public Rectangle exitButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 650,300,80);
-		
+		else if(game.getState() == Game.STATE.STORY){
+			game.setState(Game.STATE.MENU);
+			game.updateWindow();
+		}
+
 		
 		
 	}

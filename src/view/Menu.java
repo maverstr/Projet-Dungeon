@@ -56,7 +56,8 @@ public class Menu extends JPanel{
 		g2.draw(optionsButton);
 		g2.draw(exitButton);
 		g.drawString("New Game", playButton.x+20, playButton.y+60);
-		g.drawString("Options", optionsButton.x+60, optionsButton.y+60);
+		g.drawString("Story and", optionsButton.x+30, optionsButton.y+40);
+		g.drawString("Controls", optionsButton.x+45, optionsButton.y+80);
 		g.drawString("Quit Game", exitButton.x+25, exitButton.y+60);
 		g.drawImage(mainScreen, 100, 32, 780, 400, null);
 	}

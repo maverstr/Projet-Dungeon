@@ -45,6 +45,7 @@ public class Game implements RedrawObservable {
 		RUN,
 		OVER,
 		PAUSE,
+		STORY,
 		
 	};
 	
@@ -186,6 +187,9 @@ public class Game implements RedrawObservable {
 		}
 		else if(state == STATE.OVER){
 			window.redrawGameOver();
+		}
+		else if(state == STATE.STORY){
+			window.redrawStory();
 		}
 	}
 	
