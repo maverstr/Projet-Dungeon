@@ -98,8 +98,6 @@ public class Game implements RedrawObservable {
 	}
 	
 	public void gameStart(){//Launch the game when NewGame from titleScreen is selected
-		System.out.println(player);
-		System.out.println(state);
 		if (state != STATE.RUN){
 			if (bossBool) {
 				loadMap("map_boss.txt");
@@ -204,10 +202,7 @@ public class Game implements RedrawObservable {
 					mob.die();
 				}
 			}
-			System.out.println(objects);
-			this.objects.subList(1, this.objects.size()).clear();//Suppress the previous map (except the player in index 1).
-			System.out.println(objects);
-			
+			this.objects.subList(1, this.objects.size()).clear();//Suppress the previous map (except the player in index 1).			
 			if(this.map_counter >3){
 				bossBool = true;
 				loadMap("map_boss.txt");
@@ -216,14 +211,11 @@ public class Game implements RedrawObservable {
 			else{
 				map_number_random = random.nextInt(3)+1;
 				map_name = String.format("map_%d.txt", map_number_random);
-				System.out.println(map_name);
 				loadMap(map_name);
 			}
 		}
 		this.map_counter +=1;
 		this.updateWindow();
-		System.out.println(player.getInventory().getWeaponIndex());
-		System.out.println(player.getInventory().weapons);
 		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}
 
@@ -304,7 +296,6 @@ public class Game implements RedrawObservable {
 			
 			if(darkness.equals("DARKNESS")){
 				CONSTANTS.setDARKNESS_MODIFIER(true);
-				System.out.println(darkness+" true");
 			}
 			else{CONSTANTS.setDARKNESS_MODIFIER(false);}
 

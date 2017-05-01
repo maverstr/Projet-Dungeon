@@ -30,9 +30,6 @@ public class Map extends JPanel {
 		this.setFocusable(true);
 		this.setEnabled(true);
 		this.setRequestFocusEnabled(true);
-//		File curdir = new File(".");
-//		String path = curdir.getCanonicalPath();
-//		System.out.println(path);
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 		backSprite_transparent = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back_transparent.png").getFile()));
 

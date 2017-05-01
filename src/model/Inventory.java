@@ -62,8 +62,6 @@ public class Inventory {
 	}
 
 	public Weapon getWeapon() { 
-		System.out.println(this.weapons);
-		System.out.println(currentWeaponIndex);
 		return this.weapons.get(currentWeaponIndex);
 	}
 	
