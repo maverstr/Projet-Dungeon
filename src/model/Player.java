@@ -224,7 +224,7 @@ public abstract class Player extends Character {
 	
 	
 	
-	
+
 	public synchronized void openChest() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
@@ -233,6 +233,11 @@ public abstract class Player extends Character {
 					Chest chest = (Chest) object;
 					chest.open();
 					this.getGame().updateWindow();
+				}
+			}
+			else if(object.isExit()){
+				if (object.isAtPosition(posX, posY)) {
+					game.changeMap();
 				}
 			}
 		}
@@ -248,11 +253,7 @@ public abstract class Player extends Character {
 					this.getGame().updateWindow();
 				}
 			}
-			else if(object.isExit()){
-				if (object.isAtPosition(posX, posY)) {
-					game.changeMap();
-				}
-			}
+
 		}
 	}
 	

@@ -41,10 +41,13 @@ public class Game implements RedrawObservable {
 	Random random = new Random();
 	public enum STATE{ //The 2 states for the game
 		MENU,
-		RUN
+		CLASS,
+		RUN,
+		OVER,
+		
 	};
 	
-	public STATE state = STATE.MENU; //Set the initial state to titlescreen
+	private STATE state = STATE.MENU; //Set the initial state to titlescreen
 	
 	
 	
@@ -56,6 +59,20 @@ public class Game implements RedrawObservable {
 		updateWindow();
 		setMusicPlayer();
 	}
+	
+	public void setState(STATE state) {
+		this.state = state;
+	}
+	
+	public STATE getState(){
+		return this.state;
+		}
+	
+	public Window getWindow(){
+		return this.window;
+	}
+
+
 	
 	public synchronized void ChooseClass(int c){
 		switch(c){
@@ -73,6 +90,7 @@ public class Game implements RedrawObservable {
 			break;
 		}
 		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
+		this.gameStart();
 
 	}
 	
@@ -92,13 +110,6 @@ public class Game implements RedrawObservable {
 		}
 	}
 
-	public void setState(STATE state) {
-		this.state = state;
-	}
-	
-	public Window getWindow(){
-		return this.window;
-	}
 
 
 	public synchronized void removeGameObject(GameObject object) {
@@ -168,6 +179,9 @@ public class Game implements RedrawObservable {
 		else if(state == STATE.MENU) {
 			window.redrawMenu(); 
 			}
+		else if(state == STATE.CLASS){
+			window.redrawClass();
+		}
 	}
 	
 	public synchronized void changeMap(){
@@ -351,8 +365,7 @@ public class Game implements RedrawObservable {
 		Item item = null;
 		switch (randomIntLimited) {
 		case 0:
-			//item = new PotionVie(x, y, this);
-			item = new Torch(x,y,this);
+			item = new PotionVie(x, y, this);
 			break;
 		case 1:
 			item = new PotionMana(x, y, this);

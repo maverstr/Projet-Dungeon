@@ -39,7 +39,7 @@ public class Zombie extends Mob {
 			Thread.sleep(offset);
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				if (game.state == Game.STATE.RUN) {
+				if (game.getState() == Game.STATE.RUN) {
 					int mobX = this.getPosX();
 					int mobY = this.getPosY();
 					int playerX = player.getPosX();

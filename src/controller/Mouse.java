@@ -5,9 +5,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JFrame;
 
 import CONSTANTS.CONSTANTS;
 import model.Game;
+import model.Game.STATE;
 
 public class Mouse implements MouseListener, MouseMotionListener{
 	private Game game;
@@ -24,13 +26,15 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		int mx = e.getX();
 		int my = e.getY();
 
-		if(game.state == Game.STATE.MENU){
+		if(game.getState() == Game.STATE.MENU){
 			
 			
 			//playButton
 			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 450 && my <= 530){
-					game.gameStart();
+					game.setState(Game.STATE.CLASS);
+					game.updateWindow();
+					//game.gameStart();
 				}
 			}
 			//optionsButton
@@ -41,8 +45,20 @@ public class Mouse implements MouseListener, MouseMotionListener{
 			//exitButton
 			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 650 && my <= 730){
-					//Press
+					System.exit(0);
 				}
+			}
+		}
+		
+		else if(game.getState() == Game.STATE.CLASS){
+			if(mx < wPW/3){
+				game.ChooseClass(1);
+			}
+			else if(mx < (2*wPW)/3 && mx > wPW/3){
+				game.ChooseClass(2);
+			}
+			else if(mx > (2*wPW)/3){
+				game.ChooseClass(3);
 			}
 		}
 		
@@ -57,21 +73,23 @@ public class Mouse implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
-		
-		
-		if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
-			if(my >= 450 && my <= 530){
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+
+		if(game.getState() == Game.STATE.MENU){
+			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
+				if(my >= 450 && my <= 530){
+					Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+					game.getWindow().getMenu().setCursor(cursor);
+				}
+			}
+			else{
+				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 				game.getWindow().getMenu().setCursor(cursor);
 			}
+
 		}
-		else{
-		Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-		game.getWindow().getMenu().setCursor(cursor);
-		}
-		
+
 	}
-	
+
 	
 	
 	

@@ -67,7 +67,7 @@ public class Boss extends Mob {
 			Player player = this.getGame().getPlayer();
 			Random random = new Random();
 			while(player.isAlive()){
-				if (game.state == Game.STATE.RUN) {
+				if (game.getState() == Game.STATE.RUN) {
 					movePattern(player,random);
 					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 					this.getGame().updateWindow();

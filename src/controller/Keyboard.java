@@ -11,7 +11,6 @@ public class Keyboard implements KeyListener{
 	
 	public Keyboard(Game game){
 		this.game = game;
-		System.out.println(game.state);
 
 	}
 
@@ -19,7 +18,7 @@ public class Keyboard implements KeyListener{
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
 		//System.out.println(key);		
-		if (game.state == Game.STATE.RUN){ //Only when in the game and not in the menu
+		if (game.getState() == Game.STATE.RUN){ //Only when in the game and not in the menu
 			//System.out.println("key GAME");
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
@@ -64,7 +63,6 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.MENU);
-				System.out.println(game.state);
 				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
@@ -91,20 +89,19 @@ public class Keyboard implements KeyListener{
 				*/
 		}
 		}
-		else if(game.state == Game.STATE.MENU){
-			//System.out.println("key MENU");
+		else if(game.getState() == Game.STATE.CLASS){
 			switch(key){
-			case KeyEvent.VK_ENTER:
-				game.gameStart();
-				break;
-			case KeyEvent.VK_P:
-				game.setState(Game.STATE.RUN);
-				System.out.println(game.state);
-				break;
 			case 49:
 			case 50:
 			case 51:
 				game.ChooseClass(key-48);
+			}
+		}
+		else if(game.getState() == Game.STATE.MENU){
+			switch(key){
+			case KeyEvent.VK_P:
+				game.setState(Game.STATE.RUN);
+				break;
 			}
 		}
 		

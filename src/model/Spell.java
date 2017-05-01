@@ -33,7 +33,7 @@ public abstract class Spell extends Item implements Runnable {
 		
 		try{
 			while (!inventory) {
-				if (game.state == Game.STATE.RUN) {
+				if (game.getState() == Game.STATE.RUN) {
 					
 					attackMobs();
 					

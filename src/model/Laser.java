@@ -19,7 +19,7 @@ public class Laser extends Mob {
 		try{
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				if (game.state == Game.STATE.RUN) {
+				if (game.getState() == Game.STATE.RUN) {
 					
 					attackPattern();
 					

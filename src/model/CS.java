@@ -12,8 +12,7 @@ public class CS extends Player {
 	
 	private static final int maxHealthCS = 50;
 	private static final int maxManaCS = 10;
-	private static final int luckCS = 1;
-	//private static final int maxMana = 10;
+	private static final int luckCS = 3;
 	
 	@SuppressWarnings("serial")
 	private static final ArrayList<File> fileList = new ArrayList<File>() {{

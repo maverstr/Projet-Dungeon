@@ -12,7 +12,7 @@ public class CM extends Player {
 	
 	private static final int maxHealthCM = 30;
 	private static final int maxManaCM = 20;
-	private static final int luckCM = 3;
+	private static final int luckCM = 1;
 	
 	
 	@SuppressWarnings("serial")

@@ -21,20 +21,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window implements RedrawObserver {
-	private Map map = new Map();
-	private PlayerState playerState = new PlayerState();
 	private Player player;
 	private boolean bossBool = false;
 	private Boss boss;
 
 	
 	private Menu menu = new Menu();
+	private Map map = new Map();
+	private PlayerState playerState = new PlayerState();
+	private ClassMenu classMenu = new ClassMenu();
 	
     JPanel leftContainer = new JPanel();
 	JPanel menuContainer = new JPanel();
     JPanel rightContainer = new JPanel();
-	
-	
+    JPanel classContainer = new JPanel();
+    
+    
 	
 	public Window() throws IOException{	  
 
@@ -59,7 +61,12 @@ public class Window implements RedrawObserver {
 		menuContainer.add(this.menu);
 	    menuContainer.setVisible(false);
 	    
+	///////
 	    
+		//Class choosing case
+	    classContainer.setLayout(new BoxLayout(classContainer, BoxLayout.Y_AXIS));
+		classContainer.add(this.classMenu);
+		classContainer.setVisible(false);
 	    
 	    
 //	    //right side of top level container
@@ -74,7 +81,8 @@ public class Window implements RedrawObserver {
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 	    container.add(leftContainer);
 	    container.add(menuContainer);
-	    container.add(Box.createHorizontalStrut(10));
+	    container.add(classContainer);
+	    //container.add(Box.createHorizontalStrut(10));
 	    container.add(rightContainer, BorderLayout.CENTER);
 	    
 	    //Add the top level container to the frame
@@ -101,6 +109,7 @@ public class Window implements RedrawObserver {
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);
 	    this.menu.addKeyListener(keyboard);
+	    this.classMenu.addKeyListener(keyboard);
 
 	}
 	
@@ -108,6 +117,9 @@ public class Window implements RedrawObserver {
 		this.menu.addMouseListener(mouse);
 	    this.map.addMouseListener(mouse);
 	    this.menu.addMouseMotionListener((MouseMotionListener) mouse);
+	    this.classMenu.addMouseListener(mouse);
+	    this.classMenu.addMouseMotionListener((MouseMotionListener) mouse);
+
 
 	}
 	
@@ -120,6 +132,7 @@ public class Window implements RedrawObserver {
 		rightContainer.setVisible(true);
 		leftContainer.setVisible(true);
 		menuContainer.setVisible(false);
+		classContainer.setVisible(false);
 		this.map.redraw(this.player);
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		this.map.requestFocusInWindow();
@@ -131,9 +144,18 @@ public class Window implements RedrawObserver {
 		rightContainer.setVisible(false);
 		leftContainer.setVisible(false);
 		menuContainer.setVisible(true);
+		classContainer.setVisible(false);
 		this.menu.redraw();
 		this.menu.requestFocusInWindow();
+	}
+	
+	public void redrawClass(){
 
-
+		rightContainer.setVisible(false);
+		leftContainer.setVisible(false);
+		menuContainer.setVisible(false);
+		classContainer.setVisible(true);
+		this.classMenu.redraw();
+		this.classMenu.requestFocusInWindow();
 	}
 }

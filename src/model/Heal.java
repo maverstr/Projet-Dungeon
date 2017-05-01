@@ -21,7 +21,7 @@ public class Heal extends Spell {
 	public void run() {
 		try{
 			while (!inventory) {
-				if (game.state == Game.STATE.RUN) {
+				if (game.getState() == Game.STATE.RUN) {
 					
 					this.getGame().getPlayer().addHealth(1000);
 					
