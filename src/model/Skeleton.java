@@ -36,7 +36,6 @@ public class Skeleton extends Mob implements Runnable {
 			Random random = new Random();
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
-				//System.out.println("je tourne bis");
 				if (game.getState() == Game.STATE.RUN) {
 					//System.out.println("je tourne bis");
 					int mobX = this.getPosX();

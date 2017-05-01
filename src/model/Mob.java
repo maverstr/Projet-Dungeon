@@ -29,14 +29,13 @@ public abstract class Mob extends Character implements Runnable {
 		if (!this.getGame().getGameObjects().remove(this)) {
 			System.out.println(this); //TODO : ces putains de lasers
 			this.getSpriteList().get(0).setOffset(0.2, 0.2);
-			System.out.println(this.getGame().getGameObjects());
 		}
 		loot();
 		t.interrupt();
 	}
 	
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, 3);
+		this.getGame().loot(this.posX, this.posY, 3,false);
 	}
 	
 	public abstract void run();

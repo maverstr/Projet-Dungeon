@@ -63,9 +63,7 @@ public abstract class Spell extends Item implements Runnable {
 	
 	public synchronized void disappear() {
 		if (!this.getGame().getGameObjects().remove(this)) {
-			System.out.println(this);
 			//this.getSpriteList().get(0).setOffset(0.2, 0.2);
-			//System.out.println(this.getGame().getGameObjects());
 		}
 		t.interrupt();
 	}

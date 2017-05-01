@@ -36,7 +36,6 @@ public abstract class Weapon extends Item {
 		for (GameObject object:this.getGame().getGameObjects()) {
 			if (object.getPosX() == xAttack && object.getPosY() == yAttack) {
 				if (object.isAttackable()) {
-					//System.out.println("mob attacked");
 					Mob mob = (Mob) object;
 					mob.wasHit(this.damage);
 					playSwordSound();

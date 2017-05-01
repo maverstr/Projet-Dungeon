@@ -34,19 +34,15 @@ public class Keyboard implements KeyListener{
 				game.movePlayer(0, -1);
 				break;
 			case KeyEvent.VK_Z:
-				System.out.println("key hit up");
 				game.playerUseWeapon(0, -1);
 				break;
 			case KeyEvent.VK_Q:
-				System.out.println("key hit left");
 				game.playerUseWeapon(-1, 0);
 				break;
 			case KeyEvent.VK_S:
-				System.out.println("key hit down");
 				game.playerUseWeapon(0, 1);
 				break;
 			case KeyEvent.VK_D:
-				System.out.println("key hit right");
 				game.playerUseWeapon(1, 0);
 				break;
 			case KeyEvent.VK_A:
@@ -60,6 +56,7 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.PAUSE);
+				game.updateWindow();
 				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
@@ -98,6 +95,16 @@ public class Keyboard implements KeyListener{
 			switch(key){
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.RUN);
+				game.updateWindow();
+				break;
+			}
+		}
+		else if(game.getState() == Game.STATE.STORY){
+			switch(key){
+			case KeyEvent.VK_ENTER:
+			case KeyEvent.VK_ESCAPE:
+				game.setState(Game.STATE.MENU);
+				game.updateWindow();
 				break;
 			}
 		}
