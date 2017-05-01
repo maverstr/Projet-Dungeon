@@ -34,7 +34,7 @@ public class Game implements RedrawObservable {
 	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
 	private static final File uneMineFile = new File(GameObject.class.getResource("/resources/audio/Une_Mine.wav").getFile());
 	private static final Media uneMineMedia = new Media(uneMineFile.toURI().toString());
-	MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
+	private static final MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
 
 
 	private static boolean bossBool = false;
@@ -59,6 +59,7 @@ public class Game implements RedrawObservable {
 		window.setGameObjects(objects);
 		updateWindow();
 		setMusicPlayer();
+		Weapon.setSwordMediaPlayer();
 	}
 	
 	public void setState(STATE state) {
@@ -378,9 +379,12 @@ public class Game implements RedrawObservable {
 			item = new Penne(x, y, this, Penne.getFileRight());
 			break;
 		case 3:
-			item = new Pickaxe(x,y,this);
+			item = new Scepter(x,y,this);
 			break;
 		case 4:
+			item = new Pickaxe(x,y,this);
+			break;
+		case 5:
 			item = new Torch(x,y,this);
 			break;
 		}

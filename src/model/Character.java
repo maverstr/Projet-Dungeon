@@ -55,8 +55,6 @@ public abstract class Character extends GameObject{
 		}
 	}
 	
-	public abstract void attack(int xAttack,int yAttack);
-	
 	public void wasHit(int damage) {
 		this.health-=damage;
 		if (this.health<=0) {

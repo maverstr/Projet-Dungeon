@@ -9,10 +9,15 @@ public class Sword extends Weapon {
 	public Sword(int x, int y, Game game) {
 		super(2, Sprite.imageFromFile(spriteFileInventory), x, y, game, Sprite.makeSpriteList(spriteFile, 0, 0, 0));
 	}
-	
-	public boolean breakBlockAbility() {
-		return false;
+
+	@Override
+	public void use(int xPlayer, int yPlayer, int xUseWeapon, int yUseWeapon) {
+		int newPosX = xPlayer+xUseWeapon;
+		int newPosY = yPlayer+yUseWeapon;
+		
+		this.attack(newPosX, newPosY);
 	}
+	
 	
 	
 	

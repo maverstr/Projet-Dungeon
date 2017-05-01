@@ -33,6 +33,7 @@ public class CP extends Player {
 		try {
 			inventory.addWeapon(new Sword(0,0,this.getGame()));
 			inventory.addWeapon(new Pickaxe(0,0,this.getGame()));
+			inventory.addWeapon(new Scepter(0,0,this.getGame()));
 			inventory.addSpell(new Fire(0,0,game,true));
 			inventory.addSpell(new Thunder(0,0,game,true));
 			inventory.addSpell(new Ice(0,0,game,true));

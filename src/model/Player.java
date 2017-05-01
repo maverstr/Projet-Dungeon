@@ -3,21 +3,7 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-
-
 public abstract class Player extends Character {
-	
-	private static final File swordFile = new File(GameObject.class.getResource("/resources/audio/Sword_Sound.m4a").getFile());
-	private static final File pickaxeFile = new File(GameObject.class.getResource("/resources/audio/Pickaxe_Sound.wav").getFile());
-	
-	private static final Media swordMedia = new Media(swordFile.toURI().toString());
-	private static final Media pickaxeMedia = new Media(pickaxeFile.toURI().toString());
-	
-	private ArrayList<MediaPlayer> swordPlayerArray = new ArrayList<MediaPlayer>(); //for looping 3 sword players (if only 1=>attack sound stops first
-	private int swordPlayerIndex = 0;																			 //if new each time : lag
 	
 	private boolean alive = true;
 	private Inventory inventory;
@@ -44,8 +30,6 @@ public abstract class Player extends Character {
 		
 		this.inventory = new Inventory();
 		setInventory(inventory);
-	
-		setSwordMediaPlayer();
 	}
 	
 	public abstract void setInventory(Inventory inventory);
@@ -143,11 +127,7 @@ public abstract class Player extends Character {
 	public void useWeapon(int xUseWeapon,int yUseWeapon) { /* TODO: replace all x,y direction indication with Direction Enum */
 		this.setMoveDirection(xUseWeapon, yUseWeapon);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-		this.attack(xUseWeapon, yUseWeapon);
-		
-		if (this.inventory.getWeapon().breakBlockAbility()) {
-			this.mine(xUseWeapon,yUseWeapon);
-		}
+		this.inventory.getWeapon().use(posX, posY, xUseWeapon, yUseWeapon);
 	}
 	
 	public void selectItemAtIndex(int index) {
@@ -159,50 +139,6 @@ public abstract class Player extends Character {
 				Consumable consumable = inventory.consumables.get(index-ws);
 				consumable.use(consumable);
 				inventory.useConsumable(consumable);
-			}
-		}
-	}
-	
-	public synchronized void attack(int xAttack,int yAttack) {
-		int newPosX = this.posX+xAttack;
-		int newPosY = this.posY+yAttack;
-		
-		for (GameObject object:this.getGame().getGameObjects()) {
-			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object.isAttackable()) {
-					//System.out.println("mob attacked");
-					Mob mob = (Mob) object;
-					mob.wasHit(inventory.getWeapon().getDamage());
-					playSwordSound();
-					break;
-				}
-			}
-		}
-	}
-	
-	private void playSwordSound() {
-		MediaPlayer swordPlayer = swordPlayerArray.get(swordPlayerIndex);
-		swordPlayer.stop();
-		swordPlayer.play();
-		swordPlayerIndex++;
-		if (swordPlayerIndex>2) {
-			swordPlayerIndex = 0;
-		}
-	}
-	
-	public synchronized void mine(int xMine,int yMine) {
-		int newPosX = this.posX+xMine;
-		int newPosY = this.posY+yMine;
-		
-		for (GameObject object:this.getGame().getGameObjects()) {
-			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object instanceof BlockBreakable) {
-					BlockBreakable block = (BlockBreakable) object;
-					block.toBreak();
-					MediaPlayer pickaxePlayer = new MediaPlayer(pickaxeMedia);
-					pickaxePlayer.play();
-					break;
-				}
 			}
 		}
 	}
@@ -222,9 +158,6 @@ public abstract class Player extends Character {
 		this.getGame().updateWindow();
 	}
 	
-	
-	
-
 	public synchronized void openChest() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
@@ -267,14 +200,6 @@ public abstract class Player extends Character {
 		game.setState(Game.STATE.OVER);
 		this.getGame().updateWindow();
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
-	}
-	
-	private void setSwordMediaPlayer() {
-		for (int i=0;i<3;i++) {
-			MediaPlayer player = new MediaPlayer(swordMedia);
-			player.setVolume(0.1);
-			swordPlayerArray.add(player);
-		}
 	}
 	
 	public abstract void specialAbility();
