@@ -361,7 +361,7 @@ public class Game implements RedrawObservable {
 		if (alwaysLoot) {
 			randomInt+=10;
 		}
-		int randomIntLimited = Math.min(randomInt, 4);
+		int randomIntLimited = Math.min(randomInt, 5);
 		Item item = null;
 		switch (randomIntLimited) {
 		case 0:
