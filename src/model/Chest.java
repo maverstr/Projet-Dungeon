@@ -11,7 +11,7 @@ public class Chest extends Block {
 	}
 	
 	public synchronized void open() {
-		this.getGame().loot(this.posX, this.posY, 10,false);
+		this.getGame().loot(this.posX, this.posY, 10);
 		this.getGame().getGameObjects().remove(this);
 	}
 	

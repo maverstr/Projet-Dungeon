@@ -47,7 +47,7 @@ public class Laser extends Mob {
 	
 	@Override
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, -6,false);
+		this.getGame().loot(this.posX, this.posY, -6);
 	}
 
 }
