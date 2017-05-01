@@ -15,6 +15,7 @@ import view.*;
 import model.GameObject;
 import java.util.Random;
 
+import CONSTANTS.CONSTANTS;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -23,6 +24,8 @@ public class Game implements RedrawObservable {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
+	
+	private int map_counter = 1;
 
 	private Player player;
 	
@@ -169,6 +172,8 @@ public class Game implements RedrawObservable {
 	
 	public synchronized void changeMap(){
 		synchronized (objects) {
+			String map_name = "";
+			int map_number_random;
 			ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 			for(GameObject object: clone){
 				if (object.isAttackable()) {
@@ -179,13 +184,22 @@ public class Game implements RedrawObservable {
 			System.out.println(objects);
 			this.objects.subList(1, this.objects.size()).clear();//Suppress the previous map (except the player in index 1).
 			System.out.println(objects);
-			bossBool = true;
-			loadMap("map_boss.txt");
-			player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
-			uneMinePlayer.play();
+			
+			if(this.map_counter >3){
+				bossBool = true;
+				loadMap("map_boss.txt");
+				uneMinePlayer.play();
+			}
+			else{
+				map_number_random = random.nextInt(3)+1;
+				map_name = String.format("map_%d.txt", map_number_random);
+				System.out.println(map_name);
+				loadMap(map_name);
+				player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
+
+			}
 		}
-		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
-		
+		this.map_counter +=1;
 	}
 
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
@@ -255,19 +269,19 @@ public class Game implements RedrawObservable {
 				currentLine++;
 			}
 			try{
-			CONSTANTS.CONSTANTS.MAP_BLOCK_WIDTH = Integer.valueOf(map_block_width); //Defines the dimension of the map from arguments in the map file
-			CONSTANTS.CONSTANTS.MAP_BLOCK_HEIGHT = Integer.valueOf(map_block_height);
+				CONSTANTS.setMAP_BLOCK_WIDTH(Integer.valueOf(map_block_width)); //Defines the dimension of the map from arguments in the map file
+				CONSTANTS.setMAP_BLOCK_HEIGHT( Integer.valueOf(map_block_height));
 			}catch(NumberFormatException e){
 				System.out.println("Les arguments de taille de map ne sont pas valides.");
 			    e.printStackTrace();
 			}
-			CONSTANTS.CONSTANTS.updateBLOCK_SIZE();
+			CONSTANTS.updateBLOCK_SIZE();
 			
 			if(darkness.equals("DARKNESS")){
-				CONSTANTS.CONSTANTS.DARKNESS_MODIFIER = true;
+				CONSTANTS.setDARKNESS_MODIFIER(true);
 				System.out.println(darkness+" true");
 			}
-			else{CONSTANTS.CONSTANTS.DARKNESS_MODIFIER = false;}
+			else{CONSTANTS.setDARKNESS_MODIFIER(false);}
 
 			
 			bufferedReader.close();

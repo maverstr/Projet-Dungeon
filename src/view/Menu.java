@@ -20,17 +20,18 @@ import model.GameObject;
 public class Menu extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
+	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
+	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
 	
-	
-	public Rectangle playButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 450,300,80);
-	public Rectangle optionsButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 550,300,80);
-	public Rectangle exitButton = new Rectangle(CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150, 650,300,80);
+	public Rectangle playButton = new Rectangle(wPW/2 -150, 450,300,80);
+	public Rectangle optionsButton = new Rectangle(wPW/2 -150, 550,300,80);
+	public Rectangle exitButton = new Rectangle(wPW/2 -150, 650,300,80);
 	
 	private BufferedImage mainScreen;
 
 	
 	public Menu() throws IOException {	
-		this.setPreferredSize(new Dimension(CONSTANTS.WINDOW_PIXEL_WIDTH, CONSTANTS.WINDOW_PIXEL_HEIGHT));
+		this.setPreferredSize(new Dimension(wPW, wPH));
 		this.setFocusable(true);
 		this.setEnabled(true);
 		this.setRequestFocusEnabled(true);
@@ -50,7 +51,7 @@ public class Menu extends JPanel{
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);
 		g.setColor(Color.WHITE);
-		g.drawString("Haeltermine", CONSTANTS.WINDOW_PIXEL_WIDTH /2 -120, 100);
+		g.drawString("Haeltermine", wPW/2 -120, 100);
 		g2.draw(playButton);
 		g2.draw(optionsButton);
 		g2.draw(exitButton);

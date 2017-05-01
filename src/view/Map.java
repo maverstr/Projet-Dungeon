@@ -26,7 +26,7 @@ public class Map extends JPanel {
 	private Player player;
 	
 	public Map() throws IOException{
-		this.setPreferredSize(new Dimension(CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT));
+		this.setPreferredSize(new Dimension(CONSTANTS.getMAP_WIDTH(), CONSTANTS.getMAP_HEIGHT()));
 		this.setFocusable(true);
 		this.setEnabled(true);
 		this.setRequestFocusEnabled(true);
@@ -41,22 +41,25 @@ public class Map extends JPanel {
 	
 	public synchronized void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
-		for(int i = 0; i< CONSTANTS.MAP_BLOCK_WIDTH; i++){						
-			for(int j = 0; j<CONSTANTS.MAP_BLOCK_HEIGHT; j++){
+		int los = CONSTANTS.getLINE_OF_SIGHT();
+		int bs = CONSTANTS.getBLOCK_SIZE();
+		for(int i = 0; i< CONSTANTS.getMAP_BLOCK_WIDTH(); i++){						
+			for(int j = 0; j<CONSTANTS.getMAP_BLOCK_HEIGHT(); j++){
 				int x = i;
-				int y = j;		
+				int y = j;
+				
 									// Paint a background sprite on the map
-				if(CONSTANTS.DARKNESS_MODIFIER){//If DARKNESS mode is activated, blocks not in sight are half-transparent
-					if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
-						g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+				if(CONSTANTS.getDARKNESS_MODIFIER()){//If DARKNESS mode is activated, blocks not in sight are half-transparent
+					if(Math.abs(x - player.getPosX()) < los && Math.abs(y - player.getPosY()) < los){
+						g.drawImage(backSprite, x*bs, y*bs, bs, bs, null); 
 					}
 					else{
-						g.drawImage(backSprite_transparent, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+						g.drawImage(backSprite_transparent, x*bs, y*bs, bs,bs, null); 
 					}
 
 				}
 				else{ 
-					g.drawImage(backSprite, x*CONSTANTS.BLOCK_SIZE, y*CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null); 
+					g.drawImage(backSprite, x*bs, y*bs, bs, bs, null); 
 				}
 
 	}
@@ -70,8 +73,8 @@ public class Map extends JPanel {
 				int y = object.getPosY();
 				ArrayList<Sprite> spriteList = object.getSpriteList();
 				for (Sprite sprite:spriteList) {
-					if(CONSTANTS.DARKNESS_MODIFIER){
-						if(Math.abs(x - player.getPosX()) < 4 && Math.abs(y - player.getPosY()) < 4){
+					if(CONSTANTS.getDARKNESS_MODIFIER()){
+						if(Math.abs(x - player.getPosX()) < los && Math.abs(y - player.getPosY()) < los){
 							sprite.setDrawPosition(x, y);
 							totalSpriteList.add(sprite);
 						}
@@ -87,9 +90,9 @@ public class Map extends JPanel {
 		Collections.sort(totalSpriteList,(sprite1, sprite2) -> sprite1.getDrawZ()-sprite2.getDrawZ()); //sort the list by ascending zPosition
 		
 		for (Sprite sprite:totalSpriteList) {
-			double xDouble = sprite.getDrawX()*CONSTANTS.BLOCK_SIZE;
-			double yDouble = sprite.getDrawY()*CONSTANTS.BLOCK_SIZE;
-			g.drawImage(sprite.getImage(), (int) xDouble, (int) yDouble, CONSTANTS.BLOCK_SIZE, CONSTANTS.BLOCK_SIZE, null);
+			double xDouble = sprite.getDrawX()*bs;
+			double yDouble = sprite.getDrawY()*bs;
+			g.drawImage(sprite.getImage(), (int) xDouble, (int) yDouble, bs, bs, null);
 		}
 		
 

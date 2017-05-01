@@ -21,5 +21,9 @@ public class Torch extends Item {
 	public void isPassive(){
 		
 	}
+	
+	public void use(){
+		CONSTANTS.CONSTANTS.setLINE_OF_SIGHT(8);
+	}
 
 }

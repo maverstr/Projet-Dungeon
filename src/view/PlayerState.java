@@ -26,7 +26,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	
 
 	public PlayerState() {
-		this.setPreferredSize(new Dimension(200, CONSTANTS.CONSTANTS.MAP_HEIGHT)); // Set Size of screen
+		this.setPreferredSize(new Dimension(200, CONSTANTS.CONSTANTS.getMAP_HEIGHT())); // Set Size of screen
 														// part for player STATS
 		this.setFocusable(false);
 		this.setLayout(null);
@@ -74,7 +74,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 													// Weapon
 
 		g.setColor(Color.darkGray);
-		g.fillRect(0, 0, 200, CONSTANTS.CONSTANTS.MAP_HEIGHT); // Background color for Panel
+		g.fillRect(0, 0, 200, CONSTANTS.CONSTANTS.getMAP_HEIGHT()); // Background color for Panel
 		g.setColor(Color.blue);
 		for (int e = 2; e <182; e+=60){ //Note the initialization at 2 because of the thickness of the line (=3)
 				g.drawRect(e, 70, 50, 50); //Paints the rect for weapons inventory

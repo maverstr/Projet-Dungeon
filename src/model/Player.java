@@ -99,20 +99,20 @@ public abstract class Player extends Character {
 		
 		int blockMoveableNewPosX = posX+2*xMove;
 		int blockMoveableNewPosY = posY+2*yMove;
-		
-		for (GameObject object:this.getGame().getGameObjects()) {
-			if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
-				if (object.isObstacle()) {
-					//System.out.println("obstacle");
-					obstacle = true;
-					if (object.isMoveable()) {
-						//System.out.println("moveable");
-						if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
-							//System.out.println("freespace");
-							BlockMoveable blockMoveable = (BlockMoveable) object;
-							move(xMove, yMove);
-							blockMoveable.move(xMove, yMove);
-							updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+		ArrayList<GameObject> objects = this.getGame().getGameObjects();
+		synchronized(objects){
+
+			for (GameObject object:objects) {
+				if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
+					if (object.isObstacle()) {
+						obstacle = true;
+						if (object.isMoveable()) {
+							if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
+								BlockMoveable blockMoveable = (BlockMoveable) object;
+								move(xMove, yMove);
+								blockMoveable.move(xMove, yMove);
+								updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+							}
 						}
 					}
 				}
@@ -229,7 +229,7 @@ public abstract class Player extends Character {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isOpenable()) {
-				if (object.isAtPosition(posX, posY-1)) {
+				if (object.isAtPosition(posX, posY-1) || object.isAtPosition(posX-1, posY) ||object.isAtPosition(posX, posY+1) || object.isAtPosition(posX+1, posY)) {
 					Chest chest = (Chest) object;
 					chest.open();
 					this.getGame().updateWindow();

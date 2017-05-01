@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.Cursor;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,6 +11,9 @@ import model.Game;
 
 public class Mouse implements MouseListener, MouseMotionListener{
 	private Game game;
+	
+	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
+
 	public Mouse(Game game) {
 		this.game = game;
 	}
@@ -26,18 +28,18 @@ public class Mouse implements MouseListener, MouseMotionListener{
 			
 			
 			//playButton
-			if(mx >= CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150 && mx <= CONSTANTS.WINDOW_PIXEL_WIDTH/2 +150){
+			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 450 && my <= 530){
 					game.gameStart();
 				}
 			}
 			//optionsButton
-			if(mx >= CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150 && mx <= CONSTANTS.WINDOW_PIXEL_WIDTH/2 +150){
+			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 550 && my <= 630){
 				}
 			}
 			//exitButton
-			if(mx >= CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150 && mx <= CONSTANTS.WINDOW_PIXEL_WIDTH/2 +150){
+			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 				if(my >= 650 && my <= 730){
 					//Press
 				}
@@ -57,7 +59,7 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		int my = e.getY();
 		
 		
-		if(mx >= CONSTANTS.WINDOW_PIXEL_WIDTH/2 -150 && mx <= CONSTANTS.WINDOW_PIXEL_WIDTH/2 +150){
+		if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
 			if(my >= 450 && my <= 530){
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 				game.getWindow().getMenu().setCursor(cursor);

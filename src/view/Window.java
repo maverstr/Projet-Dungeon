@@ -41,7 +41,7 @@ public class Window implements RedrawObserver {
 		
 	    JFrame frame = new JFrame("HaelterMINE");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.WINDOW_PIXEL_WIDTH, CONSTANTS.CONSTANTS.WINDOW_PIXEL_HEIGHT);
+	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.getWINDOW_PIXEL_WIDTH(), CONSTANTS.CONSTANTS.getWINDOW_PIXEL_HEIGHT());
 	    frame.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile())));
 	    frame.getContentPane().setBackground(Color.gray);
 	     
