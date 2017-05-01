@@ -169,6 +169,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		} catch (NullPointerException e) { // At the beginning player may not be
 											// created -> nullpointer
 			System.out.println("player not created yet B" + e);
+			e.printStackTrace();
 		}
 		
 		x = 2;
@@ -198,6 +199,10 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		} catch (NullPointerException e) { // At the beginning player may not be
 											// created -> nullpointer
 			System.out.println("player not created yet A" + e);
+			e.printStackTrace();
+		}
+		if(inventory.getPassive()!= null){
+			g.drawImage(inventory.passiveItem.getInventoryImage(), 65, 380, 50, 50, null);
 		}
 	}
 	

@@ -37,6 +37,7 @@ public class CS extends Player {
 			inventory.addSpell(new Fire(0,0,game,true));
 			inventory.addSpell(new Thunder(0,0,game,true));
 			inventory.addSpell(new Ice(0,0,game,true));
+			inventory.replacePassive(new Torch(0,0,game));
 		}catch (Exception e){}
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.

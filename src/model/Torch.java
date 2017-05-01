@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Torch extends Item {
 	
-	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/sword_sprite.png").getFile());
-	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/sword_sprite.png").getFile());
+	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
+	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
 
 	public Torch( int x, int y, Game game) {
 		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, Sprite.makeSpriteList(spriteFile, 0, 0, 0));
@@ -15,15 +15,20 @@ public class Torch extends Item {
 
 	@Override
 	public void pickUp(Inventory inventory) {
+		this.getGame().getGameObjects().remove(this);
+		inventory.replacePassive(this);
+		this.use();
 
 	}
 	
+	@Override
 	public void isPassive(){
 		
 	}
 	
+	@Override
 	public void use(){
-		CONSTANTS.CONSTANTS.setLINE_OF_SIGHT(8);
+		CONSTANTS.CONSTANTS.setLINE_OF_SIGHT(7);
 	}
 
 }

@@ -195,11 +195,13 @@ public class Game implements RedrawObservable {
 				map_name = String.format("map_%d.txt", map_number_random);
 				System.out.println(map_name);
 				loadMap(map_name);
-				player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
-
 			}
 		}
 		this.map_counter +=1;
+		this.updateWindow();
+		System.out.println(player.getInventory().getWeaponIndex());
+		System.out.println(player.getInventory().weapons);
+		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}
 
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
@@ -349,7 +351,8 @@ public class Game implements RedrawObservable {
 		Item item = null;
 		switch (randomIntLimited) {
 		case 0:
-			item = new Potion(Potion.potionType.vie, x, y, this);
+			//item = new Potion(Potion.potionType.vie, x, y, this);
+			item = new Torch(x,y,this);
 			break;
 		case 1:
 			item = new Potion(Potion.potionType.mana, x, y, this);
@@ -358,7 +361,10 @@ public class Game implements RedrawObservable {
 			item = new Penne(x, y, this, Penne.getFileRight());
 			break;
 		case 3:
-			item = new Penne(x, y, this, Penne.getFileRight());
+			item = new Pickaxe(x,y,this);
+			break;
+		case 4:
+			item = new Torch(x,y,this);
 			break;
 		}
 		if (item!=null) {

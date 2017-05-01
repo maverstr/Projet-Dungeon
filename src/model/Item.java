@@ -43,5 +43,17 @@ public abstract class Item extends GameObject {
 	public boolean isPickable() {
 		return true;
 	}
+	
+	public boolean isPAssive(){
+		return false;
+	}
+
+	public void isPassive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void use() {
+	}
 
 }

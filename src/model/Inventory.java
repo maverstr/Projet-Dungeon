@@ -6,6 +6,7 @@ public class Inventory {
 	public ArrayList<Spell> spells = new ArrayList<Spell>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
+	public Item passiveItem;
 	private int currentWeaponIndex = 0;
 	private int currentSpellIndex = 0;
 
@@ -60,8 +61,9 @@ public class Inventory {
 
 	}
 
-	public Weapon getWeapon() { // return the Weapon to check the instanceof (cf
-								// Player hit)
+	public Weapon getWeapon() { 
+		System.out.println(this.weapons);
+		System.out.println(currentWeaponIndex);
 		return this.weapons.get(currentWeaponIndex);
 	}
 	
@@ -69,8 +71,7 @@ public class Inventory {
 		return this.spells.get(currentSpellIndex);
 	}
 
-	public void setWeaponIndex(int index) {// Set the weapon index (cf Player
-											// changeTool)
+	public void setWeaponIndex(int index) {// Set the weapon index 
 		this.currentWeaponIndex = index;
 	}
 	
@@ -92,6 +93,15 @@ public class Inventory {
 	
 	public int getItemCount() {
 		return weapons.size()+consumables.size();
+	}
+	
+	public void replacePassive(Item item){
+		this.passiveItem = item;
+		item.use();
+	}
+	
+	public Item getPassive(){
+		return this.passiveItem;
 	}
 
 

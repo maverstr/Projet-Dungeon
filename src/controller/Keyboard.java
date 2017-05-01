@@ -68,6 +68,7 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
+				break;
 			case 49:
 			case 50:
 			case 51:
