@@ -62,7 +62,7 @@ public class Keyboard implements KeyListener{
 				game.playerCastSpell();
 				break;
 			case KeyEvent.VK_P:
-				game.setState(Game.STATE.MENU);
+				game.setState(Game.STATE.PAUSE);
 				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
@@ -97,7 +97,7 @@ public class Keyboard implements KeyListener{
 				game.ChooseClass(key-48);
 			}
 		}
-		else if(game.getState() == Game.STATE.MENU){
+		else if(game.getState() == Game.STATE.PAUSE){
 			switch(key){
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.RUN);

@@ -44,6 +44,7 @@ public class Game implements RedrawObservable {
 		CLASS,
 		RUN,
 		OVER,
+		PAUSE,
 		
 	};
 	

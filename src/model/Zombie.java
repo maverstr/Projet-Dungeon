@@ -40,6 +40,7 @@ public class Zombie extends Mob {
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
 				if (game.getState() == Game.STATE.RUN) {
+					System.out.println("je tourne");
 					int mobX = this.getPosX();
 					int mobY = this.getPosY();
 					int playerX = player.getPosX();
