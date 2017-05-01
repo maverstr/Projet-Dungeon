@@ -75,6 +75,10 @@ public abstract class Player extends Character {
 		return true;
 	}
 	
+	public int getLuck() {
+		return this.luck;
+	}
+	
 	public synchronized void tryToMove(int xMove, int yMove) {
 		boolean obstacle = false;
 		

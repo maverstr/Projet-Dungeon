@@ -58,9 +58,6 @@ public class Keyboard implements KeyListener{
 			case KeyEvent.VK_SHIFT:
 				game.playerChangeSpell();
 				break;
-			case KeyEvent.VK_SPACE:
-				game.playerCastSpell();
-				break;
 			case KeyEvent.VK_P:
 				game.setState(Game.STATE.PAUSE);
 				break;

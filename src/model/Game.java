@@ -165,10 +165,6 @@ public class Game implements RedrawObservable {
 		}
 	}
 	
-	public void playerCastSpell() {
-		player.castSpell();
-	}
-	
 	public void playerChangeSpell() {
 		player.changeSpell();
 	}
@@ -361,36 +357,46 @@ public class Game implements RedrawObservable {
 		}
 	}
 	
-	public synchronized void loot(int x, int y, int lootLevel, boolean alwaysLoot) {
-		int randomInt = random.nextInt(lootLevel)-10; //int between -10 (inclusive) and lootLevel-10 (exclusive)
-		if (alwaysLoot) {
-			randomInt+=10;
+	public synchronized void loot(int x, int y, int objectLoot) {
+		int totalLootLevel = (objectLoot+this.map_counter)*player.getLuck();
+		
+		if (lootBool(totalLootLevel)) {
+			int randomItemInt = random.nextInt(6); //between 0 and 5
+			Item item = null;
+			switch (randomItemInt) {
+			case 0:
+				item = new PotionVie(x, y, this);
+				break;
+			case 1:
+				item = new PotionMana(x, y, this);
+				break;
+			case 2:
+				item = new Penne(x, y, this, Penne.getFileRight());
+				break;
+			case 3:
+				item = new Scepter(x,y,this);
+				break;
+			case 4:
+				item = new Pickaxe(x,y,this);
+				break;
+			case 5:
+				item = new Torch(x,y,this);
+				break;
+			}
+			if (item!=null) {
+				this.getGameObjects().add(item);
+			}
 		}
-		int randomIntLimited = Math.min(randomInt, 4);
-		Item item = null;
-		switch (randomIntLimited) {
-		case 0:
-			item = new PotionVie(x, y, this);
-			break;
-		case 1:
-			item = new PotionMana(x, y, this);
-			break;
-		case 2:
-			item = new Penne(x, y, this, Penne.getFileRight());
-			break;
-		case 3:
-			item = new Scepter(x,y,this);
-			break;
-		case 4:
-			item = new Pickaxe(x,y,this);
-			break;
-		case 5:
-			item = new Torch(x,y,this);
-			break;
+		
+	}
+	
+	private boolean lootBool(int totalLootLevel) {
+		boolean res = false;
+		int randomInt = random.nextInt(10);
+		if (randomInt<totalLootLevel) {
+			res = true;
 		}
-		if (item!=null) {
-			this.getGameObjects().add(item);
-		}
+		return res;
 	}
 	
 

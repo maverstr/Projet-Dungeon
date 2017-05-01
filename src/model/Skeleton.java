@@ -24,7 +24,7 @@ public class Skeleton extends Mob implements Runnable {
 	private Sprite attackSprite;
 
 	public Skeleton(int x, int y, long threadOffset, Game game, boolean isBaptized) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,isBaptized);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,-0.25,7),maxHealth,isBaptized);
 		this.offset = threadOffset;
 		
 	}
@@ -63,6 +63,10 @@ public class Skeleton extends Mob implements Runnable {
 					} else {
 						move(moveCloserX,moveCloserY);
 					}
+					updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
+					
+					this.getGame().updateWindow();
+					Thread.sleep(waitTime/2);
 					
 					int newMobX = this.getPosX();
 					int newMobY = this.getPosY();
@@ -72,9 +76,6 @@ public class Skeleton extends Mob implements Runnable {
 						this.direction = newDirection;
 						updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 					}
-					
-					this.getGame().updateWindow();
-					Thread.sleep(waitTime/2);
 					
 					if (!this.isBaptized || !this.getGame().getPlayer().isBaptized) {
 						attackPattern();
@@ -117,22 +118,22 @@ public class Skeleton extends Mob implements Runnable {
 		switch (direction) {
 		case North:
 			this.attack(0, -1);
-			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneU, 0, -0.75, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneU, 0, -0.75, 6);
 			this.spriteList.add(attackSprite);
 			break;
 		case East:
 			this.attack(1, 0);
-			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneR, 0.75, 0, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneR, 0.75, -0.25, 11);
 			this.spriteList.add(attackSprite);
 			break;
 		case South:
 			this.attack(0, 1);
-			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneD, 0, 0.75, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneD, 0, 0.25, 8);
 			this.spriteList.add(attackSprite);
 			break;
 		case West:
 			this.attack(-1, 0);
-			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneL, -0.75, 0, 0);
+			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneL, -0.75, -0.25, 11);
 			this.spriteList.add(attackSprite);
 			break;
 		default:

@@ -23,7 +23,7 @@ public class CP extends Player {
 	}};
 
 	public CP(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileCPU,0,-0.25,1),fileList,maxHealthCP,maxManaCP,luckCP);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileCPU,0,-0.25,5),fileList,maxHealthCP,maxManaCP,luckCP);
 		
 	}
 

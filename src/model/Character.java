@@ -106,7 +106,7 @@ public abstract class Character extends GameObject{
 	public void putPenne() {
 		if (!this.isBaptized) {
 			this.isBaptized = true;
-			this.spriteList.add(Sprite.makeSpriteFromFile(Penne.getFileRight(), 0, -0.45, 2));
+			this.spriteList.add(Sprite.makeSpriteFromFile(Penne.getFileRight(), 0, -0.45, 9));
 			this.penneSpriteIndex = spriteList.size()-1;
 			updatePenneDirection();
 		}

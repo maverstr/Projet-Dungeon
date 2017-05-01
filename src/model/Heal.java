@@ -14,7 +14,7 @@ public class Heal extends Spell {
 	private static final int manaCost = 10;
 
 	public Heal(int x, int y, Game game, boolean inventory) {
-		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,-1,2), waitTime, liveTime, damage, manaCost);
+		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,-1,11), waitTime, liveTime, damage, manaCost);
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ public class Thunder extends Spell {
 	private static final int manaCost = 2;
 
 	public Thunder(int x, int y, Game game, boolean inventory) {
-		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,0), waitTime, liveTime, damage, manaCost);
+		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,11), waitTime, liveTime, damage, manaCost);
 		
 	}
 

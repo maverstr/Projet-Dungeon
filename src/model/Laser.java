@@ -9,7 +9,7 @@ public class Laser extends Mob {
 	private int time = 0;
 
 	public Laser(int x, int y, Game game, File file,int phase) {
-		super(x, y, game, Sprite.makeSpriteList(file,0,0,2),10000,false);
+		super(x, y, game, Sprite.makeSpriteList(file,0,0,11),10000,false);
 		this.liveTime = 500/phase;
 		this.waitTime = 300/phase;
 	}
@@ -47,7 +47,7 @@ public class Laser extends Mob {
 	
 	@Override
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, 10, false);
+		this.getGame().loot(this.posX, this.posY, -6);
 	}
 
 }

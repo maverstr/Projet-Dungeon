@@ -28,7 +28,7 @@ public class Zombie extends Mob {
 	private Sprite attackSprite2;
 
 	public Zombie(int x, int y, long threadOffset, Game game, boolean isBaptized) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,0,0),maxHealth,isBaptized);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileU,0,-0.25,7),maxHealth,isBaptized);
 		this.offset = threadOffset;
 	}
 	
@@ -75,32 +75,32 @@ public class Zombie extends Mob {
 		case North:
 			this.attack(0, -1);
 			this.attack(0, -2);
-			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1U, 0, -0.75, 0);
-			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2U, 0, -1.75, 0);
+			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1U, 0, -1, 6);
+			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2U, 0, -2, 11);
 			this.spriteList.add(attackSprite1);
 			this.spriteList.add(attackSprite2);
 			break;
 		case East:
 			this.attack(1, 0);
 			this.attack(2, 0);
-			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1R, 0.75, 0, 0);
-			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2R, 1.75, 0, 0);
+			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1R, 0.75, -0.35, 11);
+			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2R, 1.75, -0.35, 11);
 			this.spriteList.add(attackSprite1);
 			this.spriteList.add(attackSprite2);
 			break;
 		case South:
 			this.attack(0, 1);
 			this.attack(0, 2);
-			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1D, 0, 0.75, 0);
-			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2D, 0, 1.75, 0);
+			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1D, 0, 0.2, 11);
+			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2D, 0, 1.2, 11);
 			this.spriteList.add(attackSprite1);
 			this.spriteList.add(attackSprite2);
 			break;
 		case West:
 			this.attack(-1, 0);
 			this.attack(-2, 0);
-			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1L, -0.75, 0, 0);
-			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2L, -1.75, 0, 0);
+			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1L, -0.75, -0.35, 11);
+			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2L, -1.75, -0.35, 11);
 			this.spriteList.add(attackSprite1);
 			this.spriteList.add(attackSprite2);
 			break;

@@ -23,7 +23,7 @@ public class CS extends Player {
 	}};
 
 	public CS(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileCSU,0,-0.25,1),fileList,maxHealthCS,maxManaCS,luckCS);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileCSU,0,-0.25,5),fileList,maxHealthCS,maxManaCS,luckCS);
 		setLuck(3);
 	}
 	

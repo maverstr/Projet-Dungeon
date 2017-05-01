@@ -24,7 +24,7 @@ public class CM extends Player {
 	}};
 
 	public CM(int x, int y, Game game) {
-		super(x, y, game, Sprite.makeSpriteList(spriteFileCMU,0,-0.25,1),fileList,maxHealthCM,maxManaCM,luckCM);
+		super(x, y, game, Sprite.makeSpriteList(spriteFileCMU,0,-0.25,5),fileList,maxHealthCM,maxManaCM,luckCM);
 		
 	}
 	
