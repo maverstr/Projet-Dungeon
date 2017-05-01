@@ -264,6 +264,7 @@ public abstract class Player extends Character {
 	public void die() {
 		this.alive = false;
 		this.getGame().getGameObjects().remove(this);
+		game.setState(Game.STATE.OVER);
 		this.getGame().updateWindow();
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
 	}

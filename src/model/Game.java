@@ -182,6 +182,9 @@ public class Game implements RedrawObservable {
 		else if(state == STATE.CLASS){
 			window.redrawClass();
 		}
+		else if(state == STATE.OVER){
+			window.redrawGameOver();
+		}
 	}
 	
 	public synchronized void changeMap(){

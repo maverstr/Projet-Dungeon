@@ -30,11 +30,13 @@ public class Window implements RedrawObserver {
 	private Map map = new Map();
 	private PlayerState playerState = new PlayerState();
 	private ClassMenu classMenu = new ClassMenu();
+	private GameOverScreen goScreen = new GameOverScreen();
 	
     JPanel leftContainer = new JPanel();
 	JPanel menuContainer = new JPanel();
     JPanel rightContainer = new JPanel();
     JPanel classContainer = new JPanel();
+    JPanel goContainer = new JPanel();
     
     
 	
@@ -74,6 +76,13 @@ public class Window implements RedrawObserver {
 	    rightContainer.add(this.playerState);
 	    rightContainer.setVisible(false);
 	    
+	   
+//
+	    //GameOver Container
+	    goContainer.setLayout(new BoxLayout(goContainer, BoxLayout.Y_AXIS));
+		goContainer.add(this.goScreen);
+		goContainer.setVisible(false);
+	    
 	    
     
 //	    //Top level container 
@@ -82,6 +91,7 @@ public class Window implements RedrawObserver {
 	    container.add(leftContainer);
 	    container.add(menuContainer);
 	    container.add(classContainer);
+	    container.add(goContainer);
 	    //container.add(Box.createHorizontalStrut(10));
 	    container.add(rightContainer, BorderLayout.CENTER);
 	    
@@ -133,6 +143,7 @@ public class Window implements RedrawObserver {
 		leftContainer.setVisible(true);
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
+		goContainer.setVisible(false);
 		this.map.redraw(this.player);
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		this.map.requestFocusInWindow();
@@ -143,8 +154,9 @@ public class Window implements RedrawObserver {
 
 		rightContainer.setVisible(false);
 		leftContainer.setVisible(false);
-		menuContainer.setVisible(true);
 		classContainer.setVisible(false);
+		goContainer.setVisible(false);
+		menuContainer.setVisible(true);
 		this.menu.redraw();
 		this.menu.requestFocusInWindow();
 	}
@@ -154,8 +166,19 @@ public class Window implements RedrawObserver {
 		rightContainer.setVisible(false);
 		leftContainer.setVisible(false);
 		menuContainer.setVisible(false);
+		goContainer.setVisible(false);
 		classContainer.setVisible(true);
 		this.classMenu.redraw();
 		this.classMenu.requestFocusInWindow();
+	}
+	
+	public void redrawGameOver(){
+		rightContainer.setVisible(false);
+		leftContainer.setVisible(false);
+		menuContainer.setVisible(false);
+		classContainer.setVisible(false);
+		goContainer.setVisible(true);
+		this.goScreen.redraw();
+		this.goScreen.requestFocusInWindow();
 	}
 }
