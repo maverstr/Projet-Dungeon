@@ -28,7 +28,7 @@ public class PotionMana extends Consumable {
 
 	@Override
 	public void use(Consumable c) {
-		PotionVie p = (PotionVie) c; //Downcasting
+		PotionMana p = (PotionMana) c; //Downcasting
 		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		game.getPlayer().addMana(5);
