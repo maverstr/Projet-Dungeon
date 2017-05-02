@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,12 +37,14 @@ public class StoryMenu extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		
-		Font fnt0 = new Font("arial", Font.BOLD, 50);
-		g.setFont(fnt0);
-		g.setColor(Color.WHITE);
-		g.drawImage(storyScreen, 0, 0, wPW-16, wPH-38, null);
+		RenderingHints rh = new RenderingHints(
+	             RenderingHints.KEY_RENDERING,
+	             RenderingHints.VALUE_RENDER_QUALITY);
+	    g2.setRenderingHints(rh);
+		
+		g2.drawImage(storyScreen, 0, 0, wPW-16, wPH-38, null);
 	}
 	
 	public void redraw(){

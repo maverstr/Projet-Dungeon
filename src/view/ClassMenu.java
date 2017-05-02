@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,13 +40,15 @@ public class ClassMenu extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		RenderingHints rh = new RenderingHints(
+	             RenderingHints.KEY_RENDERING,
+	             RenderingHints.VALUE_RENDER_QUALITY);
+	    g2.setRenderingHints(rh);
 		
 		this.setBackground(Color.BLACK);
 		
-		Font fnt0 = new Font("arial", Font.BOLD, 50);
-		g.setFont(fnt0);
-		g.setColor(Color.WHITE);
-		g.drawImage(classScreen, 0, 0, wPW-16, wPH-38, null);
+		g2.setColor(Color.WHITE);
+		g2.drawImage(classScreen, 0, 0, wPW-16, wPH-38, null);
 	}
 	
 	public void redraw(){
