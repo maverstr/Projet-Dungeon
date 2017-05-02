@@ -90,8 +90,12 @@ public abstract class Mob extends Character implements Runnable {
 				move(directionY);
 			}
 		} else {
-			move(directionY);
-			move(directionX);
+			if (directionX!=Direction.None) {
+				move(directionX);
+			}
+			if (directionY!=Direction.None) {
+				move(directionY);
+			}
 		}
 	}
 	

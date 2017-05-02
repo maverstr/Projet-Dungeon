@@ -45,7 +45,7 @@ public class ClassMenu extends JPanel{
 	             RenderingHints.VALUE_RENDER_QUALITY);
 	    g2.setRenderingHints(rh);
 		
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		
 		g2.setColor(Color.WHITE);
 		g2.drawImage(classScreen, 0, 0, wPW-16, wPH-38, null);
