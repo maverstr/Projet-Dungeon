@@ -7,10 +7,11 @@ public class Thunder extends Spell {
 
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/Thunder.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Thunder.png").getFile());
-	private static final int waitTime = 1000;
-	private static final int liveTime = 5000;
+	private static final int waitTime = 200;
+	private static final int liveTime = 800;
 	private static final int damage = 3;
 	private static final int manaCost = 2;
+	
 
 	public Thunder(int x, int y, Game game, boolean inventory) {
 		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, inventory, Sprite.makeSpriteList(spriteFile,0,0,11), waitTime, liveTime, damage, manaCost);

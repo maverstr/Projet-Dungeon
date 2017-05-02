@@ -41,7 +41,7 @@ public class GameOverScreen extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);

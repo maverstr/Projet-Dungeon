@@ -141,6 +141,7 @@ public class Window implements RedrawObserver {
 	    this.classMenu.addMouseListener(mouse);
 	    this.classMenu.addMouseMotionListener((MouseMotionListener) mouse);
 	    this.storyScreen.addMouseListener(mouse);
+	    this.goScreen.addMouseListener(mouse);
 
 
 	}

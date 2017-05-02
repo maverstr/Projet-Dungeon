@@ -40,7 +40,6 @@ public class Zombie extends Mob {
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
 				if (game.getState() == Game.STATE.RUN) {
-					System.out.println("je tourne");
 					int mobX = this.getPosX();
 					int mobY = this.getPosY();
 					int playerX = player.getPosX();
@@ -62,6 +61,8 @@ public class Zombie extends Mob {
 					Thread.sleep(waitTime/2);
 					this.spriteList.remove(attackSprite1); //remove the attack sprites
 					this.spriteList.remove(attackSprite2);
+				} else {
+					Thread.sleep(100);
 				}
 				
 			}

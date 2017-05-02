@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Mob extends Character implements Runnable {
+	static Object lock = new Object();
 	
 	Thread t;
 
@@ -26,13 +27,12 @@ public abstract class Mob extends Character implements Runnable {
 	public abstract void attackPattern();
 	
 	@Override
-	public synchronized void die() {
-		if (!this.getGame().getGameObjects().remove(this)) {
-			System.out.println(this); //TODO : ces putains de lasers
-			this.getSpriteList().get(0).setOffset(0.2, 0.2);
+	public void die() {
+		synchronized(lock) {
+			this.getGame().getGameObjects().remove(this);
+			loot();
+			t.interrupt();
 		}
-		loot();
-		t.interrupt();
 	}
 	
 	public void loot() {

@@ -37,7 +37,6 @@ public class Skeleton extends Mob implements Runnable {
 			Player player = this.getGame().getPlayer();
 			while(player.isAlive()){
 				if (game.getState() == Game.STATE.RUN) {
-					//System.out.println("je tourne bis");
 					int playerX = player.getPosX();
 					int playerY = player.getPosY();
 					
@@ -62,6 +61,8 @@ public class Skeleton extends Mob implements Runnable {
 					}
 					Thread.sleep(waitTime/2);
 					this.spriteList.remove(attackSprite); //remove the attack sprites
+				} else {
+					Thread.sleep(100);
 				}
 			}
 		}catch(Exception e){}; 

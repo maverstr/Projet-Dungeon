@@ -13,6 +13,8 @@ public abstract class Spell extends Item implements Runnable {
 	protected boolean inventory;
 	protected int time = 0;
 	
+	static Object lock = new Object();
+	
 	public Spell(BufferedImage inventoryImage, int x, int y, Game game, boolean inventory, ArrayList<Sprite> spriteList, int waitTime, int liveTime, int damage, int manaCost) {
 		super(inventoryImage, x, y, game, spriteList);
 		this.waitTime = waitTime;
@@ -62,10 +64,13 @@ public abstract class Spell extends Item implements Runnable {
 	}
 	
 	public synchronized void disappear() {
-		if (!this.getGame().getGameObjects().remove(this)) {
-			//this.getSpriteList().get(0).setOffset(0.2, 0.2);
+		synchronized (lock) {
+			if (!this.getGame().getGameObjects().remove(this)) {
+				System.out.println(this);
+				System.out.println(this.getGame().getGameObjects());
+			}
+			t.interrupt();
 		}
-		t.interrupt();
 	}
 	
 	@Override
