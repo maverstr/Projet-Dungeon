@@ -17,9 +17,9 @@ public class Pickaxe extends Weapon {
 	}
 
 	@Override
-	public void use(int xPlayer, int yPlayer, int xUseWeapon, int yUseWeapon) {
-		int newPosX = xPlayer+xUseWeapon;
-		int newPosY = yPlayer+yUseWeapon;
+	public void use(int xPlayer, int yPlayer, Direction useDirection) {
+		int newPosX = xPlayer+xForDirection(useDirection);
+		int newPosY = yPlayer+yForDirection(useDirection);
 		
 		this.attack(newPosX, newPosY);
 		this.mine(newPosX, newPosY);

@@ -67,8 +67,44 @@ public abstract class GameObject {
 		return false;
 	}
 	
-	public void die(){
-		
+	public int xForDirection(Direction direction) {
+		int res = 0;
+		if (direction == Direction.West) {
+			res = -1;
+		}
+		if (direction == Direction.East) {
+			res = 1;
+		}
+		return res;
 	}
+	
+	public int yForDirection(Direction direction) {
+		int res = 0;
+		if (direction == Direction.North) {
+			res = -1;
+		}
+		if (direction == Direction.South) {
+			res = 1;
+		}
+		return res;
+	}
+	
+	public Direction directionFor(int xDirection, int yDirection) {
+		Direction res = Direction.None;
+		if (xDirection>0) {
+			res = Direction.East;
+		}
+		if (xDirection<0) {
+			res = Direction.West;
+		}
+		if (yDirection>0) {
+			res = Direction.South;
+		}
+		if (yDirection<0) {
+			res = Direction.North;
+		}
+		return res;
+	}
+	
 }
 

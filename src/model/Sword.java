@@ -11,9 +11,9 @@ public class Sword extends Weapon {
 	}
 
 	@Override
-	public void use(int xPlayer, int yPlayer, int xUseWeapon, int yUseWeapon) {
-		int newPosX = xPlayer+xUseWeapon;
-		int newPosY = yPlayer+yUseWeapon;
+	public void use(int xPlayer, int yPlayer, Direction direction) {
+		int newPosX = xPlayer+xForDirection(direction);
+		int newPosY = yPlayer+yForDirection(direction);
 		
 		this.attack(newPosX, newPosY);
 	}

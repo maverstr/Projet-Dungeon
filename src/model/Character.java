@@ -34,25 +34,14 @@ public abstract class Character extends GameObject{
 	
 
 
-	public void move(int xMove,int yMove){
-		this.posX += xMove;
-		this.posY += yMove;
-		setMoveDirection(xMove,yMove);
+	public void move(Direction direction){
+		this.posX += xForDirection(direction);
+		this.posY += yForDirection(direction);
+		setMoveDirection(direction);
 	}
 	
-	public void setMoveDirection(int xMove, int yMove) {
-		if (yMove<0) {
-			this.direction = Direction.North;
-		}
-		if (xMove>0) {
-			this.direction = Direction.East;
-		}
-		if (yMove>0) {
-			this.direction = Direction.South;
-		}
-		if (xMove<0) {
-			this.direction = Direction.West;
-		}
+	public void setMoveDirection(Direction direction) {
+		this.direction = direction;
 	}
 	
 	public void wasHit(int damage) {

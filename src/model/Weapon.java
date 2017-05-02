@@ -24,7 +24,7 @@ public abstract class Weapon extends Item {
 		return this.damage;
 	}
 	
-	public abstract void use(int xPlayer, int yPlayer, int xUseWeapon, int yUseWeapon);
+	public abstract void use(int xPlayer, int yPlayer, Direction direction);
 	
 	@Override
 	public synchronized void pickUp(Inventory inventory) {

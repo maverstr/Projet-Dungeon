@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import model.Direction;
 import model.Game;
 
 
@@ -22,28 +23,28 @@ public class Keyboard implements KeyListener{
 			//System.out.println("key GAME");
 		switch (key){
 			case KeyEvent.VK_RIGHT: 
-				game.movePlayer(1, 0); /* TODO: replace all with direction enum */
+				game.movePlayer(Direction.East);
 				break;
 			case KeyEvent.VK_LEFT:
-				game.movePlayer(-1, 0);
+				game.movePlayer(Direction.West);
 				break;
 			case KeyEvent.VK_DOWN:
-				game.movePlayer(0, 1);
+				game.movePlayer(Direction.South);
 				break;
 			case KeyEvent.VK_UP:
-				game.movePlayer(0, -1);
+				game.movePlayer(Direction.North);
 				break;
 			case KeyEvent.VK_Z:
-				game.playerUseWeapon(0, -1);
+				game.playerUseWeapon(Direction.North);
 				break;
 			case KeyEvent.VK_Q:
-				game.playerUseWeapon(-1, 0);
+				game.playerUseWeapon(Direction.West);
 				break;
 			case KeyEvent.VK_S:
-				game.playerUseWeapon(0, 1);
+				game.playerUseWeapon(Direction.South);
 				break;
 			case KeyEvent.VK_D:
-				game.playerUseWeapon(1, 0);
+				game.playerUseWeapon(Direction.East);
 				break;
 			case KeyEvent.VK_A:
 				game.playerOpenChest();

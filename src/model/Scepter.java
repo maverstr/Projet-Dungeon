@@ -12,7 +12,7 @@ public class Scepter extends Weapon {
 	}
 
 	@Override
-	public void use(int xPlayer, int yPlayer, int xUseWeapon, int yUseWeapon) {
+	public void use(int xPlayer, int yPlayer, Direction direction) {
 		this.getGame().getPlayer().castSpell();
 	}
 }

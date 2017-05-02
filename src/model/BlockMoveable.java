@@ -12,9 +12,9 @@ public class BlockMoveable extends Block {
 		
 	}
 	
-	public void move(int xMove,int yMove){
-		this.posX += xMove;
-		this.posY += yMove;
+	public void move(Direction direction){
+		this.posX += xForDirection(direction);
+		this.posY += yForDirection(direction);
 	}
 	
 	@Override

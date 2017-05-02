@@ -79,14 +79,14 @@ public abstract class Player extends Character {
 		return this.luck;
 	}
 	
-	public synchronized void tryToMove(int xMove, int yMove) {
+	public synchronized void tryToMove(Direction direction) {
 		boolean obstacle = false;
 		
-		int newPosX = posX+xMove;
-		int newPosY = posY+yMove;
+		int newPosX = posX+xForDirection(direction);
+		int newPosY = posY+yForDirection(direction);
 		
-		int blockMoveableNewPosX = posX+2*xMove;
-		int blockMoveableNewPosY = posY+2*yMove;
+		int blockMoveableNewPosX = posX+2*xForDirection(direction);
+		int blockMoveableNewPosY = posY+2*yForDirection(direction);
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		synchronized(objects){
 
@@ -97,8 +97,8 @@ public abstract class Player extends Character {
 						if (object.isMoveable()) {
 							if (freeSpace(blockMoveableNewPosX,blockMoveableNewPosY)) {
 								BlockMoveable blockMoveable = (BlockMoveable) object;
-								move(xMove, yMove);
-								blockMoveable.move(xMove, yMove);
+								move(direction);
+								blockMoveable.move(direction);
 								updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 							}
 						}
@@ -107,7 +107,7 @@ public abstract class Player extends Character {
 			}
 		}
 		if (!obstacle) {
-			move(xMove, yMove);
+			move(direction);
 			updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		}
 		
@@ -128,10 +128,10 @@ public abstract class Player extends Character {
 	}
 	
 	
-	public void useWeapon(int xUseWeapon,int yUseWeapon) { /* TODO: replace all x,y direction indication with Direction Enum */
-		this.setMoveDirection(xUseWeapon, yUseWeapon);
+	public void useWeapon(Direction direction) {
+		this.setMoveDirection(direction);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
-		this.inventory.getWeapon().use(posX, posY, xUseWeapon, yUseWeapon);
+		this.inventory.getWeapon().use(posX, posY, direction);
 	}
 	
 	public void selectItemAtIndex(int index) {
