@@ -33,9 +33,9 @@ public class Window implements RedrawObserver {
 	private GameOverScreen goScreen = new GameOverScreen();
 	private StoryMenu storyScreen = new StoryMenu();
 	
-    JPanel leftContainer = new JPanel();
+    JPanel mapContainer = new JPanel();
 	JPanel menuContainer = new JPanel();
-    JPanel rightContainer = new JPanel();
+    JPanel playerstatetContainer = new JPanel();
     JPanel classContainer = new JPanel();
     JPanel goContainer = new JPanel();
     JPanel storyContainer = new JPanel();
@@ -54,9 +54,10 @@ public class Window implements RedrawObserver {
 ///////
 	    
 	    //left side of top level container
-	    leftContainer.setLayout(new BoxLayout(leftContainer, BoxLayout.Y_AXIS));
-	    leftContainer.add(this.map);
-	    leftContainer.setVisible(false);
+	    mapContainer.setLayout(new BoxLayout(mapContainer, BoxLayout.X_AXIS));
+	    mapContainer.add(this.map);
+	    mapContainer.add(Box.createHorizontalStrut(5)); //Small separator between game map and inventory
+	    mapContainer.setVisible(false);
 	    
 ///////
 	    
@@ -68,15 +69,15 @@ public class Window implements RedrawObserver {
 	///////
 	    
 		//Class choosing case
-	    classContainer.setLayout(new BoxLayout(classContainer, BoxLayout.Y_AXIS));
+	    classContainer.setLayout(new BoxLayout(classContainer, BoxLayout.X_AXIS));
 		classContainer.add(this.classMenu);
 		classContainer.setVisible(false);
 	    
 	    
 //	    //right side of top level container
-	    rightContainer.setLayout(new BoxLayout(rightContainer, BoxLayout.Y_AXIS));
-	    rightContainer.add(this.playerState);
-	    rightContainer.setVisible(false);
+	    playerstatetContainer.setLayout(new BoxLayout(playerstatetContainer, BoxLayout.Y_AXIS));
+	    playerstatetContainer.add(this.playerState);
+	    playerstatetContainer.setVisible(false);
 	    
 	   
 //
@@ -97,13 +98,12 @@ public class Window implements RedrawObserver {
 //	    //Top level container 
 	    JPanel container = new JPanel();
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-	    container.add(leftContainer);
+	    container.add(mapContainer);
 	    container.add(menuContainer);
 	    container.add(classContainer);
 	    container.add(goContainer);
 	    container.add(storyContainer);
-	    //container.add(Box.createHorizontalStrut(10));
-	    container.add(rightContainer, BorderLayout.CENTER);
+	    container.add(playerstatetContainer, BorderLayout.CENTER);
 	    
 	    //Add the top level container to the frame
 	    frame.getContentPane().add(container);
@@ -152,8 +152,8 @@ public class Window implements RedrawObserver {
 
 	@Override
 	public void redraw(RedrawObservable obj) {
-		rightContainer.setVisible(true);
-		leftContainer.setVisible(true);
+		playerstatetContainer.setVisible(true);
+		mapContainer.setVisible(true);
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
@@ -166,8 +166,8 @@ public class Window implements RedrawObserver {
 	
 	public void redrawMenu(){
 
-		rightContainer.setVisible(false);
-		leftContainer.setVisible(false);
+		playerstatetContainer.setVisible(false);
+		mapContainer.setVisible(false);
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
 		goContainer.setVisible(false);
@@ -178,8 +178,8 @@ public class Window implements RedrawObserver {
 	
 	public void redrawClass(){
 
-		rightContainer.setVisible(false);
-		leftContainer.setVisible(false);
+		playerstatetContainer.setVisible(false);
+		mapContainer.setVisible(false);
 		menuContainer.setVisible(false);
 		goContainer.setVisible(false);
 		storyContainer.setVisible(false);
@@ -189,8 +189,8 @@ public class Window implements RedrawObserver {
 	}
 	
 	public void redrawGameOver(){
-		rightContainer.setVisible(false);
-		leftContainer.setVisible(false);
+		playerstatetContainer.setVisible(false);
+		mapContainer.setVisible(false);
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
@@ -200,8 +200,8 @@ public class Window implements RedrawObserver {
 	}
 	
 	public void redrawStory(){
-		rightContainer.setVisible(false);
-		leftContainer.setVisible(false);
+		playerstatetContainer.setVisible(false);
+		mapContainer.setVisible(false);
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
 		goContainer.setVisible(false);

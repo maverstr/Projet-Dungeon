@@ -26,6 +26,8 @@ public class Game implements RedrawObservable {
 	private Window window;
 	
 	private int map_counter = 1;
+	private ArrayList<Integer> roomsDone = new ArrayList<Integer>();
+
 
 	private Player player;
 	
@@ -39,7 +41,8 @@ public class Game implements RedrawObservable {
 
 	private static boolean bossBool = false;
 	Random random = new Random();
-	public enum STATE{ //The 2 states for the game
+	
+	public enum STATE{ //The states for the game
 		MENU,
 		CLASS,
 		RUN,
@@ -77,7 +80,7 @@ public class Game implements RedrawObservable {
 
 
 	
-	public synchronized void ChooseClass(int c){
+	public synchronized void ChooseClass(int c){ //is called when in the menu to choose the class
 		switch(c){
 		case 1:
 			player = new CP(0, 0, this);
@@ -102,7 +105,7 @@ public class Game implements RedrawObservable {
 			if (bossBool) {
 				loadMap("map_boss.txt");
 			} else {
-				loadMap("map_1.txt");
+				loadMap("map_0.txt");
 			}
 			this.setState(STATE.RUN);
 			window.setPlayer(this.player);
@@ -191,32 +194,43 @@ public class Game implements RedrawObservable {
 		}
 	}
 	
-	public synchronized void changeMap(){
+	public synchronized void changeMap(){ //is called when the player gets through a door
 		synchronized (objects) {
 			String map_name = "";
 			int map_number_random;
+			boolean found = false;
 			ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 			for(GameObject object: clone){
 				if (object.isAttackable()) {
 					Mob mob = (Mob) object;
-					mob.die();
+					mob.die(); //Kill and remove every mob of the game
 				}
 			}
-			this.objects.subList(1, this.objects.size()).clear();//Suppress the previous map (except the player in index 1).			
-			if(this.map_counter >3){
+			this.objects.subList(1, this.objects.size()).clear();//Suppress the blocks of the previous map (except the player in index 1).
+			if(this.map_counter == 1){
+				loadMap("map_1.txt");
+			}
+			else if(this.map_counter >3){
 				bossBool = true;
 				loadMap("map_boss.txt");
 				uneMinePlayer.play();
 			}
 			else{
-				map_number_random = random.nextInt(3)+1;
-				map_name = String.format("map_%d.txt", map_number_random);
-				loadMap(map_name);
+				while(!found){ //Pick a map from a random list of available maps and avoid duplicates
+					map_number_random = random.nextInt(2)+2;
+					System.out.println(map_number_random);
+					if (!roomsDone.contains(map_number_random)){
+						roomsDone.add(map_number_random);
+						map_name = String.format("map_%d.txt", map_number_random);
+						loadMap(map_name);
+						found = true;
+
+					}
+				}
 			}
 		}
 		this.map_counter +=1;
 		this.updateWindow();
-		player.getInventory().setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}
 
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list

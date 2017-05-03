@@ -11,7 +11,7 @@ public class CONSTANTS {
 	private static final int MAP_HEIGHT = 800; //#pixels de la map ! 
 	private static final int MAP_WIDTH = 800;
 	private static final int WINDOW_PIXEL_HEIGHT = MAP_HEIGHT+36; // Prend en compte la taille de playerstate etc....
-	private static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+226;
+	private static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+200;
 
 	private static int MAP_BLOCK_WIDTH = 10; // #blocs
 	private static int MAP_BLOCK_HEIGHT = 10;
