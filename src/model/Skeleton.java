@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.Random;
 
 public class Skeleton extends Mob implements Runnable {
+	private static final long serialVersionUID = 42L;
 	
 	static final int waitTime = 1000;
 	long offset;

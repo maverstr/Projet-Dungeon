@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -22,7 +21,7 @@ public class ClassMenu extends JPanel{
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
 	
-	private BufferedImage classScreen;
+	private transient BufferedImage classScreen;
 
 
 	public ClassMenu() throws IOException {

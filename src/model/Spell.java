@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 public abstract class Spell extends Item implements Runnable {
+	private static final long serialVersionUID = 42L;
 
-	Thread t;
+	private transient Thread t;
 	private int waitTime;
 	private int liveTime;
 	private int damage;

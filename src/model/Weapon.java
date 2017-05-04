@@ -8,9 +8,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public abstract class Weapon extends Item {
+	private static final long serialVersionUID = 42L;
 	
 	private int damage;
-	private static ArrayList<MediaPlayer> swordPlayerArray = new ArrayList<MediaPlayer>(); //for looping 3 sword players (if only 1=>attack sound stops first
+	private static transient ArrayList<MediaPlayer> swordPlayerArray = new ArrayList<MediaPlayer>(); //for looping 3 sword players (if only 1=>attack sound stops first
 	private static int swordPlayerIndex = 0;																		 //if new each time : lag
 	private static final File swordFile = new File(GameObject.class.getResource("/resources/audio/Sword_Sound.m4a").getFile());
 	private static final Media swordMedia = new Media(swordFile.toURI().toString());

@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -17,10 +16,12 @@ import CONSTANTS.CONSTANTS;
 import model.GameObject;
 
 public class StoryMenu extends JPanel{
+	private static final long serialVersionUID = 42L;
+	
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
 	
-	private BufferedImage storyScreen;
+	private transient BufferedImage storyScreen;
 
 	public StoryMenu() throws IOException {
 		this.setPreferredSize(new Dimension(wPW, wPH));

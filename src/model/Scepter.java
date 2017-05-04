@@ -1,9 +1,10 @@
 package model;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Scepter extends Weapon {
+	private static final long serialVersionUID = 42L;
+	
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/Scepter.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Scepter.png").getFile());
 

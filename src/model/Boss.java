@@ -9,6 +9,7 @@ import javafx.scene.media.MediaPlayer;
 import java.util.Random;
 
 public class Boss extends Mob {
+	private static final long serialVersionUID = 42L;
 	
 	private static final int initWaitTime = 2000;
 	private static final int soundWaitTime = 15000;
@@ -45,9 +46,9 @@ public class Boss extends Mob {
 	private static final Media punchline2Media = new Media(file2.toURI().toString());
 	private static final Media punchline3Media = new Media(file3.toURI().toString());
 	
-	private static final MediaPlayer punchline1Player = new MediaPlayer(punchline1Media);
-	private static final MediaPlayer punchline2Player = new MediaPlayer(punchline2Media);
-	private static final MediaPlayer punchline3Player = new MediaPlayer(punchline3Media);
+	private static final transient MediaPlayer punchline1Player = new MediaPlayer(punchline1Media);
+	private static final transient MediaPlayer punchline2Player = new MediaPlayer(punchline2Media);
+	private static final transient MediaPlayer punchline3Player = new MediaPlayer(punchline3Media);
 	
 
 	public Boss(int x, int y, Game game) {

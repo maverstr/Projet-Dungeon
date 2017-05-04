@@ -14,6 +14,10 @@ public class Keyboard implements KeyListener{
 		this.game = game;
 
 	}
+	
+	public void updateGame(Game game) {
+		this.game = game;
+	}
 
 	//@Override
 	public void keyPressed(KeyEvent event) {
@@ -61,6 +65,12 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_ENTER:
 				game.changeMap();
+				break;
+			case KeyEvent.VK_K:
+				game.saveGame();
+				break;
+			case KeyEvent.VK_L:
+				game.loadSavedGame();
 				break;
 			case 49:
 			case 50:

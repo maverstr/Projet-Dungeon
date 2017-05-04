@@ -1,16 +1,20 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 
-import java.io.IOException;
+import java.io.Serializable;
 
-public class Sprite {
+public class Sprite implements Serializable {
 
-	private BufferedImage image;
+	private static final long serialVersionUID = 42L;
+	private transient BufferedImage image;
 	private double offsetX;
 	private double offsetY;
 	private double drawX;
@@ -96,6 +100,16 @@ public class Sprite {
 		
 		return spriteList;
 	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(image, "png", out); // png is lossless
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        image = ImageIO.read(in);
+    }
 	
 
 }

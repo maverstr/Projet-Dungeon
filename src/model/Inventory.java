@@ -1,15 +1,18 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventory {
+public class Inventory implements Serializable {
+	private static final long serialVersionUID = 42L;
+	
 	public ArrayList<Spell> spells = new ArrayList<Spell>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
 	public Item passiveItem;
 	private int currentWeaponIndex = 0;
 	private int currentSpellIndex = 0;
-
+	
 	public Inventory() {
 
 	}

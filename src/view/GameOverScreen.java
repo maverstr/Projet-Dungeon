@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class GameOverScreen extends JPanel {
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
 	
-	private BufferedImage goScreen;
+	private transient BufferedImage goScreen;
 
 
 	public GameOverScreen() throws IOException{
@@ -39,8 +38,6 @@ public class GameOverScreen extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D)g;
-		
 		this.setBackground(Color.WHITE);
 		
 		Font fnt0 = new Font("arial", Font.BOLD, 50);

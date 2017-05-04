@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public abstract class Player extends Character {
+	private static final long serialVersionUID = 42L;
 	
 	private boolean alive = true;
 	private Inventory inventory;

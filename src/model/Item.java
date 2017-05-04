@@ -1,12 +1,18 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 
 //public abstract class Item extends GameObject {
 public abstract class Item extends GameObject {
-	private BufferedImage inventoryImage;
+	private static final long serialVersionUID = 42L;
+	private transient BufferedImage inventoryImage;
 	private int durability;
 	
 	public Item(BufferedImage inventoryImage, int x, int y, Game game, ArrayList<Sprite> spriteList) {
@@ -55,5 +61,16 @@ public abstract class Item extends GameObject {
 
 	public void use() {
 	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(inventoryImage, "png", out); // png is lossless
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        inventoryImage = ImageIO.read(in);
+    }
+	
 
 }

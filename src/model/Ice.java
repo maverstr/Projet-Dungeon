@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Ice extends Spell {
+	private static final long serialVersionUID = 42L;
 	
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/Ice.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Ice.png").getFile());

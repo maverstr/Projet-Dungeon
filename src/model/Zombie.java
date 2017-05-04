@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 
 public class Zombie extends Mob {
+	private static final long serialVersionUID = 42L;
 	
 	private static final int waitTime = 1000;
 	long offset;

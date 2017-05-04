@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 
 public class Penne extends Item {
+	private static final long serialVersionUID = 42L;
 	
 	private static final File spriteFilePCPU = new File(GameObject.class.getResource("/resources/sprites/P_CP_U.png").getFile());
 	private static final File spriteFilePCPR = new File(GameObject.class.getResource("/resources/sprites/P_CP_R.png").getFile());

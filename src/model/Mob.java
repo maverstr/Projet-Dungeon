@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Mob extends Character implements Runnable {
+	private static final long serialVersionUID = 42L;
 	static Object lock = new Object();
 	
-	Thread t;
+	private transient Thread t;
 
 	public Mob(int x, int y, Game game, ArrayList<Sprite> spriteList, int health, boolean isBaptized) {
 		super(x, y, game, spriteList,health,isBaptized);

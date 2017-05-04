@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class GameObject {
+public abstract class GameObject implements Serializable {
+	
+	private static final long serialVersionUID = 42L;
 	protected int posX;
 	protected int posY;
 	protected ArrayList<Sprite> spriteList;
@@ -105,6 +108,8 @@ public abstract class GameObject {
 		}
 		return res;
 	}
+	
+	
 	
 }
 

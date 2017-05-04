@@ -3,10 +3,15 @@ package model;
 import java.io.BufferedReader;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 import model.Player;
 
@@ -16,31 +21,36 @@ import model.GameObject;
 import java.util.Random;
 
 import CONSTANTS.CONSTANTS;
+import Main.Main;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-public class Game implements RedrawObservable {
-	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+public class Game implements RedrawObservable, Serializable {
+	private static final long serialVersionUID = 42L;
+	
+	
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
 	
-	private int map_counter = 1;
+	private int mapCounter = 1;
 	private ArrayList<Integer> roomsDone = new ArrayList<Integer>();
-
-
+	private int savedBlockSize = 0;
+	
 	private Player player;
 	
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
-	private static final MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
+	private static final transient MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
 	private static final File uneMineFile = new File(GameObject.class.getResource("/resources/audio/Une_Mine.wav").getFile());
 	private static final Media uneMineMedia = new Media(uneMineFile.toURI().toString());
-	private static final MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
+	private static final transient MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
 
 
 	private static boolean bossBool = false;
 	Random random = new Random();
+	
+	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	
 	public enum STATE{ //The states for the game
 		MENU,
@@ -59,6 +69,10 @@ public class Game implements RedrawObservable {
 	
 	
 	public Game(Window window) throws IOException {
+		gameInit(window);
+	}
+	
+	public void gameInit(Window window) {
 		this.window = window;
 		window.setGameObjects(objects);
 		updateWindow();
@@ -96,18 +110,20 @@ public class Game implements RedrawObservable {
 			break;
 		}
 		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
-		this.gameStart();
+		this.gameStart(false);
 
 	}
 	
-	public void gameStart(){//Launch the game when NewGame from titleScreen is selected
-		if (state != STATE.RUN){
-			if (bossBool) {
-				loadMap("map_boss.txt");
-			} else {
-				loadMap("map_0.txt");
+	public void gameStart(boolean save){//Launch the game when NewGame from titleScreen is selected
+		if ((state != STATE.RUN)||(save)){
+			if (!save) {
+				if (bossBool) {
+					loadMap("map_boss.txt");
+				} else {
+					loadMap("map_0.txt");
+				}
+				this.setState(STATE.RUN);
 			}
-			this.setState(STATE.RUN);
 			window.setPlayer(this.player);
 			musicPlayer.play();
 			updateWindow();
@@ -195,6 +211,7 @@ public class Game implements RedrawObservable {
 	}
 	
 	public synchronized void changeMap(){ //is called when the player gets through a door
+		
 		synchronized (objects) {
 			String map_name = "";
 			int map_number_random;
@@ -207,17 +224,17 @@ public class Game implements RedrawObservable {
 				}
 			}
 			this.objects.subList(1, this.objects.size()).clear();//Suppress the blocks of the previous map (except the player in index 1).
-			if(this.map_counter == 1){
+			if(this.mapCounter == 1){
 				loadMap("map_1.txt");
 			}
-			else if(this.map_counter >3){
+			else if(this.mapCounter >5){
 				bossBool = true;
 				loadMap("map_boss.txt");
 				uneMinePlayer.play();
 			}
 			else{
 				while(!found){ //Pick a map from a random list of available maps and avoid duplicates
-					map_number_random = random.nextInt(2)+2;
+					map_number_random = random.nextInt(4)+2;
 					System.out.println(map_number_random);
 					if (!roomsDone.contains(map_number_random)){
 						roomsDone.add(map_number_random);
@@ -229,10 +246,13 @@ public class Game implements RedrawObservable {
 				}
 			}
 		}
-		this.map_counter +=1;
+		this.mapCounter +=1;
+		System.out.println(mapCounter);
 		this.updateWindow();
+		
+		
 	}
-
+	
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
 		try {
 			int playerLine = 0;
@@ -302,11 +322,12 @@ public class Game implements RedrawObservable {
 			try{
 				CONSTANTS.setMAP_BLOCK_WIDTH(Integer.valueOf(map_block_width)); //Defines the dimension of the map from arguments in the map file
 				CONSTANTS.setMAP_BLOCK_HEIGHT( Integer.valueOf(map_block_height));
+				savedBlockSize = Math.min(CONSTANTS.getMAP_HEIGHT(),CONSTANTS.getMAP_WIDTH())/Math.max(CONSTANTS.getMAP_BLOCK_WIDTH(), CONSTANTS.getMAP_BLOCK_HEIGHT());
+				window.updateBlockSize(savedBlockSize);
 			}catch(NumberFormatException e){
 				System.out.println("Les arguments de taille de map ne sont pas valides.");
 			    e.printStackTrace();
 			}
-			CONSTANTS.updateBLOCK_SIZE();
 			
 			if(darkness.equals("DARKNESS")){
 				CONSTANTS.setDARKNESS_MODIFIER(true);
@@ -325,6 +346,22 @@ public class Game implements RedrawObservable {
 			System.out.println("Unable to open file '" + fileName + "'" + e);
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + fileName + "'");
+		}
+	}
+	
+	public void updateWindow(Window window) {
+		this.window = window;
+	}
+	
+	public void saveGame() {
+		Main.save(this);
+	}
+	
+	public void loadSavedGame() {
+		try {
+			Main.loadRunning(window);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -371,7 +408,7 @@ public class Game implements RedrawObservable {
 	}
 	
 	public synchronized void loot(int x, int y, int objectLoot) {
-		int totalLootLevel = (objectLoot+this.map_counter)*player.getLuck();
+		int totalLootLevel = (objectLoot+this.mapCounter)*player.getLuck();
 		
 		if (lootBool(totalLootLevel)) {
 			int randomItemInt = random.nextInt(9); //between 0 and 5
@@ -406,6 +443,10 @@ public class Game implements RedrawObservable {
 		
 	}
 	
+	public int getSavedBlockSize() {
+		return this.savedBlockSize;
+	}
+	
 	private boolean lootBool(int totalLootLevel) {
 		boolean res = false;
 		int randomInt = random.nextInt(10);
@@ -413,6 +454,10 @@ public class Game implements RedrawObservable {
 			res = true;
 		}
 		return res;
+	}
+	
+	public int getMapCounter() {
+		return this.mapCounter;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -20,7 +21,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window implements RedrawObserver {
+public class Window implements RedrawObserver,Serializable {
+	private static final long serialVersionUID = 42L;
+	
 	private Player player;
 	private boolean bossBool = false;
 	private Boss boss;
@@ -125,6 +128,9 @@ public class Window implements RedrawObserver {
 		this.bossBool = true;
 	}
 
+	public void updateBlockSize(int savedBlockSize) {
+		Map.updateBLOCK_SIZE(savedBlockSize);
+	}
 	
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);

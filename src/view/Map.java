@@ -15,13 +15,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Map extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6724459904147376476L; // SERIALIZATION
+	private static final long serialVersionUID = 42L; // SERIALIZATION
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
-	private BufferedImage backSprite;
-	private BufferedImage backSprite_transparent;
+	private transient BufferedImage backSprite;
+	private transient BufferedImage backSprite_transparent;
+	
+	private static int BLOCK_SIZE; //Taille en pixel d'une case
 
 	private Player player;
 	
@@ -32,20 +31,20 @@ public class Map extends JPanel {
 		this.setRequestFocusEnabled(true);
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 		backSprite_transparent = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back_transparent.png").getFile()));
-
+		Map.BLOCK_SIZE = Math.min(CONSTANTS.getMAP_HEIGHT(),CONSTANTS.getMAP_WIDTH())/Math.max(CONSTANTS.getMAP_BLOCK_WIDTH(), CONSTANTS.getMAP_BLOCK_HEIGHT());
 	}
 
-	
+
 	public synchronized void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		int los = CONSTANTS.getLINE_OF_SIGHT();
-		int bs = CONSTANTS.getBLOCK_SIZE();
-		for(int i = 0; i< CONSTANTS.getMAP_BLOCK_WIDTH(); i++){						
-			for(int j = 0; j<CONSTANTS.getMAP_BLOCK_HEIGHT(); j++){
+		int bs = BLOCK_SIZE;
+		for(int i = 0; i<BLOCK_SIZE; i++){						
+			for(int j = 0; j<BLOCK_SIZE; j++){
 				int x = i;
 				int y = j;
-				
-									// Paint a background sprite on the map
+
+				// Paint a background sprite on the map
 				if(CONSTANTS.getDARKNESS_MODIFIER()){//If DARKNESS mode is activated, blocks not in sight are half-transparent
 					if(Math.abs(x - player.getPosX()) < los && Math.abs(y - player.getPosY()) < los){
 						g.drawImage(backSprite, x*bs, y*bs, bs, bs, null); 
@@ -59,8 +58,8 @@ public class Map extends JPanel {
 					g.drawImage(backSprite, x*bs, y*bs, bs, bs, null); 
 				}
 
-	}
-}
+			}
+		}
 
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
@@ -113,6 +112,10 @@ public class Map extends JPanel {
 		this.player = player;
 		this.requestFocusInWindow();
 		this.repaint();
+	}
+	
+	public static void updateBLOCK_SIZE(int savedBlockSize){
+		BLOCK_SIZE = savedBlockSize;
 	}
 	
 	

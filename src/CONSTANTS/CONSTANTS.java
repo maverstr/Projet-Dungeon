@@ -15,7 +15,7 @@ public class CONSTANTS {
 
 	private static int MAP_BLOCK_WIDTH = 10; // #blocs
 	private static int MAP_BLOCK_HEIGHT = 10;
-	private static int BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT); //Taille en pixel d'une case
+	
 
 	private static boolean DARKNESS_MODIFIER = false; //Reduce line of sight if true
 	private static int LINE_OF_SIGHT = 3;
@@ -26,8 +26,6 @@ public class CONSTANTS {
 	public CONSTANTS() {
 	
 	}
-	
-	
 	
 	public static void setMAP_BLOCK_WIDTH(int value){
 		MAP_BLOCK_WIDTH = value;
@@ -46,20 +44,12 @@ public class CONSTANTS {
 		return MAP_BLOCK_HEIGHT;
 	}
 	
-	public static void updateBLOCK_SIZE(){
-		CONSTANTS.BLOCK_SIZE = Math.min(MAP_HEIGHT,MAP_WIDTH)/Math.max(MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT);
-	}
-	
 	public static void setLINE_OF_SIGHT(int value){
 		LINE_OF_SIGHT = value;
 	}
 	
 	public static int getLINE_OF_SIGHT(){
 		return LINE_OF_SIGHT;
-	}
-	
-	public static int getBLOCK_SIZE(){
-		return BLOCK_SIZE;
 	}
 	
 	public static int getMAP_WIDTH(){

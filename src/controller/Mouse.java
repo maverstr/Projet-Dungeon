@@ -20,6 +20,10 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		this.game = game;
 	}
 	
+	public void updateGame(Game game) {
+		this.game = game;
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 

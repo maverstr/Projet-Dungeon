@@ -28,7 +28,7 @@ public class Menu extends JPanel{
 	public Rectangle optionsButton = new Rectangle(wPW/2 -150, 550,300,80);
 	public Rectangle exitButton = new Rectangle(wPW/2 -150, 650,300,80);
 	
-	private BufferedImage mainScreen;
+	private transient BufferedImage mainScreen;
 
 	
 	public Menu() throws IOException {	
