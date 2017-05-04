@@ -53,4 +53,9 @@ public class Laser extends Mob implements IObstacle {
 		this.getGame().loot(this.posX, this.posY, -6);
 	}
 
+	@Override
+	public void removeAttackSprites() {
+		
+	}
+	
 }

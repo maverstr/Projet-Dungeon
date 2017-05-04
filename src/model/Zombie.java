@@ -111,5 +111,11 @@ public class Zombie extends Mob {
 		}
 	}
 	
+	@Override
+	public void removeAttackSprites() {
+		this.spriteList.remove(attackSprite1);
+		this.spriteList.remove(attackSprite2);
+	}
+	
 
 }

@@ -29,6 +29,14 @@ public abstract class Mob extends Character implements Runnable, IAttackable {
 	
 	public abstract void attackPattern();
 	
+	public void relaunch() {
+		t = new Thread(this);
+		t.start();
+		removeAttackSprites();
+	}
+	
+	public abstract void removeAttackSprites();
+	
 	@Override
 	public void die() {
 		synchronized(lock) {

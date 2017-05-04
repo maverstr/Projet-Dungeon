@@ -98,6 +98,11 @@ public class Skeleton extends Mob implements Runnable {
 			break;
 		}
 	}
+
+	@Override
+	public void removeAttackSprites() {
+		this.spriteList.remove(attackSprite);
+	}
 	
 
 }

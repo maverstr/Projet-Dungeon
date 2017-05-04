@@ -116,7 +116,9 @@ public class Game implements RedrawObservable, Serializable {
 	
 	public void gameStart(boolean save){//Launch the game when NewGame from titleScreen is selected
 		if ((state != STATE.RUN)||(save)){
-			if (!save) {
+			if (save) {
+				relaunchThreads();
+			} else {
 				if (bossBool) {
 					loadMap("map_boss.txt");
 				} else {
@@ -130,7 +132,15 @@ public class Game implements RedrawObservable, Serializable {
 		}
 	}
 
-
+	public void relaunchThreads() {
+		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone();
+		for(GameObject object: clone){
+			if (object.isAttackable()) {
+				Mob mob = (Mob) object;
+				mob.relaunch();
+			}
+		}
+	}
 
 	public synchronized void removeGameObject(GameObject object) {
 		objects.remove(object);
@@ -211,7 +221,6 @@ public class Game implements RedrawObservable, Serializable {
 	}
 	
 	public synchronized void changeMap(){ //is called when the player gets through a door
-		
 		synchronized (objects) {
 			String map_name = "";
 			int map_number_random;
