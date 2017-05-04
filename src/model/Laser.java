@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 
-public class Laser extends Mob {
+public class Laser extends Mob implements IObstacle{
 	
 	private int waitTime;
 	private int liveTime;

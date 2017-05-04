@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 
-public class Chest extends Block {
+public class Chest extends Block implements IOpenable{
 	
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Chest.png").getFile());
 

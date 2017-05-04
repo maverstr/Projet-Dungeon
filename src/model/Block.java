@@ -2,7 +2,7 @@ package model;
 //test
 import java.util.ArrayList;
 
-public abstract class Block extends GameObject{
+public abstract class Block extends GameObject implements IObstacle, IMoveable, IOpenable, IExit  {
 
 	public Block(int x, int y, Game game, ArrayList<Sprite> spriteList) {
 		super(x, y, game, spriteList);
