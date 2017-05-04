@@ -2,8 +2,10 @@ package model;
 
 import java.io.File;
 
-public class Torch extends Item {
+
+public class Torch extends Item implements IPassive{
 	private static final long serialVersionUID = 42L;
+
 	
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
@@ -21,7 +23,8 @@ public class Torch extends Item {
 	}
 	
 	@Override
-	public void isPassive(){
+	public boolean isPassive(){
+		return true;
 		
 	}
 	

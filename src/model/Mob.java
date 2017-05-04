@@ -3,8 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Mob extends Character implements Runnable {
+
+public abstract class Mob extends Character implements Runnable, IAttackable {
 	private static final long serialVersionUID = 42L;
+
 	static Object lock = new Object();
 	
 	private transient Thread t;

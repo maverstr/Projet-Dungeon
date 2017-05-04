@@ -108,6 +108,11 @@ public abstract class GameObject implements Serializable {
 		}
 		return res;
 	}
+
+	public boolean isPassive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	

@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 
-public class BlockBreakable extends Block implements Breakable {
+public class BlockBreakable extends Block implements IBreakable {
 	
 	private static final File spriteFileF = new File(GameObject.class.getResource("/resources/sprites/Block_Breakable_Foreground.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Block_Breakable.png").getFile());

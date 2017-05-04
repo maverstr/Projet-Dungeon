@@ -2,8 +2,10 @@ package model;
 
 import java.io.File;
 
-public class Laser extends Mob {
+
+public class Laser extends Mob implements IObstacle {
 	private static final long serialVersionUID = 42L;
+
 	
 	private int waitTime;
 	private int liveTime;

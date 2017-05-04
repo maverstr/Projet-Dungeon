@@ -24,9 +24,9 @@ public class Menu extends JPanel{
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
 	
-	public Rectangle playButton = new Rectangle(wPW/2 -150, 450,300,80);
-	public Rectangle optionsButton = new Rectangle(wPW/2 -150, 550,300,80);
-	public Rectangle exitButton = new Rectangle(wPW/2 -150, 650,300,80);
+	private Rectangle playButton = new Rectangle(wPW/2 -150, 450,300,80);
+	private Rectangle controlsButton = new Rectangle(wPW/2 -150, 550,300,80);
+	private Rectangle exitButton = new Rectangle(wPW/2 -150, 650,300,80);
 	
 	private transient BufferedImage mainScreen;
 
@@ -58,11 +58,11 @@ public class Menu extends JPanel{
 		g2.setColor(Color.WHITE);
 		g2.drawString("   La Mine", wPW/2 -120, 100);
 		g2.draw(playButton);
-		g2.draw(optionsButton);
+		g2.draw(controlsButton);
 		g2.draw(exitButton);
 		g2.drawString("New Game", playButton.x+20, playButton.y+60);
-		g2.drawString("Story and", optionsButton.x+30, optionsButton.y+40);
-		g2.drawString("Controls", optionsButton.x+45, optionsButton.y+80);
+		g2.drawString("Story and", controlsButton.x+30, controlsButton.y+40);
+		g2.drawString("Controls", controlsButton.x+45, controlsButton.y+80);
 		g2.drawString("Quit Game", exitButton.x+25, exitButton.y+60);
 		g2.drawImage(mainScreen, 100, 32, 780, 400, null);
 	}
@@ -72,6 +72,19 @@ public class Menu extends JPanel{
 		this.repaint();
 		
 	}
+	
+	public Rectangle getPlayButton(){
+		return this.playButton;
+	}
+	
+	public Rectangle getControlsButton() {
+		return controlsButton;
+	}
+
+	public Rectangle getExitButton() {
+		return exitButton;
+	}
+
 
 
 

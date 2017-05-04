@@ -2,7 +2,7 @@ package model;
 
 import java.io.File;
 
-public class BlockMoveable extends Block {
+public class BlockMoveable extends Block implements IMoveable{
 	
 	private static final File spriteFileF = new File(GameObject.class.getResource("/resources/sprites/Block_Moveable_Foreground.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Block_Moveable.png").getFile());

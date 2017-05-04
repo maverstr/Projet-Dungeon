@@ -10,9 +10,11 @@ import javax.imageio.ImageIO;
 
 
 //public abstract class Item extends GameObject {
-public abstract class Item extends GameObject {
+
+public abstract class Item extends GameObject implements IObstacle, IPickable, IPassive{
 	private static final long serialVersionUID = 42L;
 	private transient BufferedImage inventoryImage;
+
 	private int durability;
 	
 	public Item(BufferedImage inventoryImage, int x, int y, Game game, ArrayList<Sprite> spriteList) {
@@ -50,13 +52,9 @@ public abstract class Item extends GameObject {
 		return true;
 	}
 	
-	public boolean isPAssive(){
+	@Override
+	public boolean isPassive(){
 		return false;
-	}
-
-	public void isPassive() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void use() {
