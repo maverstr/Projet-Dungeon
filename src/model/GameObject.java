@@ -105,6 +105,11 @@ public abstract class GameObject {
 		}
 		return res;
 	}
+
+	public boolean isPassive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
 

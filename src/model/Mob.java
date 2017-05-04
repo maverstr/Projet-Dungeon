@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Mob extends Character implements Runnable {
+public abstract class Mob extends Character implements Runnable, IAttackable {
 	static Object lock = new Object();
 	
 	Thread t;

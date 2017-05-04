@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 //public abstract class Item extends GameObject {
-public abstract class Item extends GameObject {
+public abstract class Item extends GameObject implements IObstacle, IPickable, IPassive {
 	private BufferedImage inventoryImage;
 	private int durability;
 	
@@ -44,13 +44,9 @@ public abstract class Item extends GameObject {
 		return true;
 	}
 	
-	public boolean isPAssive(){
+	@Override
+	public boolean isPassive(){
 		return false;
-	}
-
-	public void isPassive() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void use() {

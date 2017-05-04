@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Torch extends Item {
+public class Torch extends Item implements IPassive{
 	
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/torch_sprite.png").getFile());
@@ -22,7 +22,8 @@ public class Torch extends Item {
 	}
 	
 	@Override
-	public void isPassive(){
+	public boolean isPassive(){
+		return true;
 		
 	}
 	
