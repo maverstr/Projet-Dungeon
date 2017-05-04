@@ -1,23 +1,40 @@
 package controller;
 
 import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import CONSTANTS.CONSTANTS;
 import model.Game;
+import model.GameObject;
 import model.Game.STATE;
 
 public class Mouse implements MouseListener, MouseMotionListener{
 	private Game game;
 	
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
+	private Rectangle playButton;
+	private Rectangle controlsButton;
+	private Rectangle exitButton;
+
 
 	public Mouse(Game game) {
 		this.game = game;
+		playButton = game.getWindow().getMenu().getPlayButton();
+		controlsButton = game.getWindow().getMenu().getControlsButton();
+		exitButton = game.getWindow().getMenu().getExitButton();
+		
+
+
 	}
 	
 	@Override
@@ -30,25 +47,19 @@ public class Mouse implements MouseListener, MouseMotionListener{
 			
 			
 			//playButton
-			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
-				if(my >= 450 && my <= 530){
+			if(playButton.contains(mx, my)){
 					game.setState(Game.STATE.CLASS);
 					game.updateWindow();
 					//game.gameStart();
-				}
 			}
 			//optionsButton
-			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
-				if(my >= 550 && my <= 630){
+			if(controlsButton.contains(mx, my)){
 					game.setState(Game.STATE.STORY);
 					game.updateWindow();
-				}
 			}
 			//exitButton
-			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
-				if(my >= 650 && my <= 730){
+			if(exitButton.contains(mx, my)){
 					System.exit(0);
-				}
 			}
 		}
 		
@@ -78,17 +89,24 @@ public class Mouse implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
+		
+		java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("/resources/sprites/Boss_U.png");
+		try {
+			image = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile()));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		Cursor cursor = toolkit.createCustomCursor(image , new Point(0,0), "");
 
 		if(game.getState() == Game.STATE.MENU){
-			if(mx >= wPW/2 -150 && mx <= wPW/2 +150){
-				if(my >= 450 && my <= 530){
-					Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+			if(playButton.contains(mx, my) || controlsButton.contains(mx, my) || exitButton.contains(mx, my)){
+					//Cursor cursor = Cursor.getPredefinedCursor(a);
 					game.getWindow().getMenu().setCursor(cursor);
-				}
 			}
 			else{
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-				game.getWindow().getMenu().setCursor(cursor);
+				Cursor classicCursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
+				game.getWindow().getMenu().setCursor(classicCursor);
 			}
 
 		}
