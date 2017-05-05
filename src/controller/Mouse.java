@@ -82,8 +82,8 @@ public class Mouse implements MouseListener, MouseMotionListener{
 			game.setState(Game.STATE.MENU);
 			game.updateWindow();
 		}
-		else if(game.getState() == Game.STATE.OVER){
-			game.setState(Game.STATE.MENU);
+		else if(game.getState() == Game.STATE.OVER ||game.getState() == Game.STATE.WIN){
+			System.exit(0);
 		}
 
 		

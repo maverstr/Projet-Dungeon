@@ -116,6 +116,15 @@ public class Keyboard implements KeyListener{
 				break;
 			}
 		}
+		else if(game.getState() == Game.STATE.OVER || game.getState() == Game.STATE.WIN){
+			switch(key){
+			case KeyEvent.VK_ENTER:
+			case KeyEvent.VK_ESCAPE:
+				game.setState(Game.STATE.MENU);
+				game.updateWindow();
+				break;
+			}
+		}
 
 	}
 

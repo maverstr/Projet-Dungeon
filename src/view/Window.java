@@ -149,12 +149,12 @@ public class Window implements RedrawObserver,Serializable {
 	
 	public void setMouseListener(MouseListener mouse){
 		this.menu.addMouseListener(mouse);
-	    this.map.addMouseListener(mouse);
 	    this.menu.addMouseMotionListener((MouseMotionListener) mouse);
 	    this.classMenu.addMouseListener(mouse);
 	    this.classMenu.addMouseMotionListener((MouseMotionListener) mouse);
 	    this.storyScreen.addMouseListener(mouse);
 	    this.goScreen.addMouseListener(mouse);
+	    this.winScreen.addMouseListener(mouse);
 
 
 	}
