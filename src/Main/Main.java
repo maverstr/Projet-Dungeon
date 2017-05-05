@@ -21,6 +21,7 @@ public class Main {
 	
 	private static Keyboard keyboard;
 	private static Mouse mouse;
+	private static Game game;
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -32,10 +33,9 @@ public class Main {
 		
 		System.out.println("hello");
 		
-		
 		Window window = new Window();
 		
-		Game game = new Game(window);
+		game = new Game(window);
 		
 		keyboard = new Keyboard(game);
 		mouse = new Mouse(game);
@@ -88,21 +88,17 @@ public class Main {
 	}
 	
 	public static void loadRunning(Window window) throws IOException {
-		Game game = load();
+		Game newGame = load();
 		
-		if (game!=null) {
-			//Window window = new Window();
+		if (newGame!=null) {
+			game.inturruptThreads();
+			game = newGame;
 			CONSTANTS.update(game.getSavedBlockSize(),game.getSavedDarkness(),game.getSavedLineOfSight());
 			game.gameInit(window);
 			
 			mouse.updateGame(game);
 			keyboard.updateGame(game);
-			/*
-			Keyboard keyboard = new Keyboard(game);
-			Mouse mouse = new Mouse(game);
-			window.setKeyListener(keyboard);
-			window.setMouseListener(mouse);
-			*/
+			
 			game.addRedrawObserver(window);
 			
 			

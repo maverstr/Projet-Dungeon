@@ -50,7 +50,7 @@ public class Laser extends Mob implements IObstacle {
 	
 	@Override
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, -6);
+		this.getGame().loot(this.posX, this.posY, -10);
 	}
 
 	@Override

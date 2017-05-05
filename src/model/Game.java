@@ -222,6 +222,16 @@ public class Game implements RedrawObservable, Serializable {
 		}
 	}
 	
+	public void inturruptThreads() {
+		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
+		for(GameObject object: clone){
+			if (object.isAttackable()) {
+				Mob mob = (Mob) object;
+				mob.die(); //Kill and remove every mob of the game
+			}
+		}
+	}
+	
 	public synchronized void changeMap(){ //is called when the player gets through a door
 		synchronized (objects) {
 			String map_name = "";
