@@ -66,7 +66,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	public void paintComponent(Graphics g) { // Note : DO NOT override paint(g).
 		super.paintComponent(g);
 		
-		float spellNumber = inventory.spells.size();
+		float spellNumber = inventory.getSpells().size();
 		
 		Graphics2D g2 = (Graphics2D) g; // Allows thickness for Rect
 		g2.setStroke(new java.awt.BasicStroke(3)); // thickness of 3 for
@@ -103,12 +103,12 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		int y = 70;
 		int keyNumber = 0;
 		try {
-			for (int i = 0; i < this.inventory.weapons.size(); i++) { // WEAPON
+			for (int i = 0; i < this.inventory.getWeapons().size(); i++) { // WEAPON
 																		// inventory
 				setKeyNumber(x,y,keyNumber,g);
 				keyNumber++;
 				
-				Item item = this.inventory.weapons.get(i);
+				Item item = this.inventory.getWeapons().get(i);
 
 				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null); // Paints
 																	// sprite of
@@ -136,12 +136,12 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		x = 2;
 		y = 140;
 		try {
-			for (int i = 0; i < this.inventory.consumables.size(); i++) { // CONSUMABLE
+			for (int i = 0; i < this.inventory.getConsumables().size(); i++) { // CONSUMABLE
 																			// Inventory
 				setKeyNumber(x,y,keyNumber,g);
 				keyNumber++;
 				
-				Item item = this.inventory.consumables.get(i);
+				Item item = this.inventory.getConsumables().get(i);
 
 				g.drawImage(item.getInventoryImage(), x, y, 50, 50, null);// Paints
 																	// sprite of
@@ -175,7 +175,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		x = 2;
 		y = 280;
 		try {
-			for (int i = 0; i < this.inventory.spells.size(); i++) { // SPELL
+			for (int i = 0; i < this.inventory.getSpells().size(); i++) { // SPELL
 																		// inventory
 				if (i == this.inventory.getSpellIndex()) { // If CURRENT
 															// Spell, red
@@ -184,7 +184,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 					g.drawRect(x, y, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)));
 				}
 				
-				Item item = this.inventory.spells.get(i);
+				Item item = this.inventory.getSpells().get(i);
 
 				g.drawImage(item.getInventoryImage(), x, y, (int) (50*(3.0/spellNumber)), (int) (50*(3.0/spellNumber)), null); // Paints
 																	// sprite of
@@ -202,7 +202,7 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			e.printStackTrace();
 		}
 		if(inventory.getPassive()!= null){
-			g.drawImage(inventory.passiveItem.getInventoryImage(), 65, 380, 45, 45, null); //Draw passive item if there is one
+			g.drawImage(inventory.getPassive().getInventoryImage(), 65, 380, 45, 45, null); //Draw passive item if there is one
 		}
 	}
 	

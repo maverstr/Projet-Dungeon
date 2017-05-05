@@ -161,15 +161,38 @@ public abstract class Player extends Character {
 		addAttackSprite(this.inventory.getWeapon().getAttackSprite(direction));
 	}
 	
-	public void selectItemAtIndex(int index) {
-		int ws = inventory.weapons.size();
-		if (index<ws) {
-			this.inventory.setWeaponIndex(index);
+	public void selectItemAtIndex(int index, boolean drop) {
+		int ws = inventory.getWeapons().size();
+		if (!drop) {
+			if (index<ws) {
+				this.inventory.setWeaponIndex(index);
+			} else {
+				if (index<inventory.getItemCount()) {
+					Consumable consumable = inventory.getConsumables().get(index-ws);
+					consumable.use();
+					inventory.useConsumable(consumable);
+				}
+			}
 		} else {
-			if (index<inventory.getItemCount()) {
-				Consumable consumable = inventory.consumables.get(index-ws);
-				consumable.use(consumable);
-				inventory.useConsumable(consumable);
+			int x = this.getGame().getPlayer().posX;
+			int y = this.getGame().getPlayer().posY;
+			if (index<ws) {
+				Weapon weapon = inventory.getWeapons().remove(index);
+				weapon.drop(x, y);
+			} else {
+				if (index<inventory.getItemCount()) {
+					Consumable consumable = inventory.getConsumables().get(index-ws);
+					inventory.useConsumable(consumable);
+					consumable.drop(x, y);
+				}
+			}
+			if (index == 10) {
+				System.out.println("tsqlmfj");
+				Item item = inventory.getPassive();
+				if (item != null) {
+					item.drop(x, y);
+					inventory.removePassive();
+				}
 			}
 		}
 	}

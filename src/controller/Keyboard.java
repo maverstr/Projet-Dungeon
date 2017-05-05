@@ -19,13 +19,13 @@ public class Keyboard implements KeyListener{
 		this.game = game;
 	}
 
-	//@Override
+	
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
 		//System.out.println(key);		
 		if (game.getState() == Game.STATE.RUN){ //Only when in the game and not in the menu
 			//System.out.println("key GAME");
-		switch (key){
+			switch (key) {
 			case KeyEvent.VK_RIGHT: 
 				game.movePlayer(Direction.East);
 				break;
@@ -72,7 +72,8 @@ public class Keyboard implements KeyListener{
 			case KeyEvent.VK_L:
 				game.loadSavedGame();
 				break;
-			case 49:
+			case KeyEvent.VK_O:
+				game.changeDrop();
 			case 50:
 			case 51:
 			case 52:
@@ -81,18 +82,13 @@ public class Keyboard implements KeyListener{
 			case 55:
 			case 56:
 			case 57:
+			case 58:
 				game.itemAtIndex(key-49); //numbers set items in inventory, begin with 1 to 9
 				break;
-			case 48: game.itemAtIndex(key-39); // 0 is equal to item #10
-				
-				/*
-			case KeyEvent.VK_SPACE:
-				game.dropBomb("nuke", player1);
+			case 48: 
+				game.itemAtIndex(key-38); // 0 is equal to item #10
 				break;
-			case KeyEvent.VK_B:
-				game.dropBomb("bomb", player1);
-				*/
-		}
+			}
 		}
 		else if(game.getState() == Game.STATE.CLASS){
 			switch(key){
@@ -119,7 +115,7 @@ public class Keyboard implements KeyListener{
 				break;
 			}
 		}
-		
+
 	}
 
 	//@Override

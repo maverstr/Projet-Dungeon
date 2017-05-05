@@ -28,7 +28,7 @@ public class PotionVie extends Consumable {
 		return "potion_vie";
 	}
 	
-	public void use(Consumable c){
+	public void use(){
 		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		game.getPlayer().addHealth(10);
@@ -36,5 +36,9 @@ public class PotionVie extends Consumable {
 		new DrunkTimer(2000,game.getPlayer());
 	}
 	
+	@Override
+	public void drop(int x, int y) {
+		this.getGame().getGameObjects().add(new PotionVie(x,y,this.getGame()));
+	}
 
 }

@@ -70,5 +70,10 @@ public class Penne extends Item {
 	public static File getFileLeft() {
 		return spriteFilePL;
 	}
+	
+	@Override
+	public void drop(int x, int y) {
+		
+	}
 
 }

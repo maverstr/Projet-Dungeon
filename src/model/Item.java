@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 //public abstract class Item extends GameObject {
 
-public abstract class Item extends GameObject implements IObstacle, IPickable, IPassive{
+public abstract class Item extends GameObject implements IObstacle, IPickable, IPassive {
 	private static final long serialVersionUID = 42L;
 	private transient BufferedImage inventoryImage;
 
@@ -69,6 +69,7 @@ public abstract class Item extends GameObject implements IObstacle, IPickable, I
         in.defaultReadObject();
         inventoryImage = ImageIO.read(in);
     }
-	
+    
+    public abstract void drop(int x, int y);
 
 }

@@ -18,6 +18,6 @@ public abstract class Consumable extends Item {
 		inventory.addConsumable(this);
 	}
 
-	public abstract void use(Consumable consumable);
+	public abstract void use();
 	
 }

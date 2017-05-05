@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Inventory implements Serializable {
 	private static final long serialVersionUID = 42L;
 	
-	public ArrayList<Spell> spells = new ArrayList<Spell>();
-	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-	public ArrayList<Consumable> consumables = new ArrayList<Consumable>();
-	public Item passiveItem;
+	private ArrayList<Spell> spells = new ArrayList<Spell>();
+	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private ArrayList<Consumable> consumables = new ArrayList<Consumable>();
+	private Item passiveItem;
 	private int currentWeaponIndex = 0;
 	private int currentSpellIndex = 0;
 	
@@ -102,9 +102,23 @@ public class Inventory implements Serializable {
 		item.use();
 	}
 	
+	public void removePassive() {
+		this.passiveItem = null;
+	}
+	
 	public Item getPassive(){
 		return this.passiveItem;
 	}
+	
+	public ArrayList<Weapon> getWeapons() {
+		return weapons;
+	}
 
+	public ArrayList<Consumable> getConsumables() {
+		return consumables;
+	}
 
+	public ArrayList<Spell> getSpells() {
+		return spells;
+	}
 }

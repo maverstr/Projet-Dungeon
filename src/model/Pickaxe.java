@@ -45,6 +45,10 @@ public class Pickaxe extends Weapon {
 		return getAttackSpriteFromFile(direction,spriteFile);
 	}
 	
+	@Override
+	public void drop(int x, int y) {
+		this.getGame().getGameObjects().add(new Pickaxe(x,y,this.getGame()));
+	}
 	
 
 }

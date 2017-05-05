@@ -25,5 +25,10 @@ public class Sword extends Weapon {
 		return getAttackSpriteFromFile(direction,spriteFile);
 	}
 	
+	@Override
+	public void drop(int x, int y) {
+		this.getGame().getGameObjects().add(new Sword(x,y,this.getGame()));
+	}
+	
 	
 }

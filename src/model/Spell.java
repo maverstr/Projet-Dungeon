@@ -89,5 +89,10 @@ public abstract class Spell extends Item implements Runnable {
 	public int getManaCost() {
 		return this.manaCost;
 	}
+	
+	@Override
+	public void drop(int x, int y) {
+		
+	}
 
 }

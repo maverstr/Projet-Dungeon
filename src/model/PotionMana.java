@@ -26,7 +26,7 @@ public class PotionMana extends Consumable {
 	}
 
 	@Override
-	public void use(Consumable c) {
+	public void use() {
 		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		game.getPlayer().addMana(5);
@@ -34,6 +34,10 @@ public class PotionMana extends Consumable {
 		new DrunkTimer(4000,game.getPlayer());
 	}
 	
+	@Override
+	public void drop(int x, int y) {
+		this.getGame().getGameObjects().add(new PotionMana(x,y,this.getGame()));
+	}
 	
 
 }

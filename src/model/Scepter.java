@@ -21,4 +21,9 @@ public class Scepter extends Weapon {
 	public Sprite getAttackSprite(Direction direction) {
 		return null;
 	}
+	
+	@Override
+	public void drop(int x, int y) {
+		this.getGame().getGameObjects().add(new Scepter(x,y,this.getGame()));
+	}
 }

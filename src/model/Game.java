@@ -38,6 +38,7 @@ public class Game implements RedrawObservable, Serializable {
 	private int savedBlockSize = 0;
 	private boolean savedDarkness = false;
 	private int savedLineOfSight = 3;
+	private boolean drop = false;
 	
 	private Player player;
 	
@@ -179,7 +180,7 @@ public class Game implements RedrawObservable, Serializable {
 	}
 
 	public void itemAtIndex(int index) { //use item in inventory
-		player.selectItemAtIndex(index);
+		player.selectItemAtIndex(index,drop);
 		updateWindow();
 	}
 	
@@ -494,6 +495,10 @@ public class Game implements RedrawObservable, Serializable {
 	
 	public int getMapCounter() {
 		return this.mapCounter;
+	}
+	
+	public void changeDrop() {
+		this.drop = !this.drop;
 	}
 
 	@Override
