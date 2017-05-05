@@ -35,6 +35,8 @@ public class Window implements RedrawObserver,Serializable {
 	private ClassMenu classMenu = new ClassMenu();
 	private GameOverScreen goScreen = new GameOverScreen();
 	private StoryMenu storyScreen = new StoryMenu();
+    private WinScreen winScreen = new WinScreen();
+
 	
     JPanel mapContainer = new JPanel();
 	JPanel menuContainer = new JPanel();
@@ -42,6 +44,7 @@ public class Window implements RedrawObserver,Serializable {
     JPanel classContainer = new JPanel();
     JPanel goContainer = new JPanel();
     JPanel storyContainer = new JPanel();
+    JPanel winContainer = new JPanel();
     
     
 	
@@ -89,6 +92,12 @@ public class Window implements RedrawObserver,Serializable {
 		goContainer.add(this.goScreen);
 		goContainer.setVisible(false);
 		
+//
+	    //WinScreen Container
+	    winContainer.setLayout(new BoxLayout(winContainer, BoxLayout.Y_AXIS));
+		winContainer.add(this.winScreen);
+		winContainer.setVisible(false);
+		
 		
 //
 	    //Story + Controls Container
@@ -105,6 +114,7 @@ public class Window implements RedrawObserver,Serializable {
 	    container.add(menuContainer);
 	    container.add(classContainer);
 	    container.add(goContainer);
+	    container.add(winContainer);
 	    container.add(storyContainer);
 	    container.add(playerstatetContainer, BorderLayout.CENTER);
 	    
@@ -133,6 +143,7 @@ public class Window implements RedrawObserver,Serializable {
 	    this.menu.addKeyListener(keyboard);
 	    this.classMenu.addKeyListener(keyboard);
 	    this.storyScreen.addKeyListener(keyboard);
+	    this.winScreen.addKeyListener(keyboard);
 
 	}
 	
@@ -160,6 +171,7 @@ public class Window implements RedrawObserver,Serializable {
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
 		goContainer.setVisible(false);
+		winContainer.setVisible(false);
 		this.map.redraw(this.player);
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		this.map.requestFocusInWindow();
@@ -173,6 +185,7 @@ public class Window implements RedrawObserver,Serializable {
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
 		goContainer.setVisible(false);
+		winContainer.setVisible(false);
 		menuContainer.setVisible(true);
 		this.menu.redraw();
 		this.menu.requestFocusInWindow();
@@ -185,6 +198,7 @@ public class Window implements RedrawObserver,Serializable {
 		menuContainer.setVisible(false);
 		goContainer.setVisible(false);
 		storyContainer.setVisible(false);
+		winContainer.setVisible(false);
 		classContainer.setVisible(true);
 		this.classMenu.redraw();
 		this.classMenu.requestFocusInWindow();
@@ -196,6 +210,7 @@ public class Window implements RedrawObserver,Serializable {
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
 		storyContainer.setVisible(false);
+		winContainer.setVisible(false);
 		goContainer.setVisible(true);
 		this.goScreen.redraw();
 		this.goScreen.requestFocusInWindow();
@@ -206,9 +221,23 @@ public class Window implements RedrawObserver,Serializable {
 		mapContainer.setVisible(false);
 		menuContainer.setVisible(false);
 		classContainer.setVisible(false);
+		winContainer.setVisible(false);
 		goContainer.setVisible(false);
 		storyContainer.setVisible(true);
 		this.storyScreen.redraw();
 		this.storyScreen.requestFocusInWindow();
 	}
+	
+	public void redrawWin(){
+		playerstatetContainer.setVisible(false);
+		mapContainer.setVisible(false);
+		menuContainer.setVisible(false);
+		classContainer.setVisible(false);
+		winContainer.setVisible(true);
+		goContainer.setVisible(false);
+		storyContainer.setVisible(false);
+		this.winScreen.redraw();
+		this.winScreen.requestFocusInWindow();
+	}
 }
+
