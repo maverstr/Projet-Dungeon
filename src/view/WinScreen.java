@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +38,13 @@ private static final long serialVersionUID = 1L;
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D)g;
 		this.setBackground(Color.BLACK);
+		
+		RenderingHints rh = new RenderingHints(
+	             RenderingHints.KEY_RENDERING,
+	             RenderingHints.VALUE_RENDER_QUALITY);
+	    g2.setRenderingHints(rh);
 		g.drawImage(winScreen, 0, 0, wPW-16, wPH-38, null);
 	}
 	
