@@ -39,6 +39,11 @@ public class Pickaxe extends Weapon {
 			}
 		}
 	}
+
+	@Override
+	public Sprite getAttackSprite(Direction direction) {
+		return getAttackSpriteFromFile(direction,spriteFile);
+	}
 	
 	
 

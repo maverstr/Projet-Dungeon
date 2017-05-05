@@ -18,6 +18,8 @@ public abstract class Player extends Character {
 	private File spriteFileD;
 	private File spriteFileL;
 	
+	private Sprite attackSprite;
+	
 	
 	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList, int maxHealth, int maxMana, int luck) {
 		super(x, y, game, spriteList, maxHealth,false);
@@ -96,10 +98,11 @@ public abstract class Player extends Character {
 		
 		int blockMoveableNewPosX = posX+2*xForDirection(direction);
 		int blockMoveableNewPosY = posY+2*yForDirection(direction);
+		
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		synchronized(objects){
-
-			for (GameObject object:objects) {
+			ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone();
+			for (GameObject object:clone) {
 				if (object.getPosX() == newPosX && object.getPosY() == newPosY) {
 					if (object.isObstacle()) {
 						obstacle = true;
@@ -136,11 +139,26 @@ public abstract class Player extends Character {
 		return res;
 	}
 	
+	public void addAttackSprite(Sprite newAttackSprite) {
+		if (newAttackSprite != null) {
+			this.spriteList.remove(this.attackSprite);
+			this.attackSprite = newAttackSprite;
+			this.spriteList.add(attackSprite);
+			new AttackSpriteTimer(100,this);
+		}
+	}
+	
+	public void removeAttackSprite() {
+		this.spriteList.remove(attackSprite);
+		this.getGame().updateWindow();
+	}
+	
 	
 	public void useWeapon(Direction direction) {
 		this.setMoveDirection(direction);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		this.inventory.getWeapon().use(posX, posY, direction);
+		addAttackSprite(this.inventory.getWeapon().getAttackSprite(direction));
 	}
 	
 	public void selectItemAtIndex(int index) {

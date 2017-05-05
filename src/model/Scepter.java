@@ -16,4 +16,9 @@ public class Scepter extends Weapon {
 	public void use(int xPlayer, int yPlayer, Direction direction) {
 		this.getGame().getPlayer().castSpell();
 	}
+
+	@Override
+	public Sprite getAttackSprite(Direction direction) {
+		return null;
+	}
 }

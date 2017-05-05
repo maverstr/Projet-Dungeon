@@ -64,4 +64,28 @@ public abstract class Weapon extends Item {
 		}
 	}
 	
+	public abstract Sprite getAttackSprite(Direction direction);
+
+	
+	public Sprite getAttackSpriteFromFile(Direction direction, File file) {
+		Sprite attackSprite = null;
+		switch (direction) {
+		case North:
+			attackSprite = Sprite.makeSpriteFromFile(file, 0, -1.25, 12);
+			break;
+		case East:
+			attackSprite = Sprite.makeSpriteFromFile(file, 1, -0.25, 12);
+			break;
+		case South:
+			attackSprite = Sprite.makeSpriteFromFile(file, 0, 0.75, 12);
+			break;
+		case West:
+			attackSprite = Sprite.makeSpriteFromFile(file, -1, -0.25, 12);
+			break;
+		default:
+			break;
+		}
+		return attackSprite;
+	}
+	
 }

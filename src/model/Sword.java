@@ -19,8 +19,11 @@ public class Sword extends Weapon {
 		
 		this.attack(newPosX, newPosY);
 	}
-	
-	
+
+	@Override
+	public Sprite getAttackSprite(Direction direction) {
+		return getAttackSpriteFromFile(direction,spriteFile);
+	}
 	
 	
 }
