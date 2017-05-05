@@ -27,10 +27,11 @@ public class PotionMana extends Consumable {
 
 	@Override
 	public void use(Consumable c) {
-		PotionMana p = (PotionMana) c; //Downcasting
 		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		game.getPlayer().addMana(5);
+		game.getPlayer().setDrunk(true);
+		new DrunkTimer(4000,game.getPlayer());
 	}
 	
 	

@@ -7,6 +7,7 @@ public abstract class Player extends Character {
 	private static final long serialVersionUID = 42L;
 	
 	private boolean alive = true;
+	private boolean drunk = false;
 	private Inventory inventory;
 	private int luck;
 	protected int mana;
@@ -34,6 +35,10 @@ public abstract class Player extends Character {
 	}
 	
 	public abstract void setInventory(Inventory inventory);
+	
+	public void setDrunk(boolean drunk) {
+		this.drunk = drunk;
+	}
 	
 	public Inventory getInventory() {
 		return this.inventory;
@@ -82,6 +87,9 @@ public abstract class Player extends Character {
 	
 	public synchronized void tryToMove(Direction direction) {
 		boolean obstacle = false;
+		if (drunk) {
+			direction = oppositeDirection(direction);
+		}
 		
 		int newPosX = posX+xForDirection(direction);
 		int newPosY = posY+yForDirection(direction);
@@ -191,7 +199,6 @@ public abstract class Player extends Character {
 					this.getGame().updateWindow();
 				}
 			}
-
 		}
 	}
 	

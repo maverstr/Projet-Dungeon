@@ -29,11 +29,11 @@ public class PotionVie extends Consumable {
 	}
 	
 	public void use(Consumable c){
-		PotionVie p = (PotionVie) c; //Downcasting
 		beerSoundPlayer.stop();
 		beerSoundPlayer.play();
 		game.getPlayer().addHealth(10);
-
+		game.getPlayer().setDrunk(true);
+		new DrunkTimer(2000,game.getPlayer());
 	}
 	
 

@@ -108,6 +108,27 @@ public abstract class GameObject implements Serializable {
 		}
 		return res;
 	}
+	
+	public Direction oppositeDirection(Direction direction) {
+		Direction newDirection = Direction.None;
+		switch (direction) {
+		case North:
+			newDirection = Direction.South;
+			break;
+		case South:
+			newDirection = Direction.North;
+			break;
+		case West:
+			newDirection = Direction.East;
+			break;
+		case East:
+			newDirection = Direction.West;
+			break;
+		default:
+			break;
+		}
+		return newDirection;
+	}
 
 	public boolean isPassive() {
 		// TODO Auto-generated method stub
