@@ -10,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import CONSTANTS.CONSTANTS;
 import controller.Keyboard;
 import controller.Mouse;
 import javafx.embed.swing.JFXPanel;
@@ -91,7 +92,7 @@ public class Main {
 		
 		if (game!=null) {
 			//Window window = new Window();
-			window.updateBlockSize(game.getSavedBlockSize());
+			CONSTANTS.update(game.getSavedBlockSize(),game.getSavedDarkness(),game.getSavedLineOfSight());
 			game.gameInit(window);
 			
 			mouse.updateGame(game);

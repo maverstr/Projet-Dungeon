@@ -20,7 +20,7 @@ public class Map extends JPanel {
 	private transient BufferedImage backSprite;
 	private transient BufferedImage backSprite_transparent;
 	
-	private static int BLOCK_SIZE; //Taille en pixel d'une case
+	
 
 	private Player player;
 	
@@ -31,16 +31,16 @@ public class Map extends JPanel {
 		this.setRequestFocusEnabled(true);
 		backSprite = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back.png").getFile()));
 		backSprite_transparent = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back_transparent.png").getFile()));
-		Map.BLOCK_SIZE = Math.min(CONSTANTS.getMAP_HEIGHT(),CONSTANTS.getMAP_WIDTH())/Math.max(CONSTANTS.getMAP_BLOCK_WIDTH(), CONSTANTS.getMAP_BLOCK_HEIGHT());
 	}
 
 
 	public synchronized void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		int los = CONSTANTS.getLINE_OF_SIGHT();
-		int bs = BLOCK_SIZE;
-		for(int i = 0; i<BLOCK_SIZE; i++){						
-			for(int j = 0; j<BLOCK_SIZE; j++){
+		int bs = CONSTANTS.getBLOCK_SIZE();
+		
+		for(int i = 0; i<30; i++){						
+			for(int j = 0; j<30; j++){
 				int x = i;
 				int y = j;
 
@@ -114,9 +114,7 @@ public class Map extends JPanel {
 		this.repaint();
 	}
 	
-	public static void updateBLOCK_SIZE(int savedBlockSize){
-		BLOCK_SIZE = savedBlockSize;
-	}
+	
 	
 	
 }

@@ -13,9 +13,9 @@ public class CONSTANTS {
 	private static final int WINDOW_PIXEL_HEIGHT = MAP_HEIGHT+36; // Prend en compte la taille de playerstate etc....
 	private static final int WINDOW_PIXEL_WIDTH = MAP_WIDTH+200;
 
-	private static int MAP_BLOCK_WIDTH = 10; // #blocs
-	private static int MAP_BLOCK_HEIGHT = 10;
-	
+	private static int MAP_BLOCK_WIDTH; // #blocs
+	private static int MAP_BLOCK_HEIGHT;
+	private static int BLOCK_SIZE; //Taille en pixel d'une case
 
 	private static boolean DARKNESS_MODIFIER = false; //Reduce line of sight if true
 	private static int LINE_OF_SIGHT = 3;
@@ -25,6 +25,12 @@ public class CONSTANTS {
 	
 	public CONSTANTS() {
 	
+	}
+	
+	public static void update(int blockSize, boolean darkness, int lineOfSight) {
+		BLOCK_SIZE = blockSize;
+		DARKNESS_MODIFIER = darkness;
+		LINE_OF_SIGHT = lineOfSight;
 	}
 	
 	public static void setMAP_BLOCK_WIDTH(int value){
@@ -42,6 +48,14 @@ public class CONSTANTS {
 	
 	public static int getMAP_BLOCK_HEIGHT(){
 		return MAP_BLOCK_HEIGHT;
+	}
+	
+	public static void setBLOCK_SIZE(int savedBlockSize){
+		BLOCK_SIZE = savedBlockSize;
+	}
+	
+	public static int getBLOCK_SIZE(){
+		return BLOCK_SIZE;
 	}
 	
 	public static void setLINE_OF_SIGHT(int value){

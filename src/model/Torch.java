@@ -31,6 +31,7 @@ public class Torch extends Item implements IPassive{
 	@Override
 	public void use(){
 		CONSTANTS.CONSTANTS.setLINE_OF_SIGHT(7);
+		this.getGame().setLineOfSight(7);
 	}
 
 }

@@ -127,10 +127,6 @@ public class Window implements RedrawObserver,Serializable {
 		this.boss=b;
 		this.bossBool = true;
 	}
-
-	public void updateBlockSize(int savedBlockSize) {
-		Map.updateBLOCK_SIZE(savedBlockSize);
-	}
 	
 	public void setKeyListener(KeyListener keyboard){
 	    this.map.addKeyListener(keyboard);

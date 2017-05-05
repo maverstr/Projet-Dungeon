@@ -36,6 +36,8 @@ public class Game implements RedrawObservable, Serializable {
 	private int mapCounter = 1;
 	private ArrayList<Integer> roomsDone = new ArrayList<Integer>();
 	private int savedBlockSize = 0;
+	private boolean savedDarkness = false;
+	private int savedLineOfSight = 3;
 	
 	private Player player;
 	
@@ -332,7 +334,7 @@ public class Game implements RedrawObservable, Serializable {
 				CONSTANTS.setMAP_BLOCK_WIDTH(Integer.valueOf(map_block_width)); //Defines the dimension of the map from arguments in the map file
 				CONSTANTS.setMAP_BLOCK_HEIGHT( Integer.valueOf(map_block_height));
 				savedBlockSize = Math.min(CONSTANTS.getMAP_HEIGHT(),CONSTANTS.getMAP_WIDTH())/Math.max(CONSTANTS.getMAP_BLOCK_WIDTH(), CONSTANTS.getMAP_BLOCK_HEIGHT());
-				window.updateBlockSize(savedBlockSize);
+				CONSTANTS.setBLOCK_SIZE(savedBlockSize);
 			}catch(NumberFormatException e){
 				System.out.println("Les arguments de taille de map ne sont pas valides.");
 			    e.printStackTrace();
@@ -340,8 +342,11 @@ public class Game implements RedrawObservable, Serializable {
 			
 			if(darkness.equals("DARKNESS")){
 				CONSTANTS.setDARKNESS_MODIFIER(true);
+				savedDarkness = true;
+			}else{
+				CONSTANTS.setDARKNESS_MODIFIER(false);
+				savedDarkness = false;
 			}
-			else{CONSTANTS.setDARKNESS_MODIFIER(false);}
 
 			
 			bufferedReader.close();
@@ -454,6 +459,18 @@ public class Game implements RedrawObservable, Serializable {
 	
 	public int getSavedBlockSize() {
 		return this.savedBlockSize;
+	}
+	
+	public boolean getSavedDarkness() {
+		return this.savedDarkness;
+	}
+	
+	public void setLineOfSight(int lineOfSight) {
+		this.savedLineOfSight = lineOfSight;
+	}
+	
+	public int getSavedLineOfSight() {
+		return this.savedLineOfSight;
 	}
 	
 	private boolean lootBool(int totalLootLevel) {
