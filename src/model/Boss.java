@@ -106,7 +106,7 @@ public class Boss extends Mob {
 	}
 	
 	@Override
-	public synchronized void attackPattern() {
+	public void attackPattern() {
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		for (int i = 1; i<phase+3; i++) {
 			try {
@@ -184,6 +184,12 @@ public class Boss extends Mob {
 	@Override
 	public void removeAttackSprites() {
 		
+	}
+	
+	@Override
+	public void die(){
+		super.die();
+		game.setState(Game.STATE.WIN);
 	}
 	
 	

@@ -59,6 +59,7 @@ public class Game implements RedrawObservable, Serializable {
 		CLASS,
 		RUN,
 		OVER,
+		WIN,
 		PAUSE,
 		STORY,
 		
@@ -219,6 +220,9 @@ public class Game implements RedrawObservable, Serializable {
 		}
 		else if(state == STATE.STORY){
 			window.redrawStory();
+		}
+		else if(state == STATE.WIN){
+			window.redrawWin();
 		}
 	}
 	
