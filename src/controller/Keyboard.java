@@ -74,6 +74,7 @@ public class Keyboard implements KeyListener{
 				break;
 			case KeyEvent.VK_O:
 				game.changeDrop();
+			case 49:
 			case 50:
 			case 51:
 			case 52:
