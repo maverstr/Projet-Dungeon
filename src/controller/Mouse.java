@@ -93,27 +93,18 @@ public class Mouse implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
-		/*
-		java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
-		Image image = toolkit.getImage("/resources/sprites/Boss_U.png");
-		try {
-			image = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile()));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		Cursor cursor = toolkit.createCustomCursor(image , new Point(0,0), "");
-
+		
 		if(game.getState() == Game.STATE.MENU){
 			if(playButton.contains(mx, my) || controlsButton.contains(mx, my) || exitButton.contains(mx, my)){
-					//Cursor cursor = Cursor.getPredefinedCursor(a);
-					game.getWindow().getMenu().setCursor(cursor);
+					Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+					game.getWindow().getMenu().setCursor(cursor);;
 			}
 			else{
 				Cursor classicCursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 				game.getWindow().getMenu().setCursor(classicCursor);
 			}
 
-		}*/
+		}
 
 	}
 
