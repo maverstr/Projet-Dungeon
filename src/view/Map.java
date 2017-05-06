@@ -64,8 +64,8 @@ public class Map extends JPanel {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		ArrayList<Sprite> totalSpriteList = new ArrayList<Sprite>();
 		synchronized (objects){
-			for(GameObject object : clone) { //Paint the sprite of the object at the right place
-				try {
+			try {
+				for(GameObject object : clone) { //Paint the sprite of the object at the right place
 					int x = object.getPosX();
 					int y = object.getPosY();
 					ArrayList<Sprite> spriteList = object.getSpriteList();
@@ -77,19 +77,14 @@ public class Map extends JPanel {
 							}
 						}
 						else{
-						sprite.setDrawPosition(x, y);
-						totalSpriteList.add(sprite);
+							sprite.setDrawPosition(x, y);
+							totalSpriteList.add(sprite);
 						}
 					}
-				}catch (Exception e){
-					System.out.println(e.getMessage());
-					System.out.println(object);
-					/*
-					System.out.println(object.getPosX());
-					System.out.println(object.getPosY());
-					*/
 				}
-				
+			}catch (Exception e){
+				System.out.println(e.getMessage());
+
 			}
 		}
 		
