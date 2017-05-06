@@ -190,6 +190,7 @@ public class Boss extends Mob {
 	public void die(){
 		super.die();
 		game.setState(Game.STATE.WIN);
+		game.updateWindow();
 	}
 	
 	
