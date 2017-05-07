@@ -27,7 +27,6 @@ public class Window implements RedrawObserver,Serializable {
 	private Player player;
 	private boolean bossBool = false;
 	private Boss boss;
-
 	
 	private Menu menu = new Menu();
 	private Map map = new Map();
@@ -37,7 +36,6 @@ public class Window implements RedrawObserver,Serializable {
 	private StoryMenu storyScreen = new StoryMenu();
     private WinScreen winScreen = new WinScreen();
 
-	
     JPanel mapContainer = new JPanel();
 	JPanel menuContainer = new JPanel();
     JPanel playerstatetContainer = new JPanel();
@@ -46,18 +44,14 @@ public class Window implements RedrawObserver,Serializable {
     JPanel storyContainer = new JPanel();
     JPanel winContainer = new JPanel();
     
-    
-	
 	public Window() throws IOException{	  
-
-		
 	    JFrame frame = new JFrame("HaelterMINE");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setBounds(0, 0, CONSTANTS.CONSTANTS.getWINDOW_PIXEL_WIDTH(), CONSTANTS.CONSTANTS.getWINDOW_PIXEL_HEIGHT());
 	    frame.setIconImage(ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Boss_U.png").getFile())));
 	    frame.getContentPane().setBackground(Color.gray);
 	     
-///////
+	    ///////
 	    
 	    //left side of top level container
 	    mapContainer.setLayout(new BoxLayout(mapContainer, BoxLayout.X_AXIS));
@@ -65,14 +59,14 @@ public class Window implements RedrawObserver,Serializable {
 	    mapContainer.add(Box.createHorizontalStrut(5)); //Small separator between game map and inventory
 	    mapContainer.setVisible(false);
 	    
-///////
+	    ///////
 	    
 	    //Menu/pause case
 		menuContainer.setLayout(new BoxLayout(menuContainer, BoxLayout.Y_AXIS));
 		menuContainer.add(this.menu);
 	    menuContainer.setVisible(false);
 	    
-	///////
+	    ///////
 	    
 		//Class choosing case
 	    classContainer.setLayout(new BoxLayout(classContainer, BoxLayout.X_AXIS));
@@ -122,7 +116,6 @@ public class Window implements RedrawObserver,Serializable {
 	    frame.getContentPane().add(container);
 	    frame.setVisible(true);
 	    
-	    
 	}
 	
 	public void setGameObjects(ArrayList<GameObject> objects){ //Update the GameObjects list
@@ -144,7 +137,6 @@ public class Window implements RedrawObserver,Serializable {
 	    this.classMenu.addKeyListener(keyboard);
 	    this.storyScreen.addKeyListener(keyboard);
 	    this.winScreen.addKeyListener(keyboard);
-
 	}
 	
 	public void setMouseListener(MouseListener mouse){
@@ -155,8 +147,6 @@ public class Window implements RedrawObserver,Serializable {
 	    this.storyScreen.addMouseListener(mouse);
 	    this.goScreen.addMouseListener(mouse);
 	    this.winScreen.addMouseListener(mouse);
-
-
 	}
 	
 	public Menu getMenu(){
@@ -175,11 +165,9 @@ public class Window implements RedrawObserver,Serializable {
 		this.map.redraw(this.player);
 		this.playerState.redraw(this.player, this.boss, this.bossBool);
 		this.map.requestFocusInWindow();
-		
 	}
 	
 	public void redrawMenu(){
-
 		playerstatetContainer.setVisible(false);
 		mapContainer.setVisible(false);
 		classContainer.setVisible(false);
@@ -192,7 +180,6 @@ public class Window implements RedrawObserver,Serializable {
 	}
 	
 	public void redrawClass(){
-
 		playerstatetContainer.setVisible(false);
 		mapContainer.setVisible(false);
 		menuContainer.setVisible(false);

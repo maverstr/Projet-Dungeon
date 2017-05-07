@@ -3,6 +3,9 @@ package model;
 import java.io.File;
 
 public class Door extends Block implements IObstacle, IExit{
+	
+	private static final long serialVersionUID = 42L;
+	
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Door.jpg").getFile());
 
 	public Door(int x, int y, Game game) {
@@ -14,6 +17,7 @@ public class Door extends Block implements IObstacle, IExit{
 		return false;
 	}
 	
+	@Override
 	public boolean isExit(){
 		return true;
 	}

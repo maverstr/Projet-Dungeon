@@ -20,7 +20,6 @@ public abstract class Player extends Character {
 	
 	private Sprite attackSprite;
 	
-	
 	public Player(int x, int y, Game game, ArrayList<Sprite> spriteList, ArrayList<File> fileList, int maxHealth, int maxMana, int luck) {
 		super(x, y, game, spriteList, maxHealth,false);
 		this.spriteFileU = fileList.get(0);
@@ -36,32 +35,6 @@ public abstract class Player extends Character {
 		setInventory(inventory);
 	}
 	
-	public abstract void setInventory(Inventory inventory);
-	
-	public void setDrunk(boolean drunk) {
-		this.drunk = drunk;
-	}
-	
-	public Inventory getInventory() {
-		return this.inventory;
-	}
-	
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-	
-	public int getMaxMana() {
-		return maxMana;
-	}
-	
-	public int getMana() {
-		return mana;
-	}
-	
-	public void setLuck(int luck) {
-		this.luck = luck;
-	}
-
 	public void addHealth(int healPoints) {
 		health+=healPoints;
 		if (health>maxHealth) {
@@ -73,18 +46,12 @@ public abstract class Player extends Character {
 		mana+=manaPoints;
 		if (mana>maxMana) {
 			mana = maxMana;
-
 		}
 	}
-
 
 	@Override
 	public boolean isObstacle() {
 		return true;
-	}
-	
-	public int getLuck() {
-		return this.luck;
 	}
 	
 	public synchronized void tryToMove(Direction direction) {
@@ -267,5 +234,34 @@ public abstract class Player extends Character {
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
 	}
 	
+	public abstract void setInventory(Inventory inventory);
+	
+	public void setDrunk(boolean drunk) {
+		this.drunk = drunk;
+	}
+	
+	public Inventory getInventory() {
+		return this.inventory;
+	}
+	
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+	
+	public int getMaxMana() {
+		return maxMana;
+	}
+	
+	public int getMana() {
+		return mana;
+	}
+
+	public int getLuck() {
+		return this.luck;
+	}
+	
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
 	
 }

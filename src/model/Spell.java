@@ -11,17 +11,17 @@ public abstract class Spell extends Item implements Runnable {
 	private int liveTime;
 	private int damage;
 	private int manaCost;
-	private boolean inventory;
+	private boolean inventoryBool;
 	protected int time = 0;
 	
 	static Object lock = new Object();
 	
-	public Spell(BufferedImage inventoryImage, int x, int y, Game game, boolean inventory, ArrayList<Sprite> spriteList, int waitTime, int liveTime, int damage, int manaCost) {
+	public Spell(BufferedImage inventoryImage, int x, int y, Game game, boolean inventoryBool, ArrayList<Sprite> spriteList, int waitTime, int liveTime, int damage, int manaCost) {
 		super(inventoryImage, x, y, game, spriteList);
 		this.waitTime = waitTime;
 		this.liveTime = liveTime;
 		this.damage = damage;
-		this.inventory = inventory;
+		this.inventoryBool = inventoryBool;
 		this.manaCost = manaCost;
 		t = new Thread(this);
 		t.start();
@@ -33,9 +33,8 @@ public abstract class Spell extends Item implements Runnable {
 	}
 	
 	public void run(){
-		
 		try{
-			while (!inventory) {
+			while (!inventoryBool) {
 				if (game.getState() == Game.STATE.RUN) {
 					
 					attackMobs();
@@ -48,11 +47,12 @@ public abstract class Spell extends Item implements Runnable {
 					time+=waitTime;
 				}
 			}
-		}catch(Exception e){}; 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}; 
 	}
 	
 	public synchronized void attackMobs() {
-		
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isAttackable()) {
@@ -96,7 +96,7 @@ public abstract class Spell extends Item implements Runnable {
 	}
 	
 	public boolean isInventory(){
-		return this.inventory;
+		return this.inventoryBool;
 	}
 
 }

@@ -7,6 +7,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class Pickaxe extends Weapon {
 	private static final long serialVersionUID = 42L;
+	
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/pickaxe_sprite.png").getFile());
 
 	private static final File pickaxeFile = new File(GameObject.class.getResource("/resources/audio/Pickaxe_Sound.wav").getFile());

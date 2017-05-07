@@ -3,10 +3,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Fire extends Spell {
-	
+
+	private static final long serialVersionUID = 42L;
+
 	private static final File spriteFileInventory = new File(GameObject.class.getResource("/resources/sprites/Fire.png").getFile());
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Fire.png").getFile());
-	
+
 	private static final int waitTime = 1000;
 	private static final int liveTime = 2000;
 	private static final int damage = 2;
@@ -54,6 +56,6 @@ public class Fire extends Spell {
 			}
 		}
 	}
-	
-	
+
+
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class CS extends Player {
 	
+	private static final long serialVersionUID = 42L;
+	
 	private static final File spriteFileCSU = new File(GameObject.class.getResource("/resources/sprites/CS_U.png").getFile());
 	private static final File spriteFileCSR = new File(GameObject.class.getResource("/resources/sprites/CS_R.png").getFile());
 	private static final File spriteFileCSD = new File(GameObject.class.getResource("/resources/sprites/CS_D.png").getFile());
@@ -14,7 +16,6 @@ public class CS extends Player {
 	private static final int maxManaCS = 10;
 	private static final int luckCS = 3;
 	
-	@SuppressWarnings("serial")
 	private static final ArrayList<File> fileList = new ArrayList<File>() {{
 	    add(spriteFileCSU);
 	    add(spriteFileCSR);
@@ -38,7 +39,9 @@ public class CS extends Player {
 			inventory.addSpell(new Thunder(0,0,game,true));
 			inventory.addSpell(new Ice(0,0,game,true));
 			inventory.replacePassive(new Torch(0,0,game));
-		}catch (Exception e){}
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}

@@ -19,11 +19,9 @@ public class Map extends JPanel {
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private transient BufferedImage backSprite;
 	private transient BufferedImage backSprite_transparent;
-	
-	
 
 	private Player player;
-	
+
 	public Map() throws IOException{
 		this.setPreferredSize(new Dimension(CONSTANTS.getMAP_WIDTH(), CONSTANTS.getMAP_HEIGHT()));
 		this.setFocusable(true);
@@ -33,17 +31,15 @@ public class Map extends JPanel {
 		backSprite_transparent = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Back_transparent.png").getFile()));
 	}
 
-
 	public synchronized void paintComponent(Graphics g) { //Note : DO NOT override paint(g) 
 		super.paintComponent(g);
 		int los = CONSTANTS.getLINE_OF_SIGHT();
 		int bs = CONSTANTS.getBLOCK_SIZE();
-		
+
 		for(int i = 0; i<30; i++){						
 			for(int j = 0; j<30; j++){
 				int x = i;
 				int y = j;
-
 				// Paint a background sprite on the map
 				if(CONSTANTS.getDARKNESS_MODIFIER()){//If DARKNESS mode is activated, blocks not in sight are half-transparent
 					if(Math.abs(x - player.getPosX()) < los && Math.abs(y - player.getPosY()) < los){
@@ -52,12 +48,10 @@ public class Map extends JPanel {
 					else{
 						g.drawImage(backSprite_transparent, x*bs, y*bs, bs,bs, null); 
 					}
-
 				}
 				else{ 
 					g.drawImage(backSprite, x*bs, y*bs, bs, bs, null); 
 				}
-
 			}
 		}
 
@@ -87,31 +81,30 @@ public class Map extends JPanel {
 
 			}
 		}
-		
+
 		Collections.sort(totalSpriteList,(sprite1, sprite2) -> sprite1.getDrawZ()-sprite2.getDrawZ()); //sort the list by ascending zPosition
-		
+
 		for (Sprite sprite:totalSpriteList) {
 			double xDouble = sprite.getDrawX()*bs;
 			double yDouble = sprite.getDrawY()*bs;
 			g.drawImage(sprite.getImage(), (int) xDouble, (int) yDouble, bs, bs, null);
 		}
-		
 
 	}
-	
+
 	public synchronized void setObjects(ArrayList<GameObject> objects){
 		this.objects = objects;
 	}
-	
+
 	public void redraw(Player player){
 		this.player = player;
 		this.requestFocusInWindow();
 		this.repaint();
 	}
-	
-	
-	
-	
+
+
+
+
 }
 
 

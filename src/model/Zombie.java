@@ -34,7 +34,6 @@ public class Zombie extends Mob {
 		this.offset = threadOffset;
 	}
 	
-	
 	@Override
 	public void run() {
 		try{
@@ -68,11 +67,13 @@ public class Zombie extends Mob {
 				}
 				
 			}
-		}catch(Exception e){}; 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}; 
 	}
 
 	@Override
-	public void attackPattern() {//vomi : 2 cases
+	public void attackPattern() {//vomi : 2 cases de dégats
 		ArrayList<Sprite> spriteList = this.getSpriteList();
 		switch (getDirection()) {
 		case North:

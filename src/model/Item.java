@@ -25,21 +25,8 @@ public abstract class Item extends GameObject implements IObstacle, IPickable, I
 	
 	public abstract void pickUp(Inventory inventory);
 	
-	public BufferedImage getInventoryImage() {
-		return this.inventoryImage;
-	}
-	
-	public void setDurability(int d) 
-	{
-		this.durability = d;
-	}
-	
 	public void used(){ //When an item is used, the item counter or the durability is reduced
 		this.durability-=1;
-	}
-	
-	public int getDurability() {
-		return this.durability;
 	}
 	
 	@Override 
@@ -71,5 +58,17 @@ public abstract class Item extends GameObject implements IObstacle, IPickable, I
     }
     
     public abstract void drop(int x, int y);
+    
+    public void setDurability(int d) {
+		this.durability = d;
+	}
+    
+    public int getDurability() {
+		return this.durability;
+	}
+    
+    public BufferedImage getInventoryImage() {
+		return this.inventoryImage;
+	}
 
 }

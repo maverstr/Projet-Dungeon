@@ -1,8 +1,10 @@
 package model;
-//test
+
 import java.util.ArrayList;
 
 public abstract class Block extends GameObject implements IObstacle, IMoveable, IOpenable, IExit  {
+	
+	private static final long serialVersionUID = 42L;
 
 	public Block(int x, int y, Game game, ArrayList<Sprite> spriteList) {
 		super(x, y, game, spriteList);

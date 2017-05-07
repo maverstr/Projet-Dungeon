@@ -64,37 +64,12 @@ public class Inventory implements Serializable {
 		}
 
 	}
-
-	public Weapon getWeapon() { 
-		return this.weapons.get(currentWeaponIndex);
-	}
-	
-	public Spell getSpell() {
-		return this.spells.get(currentSpellIndex);
-	}
-
-	public void setWeaponIndex(int index) {// Set the weapon index 
-		this.currentWeaponIndex = index;
-	}
 	
 	public void updateSpellIndex() {
 		this.currentSpellIndex++;
 		if (this.currentSpellIndex>=spells.size()) {
 			this.currentSpellIndex = 0;
 		}
-	}
-
-	public int getWeaponIndex() { // Returns weapon index for checking CURRENT
-									// Weapon (cf PlayerState paintComponent)
-		return this.currentWeaponIndex;
-	}
-	
-	public int getSpellIndex() {
-		return this.currentSpellIndex;
-	}
-	
-	public int getItemCount() {
-		return weapons.size()+consumables.size();
 	}
 	
 	public void replacePassive(Item item){
@@ -121,4 +96,30 @@ public class Inventory implements Serializable {
 	public ArrayList<Spell> getSpells() {
 		return spells;
 	}
+	
+	public Weapon getWeapon() { 
+		return this.weapons.get(currentWeaponIndex);
+	}
+	
+	public Spell getSpell() {
+		return this.spells.get(currentSpellIndex);
+	}
+
+	public void setWeaponIndex(int index) {// Set the weapon index 
+		this.currentWeaponIndex = index;
+	}
+	
+	public int getItemCount() {
+		return weapons.size()+consumables.size();
+	}
+	
+	public int getWeaponIndex() { // Returns weapon index for checking CURRENT
+									// Weapon (cf PlayerState paintComponent)
+		return this.currentWeaponIndex;
+	}
+	
+	public int getSpellIndex() {
+		return this.currentSpellIndex;
+	}
+	
 }

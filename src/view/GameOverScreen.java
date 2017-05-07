@@ -22,7 +22,6 @@ public class GameOverScreen extends JPanel {
 	
 	private transient BufferedImage goScreen;
 
-
 	public GameOverScreen() throws IOException{
 		this.setPreferredSize(new Dimension(wPW, wPH));
 		this.setFocusable(true);
@@ -44,7 +43,6 @@ public class GameOverScreen extends JPanel {
 	public void redraw(){
 		this.requestFocusInWindow();
 		this.repaint();
-		
 	}
 
 }

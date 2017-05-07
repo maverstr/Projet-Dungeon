@@ -24,20 +24,19 @@ import javafx.util.Duration;
 
 public class Game implements RedrawObservable, Serializable {
 	private static final long serialVersionUID = 42L;
-	
-	
+
 	private ArrayList<RedrawObserver> listRedrawObservers = new ArrayList<RedrawObserver>();
 	private Window window;
-	
+
 	private int mapCounter = 1;
 	private ArrayList<Integer> roomsDone = new ArrayList<Integer>();
 	private int savedBlockSize = 0;
 	private boolean savedDarkness = false;
 	private int savedLineOfSight = 3;
 	private boolean drop = false;
-	
+
 	private Player player;
-	
+
 	private static final File musicFile = new File(GameObject.class.getResource("/resources/audio/Chant_CP.m4a").getFile());
 	private static final Media musicMedia = new Media(musicFile.toURI().toString());
 	private static final transient MediaPlayer musicPlayer = new MediaPlayer(musicMedia);
@@ -45,12 +44,11 @@ public class Game implements RedrawObservable, Serializable {
 	private static final Media uneMineMedia = new Media(uneMineFile.toURI().toString());
 	private static final transient MediaPlayer uneMinePlayer = new MediaPlayer(uneMineMedia);
 
-
 	private static boolean bossBool = false;
 	Random random = new Random();
-	
+
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
-	
+
 	public enum STATE{ //The states for the game
 		MENU,
 		CLASS,
@@ -59,19 +57,14 @@ public class Game implements RedrawObservable, Serializable {
 		WIN,
 		PAUSE,
 		STORY,
-		
 	};
-	
+
 	private STATE state = STATE.MENU; //Set the initial state to titlescreen
-	
-	
-	
-	
-	
+
 	public Game(Window window) throws IOException {
 		gameInit(window);
 	}
-	
+
 	public void gameInit(Window window) {
 		this.window = window;
 		window.setGameObjects(objects);
@@ -79,21 +72,7 @@ public class Game implements RedrawObservable, Serializable {
 		setMusicPlayer();
 		Weapon.setSwordMediaPlayer();
 	}
-	
-	public void setState(STATE state) {
-		this.state = state;
-	}
-	
-	public STATE getState(){
-		return this.state;
-		}
-	
-	public Window getWindow(){
-		return this.window;
-	}
 
-
-	
 	public synchronized void ChooseClass(int c){ //is called when in the menu to choose the class
 		switch(c){
 		case 1:
@@ -111,9 +90,8 @@ public class Game implements RedrawObservable, Serializable {
 		}
 		objects.add(player); //The 1st object of the list is the player in order to handle its position in the list
 		this.gameStart(false);
-
 	}
-	
+
 	public void gameStart(boolean save){//Launch the game when NewGame from titleScreen is selected
 		if ((state != STATE.RUN)||(save)){
 			if (save) {
@@ -146,10 +124,6 @@ public class Game implements RedrawObservable, Serializable {
 		objects.remove(object);
 	}
 
-	public synchronized ArrayList<GameObject> getGameObjects() {
-		return this.objects;
-	}
-	
 	public void setMusicPlayer() {
 		musicPlayer.setVolume(0.7);
 		musicPlayer.setOnEndOfMedia(new Runnable() {
@@ -157,10 +131,6 @@ public class Game implements RedrawObservable, Serializable {
 				musicPlayer.seek(Duration.ZERO);
 			}
 		});
-	}
-
-	public Player getPlayer() {
-		return this.player;
 	}
 
 	public void movePlayer(Direction direction) {
@@ -180,35 +150,34 @@ public class Game implements RedrawObservable, Serializable {
 		player.selectItemAtIndex(index,drop);
 		updateWindow();
 	}
-	
+
 	public void playerPickUpItem() { //pick up item on the ground
 		if (player.isAlive()) {
 			player.pickUpItem();
 		}
 	}
-	
+
 	public void playerOpenChest() {
 		if (player.isAlive()) {
 			player.openChest();
 		}
 	}
-	
+
 	public void playerCastSpell() {
 		player.castSpell();
 	}
-	
+
 	public void playerChangeSpell() {
 		player.changeSpell();
 	}
 
 	public void updateWindow() {
-
 		if(state == STATE.RUN){
 			notifyRedrawObserver();
 		}
 		else if(state == STATE.MENU) {
 			window.redrawMenu(); 
-			}
+		}
 		else if(state == STATE.CLASS){
 			window.redrawClass();
 		}
@@ -222,23 +191,24 @@ public class Game implements RedrawObservable, Serializable {
 			window.redrawWin();
 		}
 	}
-	
+
 	public void updateWindow(Window window) { //Overcharge when loading the game from a save
 		this.window = window;
 	}
-	
+
 	public void saveGame() {
 		Main.save(this);
 	}
-	
+
 	public void loadSavedGame() {
 		try {
 			Main.loadRunning(window);
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void interruptThreads() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		for(GameObject object: clone){
@@ -248,7 +218,7 @@ public class Game implements RedrawObservable, Serializable {
 			}
 		}
 	}
-	
+
 	public synchronized void changeMap(){ //is called when the player gets through a door
 		synchronized (objects) {
 			String map_name = "";
@@ -286,10 +256,8 @@ public class Game implements RedrawObservable, Serializable {
 		}
 		this.mapCounter +=1;
 		this.updateWindow();
-		
-		
 	}
-	
+
 	private synchronized void loadMap(String fileName) { // Read the MAP.TXT and load every object in the GameObjects list
 		try {
 			int playerLine = 0;
@@ -299,13 +267,12 @@ public class Game implements RedrawObservable, Serializable {
 
 			File file = new File(Map.class.getResource("/resources/map/" + fileName).getFile());
 			String line = null;
-			
-			
+
 			String map_block_width = ""; //To define the dimension of the map from arguments in the map file
 			String map_block_height = "";	
-			
+
 			String darkness = "";
-			
+
 			FileReader fileReader = new FileReader(file);
 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -319,7 +286,7 @@ public class Game implements RedrawObservable, Serializable {
 					else if (currentLine == -9){
 						map_block_height = map_block_height +c;
 					}
-					
+
 					else if(currentLine == -2){
 						darkness = darkness + c;
 					}
@@ -330,7 +297,7 @@ public class Game implements RedrawObservable, Serializable {
 					case '$':
 						this.objects.add(new BlockBreakable(column, currentLine, this));
 						break;
-					// Read position of the Player
+						// Read position of the Player
 					case 'P':
 						playerLine = currentLine;
 						playerColumn = column;
@@ -352,8 +319,7 @@ public class Game implements RedrawObservable, Serializable {
 						break;
 					}
 				}
-				player.setPos(playerColumn, playerLine); // set position of the
-															// player
+				player.setPos(playerColumn, playerLine); // set position of the player
 				currentLine++;
 			}
 			try{
@@ -363,9 +329,10 @@ public class Game implements RedrawObservable, Serializable {
 				CONSTANTS.setBLOCK_SIZE(savedBlockSize);
 			}catch(NumberFormatException e){
 				System.out.println("Les arguments de taille de map ne sont pas valides.");
-			    e.printStackTrace();
+				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
-			
+
 			if(darkness.equals("DARKNESS")){
 				CONSTANTS.setDARKNESS_MODIFIER(true);
 				savedDarkness = true;
@@ -374,29 +341,24 @@ public class Game implements RedrawObservable, Serializable {
 				savedDarkness = false;
 			}
 
-			
 			bufferedReader.close();
 			if (bossBool) {
 				loadMobs(emptyCasesX, emptyCasesY, 1);
 			} else {
 				loadMobs(emptyCasesX, emptyCasesY, 4);
 			}
-
 		} catch (FileNotFoundException e) {
 			System.out.println("Unable to open file '" + fileName + "'" + e);
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + fileName + "'");
 		}
 	}
-	
-
 
 	private synchronized void loadMobs(ArrayList<Integer> emptyCasesX, ArrayList<Integer> emptyCasesY, int maxMobs) {
 
 		ArrayList<Integer> mobXArray = new ArrayList<>();
 		ArrayList<Integer> mobYArray = new ArrayList<>();
 
-		
 		for (int i = 0; i < maxMobs; i++) {
 			if (emptyCasesX.size() > 0) {
 				int randomInt = random.nextInt(emptyCasesX.size()); //int between 0 (inclusive) and size (exclusive)
@@ -432,10 +394,10 @@ public class Game implements RedrawObservable, Serializable {
 			}
 		}
 	}
-	
+
 	public synchronized void loot(int x, int y, int objectLoot) {
 		int totalLootLevel = (objectLoot+this.mapCounter)*player.getLuck();
-		
+
 		if (lootBool(totalLootLevel)) {
 			int randomItemInt = random.nextInt(9); //between 0 and 5
 			Item item = null;
@@ -466,25 +428,9 @@ public class Game implements RedrawObservable, Serializable {
 				this.getGameObjects().add(item);
 			}
 		}
-		
+
 	}
-	
-	public int getSavedBlockSize() {
-		return this.savedBlockSize;
-	}
-	
-	public boolean getSavedDarkness() {
-		return this.savedDarkness;
-	}
-	
-	public void setLineOfSight(int lineOfSight) {
-		this.savedLineOfSight = lineOfSight;
-	}
-	
-	public int getSavedLineOfSight() {
-		return this.savedLineOfSight;
-	}
-	
+
 	private boolean lootBool(int totalLootLevel) {
 		boolean res = false;
 		int randomInt = random.nextInt(10);
@@ -493,11 +439,7 @@ public class Game implements RedrawObservable, Serializable {
 		}
 		return res;
 	}
-	
-	public int getMapCounter() {
-		return this.mapCounter;
-	}
-	
+
 	public void changeDrop() {
 		this.drop = !this.drop;
 	}
@@ -519,6 +461,46 @@ public class Game implements RedrawObservable, Serializable {
 		for (RedrawObserver ob : listRedrawObservers) {
 			ob.redraw(this);
 		}
+	}
+
+	public int getMapCounter() {
+		return this.mapCounter;
+	}
+	
+	public void setState(STATE state) {
+		this.state = state;
+	}
+
+	public STATE getState(){
+		return this.state;
+	}
+
+	public Window getWindow(){
+		return this.window;
+	}
+	
+	public synchronized ArrayList<GameObject> getGameObjects() {
+		return this.objects;
+	}
+	
+	public Player getPlayer() {
+		return this.player;
+	}
+	
+	public int getSavedBlockSize() {
+		return this.savedBlockSize;
+	}
+
+	public boolean getSavedDarkness() {
+		return this.savedDarkness;
+	}
+	
+	public void setLineOfSight(int lineOfSight) {
+		this.savedLineOfSight = lineOfSight;
+	}
+
+	public int getSavedLineOfSight() {
+		return this.savedLineOfSight;
 	}
 
 }

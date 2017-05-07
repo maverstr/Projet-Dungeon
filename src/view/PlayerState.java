@@ -24,7 +24,6 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 	private JProgressBar manaBar;
 	private Inventory inventory;
 	
-
 	public PlayerState() {
 		this.setPreferredSize(new Dimension(200, CONSTANTS.CONSTANTS.getMAP_HEIGHT())); // Set Size of screen
 														// part for player STATS
@@ -56,13 +55,8 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		bossHealthBar.setBackground(Color.BLUE);
 		bossHealthBar.setBounds(10, 450, 180, 20); 
 		this.add(this.bossHealthBar);
-		
 	}
 	
-	
-	
-	
-
 	public void paintComponent(Graphics g) { // Note : DO NOT override paint(g).
 		super.paintComponent(g);
 		
@@ -96,7 +90,6 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 		g.setColor(Color.magenta);
 		g.drawRect(62, 380, 50, 50); //  //Paints the rect for PASSIVE item
 		setPassiveText(27, 360,g);
-
 
 		// Paints INVENTORY
 		int x = 2;
@@ -239,7 +232,6 @@ public class PlayerState extends JPanel { // Jpanel for Player Stats and
 			this.manaBar.setValue(pMana);
 			
 			this.inventory = p.getInventory(); //update the inventory list to draw
-			
 			
 			if(bossBool){
 				int bMaxHealth = b.getMaxHealth();

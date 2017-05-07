@@ -135,5 +135,4 @@ public abstract class Mob extends Character implements Runnable, IAttackable {
 		return res;
 	}
 	
-
 }

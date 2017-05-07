@@ -17,10 +17,10 @@ import model.GameObject;
 
 public class StoryMenu extends JPanel{
 	private static final long serialVersionUID = 42L;
-	
+
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
-	
+
 	private transient BufferedImage storyScreen;
 
 	public StoryMenu() throws IOException {
@@ -30,32 +30,28 @@ public class StoryMenu extends JPanel{
 		this.setRequestFocusEnabled(true);
 		this.requestFocusInWindow();
 		this.setLayout(null);
-		
+
 		storyScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/storyScreen.jpeg").getFile()));
-		}
-	
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		
+
 		this.setBackground(Color.WHITE);
-		
+
 		RenderingHints rh = new RenderingHints(
-	             RenderingHints.KEY_RENDERING,
-	             RenderingHints.VALUE_RENDER_QUALITY);
-	    g2.setRenderingHints(rh);
-		
+				RenderingHints.KEY_RENDERING,
+				RenderingHints.VALUE_RENDER_QUALITY);
+		g2.setRenderingHints(rh);
+
 		g2.drawImage(storyScreen, 0, 0, wPW-16, wPH-38, null);
 	}
-	
+
 	public void redraw(){
 		this.requestFocusInWindow();
 		this.repaint();
-		
+
 	}
-	
-
-
-
 
 }

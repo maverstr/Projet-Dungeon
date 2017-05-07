@@ -20,17 +20,16 @@ import model.GameObject;
 
 public class Menu extends JPanel{
 	private static final long serialVersionUID = 1L;
-	
+
 	private int wPW = CONSTANTS.getWINDOW_PIXEL_WIDTH();
 	private int wPH = CONSTANTS.getWINDOW_PIXEL_HEIGHT();
-	
+
 	private Rectangle playButton = new Rectangle(wPW/2 -150, 450,300,80);
 	private Rectangle controlsButton = new Rectangle(wPW/2 -150, 550,300,80);
 	private Rectangle exitButton = new Rectangle(wPW/2 -150, 650,300,80);
-	
+
 	private transient BufferedImage mainScreen;
 
-	
 	public Menu() throws IOException {	
 		this.setPreferredSize(new Dimension(wPW, wPH));
 		this.setFocusable(true);
@@ -38,21 +37,20 @@ public class Menu extends JPanel{
 		this.setRequestFocusEnabled(true);
 		this.requestFocusInWindow();
 		this.setLayout(null);
-		
-		mainScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/main_screen.png").getFile()));
 
+		mainScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/main_screen.png").getFile()));
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		RenderingHints rh = new RenderingHints(
-	             RenderingHints.KEY_TEXT_ANTIALIASING,
-	             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-	    g2.setRenderingHints(rh);
-		
+				RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2.setRenderingHints(rh);
+
 		this.setBackground(Color.BLACK);
-		
+
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g2.setFont(fnt0);
 		g2.setColor(Color.WHITE);
@@ -66,17 +64,16 @@ public class Menu extends JPanel{
 		g2.drawString("Quit Game", exitButton.x+25, exitButton.y+60);
 		g2.drawImage(mainScreen, 100, 32, 780, 400, null);
 	}
-	
+
 	public void redraw(){
 		this.requestFocusInWindow();
 		this.repaint();
-		
 	}
-	
+
 	public Rectangle getPlayButton(){
 		return this.playButton;
 	}
-	
+
 	public Rectangle getControlsButton() {
 		return controlsButton;
 	}
@@ -84,9 +81,6 @@ public class Menu extends JPanel{
 	public Rectangle getExitButton() {
 		return exitButton;
 	}
-
-
-
 
 }
 

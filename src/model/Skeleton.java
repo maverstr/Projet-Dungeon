@@ -66,11 +66,11 @@ public class Skeleton extends Mob implements Runnable {
 					Thread.sleep(100);
 				}
 			}
-		}catch(Exception e){}; 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}; 
 	}
 	
-	
-
 	@Override
 	public void attackPattern() {
 		ArrayList<Sprite> spriteList = this.getSpriteList();

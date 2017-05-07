@@ -4,6 +4,8 @@ import java.io.File;
 
 public class Chest extends Block implements IOpenable{
 	
+	private static final long serialVersionUID = 42L;
+	
 	private static final File spriteFile = new File(GameObject.class.getResource("/resources/sprites/Chest.png").getFile());
 
 	public Chest(int x, int y, Game game) {

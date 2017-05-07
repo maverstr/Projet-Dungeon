@@ -21,7 +21,6 @@ public class Sprite implements Serializable {
 	private double drawY;
 	private int drawZ; //0 to 5, background to foreground
 	
-	
 	public Sprite(BufferedImage image,double offsetX,double offsetY, int drawZ) {
 		this.image = image;
 		this.offsetX = offsetX;
@@ -84,7 +83,9 @@ public class Sprite implements Serializable {
 		try {
 			BufferedImage image = ImageIO.read(file);
 			spriteList.add(new Sprite(image,x,y,z));
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		return spriteList;
 	}
 	
@@ -96,7 +97,9 @@ public class Sprite implements Serializable {
 			BufferedImage image2 = ImageIO.read(file2);
 			spriteList.add(new Sprite(image1,x1,y1,z1));
 			spriteList.add(new Sprite(image2,x2,y2,z2));
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		return spriteList;
 	}

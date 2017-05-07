@@ -27,7 +27,6 @@ public class Penne extends Item {
 
 	public Penne(int x, int y, Game game, File spriteFile) {
 		super(Sprite.imageFromFile(spriteFile), x, y, game, Sprite.makeSpriteList(spriteFile, 0, 0, 0));
-		
 	}
 
 	@Override

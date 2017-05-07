@@ -15,7 +15,6 @@ public class PotionMana extends Consumable {
 	private static final Media beerSoundMedia = new Media(beerSoundFile.toURI().toString());
 	private static final transient MediaPlayer beerSoundPlayer = new MediaPlayer(beerSoundMedia);
 
-
 	public PotionMana(int x, int y, Game game) {
 		super(Sprite.imageFromFile(spriteFileInventory), x, y, game, Sprite.makeSpriteList(spriteFile, 0, 0, 0));
 	}

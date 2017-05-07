@@ -21,10 +21,6 @@ public abstract class Weapon extends Item {
 		this.damage = damage;
 	}
 	
-	public int getDamage() {
-		return this.damage;
-	}
-	
 	public abstract void use(int xPlayer, int yPlayer, Direction direction);
 	
 	@Override
@@ -88,4 +84,7 @@ public abstract class Weapon extends Item {
 		return attackSprite;
 	}
 	
+	public int getDamage() {
+		return this.damage;
+	}
 }

@@ -6,25 +6,20 @@ import java.awt.event.KeyListener;
 import model.Direction;
 import model.Game;
 
-
 public class Keyboard implements KeyListener{
 	private Game game;
-	
+
 	public Keyboard(Game game){
 		this.game = game;
-
 	}
-	
+
 	public void updateGame(Game game) {
 		this.game = game;
 	}
 
-	
 	public void keyPressed(KeyEvent event) {
 		int key = event.getKeyCode();
-		//System.out.println(key);		
 		if (game.getState() == Game.STATE.RUN){ //Only when in the game and not in the menu
-			//System.out.println("key GAME");
 			switch (key) {
 			case KeyEvent.VK_RIGHT: 
 				game.movePlayer(Direction.East);
@@ -127,12 +122,14 @@ public class Keyboard implements KeyListener{
 		}
 
 	}
-
-	//@Override
+	
+	////////////////////////////////////////////
+	
+	@Override
 	public void keyTyped(KeyEvent e) {
 	}
-
-	//@Override
+	
+	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 

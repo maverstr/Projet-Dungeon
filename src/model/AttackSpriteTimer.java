@@ -4,7 +4,6 @@ public class AttackSpriteTimer extends Timer {
 
 	public AttackSpriteTimer(int duration, Player player) {
 		super(duration, player);
-		
 	}
 
 	@Override

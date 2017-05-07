@@ -6,7 +6,6 @@ import java.io.File;
 public class Laser extends Mob implements IObstacle {
 	private static final long serialVersionUID = 42L;
 
-	
 	private int waitTime;
 	private int liveTime;
 	private int time = 0;
@@ -34,7 +33,9 @@ public class Laser extends Mob implements IObstacle {
 					time+=waitTime;
 				}
 			}
-		}catch(Exception e){}; 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}; 
 	}
 	
 	

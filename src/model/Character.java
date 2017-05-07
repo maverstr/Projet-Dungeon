@@ -5,12 +5,14 @@ import java.io.File;
 import java.util.ArrayList;
 
 public abstract class Character extends GameObject{
-	
+
+	private static final long serialVersionUID = 42L;
+
 	protected int maxHealth;
 	protected int health;
 	protected boolean isBaptized;
 	protected int penneSpriteIndex;
-	
+
 	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int maxHealth, boolean isBaptized){
 		super(x,y,game,spriteList);
 		this.maxHealth = maxHealth;
@@ -19,28 +21,17 @@ public abstract class Character extends GameObject{
 			putPenne();
 		}
 	}
-	
-	@Override
-	public boolean isObstacle() {
-		return true;
-	}
-	
-	public int getHealth(){
-		return this.health;
-	}
-	
-
 
 	public void move(Direction direction){
 		this.setPosX(this.getPosX() + xForDirection(direction));
 		this.setPosY(this.getPosY() + yForDirection(direction));
 		setMoveDirection(direction);
 	}
-	
+
 	public void setMoveDirection(Direction direction) {
 		setDirection(direction);
 	}
-	
+
 	public void wasHit(int damage) {
 		this.health-=damage;
 		if (this.health<=0) {
@@ -48,48 +39,50 @@ public abstract class Character extends GameObject{
 			die();
 		}
 	}
-	
-	public abstract void die();
-	
+
 	public void updateSpriteDirection(File up,File right,File down,File left) {
 		Sprite sprite = getSpriteList().get(0);
 		try {
 			switch (this.getDirection()) {
 			case North:sprite.setImageFromFile(up);
-				break;
+			break;
 			case East:sprite.setImageFromFile(right);
-				break;
+			break;
 			case South:sprite.setImageFromFile(down);
-				break;
+			break;
 			case West:sprite.setImageFromFile(left);
-				break;
+			break;
 			default:
 				break;
 			}
-		} catch (Exception e) {e.printStackTrace();}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (this.isBaptized) {
 			updatePenneDirection();
 		}
 	}
-	
+
 	public void updatePenneDirection() {
 		try {
 			Sprite sprite = getSpriteList().get(penneSpriteIndex);
 			switch (this.getDirection()) {
 			case North:sprite.setImageFromFile(Penne.getFileUp());
-				break;
+			break;
 			case East:sprite.setImageFromFile(Penne.getFileRight());
-				break;
+			break;
 			case South:sprite.setImageFromFile(Penne.getFileDown());
-				break;
+			break;
 			case West:sprite.setImageFromFile(Penne.getFileLeft());
-				break;
+			break;
 			default:
 				break;
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	
+
 	public void putPenne() {
 		if (!this.isBaptized) {
 			this.isBaptized = true;
@@ -98,6 +91,17 @@ public abstract class Character extends GameObject{
 			updatePenneDirection();
 		}
 	}
-	
-	
+
+	public abstract void die();
+
+	@Override
+	public boolean isObstacle() {
+		return true;
+	}
+
+	public int getHealth(){
+		return this.health;
+	}
+
+
 }
