@@ -12,6 +12,7 @@ public class BlockBreakable extends Block implements IBreakable {
 		
 	}
 	
+	@Override
 	public boolean isBreakable() {
 		return true;
 	}
