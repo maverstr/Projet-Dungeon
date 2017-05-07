@@ -21,7 +21,7 @@ public class Heal extends Spell {
 	@Override
 	public void run() {
 		try{
-			while (!inventory) {
+			while (!isInventory()) {
 				if (game.getState() == Game.STATE.RUN) {
 					
 					this.getGame().getPlayer().addHealth(1000);

@@ -92,7 +92,8 @@ public abstract class Player extends Character {
 		if (drunk) {
 			direction = oppositeDirection(direction);
 		}
-		
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		int newPosX = posX+xForDirection(direction);
 		int newPosY = posY+yForDirection(direction);
 		
@@ -140,21 +141,24 @@ public abstract class Player extends Character {
 	}
 	
 	public void addAttackSprite(Sprite newAttackSprite) {
+		ArrayList<Sprite> spriteList = this.getSpriteList();
 		if (newAttackSprite != null) {
-			this.spriteList.remove(this.attackSprite);
+			spriteList.remove(this.attackSprite);
 			this.attackSprite = newAttackSprite;
-			this.spriteList.add(attackSprite);
+			spriteList.add(attackSprite);
 			new AttackSpriteTimer(100,this);
 		}
 	}
 	
 	public void removeAttackSprite() {
-		this.spriteList.remove(attackSprite);
+		this.getSpriteList().remove(attackSprite);
 		this.getGame().updateWindow();
 	}
 	
 	
 	public void useWeapon(Direction direction) {
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		this.setMoveDirection(direction);
 		updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 		this.inventory.getWeapon().use(posX, posY, direction);
@@ -162,6 +166,8 @@ public abstract class Player extends Character {
 	}
 	
 	public void selectItemAtIndex(int index, boolean drop) {
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		int ws = inventory.getWeapons().size();
 		if (!drop) {
 			if (index<ws) {
@@ -174,8 +180,8 @@ public abstract class Player extends Character {
 				}
 			}
 		} else {
-			int x = this.getGame().getPlayer().posX;
-			int y = this.getGame().getPlayer().posY;
+			int x = posX;
+			int y = posY;
 			if (index<ws) {
 				Weapon weapon = inventory.getWeapons().remove(index);
 				weapon.drop(x, y);
@@ -203,16 +209,20 @@ public abstract class Player extends Character {
 	}
 	
 	public void castSpell() {
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		Spell spell = inventory.getSpell();
 		int manaCost = spell.getManaCost();
 		if (manaCost<=mana) {
-			spell.castSpell(posX, posY, game, this.direction);
+			spell.castSpell(posX, posY, game, this.getDirection());
 			mana-=manaCost;
 		}
 		this.getGame().updateWindow();
 	}
 	
 	public synchronized void openChest() {
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isOpenable()) {
@@ -231,6 +241,8 @@ public abstract class Player extends Character {
 	}
 	
 	public synchronized void pickUpItem() { //Note : this method may also be called to enter the level exit door
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isPickable()) {
@@ -254,8 +266,6 @@ public abstract class Player extends Character {
 		this.getGame().updateWindow();
 		System.out.println("GAME OVER-------GET REKT-------YOU MAD BRO??");
 	}
-	
-	public abstract void specialAbility();
 	
 	
 }

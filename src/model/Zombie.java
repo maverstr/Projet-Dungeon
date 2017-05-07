@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Zombie extends Mob {
 	private static final long serialVersionUID = 42L;
@@ -48,7 +49,7 @@ public class Zombie extends Mob {
 					
 					Direction newDirection = setDirection(mobX,mobY,playerX,playerY);
 					if (newDirection != Direction.None) {
-						this.direction = newDirection;
+						setDirection(newDirection);
 						updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 					}
 					this.getGame().updateWindow();
@@ -60,8 +61,8 @@ public class Zombie extends Mob {
 					}
 					
 					Thread.sleep(waitTime/2);
-					this.spriteList.remove(attackSprite1); //remove the attack sprites
-					this.spriteList.remove(attackSprite2);
+					this.getSpriteList().remove(attackSprite1); //remove the attack sprites
+					this.getSpriteList().remove(attackSprite2);
 				} else {
 					Thread.sleep(100);
 				}
@@ -71,40 +72,40 @@ public class Zombie extends Mob {
 	}
 
 	@Override
-	public void attackPattern() {
-		//vomi : 2 cases
-		switch (direction) {
+	public void attackPattern() {//vomi : 2 cases
+		ArrayList<Sprite> spriteList = this.getSpriteList();
+		switch (getDirection()) {
 		case North:
 			this.attack(0, -1);
 			this.attack(0, -2);
 			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1U, 0, -1, 6);
 			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2U, 0, -2, 11);
-			this.spriteList.add(attackSprite1);
-			this.spriteList.add(attackSprite2);
+			spriteList.add(attackSprite1);
+			spriteList.add(attackSprite2);
 			break;
 		case East:
 			this.attack(1, 0);
 			this.attack(2, 0);
 			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1R, 0.75, -0.35, 11);
 			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2R, 1.75, -0.35, 11);
-			this.spriteList.add(attackSprite1);
-			this.spriteList.add(attackSprite2);
+			spriteList.add(attackSprite1);
+			spriteList.add(attackSprite2);
 			break;
 		case South:
 			this.attack(0, 1);
 			this.attack(0, 2);
 			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1D, 0, 0.2, 11);
 			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2D, 0, 1.2, 11);
-			this.spriteList.add(attackSprite1);
-			this.spriteList.add(attackSprite2);
+			spriteList.add(attackSprite1);
+			spriteList.add(attackSprite2);
 			break;
 		case West:
 			this.attack(-1, 0);
 			this.attack(-2, 0);
 			attackSprite1 = Sprite.makeSpriteFromFile(spriteFileVomit1L, -0.75, -0.35, 11);
 			attackSprite2 = Sprite.makeSpriteFromFile(spriteFileVomit2L, -1.75, -0.35, 11);
-			this.spriteList.add(attackSprite1);
-			this.spriteList.add(attackSprite2);
+			spriteList.add(attackSprite1);
+			spriteList.add(attackSprite2);
 			break;
 		default:
 			break;
@@ -113,8 +114,8 @@ public class Zombie extends Mob {
 	
 	@Override
 	public void removeAttackSprites() {
-		this.spriteList.remove(attackSprite1);
-		this.spriteList.remove(attackSprite2);
+		this.getSpriteList().remove(attackSprite1);
+		this.getSpriteList().remove(attackSprite2);
 	}
 	
 

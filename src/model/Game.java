@@ -227,7 +227,23 @@ public class Game implements RedrawObservable, Serializable {
 		}
 	}
 	
-	public void inturruptThreads() {
+	public void updateWindow(Window window) { //Overcharge when loading the game from a save
+		this.window = window;
+	}
+	
+	public void saveGame() {
+		Main.save(this);
+	}
+	
+	public void loadSavedGame() {
+		try {
+			Main.loadRunning(window);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void interruptThreads() {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) objects.clone(); //Clone() allows to create a DEEPCOPY of the list to get the variables without actually blocking the real list
 		for(GameObject object: clone){
 			if (object.isAttackable()) {
@@ -250,10 +266,10 @@ public class Game implements RedrawObservable, Serializable {
 				}
 			}
 			this.objects.subList(1, this.objects.size()).clear();//Suppress the blocks of the previous map (except the player in index 1).
-			if(this.mapCounter == 1){
+			if(this.mapCounter == 1){ //After the introduction map_0, the next is map_1 
 				loadMap("map_1.txt");
 			}
-			else if(this.mapCounter >5){
+			else if(this.mapCounter >5){ //After 5 different maps, the boss room
 				bossBool = true;
 				loadMap("map_boss.txt");
 				uneMinePlayer.play();
@@ -273,7 +289,6 @@ public class Game implements RedrawObservable, Serializable {
 			}
 		}
 		this.mapCounter +=1;
-		System.out.println(mapCounter);
 		this.updateWindow();
 		
 		
@@ -378,21 +393,7 @@ public class Game implements RedrawObservable, Serializable {
 		}
 	}
 	
-	public void updateWindow(Window window) {
-		this.window = window;
-	}
-	
-	public void saveGame() {
-		Main.save(this);
-	}
-	
-	public void loadSavedGame() {
-		try {
-			Main.loadRunning(window);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	private synchronized void loadMobs(ArrayList<Integer> emptyCasesX, ArrayList<Integer> emptyCasesY, int maxMobs) {
 

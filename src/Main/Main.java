@@ -51,12 +51,9 @@ public class Main {
 		//Save when entering a new room
 		System.out.println("save");
 		try {
-			FileOutputStream file = new FileOutputStream("personne.serial");
-			System.out.println(file);
+			FileOutputStream file = new FileOutputStream("game.serial");
 			ObjectOutputStream oos= new ObjectOutputStream(file);
-			System.out.println(oos);
 			oos.writeObject(game);
-			System.out.println(oos);
 			oos.flush(); 
 			oos.close();
 			System.out.println("ok");
@@ -72,13 +69,10 @@ public class Main {
 	private static Game load() {
 		Game gameloaded = null;
 		try {
-			FileInputStream file = new FileInputStream("personne.serial");
-			System.out.println(file);
+			FileInputStream file = new FileInputStream("game.serial");
 			ObjectInputStream ois= new ObjectInputStream(file);
-			System.out.println(ois);
 			gameloaded = (Game) ois.readObject(); 
 			ois.close();
-			System.out.println(gameloaded);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			System.out.println("catch");
@@ -91,7 +85,7 @@ public class Main {
 		Game newGame = load();
 		
 		if (newGame!=null) {
-			game.inturruptThreads();
+			game.interruptThreads();
 			game = newGame;
 			CONSTANTS.update(game.getSavedBlockSize(),game.getSavedDarkness(),game.getSavedLineOfSight());
 			game.gameInit(window);

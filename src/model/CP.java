@@ -41,10 +41,6 @@ public class CP extends Player {
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}
-	
-	@Override
-	public void specialAbility() {
-		
-	}
+
 
 }

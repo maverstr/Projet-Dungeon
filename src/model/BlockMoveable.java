@@ -13,8 +13,8 @@ public class BlockMoveable extends Block implements IMoveable{
 	}
 	
 	public void move(Direction direction){
-		this.posX += xForDirection(direction);
-		this.posY += yForDirection(direction);
+		this.setPosX(this.getPosX() + xForDirection(direction));
+		this.setPosY(this.getPosY() + yForDirection(direction));
 	}
 	
 	@Override

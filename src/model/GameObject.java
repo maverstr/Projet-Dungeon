@@ -6,21 +6,29 @@ import java.util.ArrayList;
 public abstract class GameObject implements Serializable {
 	
 	private static final long serialVersionUID = 42L;
-	protected int posX;
-	protected int posY;
-	protected ArrayList<Sprite> spriteList;
-	protected Direction direction = Direction.North; //0=up,1=right,2=down,3=left
+	private int posX;
+	private int posY;
+	private ArrayList<Sprite> spriteList;
+	private Direction direction = Direction.North; //0=up,1=right,2=down,3=left
 	protected Game game;
 	
 	public GameObject(int x, int y, Game game, ArrayList<Sprite> spriteList) {
-		this.posX = x;
-		this.posY = y;
+		this.setPosX(x);
+		this.setPosY(y);
 		this.spriteList = spriteList;
 		this.game = game;
 	}
 	
 	public void setPos(int posX,int posY) {
+		this.setPosX(posX);
+		this.setPosY(posY);
+	}
+	
+	public void setPosX(int posX) {
 		this.posX = posX;
+	}
+
+	public void setPosY(int posY) {
 		this.posY = posY;
 	}
 	
@@ -36,12 +44,16 @@ public abstract class GameObject implements Serializable {
 		return this.direction;
 	}
 	
+	public void setDirection(Direction d){
+		this.direction = d;
+	}
+	
 	public ArrayList<Sprite> getSpriteList() {
 		return this.spriteList;
 	}
 	
 	public boolean isAtPosition(int x, int y){
-		return this.posX == x && this.posY == y;
+		return this.getPosX() == x && this.getPosY() == y;
 	}
 	
 	public Game getGame() {
@@ -131,9 +143,11 @@ public abstract class GameObject implements Serializable {
 	}
 
 	public boolean isPassive() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
+
+
 	
 	
 	

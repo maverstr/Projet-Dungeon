@@ -11,7 +11,7 @@ public class Chest extends Block implements IOpenable{
 	}
 	
 	public synchronized void open() {
-		this.getGame().loot(this.posX, this.posY, 10);
+		this.getGame().loot(this.getPosX(), this.getPosY(), 10);
 		this.getGame().getGameObjects().remove(this);
 	}
 	

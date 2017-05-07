@@ -1,7 +1,7 @@
 package model;
 
 import java.io.File;
-
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Skeleton extends Mob implements Runnable {
@@ -52,7 +52,7 @@ public class Skeleton extends Mob implements Runnable {
 					
 					Direction newDirection = setDirection(newMobX,newMobY,playerX,playerY);
 					if (newDirection != Direction.None) {
-						this.direction = newDirection;
+						setDirection(newDirection);
 						updateSpriteDirection(spriteFileU,spriteFileR,spriteFileD,spriteFileL);
 					}
 					
@@ -61,7 +61,7 @@ public class Skeleton extends Mob implements Runnable {
 						this.getGame().updateWindow();
 					}
 					Thread.sleep(waitTime/2);
-					this.spriteList.remove(attackSprite); //remove the attack sprites
+					this.getSpriteList().remove(attackSprite); //remove the attack sprites
 				} else {
 					Thread.sleep(100);
 				}
@@ -73,26 +73,27 @@ public class Skeleton extends Mob implements Runnable {
 
 	@Override
 	public void attackPattern() {
-		switch (direction) {
+		ArrayList<Sprite> spriteList = this.getSpriteList();
+		switch (getDirection()) {
 		case North:
 			this.attack(0, -1);
 			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneU, 0, -0.75, 6);
-			this.spriteList.add(attackSprite);
+			spriteList.add(attackSprite);
 			break;
 		case East:
 			this.attack(1, 0);
 			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneR, 0.75, -0.25, 11);
-			this.spriteList.add(attackSprite);
+			spriteList.add(attackSprite);
 			break;
 		case South:
 			this.attack(0, 1);
 			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneD, 0, 0.25, 8);
-			this.spriteList.add(attackSprite);
+			spriteList.add(attackSprite);
 			break;
 		case West:
 			this.attack(-1, 0);
 			attackSprite = Sprite.makeSpriteFromFile(spriteFileBoneL, -0.75, -0.25, 11);
-			this.spriteList.add(attackSprite);
+			spriteList.add(attackSprite);
 			break;
 		default:
 			break;
@@ -101,7 +102,7 @@ public class Skeleton extends Mob implements Runnable {
 
 	@Override
 	public void removeAttackSprites() {
-		this.spriteList.remove(attackSprite);
+		this.getSpriteList().remove(attackSprite);
 	}
 	
 

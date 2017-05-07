@@ -11,7 +11,7 @@ public abstract class Spell extends Item implements Runnable {
 	private int liveTime;
 	private int damage;
 	private int manaCost;
-	protected boolean inventory;
+	private boolean inventory;
 	protected int time = 0;
 	
 	static Object lock = new Object();
@@ -56,7 +56,7 @@ public abstract class Spell extends Item implements Runnable {
 		ArrayList<GameObject> clone = (ArrayList<GameObject>) this.getGame().getGameObjects().clone();
 		for (GameObject object:clone) {
 			if (object.isAttackable()) {
-				if (object.isAtPosition(posX, posY)) {
+				if (object.isAtPosition(getPosX(), getPosY())) {
 					Mob mob = (Mob) object;
 					mob.wasHit(this.damage);
 				}
@@ -93,6 +93,10 @@ public abstract class Spell extends Item implements Runnable {
 	@Override
 	public void drop(int x, int y) {
 		
+	}
+	
+	public boolean isInventory(){
+		return this.inventory;
 	}
 
 }

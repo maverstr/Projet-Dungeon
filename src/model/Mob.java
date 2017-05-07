@@ -7,7 +7,7 @@ import java.util.Random;
 public abstract class Mob extends Character implements Runnable, IAttackable {
 	private static final long serialVersionUID = 42L;
 
-	static Object lock = new Object();
+	static Object lock = new Object(); //Used to synchronize threads
 	
 	private transient Thread t;
 
@@ -18,8 +18,8 @@ public abstract class Mob extends Character implements Runnable, IAttackable {
 	}
 	
 	public void attack(int xAttack, int yAttack) {
-		int newPosX = this.posX+xAttack;
-		int newPosY = this.posY+yAttack;
+		int newPosX = this.getPosX()+xAttack;
+		int newPosY = this.getPosY()+yAttack;
 		
 		Player player = this.getGame().getPlayer();
 		if (player.getPosX() == newPosX && player.getPosY() == newPosY) {
@@ -29,7 +29,7 @@ public abstract class Mob extends Character implements Runnable, IAttackable {
 	
 	public abstract void attackPattern();
 	
-	public void relaunch() {
+	public void relaunch() { //When loading a game, need to restart threads
 		t = new Thread(this);
 		t.start();
 		removeAttackSprites();
@@ -47,7 +47,7 @@ public abstract class Mob extends Character implements Runnable, IAttackable {
 	}
 	
 	public void loot() {
-		this.getGame().loot(this.posX, this.posY, 3);
+		this.getGame().loot(this.getPosX(), this.getPosY(), 3);
 	}
 	
 	public abstract void run();

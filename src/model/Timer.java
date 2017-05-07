@@ -4,7 +4,7 @@ public abstract class Timer implements Runnable {
 	
 	private transient Thread t;
 	private int duration;
-	protected Player player;
+	private Player player;
 
 	public Timer(int duration, Player player) {
 		this.duration = duration;
@@ -13,6 +13,10 @@ public abstract class Timer implements Runnable {
 		t.start();
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+
 	@Override
 	public void run() {
 		try {

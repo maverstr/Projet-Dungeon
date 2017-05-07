@@ -101,7 +101,7 @@ public class Sprite implements Serializable {
 		return spriteList;
 	}
 	
-	private void writeObject(ObjectOutputStream out) throws IOException {
+	private void writeObject(ObjectOutputStream out) throws IOException { //Redefining wirte and ReadObject in order to serialize BufferedImage
         out.defaultWriteObject();
         ImageIO.write(image, "png", out); // png is lossless
     }

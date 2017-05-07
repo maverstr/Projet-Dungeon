@@ -9,7 +9,7 @@ public class AttackSpriteTimer extends Timer {
 
 	@Override
 	public void delayedAction() {
-		player.removeAttackSprite();
+		getPlayer().removeAttackSprite();
 	}
 
 }

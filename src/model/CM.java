@@ -45,10 +45,4 @@ public class CM extends Player {
 		
 		inventory.setWeaponIndex(0); //Select The Sword as the beginning weapon at start.
 	}
-	
-	@Override
-	public void specialAbility() {
-		//TODO heal()
-	}
-
 }

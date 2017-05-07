@@ -10,7 +10,7 @@ public class DrunkTimer extends Timer {
 
 	@Override
 	public void delayedAction() {
-		player.setDrunk(false);
+		getPlayer().setDrunk(false);
 	}
 
 }

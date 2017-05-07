@@ -86,7 +86,7 @@ public class Boss extends Mob {
 		}catch(Exception e){}; 
 	}
 	
-	@Override 
+	@Override
 	public void wasHit(int damage) {
 		super.wasHit(damage);
 		int newPhase = 0;
@@ -107,13 +107,15 @@ public class Boss extends Mob {
 	
 	@Override
 	public void attackPattern() {
+		int posX = this.getPosX();
+		int posY = this.getPosY();
 		ArrayList<GameObject> objects = this.getGame().getGameObjects();
 		for (int i = 1; i<phase+3; i++) {
 			try {
-				objects.add(new Laser(this.posX,this.posY+i,this.getGame(),fileD(i,phase+2),phase));
-				objects.add(new Laser(this.posX,this.posY-i,this.getGame(),fileU(i,phase+2),phase));
-				objects.add(new Laser(this.posX+i,this.posY,this.getGame(),fileR(i,phase+2),phase));
-				objects.add(new Laser(this.posX-i,this.posY,this.getGame(),fileL(i,phase+2),phase));
+				objects.add(new Laser(posX,posY+i,this.getGame(),fileD(i,phase+2),phase));
+				objects.add(new Laser(posX,posY-i,this.getGame(),fileU(i,phase+2),phase));
+				objects.add(new Laser(posX+i,posY,this.getGame(),fileR(i,phase+2),phase));
+				objects.add(new Laser(posX-i,posY,this.getGame(),fileL(i,phase+2),phase));
 			} catch(Exception e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
@@ -121,7 +123,7 @@ public class Boss extends Mob {
 		}
 	}
 	
-	public File fileU(int i, int maxI) {
+	private File fileU(int i, int maxI) {
 		File file = spriteFile2U;
 		if (i == 1) {
 			file = spriteFile1U;
@@ -132,7 +134,7 @@ public class Boss extends Mob {
 		return file;
 	}
 	
-	public File fileR(int i, int maxI) {
+	private File fileR(int i, int maxI) {
 		File file = spriteFile2R;
 		if (i == 1) {
 			file = spriteFile1R;
@@ -143,7 +145,7 @@ public class Boss extends Mob {
 		return file;
 	}
 	
-	public File fileD(int i, int maxI) {
+	private File fileD(int i, int maxI) {
 		File file = spriteFile2D;
 		if (i == 1) {
 			file = spriteFile1D;
@@ -154,7 +156,7 @@ public class Boss extends Mob {
 		return file;
 	}
 	
-	public File fileL(int i, int maxI) {
+	private File fileL(int i, int maxI) {
 		File file = spriteFile2L;
 		if (i == 1) {
 			file = spriteFile1L;
@@ -165,7 +167,7 @@ public class Boss extends Mob {
 		return file;
 	}
 	
-	public void setAudio() {
+	private void setAudio() {
 		soundTime+=waitTime;
 		if (soundTime > soundWaitTime) {
 			if (punchline1Bool) {

@@ -11,9 +11,6 @@ public abstract class Character extends GameObject{
 	protected boolean isBaptized;
 	protected int penneSpriteIndex;
 	
-	//int itemType = 0; //1->weapon, 2->pickaxe
-	//Weapon weapon = new Weapon();
-	
 	public Character(int x, int y, Game game, ArrayList<Sprite> spriteList, int maxHealth, boolean isBaptized){
 		super(x,y,game,spriteList);
 		this.maxHealth = maxHealth;
@@ -35,13 +32,13 @@ public abstract class Character extends GameObject{
 
 
 	public void move(Direction direction){
-		this.posX += xForDirection(direction);
-		this.posY += yForDirection(direction);
+		this.setPosX(this.getPosX() + xForDirection(direction));
+		this.setPosY(this.getPosY() + yForDirection(direction));
 		setMoveDirection(direction);
 	}
 	
 	public void setMoveDirection(Direction direction) {
-		this.direction = direction;
+		setDirection(direction);
 	}
 	
 	public void wasHit(int damage) {
@@ -55,9 +52,9 @@ public abstract class Character extends GameObject{
 	public abstract void die();
 	
 	public void updateSpriteDirection(File up,File right,File down,File left) {
-		Sprite sprite = spriteList.get(0);
+		Sprite sprite = getSpriteList().get(0);
 		try {
-			switch (this.direction) {
+			switch (this.getDirection()) {
 			case North:sprite.setImageFromFile(up);
 				break;
 			case East:sprite.setImageFromFile(right);
@@ -77,8 +74,8 @@ public abstract class Character extends GameObject{
 	
 	public void updatePenneDirection() {
 		try {
-			Sprite sprite = spriteList.get(penneSpriteIndex);
-			switch (this.direction) {
+			Sprite sprite = getSpriteList().get(penneSpriteIndex);
+			switch (this.getDirection()) {
 			case North:sprite.setImageFromFile(Penne.getFileUp());
 				break;
 			case East:sprite.setImageFromFile(Penne.getFileRight());
@@ -96,8 +93,8 @@ public abstract class Character extends GameObject{
 	public void putPenne() {
 		if (!this.isBaptized) {
 			this.isBaptized = true;
-			this.spriteList.add(Sprite.makeSpriteFromFile(Penne.getFileRight(), 0, -0.45, 9));
-			this.penneSpriteIndex = spriteList.size()-1;
+			this.getSpriteList().add(Sprite.makeSpriteFromFile(Penne.getFileRight(), 0, -0.45, 9));
+			this.penneSpriteIndex = getSpriteList().size()-1;
 			updatePenneDirection();
 		}
 	}
