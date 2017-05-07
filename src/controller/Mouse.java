@@ -1,22 +1,13 @@
 package controller;
 
 import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 import CONSTANTS.CONSTANTS;
 import model.Game;
-import model.GameObject;
-import model.Game.STATE;
 
 public class Mouse implements MouseListener, MouseMotionListener{
 	private Game game;
