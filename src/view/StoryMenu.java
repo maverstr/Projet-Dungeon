@@ -31,7 +31,7 @@ public class StoryMenu extends JPanel{
 		this.requestFocusInWindow();
 		this.setLayout(null);
 
-		storyScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/storyScreen.jpeg").getFile()));
+		storyScreen = ImageIO.read(new File(GameObject.class.getResource("/resources/sprites/Story_Screen.png").getFile()));
 	}
 
 	public void paintComponent(Graphics g) {
