@@ -160,7 +160,6 @@ public abstract class Player extends Character {
 				}
 			}
 			if (index == 10) {
-				System.out.println("tsqlmfj");
 				Item item = inventory.getPassive();
 				if (item != null) {
 					item.drop(x, y);

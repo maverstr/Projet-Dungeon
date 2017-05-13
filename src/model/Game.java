@@ -243,7 +243,6 @@ public class Game implements RedrawObservable, Serializable {
 			else{
 				while(!found){ //Pick a map from a random list of available maps and avoid duplicates
 					map_number_random = random.nextInt(4)+2;
-					System.out.println(map_number_random);
 					if (!roomsDone.contains(map_number_random)){
 						roomsDone.add(map_number_random);
 						map_name = String.format("map_%d.txt", map_number_random);
