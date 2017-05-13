@@ -68,7 +68,7 @@ public class Zombie extends Mob {
 				
 			}
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()); //Often "sleep interrupted" exception, because the thread is interrupted when the mob dies. Normal.
 		}; 
 	}
 
